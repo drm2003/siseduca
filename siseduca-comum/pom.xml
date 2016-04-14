@@ -2,29 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<!-- Detalhes do modulo -->
 	<parent>
-		<artifactId>siseduca</artifactId>
 		<groupId>br.com.cdan</groupId>
+		<artifactId>siseduca</artifactId>
 		<version>1.0.0</version>
 	</parent>
-	<artifactId>siseduca-ejb</artifactId>
-	<packaging>ejb</packaging>
-	<name>siseduca-ejb</name>
-	<description>
-        Modulo EJB da aplicacao SISEDUCA Java EE
-    </description>
 
+	<artifactId>siseduca-comum</artifactId>
+	<packaging>jar</packaging>
+	<name>siseduca-comum</name>
+	<description>Módulo que contém informações a todos os demais módulos</description>
 	<!-- Dependencias do modulo -->
 	<dependencies>
-		<!-- Modulo COMUM -->
-		<dependency>
-			<groupId>br.com.cdan</groupId>
-			<artifactId>siseduca-comum</artifactId>
-			<type>jar</type>
-		</dependency>
-
 		<!-- API do Java EE 6 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -32,25 +21,25 @@
 			<scope>provided</scope>
 		</dependency>
 
-	<!-- Núcleo do Hibernate -->
- <dependency>
+		<!-- Núcleo do Hibernate -->
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<scope>provided</scope>
-		</dependency> 
+		</dependency>
 
 		<!-- Implementação de EntityManager da JPA -->
-		 <dependency>
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		<!-- Driver JDBC do MySQL -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>provided</scope>
-		</dependency>--> 
+		</dependency>
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
@@ -94,12 +83,12 @@
 			<scope>provided</scope>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -440,62 +429,6 @@
 			<artifactId>swagger-jaxrs</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
-		<!-- <dependency> <groupId>br.jus.tjdft.net.sf.jasperreports</groupId> 
-			<artifactId>fonts-jasperreports</artifactId> <version>1.2.0</version> </dependency> -->
-
-		<!-- <dependency> <groupId>br.jus.tjdft.net.sf.jtidy</groupId> <artifactId>jtidysercos</artifactId> 
-			<version>r938</version> </dependency> -->
-
-		<!-- <dependency> <groupId>com.octo.captcha</groupId> <artifactId>jcaptcha</artifactId> 
-			<version>1.0-all</version> </dependency> -->
-
-		<!-- <dependency> <groupId>com.octo.captcha</groupId> <artifactId>jcaptcha-integration-simple-servlet</artifactId> 
-			<version>2.0-alpha-1</version> </dependency> -->
-
-		<!-- <dependency> <groupId>nl.captcha</groupId> <artifactId>simplecaptcha</artifactId> 
-			<version>1.2.1</version> </dependency> -->
-
-		<!-- <dependency> <groupId>com.sun.media</groupId> <artifactId>jai-codec</artifactId> 
-			<version>1.1.3</version> </dependency> -->
-
-		<!-- <dependency> <groupId>org.jfor</groupId> <artifactId>jfor</artifactId> 
-			<version>0.7.2rc1</version> </dependency> -->
-
-		<!-- <dependency> <groupId>dom4j</groupId> <artifactId>dom4j</artifactId> 
-			<version>1.6.1-redhat-5</version> <exclusions> <exclusion> <artifactId>xml-apis</artifactId> 
-			<groupId>xml-apis</groupId> </exclusion> </exclusions> </dependency> -->
-
-		<!-- <dependency> <groupId>commons-javaflow</groupId> <artifactId>commons-javaflow</artifactId> 
-			<version>20060411</version> </dependency> -->
-
-		<!-- <dependency> <groupId>org.clazzes</groupId> <artifactId>odtransform</artifactId> 
-			<version>0.0.1</version> </dependency> -->
-
-		<!-- <dependency> <groupId>net.dev.java</groupId> <artifactId>pdf-renderer</artifactId> 
-			<version>0.9.0</version> </dependency> -->
-
-		<!-- SQLServer jdbc driver -->
-		<!-- <dependency> <groupId>com.microsoft.sqlserver.jdbc</groupId> <artifactId>sqljdbc</artifactId> 
-			<version>4.0.2206.100</version> <classifier>jdbc4</classifier> <scope>compile</scope> 
-			</dependency> -->
-
-		<!-- ORACLE jdbc driver -->
-		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc7</artifactId> 
-			<version>12.1.0.1.0</version> <scope>compile</scope> </dependency> -->
-
-		<!-- InterSystems Cache jdbc driver -->
-		<!-- <dependency> <groupId>com.intersystems.cache-database</groupId> <artifactId>cachejdbc</artifactId> 
-			<version>2013.1.0.446</version> <classifier>jdk7</classifier> <scope>compile</scope> 
-			</dependency> -->
-
-		<!-- InterSystems Cache DataBase Utilities -->
-		<!-- <dependency> <groupId>com.intersystems.cache-database</groupId> <artifactId>cachedb</artifactId> 
-			<version>2011.2</version> <classifier>jdk7</classifier> </dependency> -->
-
-		<!-- EJB API -->
-		<!-- <dependency> <groupId>javaee</groupId> <artifactId>javaee-api</artifactId> 
-			<scope>provided</scope> </dependency> -->
 	</dependencies>
 
 	<build>
@@ -506,14 +439,6 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
-				</configuration>
-			</plugin>
-			<!-- Plugin EJB para definicao da versao dos EJB -->
-			<plugin>
-				<artifactId>maven-ejb-plugin</artifactId>
-				<version>2.5.1</version>
-				<configuration>
-					<ejbVersion>3.2</ejbVersion>
 				</configuration>
 			</plugin>
 		</plugins>
