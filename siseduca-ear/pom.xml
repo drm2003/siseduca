@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- Detalhes do modulo -->
+	<parent>
+		<artifactId>siseduca</artifactId>
+		<groupId>br.com.cdan</groupId>
+		<version>1.0.0</version>
+	</parent>
+	<artifactId>siseduca-ear</artifactId>
+	<packaging>ear</packaging>
+	<name>siseduca-ear</name>
+	<description>
+        Modulo EAR da aplicacao SISEDUCA Java EE
+    </description>
+
+	<!-- Dependencias do modulo -->
+	<dependencies>
+		<!-- Modulo EJB -->
+		<dependency>
+			<groupId>br.com.cdan</groupId>
+			<artifactId>siseduca-ejb</artifactId>
+			<type>ejb</type>
+		</dependency>
+		<!-- Modulo Web -->
+		<dependency>
+			<groupId>br.com.cdan</groupId>
+			<artifactId>siseduca-war</artifactId>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>siseduca-ear</finalName>
+		<plugins>
+			<!-- Plugin de empacotamento EAR -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.10.1</version>
+				<configuration>
+					<version>1.3</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<fileNameMapping>no-version</fileNameMapping>
+					<modules></modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
