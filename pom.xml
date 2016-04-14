@@ -28,6 +28,13 @@
 				<version>1.0.0</version>
 				<type>ejb</type>
 			</dependency>
+			<!-- Modulo COMUM -->
+			<dependency>
+				<groupId>br.com.cdan</groupId>
+				<artifactId>siseduca-comum</artifactId>
+				<version>1.0.0</version>
+				<type>jar</type>
+			</dependency>
 			<!-- Modulo WEB -->
 			<dependency>
 				<groupId>br.com.cdan</groupId>
@@ -662,6 +669,7 @@
 
 	<!-- Lista de modulos filhos deste modulo -->
 	<modules>
+		<module>siseduca-comum</module>
 		<module>siseduca-ejb</module>
 		<module>siseduca-war</module>
 		<module>siseduca-ear</module>
