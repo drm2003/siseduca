@@ -1,6 +1,6 @@
 package br.com.cdan.model.pedagogico.contrato;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.util.Set;
 
 import javax.persistence.Column;
