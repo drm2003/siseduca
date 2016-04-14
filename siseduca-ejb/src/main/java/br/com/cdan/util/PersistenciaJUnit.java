@@ -23,7 +23,7 @@ import org.junit.runners.JUnit4;
  */
 @RunWith(JUnit4.class)
 public class PersistenciaJUnit {
-	private static final String PERSISTENCE_UNIT_TESTES = "SisEducaPU";
+	private static final String PERSISTENCE_UNIT_TESTES = "SisEducaPULocal";
 	private static final String DRIVER_CONEXAO = "com.mysql.jdbc.Driver";
 	// private static final String URL_CONEXAO_BANCO =
 	// "jdbc:oracle:thin:@tjsu690v:1521:ORADES";

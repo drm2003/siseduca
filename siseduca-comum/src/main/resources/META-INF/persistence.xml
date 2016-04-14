@@ -31,4 +31,31 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 				name="hibernate.c3p0.idle_test_period" value="100" /> -->
 		</properties>
 	</persistence-unit>
+	
+	<persistence-unit name="SisEducaPULocal" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/siseduca" 
+				/> <property name="javax.persistence.jdbc.user" value="root" /> <property 
+				name="javax.persistence.jdbc.password" value="admin" /> <property name="javax.persistence.jdbc.driver" 
+				value="com.mysql.jdbc.Driver" />
+			<!--configuração para testes locais -->
+			<property name="hibernate.transaction.manager_lookup_class"
+				value="org.hibernate.transaction.JBossTransactionManagerLookup" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="false" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.cache.use_second_level_cache"
+				value="true" />
+			<property name="hibernate.max_fetch_depth" value="3" />
+
+			<!-- <property name="hibernate.connection.privider_class" value="org.hibernate.service.jdbc.connections.internal.C3P0ConnectinProvider" 
+				/> <property name="hibernate.c3p0.min_size" value="5" /> <property name="hibernate.c3p0.max_size" 
+				value="10" /> <property name="hibernate.c3p0.timeout" value="180" /> <property 
+				name="hibernate.c3p0.idle_test_period" value="100" /> -->
+		</properties>
+	</persistence-unit>
 </persistence>
