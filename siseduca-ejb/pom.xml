@@ -18,6 +18,13 @@
 
 	<!-- Dependencias do modulo -->
 	<dependencies>
+		<!-- Modulo COMUM -->
+		<dependency>
+			<groupId>br.com.cdan</groupId>
+			<artifactId>siseduca-comum</artifactId>
+			<type>jar</type>
+		</dependency>
+
 		<!-- API do Java EE 6 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -25,25 +32,25 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Núcleo do Hibernate -->
-		<dependency>
+	<!-- Núcleo do Hibernate -->
+ <dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> 
 
 		<!-- Implementação de EntityManager da JPA -->
-		<dependency>
+		 <dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		<!-- Driver JDBC do MySQL -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>provided</scope>
-		</dependency>
+		</dependency>--> 
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
@@ -87,12 +94,12 @@
 			<scope>provided</scope>
 		</dependency>
 
+
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>

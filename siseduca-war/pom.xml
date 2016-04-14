@@ -29,6 +29,13 @@
 			<type>ejb</type>
 			<scope>provided</scope>
 		</dependency>
+		<!-- Modulo COMUM -->
+		<dependency>
+			<groupId>br.com.cdan</groupId>
+			<artifactId>siseduca-comum</artifactId>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
 		<!-- EJB API -->
 		<dependency>
 			<groupId>javaee</groupId>
