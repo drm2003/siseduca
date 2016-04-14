@@ -1,0 +1,3 @@
+#Ignorar a pasta e arquivos do eclipse
+.settings/
+.project
