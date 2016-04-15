@@ -11,11 +11,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.cdan.model.geral.Endereco;
+import br.com.cdan.model.geral.EstadoUF;
 import br.com.cdan.model.pedagogico.contrato.Aproveitamento;
 
 @Entity
@@ -32,8 +34,9 @@ public class CEP implements Serializable {
 	@OneToMany(mappedBy = "cep", fetch = FetchType.LAZY)
 	private Set<Endereco> endereco;
 
-	@Column(name = "UF", length = 2, nullable = false, unique = true)
-	private String UF;
+	@OneToOne
+	@JoinColumn(name = "UF")
+	private EstadoUF UF;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "Chave", length = 5, nullable = false, unique = true)
@@ -80,11 +83,11 @@ public class CEP implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public String getUF() {
+	public EstadoUF getEstadoUF() {
 		return UF;
 	}
 
-	public void setUF(String uF) {
+	public void setEstadoUF(EstadoUF uF) {
 		UF = uF;
 	}
 
@@ -166,8 +169,7 @@ public class CEP implements Serializable {
 		int result = 1;
 		result = prime * result + ((UF == null) ? 0 : UF.hashCode());
 		result = prime * result + ((chave == null) ? 0 : chave.hashCode());
-		result = prime * result
-				+ ((tipoCidade == null) ? 0 : tipoCidade.hashCode());
+		result = prime * result + ((tipoCidade == null) ? 0 : tipoCidade.hashCode());
 		return result;
 	}
 
@@ -194,9 +196,8 @@ public class CEP implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CEP [endereco=" + endereco + ", UF=" + UF + ", chave=" + chave
-				+ ", cepmin=" + cepmin + ", cepMax=" + cepMax + ", cod_cidade="
-				+ cod_cidade + ", tipoCidade=" + tipoCidade + ", codCidadeSub="
+		return "CEP [endereco=" + endereco + ", UF=" + UF + ", chave=" + chave + ", cepmin=" + cepmin + ", cepMax="
+				+ cepMax + ", cod_cidade=" + cod_cidade + ", tipoCidade=" + tipoCidade + ", codCidadeSub="
 				+ codCidadeSub + ", codMunicicio=" + codMunicicio + "]";
 	}
 

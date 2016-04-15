@@ -2,7 +2,7 @@ package br.com.cdan.model.pedagogico.contrato;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -61,7 +61,7 @@ public class Aproveitamento implements Serializable {
 
 	@Temporal(TemporalType.TIME)
 	@Column(name = "cargaHoraria")
-	private Date cargaHoraria;
+	private Calendar cargaHoraria;
 
 	@Column(name = "semestreAno")
 	private String semestreAno;
@@ -162,11 +162,11 @@ public class Aproveitamento implements Serializable {
 		this.nomeDisciplina = nomeDisciplina;
 	}
 
-	public Date getCargaHoraria() {
+	public Calendar getCargaHoraria() {
 		return cargaHoraria;
 	}
 
-	public void setCargaHoraria(Date cargaHoraria) {
+	public void setCargaHoraria(Calendar cargaHoraria) {
 		this.cargaHoraria = cargaHoraria;
 	}
 

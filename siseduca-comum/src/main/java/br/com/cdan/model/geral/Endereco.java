@@ -219,10 +219,8 @@ public class Endereco implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((bairro == null) ? 0 : bairro.hashCode());
-		result = prime * result
-				+ ((logradouro == null) ? 0 : logradouro.hashCode());
-		result = prime * result
-				+ ((numeroRua == null) ? 0 : numeroRua.hashCode());
+		result = prime * result + ((logradouro == null) ? 0 : logradouro.hashCode());
+		result = prime * result + ((numeroRua == null) ? 0 : numeroRua.hashCode());
 		return result;
 	}
 
@@ -255,8 +253,7 @@ public class Endereco implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Endereco [logradouro=" + logradouro + ", numeroRua="
-				+ numeroRua + ", bairro=" + bairro + ", cidade=" + cidade
-				+ ", estado=" + estado + ", pais=" + pais + "]";
+		return "Endereco [logradouro=" + logradouro + ", numeroRua=" + numeroRua + ", bairro=" + bairro + ", cidade="
+				+ cidade + ", estado=" + estado + ", pais=" + pais + "]";
 	}
 }

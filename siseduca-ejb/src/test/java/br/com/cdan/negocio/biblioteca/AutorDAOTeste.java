@@ -10,9 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.cdan.model.biblioteca.AreasDeConhecimento;
 import br.com.cdan.model.biblioteca.Autor;
-import br.com.cdan.negocio.biblioteca.factory.AreasDeConhecimentoFabricaTest;
 import br.com.cdan.negocio.biblioteca.factory.AutorFabricaTest;
 import br.com.cdan.util.PersistenciaJUnit;
 
@@ -42,7 +40,7 @@ public class AutorDAOTeste extends PersistenciaJUnit {
 		Autor a = criaAutor();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
-		AreasDeConhecimento consulta = dao.find(AreasDeConhecimento.class, a.getId());// CONSULTA
+		Autor consulta = dao.find(Autor.class, a.getId());// CONSULTA
 		Assert.assertSame(a, consulta);// VERIFICA INSERÇÃO
 	}
 
@@ -55,81 +53,81 @@ public class AutorDAOTeste extends PersistenciaJUnit {
 		a.setNome("");
 		a.setCompartilhado(false);
 		dao.merge(a);
-		AreasDeConhecimento consulta = dao.find(AreasDeConhecimento.class, a.getId());// CONSULTA
+		Autor consulta = dao.find(Autor.class, a.getId());// CONSULTA
 		Assert.assertSame(a, consulta);// VERIFICA INSERï¿½ï¿½O
 	}
 
 	@Test
 	public void excluir() {
-		AreasDeConhecimento a = criaAreasDeConhecimento();
+		Autor a = criaAutor();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
-		AreasDeConhecimento consulta = dao.find(AreasDeConhecimento.class, a.getId());// CONSULTA
+		Autor consulta = dao.find(Autor.class, a.getId());// CONSULTA
 		consulta.setAtivo(false);
 		dao.remove(a);
-		Assert.assertSame(consulta, dao.find(AreasDeConhecimento.class, a.getId()));
+		Assert.assertSame(consulta, dao.find(Autor.class, a.getId()));
 	}
 
 	@Test
 	public void consultar_todos() {
-		AreasDeConhecimento a1 = criaAreasDeConhecimento();
+		Autor a1 = criaAutor();
 		dao.persist(a1);
-		AreasDeConhecimento a2 = criaAreasDeConhecimento();
+		Autor a2 = criaAutor();
 		dao.persist(a2);
 		//
-		String sql = "SELECT a FROM AreasDeConhecimento a";
-		Query query = dao.getEntityManager().createQuery(sql, AreasDeConhecimento.class);
+		String sql = "SELECT a FROM Autor a";
+		Query query = dao.getEntityManager().createQuery(sql, Autor.class);
 		//
 		@SuppressWarnings("unchecked")
-		List<AreasDeConhecimento> lista = query.getResultList(); //
+		List<Autor> lista = query.getResultList(); //
 		//
 		Assert.assertTrue(lista.contains(a1));
 		Assert.assertTrue(lista.contains(a2));
 	}
 
 	@Test
-	public void consultar_por_descricao() {
-		AreasDeConhecimento a = criaAreasDeConhecimento();
+	public void consultar_por_nome() {
+		Autor a = criaAutor();
 		dao.persist(a);
 		Assert.assertNotNull(a);
-		String sql = "SELECT a FROM AreasDeConhecimento a WHERE a.descricao = :descricao";
+		String sql = "SELECT a FROM Autor a WHERE a.descricao = :descricao";
 		Query query = dao.getEntityManager().createQuery(sql);
-		query.setParameter("descricao", a.getDescricao());
-		AreasDeConhecimento consulta = (AreasDeConhecimento) query.getSingleResult();
+		query.setParameter("descricao", a.getNome());
+		Autor consulta = (Autor) query.getSingleResult();
 		Assert.assertSame(a, consulta);
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_descricao_nula() {
-		AreasDeConhecimento a = criaAreasDeConhecimento();
-		a.setDescricao(null);
+	public void nao_deve_permitir_nome_nulo() {
+		Autor a = criaAutor();
+		a.setNome(null);
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_descricao_vazia() {
-		AreasDeConhecimento a = criaAreasDeConhecimento();
-		a.setDescricao("");
+	public void nao_deve_permitir_nome_vazio() {
+		Autor a = criaAutor();
+		a.setNome("");
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
 	public void descricao_maior_que_tamanho_maximo_permitido() {
-		AreasDeConhecimento a = criaAreasDeConhecimento();
-		a.setDescricao(criarStringDinamicaPorTamanho(51));
+		Autor a = criaAutor();
+		a.setNome(criarStringDinamicaPorTamanho(256));
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
 	public void nao_deve_permitir_ativo_nulo() {
-		AreasDeConhecimento a = criaAreasDeConhecimento();
+		Autor a = criaAutor();
 		a.setAtivo(null);
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
-	}
+	}	
 
 	private Autor criaAutor() {
 		return AutorFabricaTest.getInstance().criaAutor();
