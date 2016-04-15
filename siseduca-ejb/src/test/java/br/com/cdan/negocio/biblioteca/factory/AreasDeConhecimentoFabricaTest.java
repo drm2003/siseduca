@@ -19,7 +19,7 @@ public class AreasDeConhecimentoFabricaTest {
 		AreasDeConhecimento a = new AreasDeConhecimento();
 		a.setAtivo(Boolean.TRUE);
 		a.setCompartilhado(true);
-		a.setDescricao("Linguistica, Letras e Artes");
+		a.setDescricao("Linguistica, Letras e Artes nº " +Math.random()*1000);
 		return a;
 	}
 
