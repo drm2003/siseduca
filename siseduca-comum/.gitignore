@@ -2,3 +2,7 @@
 .classhpath
 .project
 /.settings/
+target
+target/
+target/*
+*/target/*
