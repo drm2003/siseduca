@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.cdan.model.empresa.Empresa;
@@ -38,7 +37,7 @@ public class Responsavel implements Serializable {
 	@Column(name = "senhaPortal")
 	private String senhaPortal;
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_pessoa")
 	private Pessoa pessoa;
 
@@ -170,10 +169,7 @@ public class Responsavel implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
-		result = prime
-				* result
-				+ ((tipoDeResponsavel == null) ? 0 : tipoDeResponsavel
-						.hashCode());
+		result = prime * result + ((tipoDeResponsavel == null) ? 0 : tipoDeResponsavel.hashCode());
 		return result;
 	}
 
@@ -201,8 +197,7 @@ public class Responsavel implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Responsavel [pessoa=" + pessoa + ", tipoDeResponsavel="
-				+ tipoDeResponsavel + ", aluno=" + aluno + ", empresa="
-				+ empresa + "]";
+		return "Responsavel [pessoa=" + pessoa + ", tipoDeResponsavel=" + tipoDeResponsavel + ", aluno=" + aluno
+				+ ", empresa=" + empresa + "]";
 	}
 }

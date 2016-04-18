@@ -61,7 +61,7 @@ public class Usuario implements Serializable {
 	private HorarioDeAcesso horarioDeAcesso;
 
 	@OneToMany(mappedBy = "coordenador")
-	private Set<Curso> curso;
+	private Set<Curso> cursos;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -146,12 +146,12 @@ public class Usuario implements Serializable {
 		this.horarioDeAcesso = horarioDeAcesso;
 	}
 
-	public Set<Curso> getCurso() {
-		return curso;
+	public Set<Curso> getCursos() {
+		return cursos;
 	}
 
-	public void setCurso(Set<Curso> curso) {
-		this.curso = curso;
+	public void setCursos(Set<Curso> cursos) {
+		this.cursos = cursos;
 	}
 
 	public Boolean getAtivo() {
@@ -167,8 +167,7 @@ public class Usuario implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
-		result = prime * result
-				+ ((nomeUsuario == null) ? 0 : nomeUsuario.hashCode());
+		result = prime * result + ((nomeUsuario == null) ? 0 : nomeUsuario.hashCode());
 		return result;
 	}
 
@@ -196,10 +195,8 @@ public class Usuario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Usuario [funcionario=" + funcionario + ", nomeUsuario="
-				+ nomeUsuario + ", login=" + login + ", senha=" + senha
-				+ ", emails=" + emails + ", professor=" + professor
-				+ ", coordenadorDoCurso=" + coordenadorDoCurso + ", permissao="
-				+ permissao + ", horarioDeAcesso=" + horarioDeAcesso + "]";
+		return "Usuario [funcionario=" + funcionario + ", nomeUsuario=" + nomeUsuario + ", login=" + login + ", senha="
+				+ senha + ", emails=" + emails + ", professor=" + professor + ", coordenadorDoCurso="
+				+ coordenadorDoCurso + ", permissao=" + permissao + ", horarioDeAcesso=" + horarioDeAcesso + "]";
 	}
 }

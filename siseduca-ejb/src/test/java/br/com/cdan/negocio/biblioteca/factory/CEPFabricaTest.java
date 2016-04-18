@@ -3,6 +3,8 @@ package br.com.cdan.negocio.biblioteca.factory;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.model.geral.Endereco;
 import br.com.cdan.model.geral.cep.CEP;
 import br.com.cdan.model.geral.cep.EnumChaveCidade;
@@ -36,8 +38,12 @@ public class CEPFabricaTest {
 		enderecos.add(e2);
 		cep.setEndereco(enderecos);
 		cep.setTipoCidade(EnumTipoCidade.D);
-		cep.setUF(EstadoUFFabricaTest.getInstance().criaEstadoUF());
+		cep.setEstadoUF(EstadoUFFabricaTest.getInstance().criaEstadoUF());
 		return cep;
+	}
+
+	public CEP criaCepPersistido(EntityManager em) {
+
 	}
 
 }

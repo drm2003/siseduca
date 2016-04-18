@@ -60,6 +60,9 @@ public class Transferencia implements Serializable {
 	@Column(name = "estabelecimentoProcedencia")
 	private String estabelecimentoProcedencia;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -130,5 +133,58 @@ public class Transferencia implements Serializable {
 
 	public void setEstabelecimentoProcedencia(String estabelecimentoProcedencia) {
 		this.estabelecimentoProcedencia = estabelecimentoProcedencia;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
+		result = prime * result + ((curso == null) ? 0 : curso.hashCode());
+		result = prime * result + ((estabelecimentoProcedencia == null) ? 0 : estabelecimentoProcedencia.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Transferencia other = (Transferencia) obj;
+		if (aluno == null) {
+			if (other.aluno != null)
+				return false;
+		} else if (!aluno.equals(other.aluno))
+			return false;
+		if (curso == null) {
+			if (other.curso != null)
+				return false;
+		} else if (!curso.equals(other.curso))
+			return false;
+		if (estabelecimentoProcedencia == null) {
+			if (other.estabelecimentoProcedencia != null)
+				return false;
+		} else if (!estabelecimentoProcedencia.equals(other.estabelecimentoProcedencia))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Transferencia [id=" + id + ", tipoDeTransferencia=" + tipoDeTransferencia + ", curso=" + curso
+				+ ", turma=" + turma + ", aluno=" + aluno + ", data=" + data + ", motivoDeTransferencia="
+				+ motivoDeTransferencia + ", cidade=" + cidade + ", estabelecimentoProcedencia="
+				+ estabelecimentoProcedencia + ", ativo=" + ativo + "]";
 	}
 }
