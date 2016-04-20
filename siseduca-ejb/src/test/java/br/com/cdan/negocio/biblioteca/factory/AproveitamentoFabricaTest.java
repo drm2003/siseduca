@@ -2,7 +2,12 @@ package br.com.cdan.negocio.biblioteca.factory;
 
 import java.util.Calendar;
 
+import javax.persistence.EntityManager;
+
+import br.com.cdan.model.geral.cep.CEP;
 import br.com.cdan.model.pedagogico.contrato.Aproveitamento;
+import br.com.cdan.negocio.biblioteca.AproveitamentoDao;
+import br.com.cdan.negocio.biblioteca.CEPDao;
 
 public class AproveitamentoFabricaTest {
 	private static AproveitamentoFabricaTest instance = null;
@@ -19,6 +24,21 @@ public class AproveitamentoFabricaTest {
 		aproveitamento.setAtivo(Boolean.TRUE);
 		aproveitamento.setCargaHoraria(Calendar.getInstance());
 		aproveitamento.setCepEstabelecimento(CEPFabricaTest.getInstance().criaCEP());
+		return aproveitamento;
+	}
+
+	public Aproveitamento criaAproveitamento(EntityManager em) {
+		Aproveitamento aproveitamento = criaAproveitamento();
+		AproveitamentoDao aproveitamentoDao = new AproveitamentoDao();
+		aproveitamentoDao.setEntityManager(em);
+		// Cep
+		CEPDao cepDao = new CEPDao();
+		cepDao.setEntityManager(em);
+		CEP cepEstabelecimento = aproveitamento.getCepEstabelecimento();
+		cepDao.persist(cepEstabelecimento);
+		aproveitamento.setCepEstabelecimento(cepEstabelecimento);
+		//
+		aproveitamentoDao.persist(aproveitamento);
 		return aproveitamento;
 	}
 

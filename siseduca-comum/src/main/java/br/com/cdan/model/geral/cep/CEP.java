@@ -12,10 +12,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.geral.Endereco;
 import br.com.cdan.model.geral.EstadoUF;
 import br.com.cdan.model.pedagogico.contrato.Aproveitamento;
@@ -32,7 +34,7 @@ public class CEP implements Serializable {
 	private Long id;
 
 	@OneToMany(mappedBy = "cep", fetch = FetchType.LAZY)
-	private Set<Endereco> endereco;
+	private Set<Endereco> enderecos;
 
 	@OneToOne
 	@JoinColumn(name = "UF")
@@ -63,6 +65,10 @@ public class CEP implements Serializable {
 
 	@OneToOne(mappedBy = "cepEstabelecimento")
 	private Aproveitamento aproveitamento;
+	
+	@ManyToOne
+	@JoinColumn(name="empresa")
+	private Empresa empresa;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -75,12 +81,12 @@ public class CEP implements Serializable {
 		this.id = id;
 	}
 
-	public Set<Endereco> getEndereco() {
-		return endereco;
+	public Set<Endereco> getEnderecos() {
+		return enderecos;
 	}
 
-	public void setEndereco(Set<Endereco> endereco) {
-		this.endereco = endereco;
+	public void setEnderecos(Set<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 	public EstadoUF getEstadoUF() {
@@ -196,7 +202,7 @@ public class CEP implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CEP [endereco=" + endereco + ", UF=" + UF + ", chave=" + chave + ", cepmin=" + cepmin + ", cepMax="
+		return "CEP [endereco=" + enderecos + ", UF=" + UF + ", chave=" + chave + ", cepmin=" + cepmin + ", cepMax="
 				+ cepMax + ", cod_cidade=" + cod_cidade + ", tipoCidade=" + tipoCidade + ", codCidadeSub="
 				+ codCidadeSub + ", codMunicicio=" + codMunicicio + "]";
 	}

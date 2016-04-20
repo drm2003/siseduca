@@ -3,9 +3,18 @@ package br.com.cdan.negocio.biblioteca.factory;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.model.geral.Bairro;
 import br.com.cdan.model.geral.Cidade;
 import br.com.cdan.model.geral.Endereco;
+import br.com.cdan.model.geral.EstadoUF;
+import br.com.cdan.model.pedagogico.contrato.Transferencia;
+import br.com.cdan.negocio.biblioteca.BairroDao;
+import br.com.cdan.negocio.biblioteca.CidadeDao;
+import br.com.cdan.negocio.biblioteca.EnderecoDao;
+import br.com.cdan.negocio.biblioteca.EstadoUFDao;
+import br.com.cdan.negocio.biblioteca.TransferenciaDao;
 
 public class CidadeFabricaTest {
 	private static CidadeFabricaTest instance = null;
@@ -38,7 +47,54 @@ public class CidadeFabricaTest {
 		enderecos.add(e2);
 		cidade.setEnderecos(enderecos);
 		// Transferências
-		cidade.setTransferencias(TransferenciaFabricaTest.getInstance().criaTransferencia());
+		Set<Transferencia> transferencias = new LinkedHashSet<>();
+		transferencias.add(TransferenciaFabricaTest.getInstance().criaTransferencia());
+		transferencias.add(TransferenciaFabricaTest.getInstance().criaTransferencia());
+		cidade.setTransferencias(transferencias);
+		return cidade;
+	}
+
+	public Cidade criaCidadePersistido(EntityManager em) {
+		CidadeDao dao = new CidadeDao();
+		dao.setEntityManager(em);
+		Cidade cidade = criaCidade();
+		// Estado UF
+		EstadoUFDao estadoUFDao = new EstadoUFDao();
+		estadoUFDao.setEntityManager(em);
+		EstadoUF estadoUF = cidade.getEstadoUF();
+		estadoUFDao.persist(estadoUF);
+		cidade.setEstadoUF(estadoUF);
+		// Bairros
+		Set<Bairro> bairros = new LinkedHashSet<>();
+		BairroDao daoBairro = new BairroDao();
+		daoBairro.setEntityManager(em);
+		cidade.getBairros().forEach(b -> {
+			daoBairro.persist(b);
+			bairros.add(b);
+		});
+		cidade.setBairros(bairros);
+		// Endereco
+		Set<Endereco> enderecos = new LinkedHashSet<>();
+		EnderecoDao daoEndereco = new EnderecoDao();
+		daoEndereco.setEntityManager(em);
+		cidade.getEnderecos().forEach(e -> {
+			daoEndereco.persist(e);
+			enderecos.add(e);
+		});
+		cidade.setEnderecos(enderecos);
+
+		// Transferências
+		Set<Transferencia> transferencias = new LinkedHashSet<>();
+		TransferenciaDao daoTransferencia = new TransferenciaDao();
+		daoTransferencia.setEntityManager(em);
+		cidade.getTransferencias().forEach(b -> {
+			daoTransferencia.persist(b);
+			transferencias.add(b);
+		});
+		cidade.setTransferencias(transferencias);
+		// Gravando cidade
+		dao.persist(cidade);
+		return cidade;
 	}
 
 }

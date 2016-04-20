@@ -84,7 +84,7 @@ public class Pessoa implements Serializable {
 	private String secaoTituloEleitor;
 
 	@Column(name = "dataEmissaoTituloEleitor")
-	private String dataEmissaoTituloEleitor;
+	private Calendar dataEmissaoTituloEleitor;
 
 	@Column(name = "cpf")
 	private String cpf;
@@ -117,12 +117,8 @@ public class Pessoa implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Aluno aluno;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_cnh")
-	private CarteiraHabilitacao cnh;
-
-	@OneToOne(mappedBy = "pessoa", targetEntity = Responsavel.class, fetch = FetchType.EAGER)
-	private Responsavel responsavel;
+	@OneToMany(mappedBy = "pessoa", targetEntity = Responsavel.class, fetch = FetchType.EAGER)
+	private Set<Responsavel> responsaveis;
 
 	@OneToOne
 	@JoinColumn(name = "id_carteiraHabilitacao")
@@ -254,11 +250,11 @@ public class Pessoa implements Serializable {
 		this.secaoTituloEleitor = secaoTituloEleitor;
 	}
 
-	public String getDataEmissaoTituloEleitor() {
+	public Calendar getDataEmissaoTituloEleitor() {
 		return dataEmissaoTituloEleitor;
 	}
 
-	public void setDataEmissaoTituloEleitor(String dataEmissaoTituloEleitor) {
+	public void setDataEmissaoTituloEleitor(Calendar dataEmissaoTituloEleitor) {
 		this.dataEmissaoTituloEleitor = dataEmissaoTituloEleitor;
 	}
 
@@ -342,28 +338,19 @@ public class Pessoa implements Serializable {
 		this.aluno = aluno;
 	}
 
-	public CarteiraHabilitacao getCnh() {
-		return cnh;
+	public Set<Responsavel> getResponsavel() {
+		return responsaveis;
 	}
 
-	public void setCnh(CarteiraHabilitacao cnh) {
-		this.cnh = cnh;
-	}
-
-	public Responsavel getResponsavel() {
-		return responsavel;
-	}
-
-	public void setResponsavel(Responsavel responsavel) {
-		this.responsavel = responsavel;
+	public void setResponsavel(Set<Responsavel> responsaveis) {
+		this.responsaveis = responsaveis;
 	}
 
 	public Boolean getPermitirEmprestimoBiblioteca() {
 		return permitirEmprestimoBiblioteca;
 	}
 
-	public void setPermitirEmprestimoBiblioteca(
-			Boolean permitirEmprestimoBiblioteca) {
+	public void setPermitirEmprestimoBiblioteca(Boolean permitirEmprestimoBiblioteca) {
 		this.permitirEmprestimoBiblioteca = permitirEmprestimoBiblioteca;
 	}
 
@@ -388,7 +375,6 @@ public class Pessoa implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
-		result = prime * result + ((cnh == null) ? 0 : cnh.hashCode());
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((rg == null) ? 0 : rg.hashCode());
 		return result;
@@ -408,11 +394,6 @@ public class Pessoa implements Serializable {
 				return false;
 		} else if (!aluno.equals(other.aluno))
 			return false;
-		if (cnh == null) {
-			if (other.cnh != null)
-				return false;
-		} else if (!cnh.equals(other.cnh))
-			return false;
 		if (cpf == null) {
 			if (other.cpf != null)
 				return false;
@@ -428,22 +409,14 @@ public class Pessoa implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Pessoa [nome=" + nome + ", dataNascimento=" + dataNascimento
-				+ ", profissaoFormacao=" + profissaoFormacao
-				+ ", empresaLocalDeTrabalho=" + empresaLocalDeTrabalho
-				+ ", estadoCivil=" + estadoCivil + ", cidadeNatal="
-				+ cidadeNatal + ", sexo=" + sexo + ", rg=" + rg
-				+ ", orgaoExpedidorRg=" + orgaoExpedidorRg
-				+ ", dataExpedicaoRg=" + dataExpedicaoRg + ", tituloEleitor="
-				+ tituloEleitor + ", zonaTituloEleitor=" + zonaTituloEleitor
-				+ ", secaoTituloEleitor=" + secaoTituloEleitor
-				+ ", dataEmissaoTituloEleitor=" + dataEmissaoTituloEleitor
-				+ ", cpf=" + cpf + ", documentoMilitar=" + documentoMilitar
-				+ ", numeroDocumentoMilitar=" + numeroDocumentoMilitar
-				+ ", numeroPassaporte=" + numeroPassaporte
-				+ ", certidaoNascimentoCasamento=" + certidao + ", endereco="
-				+ endereco + ", email=" + email + ", funcionarios="
-				+ funcionarios + ", aluno=" + aluno + ", cnh=" + cnh
-				+ ", responsavel=" + responsavel + "]";
+		return "Pessoa [nome=" + nome + ", dataNascimento=" + dataNascimento + ", profissaoFormacao="
+				+ profissaoFormacao + ", empresaLocalDeTrabalho=" + empresaLocalDeTrabalho + ", estadoCivil="
+				+ estadoCivil + ", cidadeNatal=" + cidadeNatal + ", sexo=" + sexo + ", rg=" + rg + ", orgaoExpedidorRg="
+				+ orgaoExpedidorRg + ", dataExpedicaoRg=" + dataExpedicaoRg + ", tituloEleitor=" + tituloEleitor
+				+ ", zonaTituloEleitor=" + zonaTituloEleitor + ", secaoTituloEleitor=" + secaoTituloEleitor
+				+ ", dataEmissaoTituloEleitor=" + dataEmissaoTituloEleitor + ", cpf=" + cpf + ", documentoMilitar="
+				+ documentoMilitar + ", numeroDocumentoMilitar=" + numeroDocumentoMilitar + ", numeroPassaporte="
+				+ numeroPassaporte + ", certidaoNascimentoCasamento=" + certidao + ", endereco=" + endereco + ", email="
+				+ email + ", funcionarios=" + funcionarios + ", aluno=" + aluno + ", responsavel=" + responsaveis + "]";
 	}
 }

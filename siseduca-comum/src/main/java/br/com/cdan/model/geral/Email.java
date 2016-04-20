@@ -35,7 +35,7 @@ public class Email implements Serializable {
 
 	@ManyToMany
 	@JoinTable(name = "email_empresa", joinColumns = @JoinColumn(name = "id_email"), inverseJoinColumns = @JoinColumn(name = "id_empresa"))
-	private Set<Empresa> empresa;
+	private Set<Empresa> empresas;
 
 	@ManyToOne
 	@JoinColumn(name = "id_editora")
@@ -71,12 +71,12 @@ public class Email implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Set<Empresa> getEmpresa() {
-		return empresa;
+	public Set<Empresa> getEmpresas() {
+		return empresas;
 	}
 
-	public void setEmpresa(Set<Empresa> empresa) {
-		this.empresa = empresa;
+	public void setEmpresas(Set<Empresa> empresas) {
+		this.empresas = empresas;
 	}
 
 	public Editora getEditora() {

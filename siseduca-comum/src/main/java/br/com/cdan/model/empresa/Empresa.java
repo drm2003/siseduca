@@ -27,6 +27,7 @@ import br.com.cdan.model.geral.Email;
 import br.com.cdan.model.geral.Endereco;
 import br.com.cdan.model.geral.Telefone;
 import br.com.cdan.model.geral.TipoDeServico;
+import br.com.cdan.model.geral.cep.CEP;
 import br.com.cdan.model.pedagogico.contrato.EstagioMonografia;
 import br.com.cdan.model.pessoa.Responsavel;
 
@@ -66,8 +67,8 @@ public class Empresa implements Serializable {
 	@OneToMany(mappedBy = "empresa")
 	private Set<Endereco> enderecos;
 
-	@Column(name = "cep")
-	private String cep;
+	@OneToMany(mappedBy = "empresa", fetch = FetchType.EAGER)
+	private Set<CEP> cep;
 
 	@Column(name = "codigoArea")
 	private String codigoArea;
@@ -78,7 +79,7 @@ public class Empresa implements Serializable {
 	@Column(name = "fax")
 	private String fax;
 
-	@ManyToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "empresas", fetch = FetchType.LAZY)
 	private Set<Email> email;
 
 	@Column(name = "home")
@@ -190,11 +191,11 @@ public class Empresa implements Serializable {
 		this.enderecos = enderecos;
 	}
 
-	public String getCep() {
+	public Set<CEP> getCep() {
 		return cep;
 	}
 
-	public void setCep(String cep) {
+	public void setCep(Set<CEP> cep) {
 		this.cep = cep;
 	}
 
