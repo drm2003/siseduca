@@ -3,10 +3,15 @@ package br.com.cdan.negocio.biblioteca.factory;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.financeiro.Bolsa;
 import br.com.cdan.model.financeiro.ContasAPagar;
 import br.com.cdan.model.geral.cep.CEP;
+import br.com.cdan.negocio.biblioteca.BolsaDao;
+import br.com.cdan.negocio.biblioteca.CEPDao;
+import br.com.cdan.negocio.biblioteca.EmpresaDao;
 
 public class EmpresaFabricaTest {
 	private static EmpresaFabricaTest instance = null;
@@ -41,4 +46,32 @@ public class EmpresaFabricaTest {
 		return empresa;
 	}
 
+	public Empresa criaEmpresaPersistido(EntityManager em) {
+		EmpresaDao dao = new EmpresaDao();
+		dao.setEntityManager(em);
+		Empresa empresa = criaEmpresa();
+		// Bolsas
+		Set<Bolsa> bolsas = new LinkedHashSet<>();
+		BolsaDao bolsaDao = new BolsaDao();
+		bolsaDao.setEntityManager(em);
+		empresa.getBolsas().forEach(b -> {
+			bolsaDao.persist(b);
+			bolsas.add(b);
+		});
+		empresa.setBolsas(bolsas);
+		// CEPs
+		Set<CEP> ceps = new LinkedHashSet<>();
+		CEPDao cepDao = new CEPDao();
+		cepDao.setEntityManager(em);
+		empresa.getCep().forEach(c -> {
+			cepDao.persist(c);
+			ceps.add(c);
+		});
+		empresa.setCep(ceps);
+		//
+		//
+
+		dao.persist(empresa);
+		return empresa;
+	}
 }

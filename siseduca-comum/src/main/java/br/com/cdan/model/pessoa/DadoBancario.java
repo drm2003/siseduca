@@ -27,7 +27,7 @@ public class DadoBancario implements Serializable {
 	private Long id;
 
 	@OneToMany(mappedBy = "dadoBancario", fetch = FetchType.LAZY)
-	private Set<Bolsa> bolsa;
+	private Set<Bolsa> bolsas;
 
 	@Column(name = "diaDoVencimento")
 	private Long diaDoVencimento;
@@ -46,12 +46,12 @@ public class DadoBancario implements Serializable {
 		this.id = id;
 	}
 
-	public Set<Bolsa> getBolsa() {
-		return bolsa;
+	public Set<Bolsa> getBolsas() {
+		return bolsas;
 	}
 
-	public void setBolsa(Set<Bolsa> bolsa) {
-		this.bolsa = bolsa;
+	public void setBolsa(Set<Bolsa> bolsas) {
+		this.bolsas = bolsas;
 	}
 
 	public Long getDiaDoVencimento() {
@@ -82,7 +82,7 @@ public class DadoBancario implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bolsa == null) ? 0 : bolsa.hashCode());
+		result = prime * result + ((bolsas == null) ? 0 : bolsas.hashCode());
 		result = prime * result
 				+ ((diaDoVencimento == null) ? 0 : diaDoVencimento.hashCode());
 		return result;
@@ -97,10 +97,10 @@ public class DadoBancario implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		DadoBancario other = (DadoBancario) obj;
-		if (bolsa == null) {
-			if (other.bolsa != null)
+		if (bolsas == null) {
+			if (other.bolsas != null)
 				return false;
-		} else if (!bolsa.equals(other.bolsa))
+		} else if (!bolsas.equals(other.bolsas))
 			return false;
 		if (diaDoVencimento == null) {
 			if (other.diaDoVencimento != null)
@@ -112,7 +112,7 @@ public class DadoBancario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "DadoBancario [bolsa=" + bolsa + ", diaDoVencimento="
+		return "DadoBancario [bolsa=" + bolsas + ", diaDoVencimento="
 				+ diaDoVencimento + ", inadimplente=" + inadimplente + "]";
 	}
 }

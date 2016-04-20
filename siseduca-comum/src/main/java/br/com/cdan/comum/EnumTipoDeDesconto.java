@@ -1,7 +1,7 @@
 package br.com.cdan.comum;
 
 public enum EnumTipoDeDesconto {
-	BOLSA("Bolsa"), CONlVENIO("ConvÃªnio");
+	BOLSA("Bolsa"), CONlVENIO("Convênio");
 
 	private final String valor;
 

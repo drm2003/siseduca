@@ -44,14 +44,14 @@ public class Bolsa implements Serializable {
 	private EnumEspecieDesconto especieDesconto;
 
 	@OneToMany(mappedBy = "bolsa")
-	private Set<Desconto> desconto;
+	private Set<Desconto> descontos;
 
 	@Column(name = "padraoFranquia")
 	private String padraoFranquia;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "bolsa_empresa", joinColumns = @JoinColumn(name = "id_bolsa"), inverseJoinColumns = @JoinColumn(name = "id_empresa"))
-	private Set<Empresa> empresa;
+	private Set<Empresa> empresas;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_dadoBancario")
@@ -111,12 +111,12 @@ public class Bolsa implements Serializable {
 		this.padraoFranquia = padraoFranquia;
 	}
 
-	public Set<Empresa> getEmpresa() {
-		return empresa;
+	public Set<Empresa> getEmpresas() {
+		return empresas;
 	}
 
-	public void setEmpresa(Set<Empresa> empresa) {
-		this.empresa = empresa;
+	public void setEmpresas(Set<Empresa> empresas) {
+		this.empresas = empresas;
 	}
 
 	public EnumEspecieDesconto getEspecieDesconto() {
@@ -127,12 +127,12 @@ public class Bolsa implements Serializable {
 		this.especieDesconto = especieDesconto;
 	}
 
-	public Set<Desconto> getDesconto() {
-		return desconto;
+	public Set<Desconto> getDescontos() {
+		return descontos;
 	}
 
-	public void setDesconto(Set<Desconto> desconto) {
-		this.desconto = desconto;
+	public void setDescontos(Set<Desconto> descontos) {
+		this.descontos = descontos;
 	}
 
 	public DadoBancario getDadoBancario() {
