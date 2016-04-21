@@ -42,7 +42,7 @@ public class Matricula implements Serializable {
 	private Aluno aluno;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "matricula")
-	private Set<DisciplinaMatricula> disciplina;
+	private Set<DisciplinaMatricula> disciplinas;
 
 	@NotNull
 	@NotBlank
@@ -102,12 +102,12 @@ public class Matricula implements Serializable {
 		this.aluno = aluno;
 	}
 
-	public Set<DisciplinaMatricula> getDisciplina() {
-		return disciplina;
+	public Set<DisciplinaMatricula> getDisciplinas() {
+		return disciplinas;
 	}
 
-	public void setDisciplina(Set<DisciplinaMatricula> disciplina) {
-		this.disciplina = disciplina;
+	public void setDisciplinas(Set<DisciplinaMatricula> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 
 	public String getNumeroContrato() {
@@ -188,5 +188,52 @@ public class Matricula implements Serializable {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
+		result = prime * result + ((disciplinas == null) ? 0 : disciplinas.hashCode());
+		result = prime * result + ((turma == null) ? 0 : turma.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Matricula other = (Matricula) obj;
+		if (aluno == null) {
+			if (other.aluno != null)
+				return false;
+		} else if (!aluno.equals(other.aluno))
+			return false;
+		if (disciplinas == null) {
+			if (other.disciplinas != null)
+				return false;
+		} else if (!disciplinas.equals(other.disciplinas))
+			return false;
+		if (turma == null) {
+			if (other.turma != null)
+				return false;
+		} else if (!turma.equals(other.turma))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Matricula [id=" + id + ", aluno=" + aluno + ", disciplinas=" + disciplinas + ", numeroContrato="
+				+ numeroContrato + ", dataInicio=" + dataInicio + ", dataTermino=" + dataTermino
+				+ ", situacaoDoContrato=" + situacaoDoContrato + ", tipoDeContrato=" + tipoDeContrato
+				+ ", situacaoDoAlunoNaTurma=" + situacaoDoAlunoNaTurma + ", investimento=" + investimento + ", turma="
+				+ turma + ", matrizCurricular=" + matrizCurricular + ", turma_disciplina=" + turma_disciplina
+				+ ", ativo=" + ativo + "]";
 	}
 }

@@ -61,6 +61,9 @@ public class Ocorrencia implements Serializable {
 	@Column(name = "periodo")
 	private String periodo;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -131,6 +134,14 @@ public class Ocorrencia implements Serializable {
 
 	public void setPeriodo(String periodo) {
 		this.periodo = periodo;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

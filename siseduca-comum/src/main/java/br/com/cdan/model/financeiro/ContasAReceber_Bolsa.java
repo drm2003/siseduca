@@ -42,6 +42,9 @@ public class ContasAReceber_Bolsa implements Serializable {
 	@Column(name = "motivoDescontoManual")
 	private String motivoDescontoManual;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public ContasAReceber_BolsaPK getId() {
 		return id;
 	}
@@ -88,6 +91,14 @@ public class ContasAReceber_Bolsa implements Serializable {
 
 	public void setMotivoDescontoManual(String motivoDescontoManual) {
 		this.motivoDescontoManual = motivoDescontoManual;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

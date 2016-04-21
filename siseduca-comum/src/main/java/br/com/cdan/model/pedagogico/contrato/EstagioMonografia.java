@@ -83,6 +83,9 @@ public class EstagioMonografia implements Serializable {
 	@OneToMany(mappedBy = "estagioMonografia")
 	private Set<AnexoDocumentos> anexos;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -209,5 +212,75 @@ public class EstagioMonografia implements Serializable {
 
 	public void setAnexos(Set<AnexoDocumentos> anexos) {
 		this.anexos = anexos;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
+		result = prime * result + ((dataInicio == null) ? 0 : dataInicio.hashCode());
+		result = prime * result + ((horaInicio == null) ? 0 : horaInicio.hashCode());
+		result = prime * result + ((orientadorSupervisor == null) ? 0 : orientadorSupervisor.hashCode());
+		result = prime * result + ((tipoEstagioMonografia == null) ? 0 : tipoEstagioMonografia.hashCode());
+		result = prime * result + ((tituloTema == null) ? 0 : tituloTema.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EstagioMonografia other = (EstagioMonografia) obj;
+		if (aluno == null) {
+			if (other.aluno != null)
+				return false;
+		} else if (!aluno.equals(other.aluno))
+			return false;
+		if (dataInicio == null) {
+			if (other.dataInicio != null)
+				return false;
+		} else if (!dataInicio.equals(other.dataInicio))
+			return false;
+		if (horaInicio == null) {
+			if (other.horaInicio != null)
+				return false;
+		} else if (!horaInicio.equals(other.horaInicio))
+			return false;
+		if (orientadorSupervisor == null) {
+			if (other.orientadorSupervisor != null)
+				return false;
+		} else if (!orientadorSupervisor.equals(other.orientadorSupervisor))
+			return false;
+		if (tipoEstagioMonografia != other.tipoEstagioMonografia)
+			return false;
+		if (tituloTema == null) {
+			if (other.tituloTema != null)
+				return false;
+		} else if (!tituloTema.equals(other.tituloTema))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "EstagioMonografia [id=" + id + ", tipoEstagioMonografia=" + tipoEstagioMonografia + ", concluido="
+				+ concluido + ", aluno=" + aluno + ", turma_Disciplina=" + turma_Disciplina + ", orientadorSupervisor="
+				+ orientadorSupervisor + ", tituloTema=" + tituloTema + ", dataInicio=" + dataInicio + ", dataTermino="
+				+ dataTermino + ", horaInicio=" + horaInicio + ", horaTermino=" + horaTermino + ", nota=" + nota
+				+ ", resultado=" + resultado + ", observacao=" + observacao + ", dadosEmpresaConcedente="
+				+ dadosEmpresaConcedente + ", anexos=" + anexos + ", ativo=" + ativo + "]";
 	}
 }

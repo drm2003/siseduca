@@ -48,7 +48,7 @@ public class TipoDeServico implements Serializable {
 
 	@ManyToMany
 	@JoinTable(name = "tipoDeServico_empresa", joinColumns = @JoinColumn(name = "id_tipoDeServico"), inverseJoinColumns = @JoinColumn(name = "id_empresa"))
-	private Set<Empresa> empresa;
+	private Set<Empresa> empresas;
 
 	@ManyToMany
 	@JoinTable(name = "tipoDeServico_tipoDeCurso", joinColumns = @JoinColumn(name = "id_tipoDeServico"), inverseJoinColumns = @JoinColumn(name = "id_tipoDeCurso"))
@@ -110,12 +110,12 @@ public class TipoDeServico implements Serializable {
 		this.ativo = ativo;
 	}
 
-	public Set<Empresa> getEmpresa() {
-		return empresa;
+	public Set<Empresa> getEmpresas() {
+		return empresas;
 	}
 
-	public void setEmpresa(Set<Empresa> empresa) {
-		this.empresa = empresa;
+	public void setEmpresas(Set<Empresa> empresas) {
+		this.empresas = empresas;
 	}
 
 	public Set<TipoDeCurso> getTipoDeCurso() {
@@ -155,7 +155,7 @@ public class TipoDeServico implements Serializable {
 	public String toString() {
 		return "TipoDeServico [descricao=" + descricao + ", primeiraSolicitacaoGratuita=" + primeiraSolicitacaoGratuita
 				+ ", categoria=" + categoria + ", valor=" + valor + ", dias=" + dias + ", ativo=" + ativo + ", empresa="
-				+ empresa + ", tipoDeCurso=" + tipoDeCurso + "]";
+				+ empresas + ", tipoDeCurso=" + tipoDeCurso + "]";
 	}
 
 }

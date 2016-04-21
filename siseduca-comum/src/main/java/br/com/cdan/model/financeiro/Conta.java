@@ -39,7 +39,7 @@ public class Conta implements Serializable {
 
 	@ManyToMany
 	@JoinTable(name = "conta_empresa", joinColumns = @JoinColumn(name = "id_conta"), inverseJoinColumns = @JoinColumn(name = "id_empresa"))
-	private Set<Empresa> empresa;
+	private Set<Empresa> empresas;
 
 	@Column(name = "encerrada")
 	private Boolean encerrada;
@@ -85,12 +85,12 @@ public class Conta implements Serializable {
 		this.banco = banco;
 	}
 
-	public Set<Empresa> getEmpresa() {
-		return empresa;
+	public Set<Empresa> getEmpresas() {
+		return empresas;
 	}
 
-	public void setEmpresa(Set<Empresa> empresa) {
-		this.empresa = empresa;
+	public void setEmpresas(Set<Empresa> empresas) {
+		this.empresas = empresas;
 	}
 
 	public Boolean getEncerrada() {

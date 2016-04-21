@@ -68,6 +68,9 @@ public class Responsavel implements Serializable {
 	@JoinColumn(name = "id_alunoInteressado")
 	private AlunoInteressado alunoInteressado;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -162,6 +165,14 @@ public class Responsavel implements Serializable {
 
 	public void setAlunoInteressado(AlunoInteressado alunoInteressado) {
 		this.alunoInteressado = alunoInteressado;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

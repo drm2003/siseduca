@@ -58,7 +58,7 @@ public class Bolsa implements Serializable {
 	private DadoBancario dadoBancario;
 
 	@OneToMany(mappedBy = "bolsa", fetch = FetchType.LAZY)
-	private Set<ContasAReceber_Bolsa> bolsa;
+	private Set<ContasAReceber_Bolsa> contasAReceber_Bolsa;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -87,12 +87,12 @@ public class Bolsa implements Serializable {
 		this.tipoDeDesconto = tipoDeDesconto;
 	}
 
-	public Set<ContasAReceber_Bolsa> getBolsa() {
-		return bolsa;
+	public Set<ContasAReceber_Bolsa> getContasAReceber_Bolsa() {
+		return contasAReceber_Bolsa;
 	}
 
-	public void setBolsa(Set<ContasAReceber_Bolsa> bolsa) {
-		this.bolsa = bolsa;
+	public void setContasAReceber_Bolsa(Set<ContasAReceber_Bolsa> contasAReceber_Bolsa) {
+		this.contasAReceber_Bolsa = contasAReceber_Bolsa;
 	}
 
 	public Boolean getAtivo() {

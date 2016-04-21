@@ -3,10 +3,18 @@ package br.com.cdan.negocio.biblioteca.factory;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.model.empresa.Empresa;
+import br.com.cdan.model.financeiro.Banco;
 import br.com.cdan.model.financeiro.Caixa;
 import br.com.cdan.model.financeiro.Conta;
 import br.com.cdan.model.financeiro.ContasAReceber;
+import br.com.cdan.negocio.biblioteca.BancoDao;
+import br.com.cdan.negocio.biblioteca.CaixaDao;
+import br.com.cdan.negocio.biblioteca.ContaDao;
+import br.com.cdan.negocio.biblioteca.ContasAReceberDao;
+import br.com.cdan.negocio.biblioteca.EmpresaDao;
 
 public class ContaFabricaTest {
 	private static ContaFabricaTest instance = null;
@@ -36,10 +44,53 @@ public class ContaFabricaTest {
 		Set<Empresa> empresas = new LinkedHashSet<>();
 		empresas.add(EmpresaFabricaTest.getInstance().criaEmpresa());
 		empresas.add(EmpresaFabricaTest.getInstance().criaEmpresa());
-		c.setEmpresa(empresas);
+		c.setEmpresas(empresas);
 		//
 		c.setEncerrada(Boolean.FALSE);
 		c.setNumero("numero");
 		c.setTitular("titular");
+		//
+		return c;
+	}
+
+	public Conta criaContaPersistido(EntityManager em) {
+		ContaDao contaDao = new ContaDao();
+		contaDao.setEntityManager(em);
+		Conta c = criaConta();
+		// Banco
+		BancoDao bancoDao = new BancoDao();
+		bancoDao.setEntityManager(em);
+		Banco banco = c.getBanco();
+		bancoDao.persist(banco);
+		c.setBanco(banco);
+		// Caixas
+		CaixaDao caixaDao = new CaixaDao();
+		caixaDao.setEntityManager(em);
+		Set<Caixa> caixas = new LinkedHashSet<>();
+		c.getCaixas().forEach(caixa -> {
+			caixaDao.persist(caixa);
+			caixas.add(caixa);
+		});
+		c.setCaixas(caixas);
+		// Contas a receber
+		ContasAReceberDao contasAReceberDao = new ContasAReceberDao();
+		contasAReceberDao.setEntityManager(em);
+		Set<ContasAReceber> contasAReceber = new LinkedHashSet<>();
+		c.getContasAReceber().forEach(contaAReceber -> {
+			contasAReceberDao.persist(contaAReceber);
+			contasAReceber.add(contaAReceber);
+		});
+		c.setContasAReceber(contasAReceber);
+		// Empresas
+		EmpresaDao empresaDao = new EmpresaDao();
+		empresaDao.setEntityManager(em);
+		Set<Empresa> empresas = new LinkedHashSet<>();
+		c.getEmpresas().forEach(empresa -> {
+			empresaDao.persist(empresa);
+			empresas.add(empresa);
+		});
+		c.setEmpresas(empresas);
+		//
+		return c;
 	}
 }

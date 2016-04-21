@@ -31,7 +31,7 @@ public class Categoria implements Serializable {
 	private String descricao;
 
 	@OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
-	private Set<TipoDeServico> tipoDeServico;
+	private Set<TipoDeServico> tiposDeServico;
 
 	@OneToOne(mappedBy = "categoria", fetch = FetchType.LAZY)
 	private Investimento investimento;
@@ -58,12 +58,12 @@ public class Categoria implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Set<TipoDeServico> getTipoDeServico() {
-		return tipoDeServico;
+	public Set<TipoDeServico> getTiposDeServico() {
+		return tiposDeServico;
 	}
 
-	public void setTipoDeServico(Set<TipoDeServico> tipoDeServico) {
-		this.tipoDeServico = tipoDeServico;
+	public void setTiposDeServico(Set<TipoDeServico> tiposDeServico) {
+		this.tiposDeServico = tiposDeServico;
 	}
 
 	public Boolean getAtivo() {
@@ -101,6 +101,6 @@ public class Categoria implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Categoria [descricao=" + descricao + ", tipoDeServico=" + tipoDeServico.toString() + "]";
+		return "Categoria [descricao=" + descricao + ", tipoDeServico=" + tiposDeServico.toString() + "]";
 	}
 }

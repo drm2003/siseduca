@@ -45,7 +45,7 @@ public class TipoDeCurso implements Serializable {
 	private Set<SeriePadrao> seriesPadrao;
 
 	@OneToMany(mappedBy = "tipoDeCurso")
-	private Set<Disciplina> disciplina;
+	private Set<Disciplina> disciplinas;
 
 	@OneToOne(mappedBy = "tipoDeCurso")
 	private Curso curso;
@@ -104,12 +104,12 @@ public class TipoDeCurso implements Serializable {
 		this.tipoDeServico = tipoDeServico;
 	}
 
-	public Set<Disciplina> getDisciplina() {
-		return disciplina;
+	public Set<Disciplina> getDisciplinas() {
+		return disciplinas;
 	}
 
-	public void setDisciplina(Set<Disciplina> disciplina) {
-		this.disciplina = disciplina;
+	public void setDisciplina(Set<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 
 	public Curso getCurso() {
@@ -140,8 +140,7 @@ public class TipoDeCurso implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 
@@ -164,8 +163,7 @@ public class TipoDeCurso implements Serializable {
 
 	@Override
 	public String toString() {
-		return "TipoDeCurso [descricao=" + descricao + ", reconhecidoPeloMec="
-				+ reconhecidoPeloMec + ", temMatrizCurricular="
-				+ temMatrizCurricular + ", seriesPadrao=" + seriesPadrao + "]";
+		return "TipoDeCurso [descricao=" + descricao + ", reconhecidoPeloMec=" + reconhecidoPeloMec
+				+ ", temMatrizCurricular=" + temMatrizCurricular + ", seriesPadrao=" + seriesPadrao + "]";
 	}
 }

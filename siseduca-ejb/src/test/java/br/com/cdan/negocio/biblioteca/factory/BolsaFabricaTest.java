@@ -10,6 +10,12 @@ import br.com.cdan.comum.EnumTipoDeDesconto;
 import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.financeiro.Bolsa;
 import br.com.cdan.model.financeiro.ContasAReceber_Bolsa;
+import br.com.cdan.model.financeiro.Desconto;
+import br.com.cdan.model.pessoa.DadoBancario;
+import br.com.cdan.negocio.biblioteca.ContasAReceber_BolsaDao;
+import br.com.cdan.negocio.biblioteca.DadoBancarioDao;
+import br.com.cdan.negocio.biblioteca.DescontoDao;
+import br.com.cdan.negocio.biblioteca.EmpresaDao;
 
 public class BolsaFabricaTest {
 	private static BolsaFabricaTest instance = null;
@@ -24,14 +30,19 @@ public class BolsaFabricaTest {
 	public Bolsa criaBolsa() {
 		Bolsa b = new Bolsa();
 		b.setAtivo(Boolean.TRUE);
-		// Bolsas
+		// Contas a receber e Bolsa
 		Set<ContasAReceber_Bolsa> contasAReceber_Bolsa = new LinkedHashSet<>();
 		contasAReceber_Bolsa.add(ContasAReceber_BolsaFabricaTest.getInstance().criaContasAReceber_Bolsa());
 		contasAReceber_Bolsa.add(ContasAReceber_BolsaFabricaTest.getInstance().criaContasAReceber_Bolsa());
-		b.setBolsa(contasAReceber_Bolsa);
+		b.setContasAReceber_Bolsa(contasAReceber_Bolsa);
 		//
 		b.setDadoBancario(DadoBancarioFabricaTest.getInstance().criaDadoBancario());
-		b.setDescontos(DescontoFabricaTest.getInstance().criaDesconto());
+		// Descontos
+		Set<Desconto> descontos = new LinkedHashSet<>();
+		descontos.add(DescontoFabricaTest.getInstance().criaDesconto());
+		descontos.add(DescontoFabricaTest.getInstance().criaDesconto());
+		b.setDescontos(descontos);
+		//
 		b.setDescricao("descricao");
 		// Empresas
 		Set<Empresa> empresas = new LinkedHashSet<>();
@@ -46,5 +57,40 @@ public class BolsaFabricaTest {
 	}
 
 	public Bolsa criaBolsaPersistido(EntityManager em) {
-
+		Bolsa b = criaBolsa();
+		// contas a receber e bolsa
+		ContasAReceber_BolsaDao contasAReceber_BolsaDao = new ContasAReceber_BolsaDao();
+		contasAReceber_BolsaDao.setEntityManager(em);
+		Set<ContasAReceber_Bolsa> contasAReceber_Bolsas = new LinkedHashSet<>();
+		b.getContasAReceber_Bolsa().forEach(cReceberBolsa -> {
+			contasAReceber_BolsaDao.persist(cReceberBolsa);
+			contasAReceber_Bolsas.add(cReceberBolsa);
+		});
+		b.setContasAReceber_Bolsa(contasAReceber_Bolsas);
+		// Dado bancário
+		DadoBancarioDao dadoBancarioDao = new DadoBancarioDao();
+		dadoBancarioDao.setEntityManager(em);
+		DadoBancario dadoBancario = b.getDadoBancario();
+		dadoBancarioDao.persist(dadoBancario);
+		// Descontos
+		DescontoDao descontoDao = new DescontoDao();
+		descontoDao.setEntityManager(em);
+		Set<Desconto> descontos = new LinkedHashSet<>();
+		b.getDescontos().forEach(desconto -> {
+			descontoDao.persist(desconto);
+			descontos.add(desconto);
+		});
+		b.setDescontos(descontos);
+		// Empresas
+		EmpresaDao empresaDao = new EmpresaDao();
+		empresaDao.setEntityManager(em);
+		Set<Empresa> empresas = new LinkedHashSet<>();
+		b.getEmpresas().forEach(empresa -> {
+			empresaDao.persist(empresa);
+			empresas.add(empresa);
+		});
+		b.setEmpresas(empresas);
+		//
+		return b;
+	}
 }

@@ -34,6 +34,9 @@ public class Desconto implements Serializable {
 	@JoinColumn(name = "id_bolsa")
 	private Bolsa bolsa;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -64,6 +67,14 @@ public class Desconto implements Serializable {
 
 	public void setBolsa(Bolsa bolsa) {
 		this.bolsa = bolsa;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

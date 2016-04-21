@@ -76,6 +76,9 @@ public class Turma_Disciplina implements Serializable {
 	@JoinColumn(name = "id_estagioMonografia")
 	private EstagioMonografia estagioMonografia;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Turma_DisciplinaPK getId() {
 		return id;
 	}
@@ -178,5 +181,13 @@ public class Turma_Disciplina implements Serializable {
 
 	public void setEstagioMonografia(EstagioMonografia estagioMonografia) {
 		this.estagioMonografia = estagioMonografia;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 }
