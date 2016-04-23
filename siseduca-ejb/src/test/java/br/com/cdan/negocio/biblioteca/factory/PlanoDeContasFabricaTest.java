@@ -4,8 +4,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import br.com.cdan.comum.EnumTipoDePlanoDeContas;
-import br.com.cdan.model.financeiro.ContasAReceber;
-import br.com.cdan.model.financeiro.PlanoDeContas;
+import br.com.cdan.model.financeiro.ContaAReceber;
+import br.com.cdan.model.financeiro.PlanoDeConta;
 import br.com.cdan.model.financeiro.PlanoDeContas_CentroDeCustos;
 
 public class PlanoDeContasFabricaTest {
@@ -18,15 +18,15 @@ public class PlanoDeContasFabricaTest {
 		return instance;
 	}
 
-	public PlanoDeContas criaPlanoDeContas() {
-		PlanoDeContas p = new PlanoDeContas();
+	public PlanoDeConta criaPlanoDeContas() {
+		PlanoDeConta p = new PlanoDeConta();
 		p.setAtivo(Boolean.TRUE);
 		p.setCodigo(Long.valueOf("1"));
 		p.setCompartilhado(Boolean.TRUE);
 		// Contas as receber
-		Set<ContasAReceber> contasAReceber = new LinkedHashSet<>();
-		contasAReceber.add(ContasAReceberFabricaTest.getInstance().criaContasAReceber());
-		contasAReceber.add(ContasAReceberFabricaTest.getInstance().criaContasAReceber());
+		Set<ContaAReceber> contasAReceber = new LinkedHashSet<>();
+		contasAReceber.add(ContaAReceberFabricaTest.getInstance().criaContasAReceber());
+		contasAReceber.add(ContaAReceberFabricaTest.getInstance().criaContasAReceber());
 		p.setContasAReceber(contasAReceber);
 		//
 		p.setItemApenasDeGrupo(Boolean.TRUE);

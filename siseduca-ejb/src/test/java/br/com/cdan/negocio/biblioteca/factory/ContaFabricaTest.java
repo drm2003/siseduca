@@ -9,11 +9,11 @@ import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.financeiro.Banco;
 import br.com.cdan.model.financeiro.Caixa;
 import br.com.cdan.model.financeiro.Conta;
-import br.com.cdan.model.financeiro.ContasAReceber;
+import br.com.cdan.model.financeiro.ContaAReceber;
 import br.com.cdan.negocio.biblioteca.BancoDao;
 import br.com.cdan.negocio.biblioteca.CaixaDao;
+import br.com.cdan.negocio.biblioteca.ContaAReceberDao;
 import br.com.cdan.negocio.biblioteca.ContaDao;
-import br.com.cdan.negocio.biblioteca.ContasAReceberDao;
 import br.com.cdan.negocio.biblioteca.EmpresaDao;
 
 public class ContaFabricaTest {
@@ -36,9 +36,9 @@ public class ContaFabricaTest {
 		caixas.add(CaixaFabricaTest.getInstance().criaCaixa());
 		c.setCaixas(caixas);
 		// Contas a receber
-		Set<ContasAReceber> contasAReceber = new LinkedHashSet<>();
-		contasAReceber.add(ContasAReceberFabricaTest.getInstance().criaContasAReceber());
-		contasAReceber.add(ContasAReceberFabricaTest.getInstance().criaContasAReceber());
+		Set<ContaAReceber> contasAReceber = new LinkedHashSet<>();
+		contasAReceber.add(ContaAReceberFabricaTest.getInstance().criaContaAReceber());
+		contasAReceber.add(ContaAReceberFabricaTest.getInstance().criaContaAReceber());
 		c.setContasAReceber(contasAReceber);
 		// Empresas
 		Set<Empresa> empresas = new LinkedHashSet<>();
@@ -73,9 +73,9 @@ public class ContaFabricaTest {
 		});
 		c.setCaixas(caixas);
 		// Contas a receber
-		ContasAReceberDao contasAReceberDao = new ContasAReceberDao();
+		ContaAReceberDao contasAReceberDao = new ContaAReceberDao();
 		contasAReceberDao.setEntityManager(em);
-		Set<ContasAReceber> contasAReceber = new LinkedHashSet<>();
+		Set<ContaAReceber> contasAReceber = new LinkedHashSet<>();
 		c.getContasAReceber().forEach(contaAReceber -> {
 			contasAReceberDao.persist(contaAReceber);
 			contasAReceber.add(contaAReceber);

@@ -40,6 +40,9 @@ public class DadosDoExemplar {
 	@Column(name = "observacoes")
 	private String observacoes;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public EnumTipoAquisicao getTipoAquisicao() {
 		return tipoAquisicao;
 	}
@@ -118,5 +121,64 @@ public class DadosDoExemplar {
 
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ISBN == null) ? 0 : ISBN.hashCode());
+		result = prime * result + ((ISSN == null) ? 0 : ISSN.hashCode());
+		result = prime * result + ((codigoDeBarras == null) ? 0 : codigoDeBarras.hashCode());
+		result = prime * result + ((tombo == null) ? 0 : tombo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DadosDoExemplar other = (DadosDoExemplar) obj;
+		if (ISBN == null) {
+			if (other.ISBN != null)
+				return false;
+		} else if (!ISBN.equals(other.ISBN))
+			return false;
+		if (ISSN == null) {
+			if (other.ISSN != null)
+				return false;
+		} else if (!ISSN.equals(other.ISSN))
+			return false;
+		if (codigoDeBarras == null) {
+			if (other.codigoDeBarras != null)
+				return false;
+		} else if (!codigoDeBarras.equals(other.codigoDeBarras))
+			return false;
+		if (tombo == null) {
+			if (other.tombo != null)
+				return false;
+		} else if (!tombo.equals(other.tombo))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "DadosDoExemplar [tipoAquisicao=" + tipoAquisicao + ", ISBN=" + ISBN + ", ISSN=" + ISSN
+				+ ", codigoDeBarras=" + codigoDeBarras + ", tombo=" + tombo + ", localizacao=" + localizacao
+				+ ", emprestar=" + emprestar + ", reservar=" + reservar + ", renovar=" + renovar + ", observacoes="
+				+ observacoes + ", ativo=" + ativo + "]";
 	}
 }

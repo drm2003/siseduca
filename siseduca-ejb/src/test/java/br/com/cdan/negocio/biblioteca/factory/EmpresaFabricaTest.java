@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.financeiro.Bolsa;
-import br.com.cdan.model.financeiro.ContasAPagar;
+import br.com.cdan.model.financeiro.ContaAPagar;
 import br.com.cdan.model.geral.cep.CEP;
 import br.com.cdan.negocio.biblioteca.BolsaDao;
 import br.com.cdan.negocio.biblioteca.CEPDao;
@@ -40,7 +40,7 @@ public class EmpresaFabricaTest {
 		empresa.setCnpj("cnpj");
 		empresa.setCodigoArea("codigo Area");
 		// Contas a pagar
-		Set<ContasAPagar> contasAPagar = new LinkedHashSet<>();
+		Set<ContaAPagar> contasAPagar = new LinkedHashSet<>();
 		contasAPagar.add(ContasAPagarFabricaTest.getInstance().criaContasAPagar());
 		empresa.setContasAPagar(contasAPagar);
 		return empresa;

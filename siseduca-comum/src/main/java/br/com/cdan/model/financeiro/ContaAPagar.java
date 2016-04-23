@@ -29,8 +29,8 @@ import br.com.cdan.model.pessoa.Aluno;
 import br.com.cdan.model.pessoa.Funcionario;
 
 @Entity
-@Table(name = "ContasAPagar")
-public class ContasAPagar implements Serializable {
+@Table(name = "ContaAPagar")
+public class ContaAPagar implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -38,15 +38,15 @@ public class ContasAPagar implements Serializable {
 	private Long id;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "ContasAPagar_Aluno", joinColumns = @JoinColumn(name = "id_contasAReceber"), inverseJoinColumns = @JoinColumn(name = "id_aluno"))
+	@JoinTable(name = "ContasAPagar_Aluno", joinColumns = @JoinColumn(name = "id_contaAReceber"), inverseJoinColumns = @JoinColumn(name = "id_aluno"))
 	private Set<Aluno> alunos;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "ContasAPagar_Empresa", joinColumns = @JoinColumn(name = "id_contasAReceber"), inverseJoinColumns = @JoinColumn(name = "id_empresa"))
+	@JoinTable(name = "ContasAPagar_Empresa", joinColumns = @JoinColumn(name = "id_contaAReceber"), inverseJoinColumns = @JoinColumn(name = "id_empresa"))
 	private Set<Empresa> empresas;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "ContasAPagar_Empresa", joinColumns = @JoinColumn(name = "id_contasAReceber"), inverseJoinColumns = @JoinColumn(name = "id_funcionario"))
+	@JoinTable(name = "ContasAPagar_Empresa", joinColumns = @JoinColumn(name = "id_contaAReceber"), inverseJoinColumns = @JoinColumn(name = "id_funcionario"))
 	private Set<Funcionario> funcionarios;
 
 	@Column(name = "valorDiferenciadoPrimeiraParcela")
@@ -62,7 +62,7 @@ public class ContasAPagar implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_planoDeConta")
-	private PlanoDeContas planoDeConta;
+	private PlanoDeConta planoDeConta;
 
 	@Column(name = "complementoPlanoDeConta")
 	private String complementoPlanoDeConta;
@@ -152,11 +152,11 @@ public class ContasAPagar implements Serializable {
 		this.dataVencimento = dataVencimento;
 	}
 
-	public PlanoDeContas getPlanoDeConta() {
+	public PlanoDeConta getPlanoDeConta() {
 		return planoDeConta;
 	}
 
-	public void setPlanoDeConta(PlanoDeContas planoDeConta) {
+	public void setPlanoDeConta(PlanoDeConta planoDeConta) {
 		this.planoDeConta = planoDeConta;
 	}
 
@@ -253,7 +253,7 @@ public class ContasAPagar implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ContasAPagar other = (ContasAPagar) obj;
+		ContaAPagar other = (ContaAPagar) obj;
 		if (alunos == null) {
 			if (other.alunos != null)
 				return false;

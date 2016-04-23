@@ -30,7 +30,7 @@ public class PlanoDeContas_CentroDeCustos implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_PlanoDeContas")
-	private PlanoDeContas planoDeContas;
+	private PlanoDeConta planoDeContas;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_centroDeCustos")
@@ -60,11 +60,11 @@ public class PlanoDeContas_CentroDeCustos implements Serializable {
 		this.centroDeCustos = centroDeCustos;
 	}
 
-	public PlanoDeContas getPlanoDeContas() {
+	public PlanoDeConta getPlanoDeContas() {
 		return planoDeContas;
 	}
 
-	public void setPlanoDeContas(PlanoDeContas planoDeContas) {
+	public void setPlanoDeContas(PlanoDeConta planoDeContas) {
 		this.planoDeContas = planoDeContas;
 	}
 

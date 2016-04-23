@@ -3,8 +3,8 @@ package br.com.cdan.negocio.biblioteca.factory;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import br.com.cdan.model.financeiro.ContasAPagar;
-import br.com.cdan.model.financeiro.ContasAReceber;
+import br.com.cdan.model.financeiro.ContaAPagar;
+import br.com.cdan.model.financeiro.ContaAReceber;
 import br.com.cdan.model.pedagogico.contrato.EstagioMonografia;
 import br.com.cdan.model.pedagogico.contrato.Ocorrencia;
 import br.com.cdan.model.pedagogico.curso.Turma;
@@ -28,14 +28,14 @@ public class FuncionarioFabricaTest {
 		f.setAtivo(Boolean.TRUE);
 		f.setCargo(CargoFabricaTest.getInstance().criaCargo());
 		// Contas a pagar
-		Set<ContasAPagar> contasAPagar = new LinkedHashSet<>();
+		Set<ContaAPagar> contasAPagar = new LinkedHashSet<>();
 		contasAPagar.add(ContasAPagarFabricaTest.getInstance().criaContasAPagar());
 		contasAPagar.add(ContasAPagarFabricaTest.getInstance().criaContasAPagar());
 		f.setContasAPagar(contasAPagar);
 		// Contas a receber
-		Set<ContasAReceber> contasAReceber = new LinkedHashSet<>();
-		contasAReceber.add(ContasAReceberFabricaTest.getInstance().criaContasAReceber());
-		contasAReceber.add(ContasAReceberFabricaTest.getInstance().criaContasAReceber());
+		Set<ContaAReceber> contasAReceber = new LinkedHashSet<>();
+		contasAReceber.add(ContaAReceberFabricaTest.getInstance().criaContasAReceber());
+		contasAReceber.add(ContaAReceberFabricaTest.getInstance().criaContasAReceber());
 		f.setContasAReceber(contasAReceber);
 		//
 		f.setDadosProfissionais(DadosProfissionaisFabricaTest.getInstance().criaDadosProfissionais());

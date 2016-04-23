@@ -25,7 +25,7 @@ public class TipoDeCobrancaRecebimento implements Serializable {
 	private String descricao;
 
 	@OneToMany(mappedBy = "tipoDeCobranca", fetch = FetchType.EAGER)
-	private Set<ContasAReceber> contasAReceber;
+	private Set<ContaAReceber> contasAReceber;
 
 	@OneToMany(mappedBy = "tipoDeMovimentacao", fetch = FetchType.EAGER)
 	private Set<Caixa> caixas;
@@ -49,11 +49,11 @@ public class TipoDeCobrancaRecebimento implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Set<ContasAReceber> getContasAReceber() {
+	public Set<ContaAReceber> getContasAReceber() {
 		return contasAReceber;
 	}
 
-	public void setContasAReceber(Set<ContasAReceber> contasAReceber) {
+	public void setContasAReceber(Set<ContaAReceber> contasAReceber) {
 		this.contasAReceber = contasAReceber;
 	}
 

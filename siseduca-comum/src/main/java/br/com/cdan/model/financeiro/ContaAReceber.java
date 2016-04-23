@@ -28,8 +28,8 @@ import br.com.cdan.model.pessoa.Aluno;
 import br.com.cdan.model.pessoa.Funcionario;
 
 @Entity
-@Table(name = "ContasAReceber")
-public class ContasAReceber implements Serializable {
+@Table(name = "ContaAReceber")
+public class ContaAReceber implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -37,23 +37,23 @@ public class ContasAReceber implements Serializable {
 	private Long id;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "ContasAReceber_Aluno", joinColumns = @JoinColumn(name = "id_contasAReceber"), inverseJoinColumns = @JoinColumn(name = "id_aluno"))
+	@JoinTable(name = "ContaAReceber_Aluno", joinColumns = @JoinColumn(name = "id_contaAReceber"), inverseJoinColumns = @JoinColumn(name = "id_aluno"))
 	private Set<Aluno> alunos;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "ContasAReceber_Empresa", joinColumns = @JoinColumn(name = "id_contasAReceber"), inverseJoinColumns = @JoinColumn(name = "id_empresa"))
+	@JoinTable(name = "ContaAReceber_Empresa", joinColumns = @JoinColumn(name = "id_contaAReceber"), inverseJoinColumns = @JoinColumn(name = "id_empresa"))
 	private Set<Empresa> empresas;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "ContasAReceber_Turma", joinColumns = @JoinColumn(name = "id_contasAReceber"), inverseJoinColumns = @JoinColumn(name = "id_turma"))
+	@JoinTable(name = "contaAReceber_Turma", joinColumns = @JoinColumn(name = "id_contaAReceber"), inverseJoinColumns = @JoinColumn(name = "id_turma"))
 	private Set<Turma> turmas;
 
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "ContasAReceber_Empresa", joinColumns = @JoinColumn(name = "id_contasAReceber"), inverseJoinColumns = @JoinColumn(name = "id_funcionario"))
+	@JoinTable(name = "contaAReceber_Empresa", joinColumns = @JoinColumn(name = "id_contaAReceber"), inverseJoinColumns = @JoinColumn(name = "id_funcionario"))
 	private Set<Funcionario> funcionarios;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "contasAReceber")
-	private Set<ContasAReceber_Bolsa> contasAReceber;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "contaAReceber")
+	private Set<ContaAReceber_Bolsa> contasAReceber_Bolsa;
 
 	@Column(name = "valorDiferenciadoPrimeiraParcela")
 	private Boolean valorDiferenciadoPrimeiraParcela;
@@ -68,7 +68,7 @@ public class ContasAReceber implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_planoDeConta")
-	private PlanoDeContas planoDeConta;
+	private PlanoDeConta planoDeConta;
 
 	@Column(name = "complementoPlanoDeConta")
 	private String complementoPlanoDeConta;
@@ -137,12 +137,12 @@ public class ContasAReceber implements Serializable {
 		this.funcionarios = funcionarios;
 	}
 
-	public Set<ContasAReceber_Bolsa> getContasAReceber() {
-		return contasAReceber;
+	public Set<ContaAReceber_Bolsa> getcontasAReceberBolsa() {
+		return contasAReceber_Bolsa;
 	}
 
-	public void setContasAReceber(Set<ContasAReceber_Bolsa> contasAReceber) {
-		this.contasAReceber = contasAReceber;
+	public void setcontaAReceber_Bolsa(Set<ContaAReceber_Bolsa> contasAReceber_Bolsa) {
+		this.contasAReceber_Bolsa = contasAReceber_Bolsa;
 	}
 
 	public Boolean getValorDiferenciadoPrimeiraParcela() {
@@ -169,11 +169,11 @@ public class ContasAReceber implements Serializable {
 		this.dataVencimento = dataVencimento;
 	}
 
-	public PlanoDeContas getPlanoDeConta() {
+	public PlanoDeConta getPlanoDeConta() {
 		return planoDeConta;
 	}
 
-	public void setPlanoDeConta(PlanoDeContas planoDeConta) {
+	public void setPlanoDeConta(PlanoDeConta planoDeConta) {
 		this.planoDeConta = planoDeConta;
 	}
 
@@ -262,7 +262,7 @@ public class ContasAReceber implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ContasAReceber other = (ContasAReceber) obj;
+		ContaAReceber other = (ContaAReceber) obj;
 		if (alunos == null) {
 			if (other.alunos != null)
 				return false;
@@ -298,8 +298,8 @@ public class ContasAReceber implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ContasAReceber [id=" + id + ", alunos=" + alunos + ", empresas=" + empresas + ", turmas=" + turmas
-				+ ", funcionarios=" + funcionarios + ", contasAReceber=" + contasAReceber
+		return "contaAReceber [id=" + id + ", alunos=" + alunos + ", empresas=" + empresas + ", turmas=" + turmas
+				+ ", funcionarios=" + funcionarios + ", contasAReceber_Bolsa=" + contasAReceber_Bolsa
 				+ ", valorDiferenciadoPrimeiraParcela=" + valorDiferenciadoPrimeiraParcela + ", primeiraParcela="
 				+ primeiraParcela + ", dataVencimento=" + dataVencimento + ", planoDeConta=" + planoDeConta
 				+ ", complementoPlanoDeConta=" + complementoPlanoDeConta + ", dataCompetenciaPlanoDeConta="

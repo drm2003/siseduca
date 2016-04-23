@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
 
 import br.com.cdan.comum.EnumTipoDeSituacaoInvestimento;
 import br.com.cdan.model.estoque.Item;
-import br.com.cdan.model.financeiro.ContasAReceber;
+import br.com.cdan.model.financeiro.ContaAReceber;
 import br.com.cdan.model.geral.Categoria;
 import br.com.cdan.model.pedagogico.contrato.Matricula;
 
@@ -84,10 +84,10 @@ public class Investimento implements Serializable {
 	private EnumTipoDeSituacaoInvestimento tipoDeSituacao;
 
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "primeiraParcela")
-	private ContasAReceber contasAReceberPrimeiraParcela;
+	private ContaAReceber contaAReceberPrimeiraParcela;
 
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "investimento")
-	private ContasAReceber contasAReceber;
+	private ContaAReceber contaAReceber;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -196,12 +196,12 @@ public class Investimento implements Serializable {
 		this.item = item;
 	}
 
-	public ContasAReceber getContasAReceber() {
-		return contasAReceber;
+	public ContaAReceber getContaAReceber() {
+		return contaAReceber;
 	}
 
-	public void setContasAReceber(ContasAReceber contasAReceber) {
-		this.contasAReceber = contasAReceber;
+	public void setContaAReceber(ContaAReceber contaAReceber) {
+		this.contaAReceber = contaAReceber;
 	}
 
 	public EnumTipoDeSituacaoInvestimento getTipoDeSituacao() {
@@ -212,12 +212,12 @@ public class Investimento implements Serializable {
 		this.tipoDeSituacao = tipoDeSituacao;
 	}
 
-	public ContasAReceber getContasAReceberPrimeiraParcela() {
-		return contasAReceberPrimeiraParcela;
+	public ContaAReceber getContaAReceberPrimeiraParcela() {
+		return contaAReceberPrimeiraParcela;
 	}
 
-	public void setContasAReceberPrimeiraParcela(ContasAReceber contasAReceberPrimeiraParcela) {
-		this.contasAReceberPrimeiraParcela = contasAReceberPrimeiraParcela;
+	public void setContaAReceberPrimeiraParcela(ContaAReceber contaAReceberPrimeiraParcela) {
+		this.contaAReceberPrimeiraParcela = contaAReceberPrimeiraParcela;
 	}
 
 	public Boolean getAtivo() {

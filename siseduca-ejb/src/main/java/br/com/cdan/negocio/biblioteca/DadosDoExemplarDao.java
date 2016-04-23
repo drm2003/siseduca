@@ -1,7 +1,7 @@
 package br.com.cdan.negocio.biblioteca;
 
 import br.com.cdan.dao.SiseducaDao;
-import br.com.cdan.model.biblioteca.Editora;
+import br.com.cdan.model.biblioteca.DadosDoExemplar;
 
 public class DadosDoExemplarDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
@@ -11,8 +11,8 @@ public class DadosDoExemplarDao extends SiseducaDao {
 	 */
 	@Override
 	public void remove(Object obj) {
-		Editora editora = (Editora) obj;
-		editora.setAtivo(false);
-		getEntityManager().merge(editora);
+		DadosDoExemplar dadosDoExemplar = (DadosDoExemplar) obj;
+		dadosDoExemplar.setAtivo(false);
+		getEntityManager().merge(dadosDoExemplar);
 	}
 }

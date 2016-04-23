@@ -5,8 +5,8 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.financeiro.ContasAPagar;
-import br.com.cdan.model.financeiro.ContasAReceber;
+import br.com.cdan.model.financeiro.ContaAReceber;
+import br.com.cdan.model.financeiro.ContaAPagar;
 import br.com.cdan.model.geral.SituacaoDoAluno;
 import br.com.cdan.model.pedagogico.contrato.Dependencia;
 import br.com.cdan.model.pedagogico.contrato.EstagioMonografia;
@@ -20,8 +20,8 @@ import br.com.cdan.model.pessoa.Interessado;
 import br.com.cdan.model.pessoa.Pessoa;
 import br.com.cdan.model.pessoa.Responsavel;
 import br.com.cdan.negocio.biblioteca.AlunoDao;
-import br.com.cdan.negocio.biblioteca.ContasAPagarDao;
-import br.com.cdan.negocio.biblioteca.ContasAReceberDao;
+import br.com.cdan.negocio.biblioteca.ContaAReceberDao;
+import br.com.cdan.negocio.biblioteca.ContaAPagarDao;
 import br.com.cdan.negocio.biblioteca.DadoBancarioDao;
 import br.com.cdan.negocio.biblioteca.DependenciaDao;
 import br.com.cdan.negocio.biblioteca.DiarioDeAulaDao;
@@ -49,14 +49,14 @@ public class AlunoFabricaTest {
 		aluno.setAtivo(Boolean.TRUE);
 		aluno.setCodigoDeBarras("codigoDeBarras");
 		// Contas a pagar
-		Set<ContasAPagar> contasAPagar = new LinkedHashSet<>();
+		Set<ContaAPagar> contasAPagar = new LinkedHashSet<>();
 		contasAPagar.add(ContasAPagarFabricaTest.getInstance().criaContasAPagar());
 		contasAPagar.add(ContasAPagarFabricaTest.getInstance().criaContasAPagar());
 		aluno.setContasAPagar(contasAPagar);
 		// Contas a receber
-		Set<ContasAReceber> contasAReceber = new LinkedHashSet<>();
-		contasAReceber.add(ContasAReceberFabricaTest.getInstance().criaContasAReceber());
-		contasAReceber.add(ContasAReceberFabricaTest.getInstance().criaContasAReceber());
+		Set<ContaAReceber> contasAReceber = new LinkedHashSet<>();
+		contasAReceber.add(ContaAReceberFabricaTest.getInstance().criaContaAReceber());
+		contasAReceber.add(ContaAReceberFabricaTest.getInstance().criaContaAReceber());
 		aluno.setContasAReceber(contasAReceber);
 		//
 		aluno.setDadoBancario(DadoBancarioFabricaTest.getInstance().criaDadoBancario());
@@ -107,8 +107,8 @@ public class AlunoFabricaTest {
 		dao.setEntityManager(em);
 		Aluno aluno = criaAluno();
 		// Contas a pagar
-		Set<ContasAPagar> contasAPagar = new LinkedHashSet<>();
-		ContasAPagarDao contasAPagarDao = new ContasAPagarDao();
+		Set<ContaAPagar> contasAPagar = new LinkedHashSet<>();
+		ContaAPagarDao contasAPagarDao = new ContaAPagarDao();
 		contasAPagarDao.setEntityManager(em);
 		aluno.getContasAPagar().forEach(contasPagar -> {
 			contasAPagarDao.persist(contasPagar);
@@ -116,8 +116,8 @@ public class AlunoFabricaTest {
 		});
 		aluno.setContasAPagar(contasAPagar);
 		// Contas a receber
-		Set<ContasAReceber> contasAReceber = new LinkedHashSet<>();
-		ContasAReceberDao contasAReceberDao = new ContasAReceberDao();
+		Set<ContaAReceber> contasAReceber = new LinkedHashSet<>();
+		ContaAReceberDao contasAReceberDao = new ContaAReceberDao();
 		contasAReceberDao.setEntityManager(em);
 		aluno.getContasAReceber().forEach(contasReceber -> {
 			contasAReceberDao.persist(contasReceber);

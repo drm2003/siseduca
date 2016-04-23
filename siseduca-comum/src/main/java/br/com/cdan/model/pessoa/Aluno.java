@@ -18,8 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import br.com.cdan.model.financeiro.ContasAPagar;
-import br.com.cdan.model.financeiro.ContasAReceber;
+import br.com.cdan.model.financeiro.ContaAPagar;
+import br.com.cdan.model.financeiro.ContaAReceber;
 import br.com.cdan.model.geral.SituacaoDoAluno;
 import br.com.cdan.model.pedagogico.contrato.Dependencia;
 import br.com.cdan.model.pedagogico.contrato.EstagioMonografia;
@@ -111,10 +111,10 @@ public class Aluno implements Serializable {
 	private Set<EstagioMonografia> estagioMonografia;
 
 	@ManyToMany(mappedBy = "alunos", fetch = FetchType.LAZY)
-	private Set<ContasAReceber> contasAReceber;
+	private Set<ContaAReceber> contasAReceber;
 
 	@ManyToMany(mappedBy = "alunos", fetch = FetchType.LAZY)
-	private Set<ContasAPagar> contasAPagar;
+	private Set<ContaAPagar> contasAPagar;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -298,19 +298,19 @@ public class Aluno implements Serializable {
 		this.ocorrencias = ocorrencias;
 	}
 
-	public Set<ContasAReceber> getContasAReceber() {
+	public Set<ContaAReceber> getContasAReceber() {
 		return contasAReceber;
 	}
 
-	public void setContasAReceber(Set<ContasAReceber> contasAReceber) {
+	public void setContasAReceber(Set<ContaAReceber> contasAReceber) {
 		this.contasAReceber = contasAReceber;
 	}
 
-	public Set<ContasAPagar> getContasAPagar() {
+	public Set<ContaAPagar> getContasAPagar() {
 		return contasAPagar;
 	}
 
-	public void setContasAPagar(Set<ContasAPagar> contasAPagar) {
+	public void setContasAPagar(Set<ContaAPagar> contasAPagar) {
 		this.contasAPagar = contasAPagar;
 	}
 

@@ -9,7 +9,7 @@ import br.com.cdan.comum.EnumEspecieDesconto;
 import br.com.cdan.comum.EnumTipoDeDesconto;
 import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.financeiro.Bolsa;
-import br.com.cdan.model.financeiro.ContasAReceber_Bolsa;
+import br.com.cdan.model.financeiro.ContaAReceber_Bolsa;
 import br.com.cdan.model.financeiro.Desconto;
 import br.com.cdan.model.pessoa.DadoBancario;
 import br.com.cdan.negocio.biblioteca.ContasAReceber_BolsaDao;
@@ -31,7 +31,7 @@ public class BolsaFabricaTest {
 		Bolsa b = new Bolsa();
 		b.setAtivo(Boolean.TRUE);
 		// Contas a receber e Bolsa
-		Set<ContasAReceber_Bolsa> contasAReceber_Bolsa = new LinkedHashSet<>();
+		Set<ContaAReceber_Bolsa> contasAReceber_Bolsa = new LinkedHashSet<>();
 		contasAReceber_Bolsa.add(ContasAReceber_BolsaFabricaTest.getInstance().criaContasAReceber_Bolsa());
 		contasAReceber_Bolsa.add(ContasAReceber_BolsaFabricaTest.getInstance().criaContasAReceber_Bolsa());
 		b.setContasAReceber_Bolsa(contasAReceber_Bolsa);
@@ -61,7 +61,7 @@ public class BolsaFabricaTest {
 		// contas a receber e bolsa
 		ContasAReceber_BolsaDao contasAReceber_BolsaDao = new ContasAReceber_BolsaDao();
 		contasAReceber_BolsaDao.setEntityManager(em);
-		Set<ContasAReceber_Bolsa> contasAReceber_Bolsas = new LinkedHashSet<>();
+		Set<ContaAReceber_Bolsa> contasAReceber_Bolsas = new LinkedHashSet<>();
 		b.getContasAReceber_Bolsa().forEach(cReceberBolsa -> {
 			contasAReceber_BolsaDao.persist(cReceberBolsa);
 			contasAReceber_Bolsas.add(cReceberBolsa);

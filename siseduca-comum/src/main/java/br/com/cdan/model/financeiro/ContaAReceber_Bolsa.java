@@ -14,18 +14,18 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 
 @Entity
-@Table(name = "ContasAReceber_Bolsa")
-public class ContasAReceber_Bolsa implements Serializable {
+@Table(name = "ContaAReceber_Bolsa")
+public class ContaAReceber_Bolsa implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 
 	 */
 	@EmbeddedId
-	private ContasAReceber_BolsaPK id;
+	private ContaAReceber_BolsaPK id;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_contasAReceber")
-	private ContasAReceber contasAReceber;
+	@JoinColumn(name = "id_contaAReceber")
+	private ContaAReceber contaAReceber;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_bolsa")
@@ -45,20 +45,20 @@ public class ContasAReceber_Bolsa implements Serializable {
 	@Column(name = "ativo")
 	private Boolean ativo;
 
-	public ContasAReceber_BolsaPK getId() {
+	public ContaAReceber_BolsaPK getId() {
 		return id;
 	}
 
-	public void setId(ContasAReceber_BolsaPK id) {
+	public void setId(ContaAReceber_BolsaPK id) {
 		this.id = id;
 	}
 
-	public ContasAReceber getContasAReceber() {
-		return contasAReceber;
+	public ContaAReceber getContaAReceber() {
+		return contaAReceber;
 	}
 
-	public void setContasAReceber(ContasAReceber contasAReceber) {
-		this.contasAReceber = contasAReceber;
+	public void setContaAReceber(ContaAReceber contaAReceber) {
+		this.contaAReceber = contaAReceber;
 	}
 
 	public Bolsa getBolsa() {
@@ -106,7 +106,7 @@ public class ContasAReceber_Bolsa implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((bolsa == null) ? 0 : bolsa.hashCode());
-		result = prime * result + ((contasAReceber == null) ? 0 : contasAReceber.hashCode());
+		result = prime * result + ((contaAReceber == null) ? 0 : contaAReceber.hashCode());
 		result = prime * result + ((percentual == null) ? 0 : percentual.hashCode());
 		return result;
 	}
@@ -119,16 +119,16 @@ public class ContasAReceber_Bolsa implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ContasAReceber_Bolsa other = (ContasAReceber_Bolsa) obj;
+		ContaAReceber_Bolsa other = (ContaAReceber_Bolsa) obj;
 		if (bolsa == null) {
 			if (other.bolsa != null)
 				return false;
 		} else if (!bolsa.equals(other.bolsa))
 			return false;
-		if (contasAReceber == null) {
-			if (other.contasAReceber != null)
+		if (contaAReceber == null) {
+			if (other.contaAReceber != null)
 				return false;
-		} else if (!contasAReceber.equals(other.contasAReceber))
+		} else if (!contaAReceber.equals(other.contaAReceber))
 			return false;
 		if (percentual == null) {
 			if (other.percentual != null)
@@ -140,7 +140,7 @@ public class ContasAReceber_Bolsa implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ContasAReceber_Bolsa [id=" + id + ", contasAReceber=" + contasAReceber + ", bolsa=" + bolsa
+		return "ContaAReceber_Bolsa [id=" + id + ", contaAReceber=" + contaAReceber + ", bolsa=" + bolsa
 				+ ", lancarParcelasComDesconto=" + lancarParcelasComDesconto + ", percentual=" + percentual
 				+ ", motivoDescontoManual=" + motivoDescontoManual + "]";
 	}

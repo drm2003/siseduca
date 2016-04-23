@@ -1,9 +1,9 @@
 package br.com.cdan.negocio.biblioteca;
 
 import br.com.cdan.dao.SiseducaDao;
-import br.com.cdan.model.financeiro.ContasAPagar;
+import br.com.cdan.model.financeiro.ContaAPagar;
 
-public class ContasAPagarDao extends SiseducaDao {
+public class ContaAPagarDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -11,7 +11,7 @@ public class ContasAPagarDao extends SiseducaDao {
 	 */
 	@Override
 	public void remove(Object obj) {
-		ContasAPagar contasAPagar = (ContasAPagar) obj;
+		ContaAPagar contasAPagar = (ContaAPagar) obj;
 		contasAPagar.setAtivo(false);
 		getEntityManager().merge(contasAPagar);
 	}

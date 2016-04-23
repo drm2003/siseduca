@@ -25,9 +25,9 @@ public class InvestimentoFabricaTest {
 		i.setCategoria(CategoriaFabricaTest.getInstance().criaCategoria());
 		i.setConsiderarMesAtual(Boolean.TRUE);
 		// Contas a receber
-		i.setContasAReceber(ContasAReceberFabricaTest.getInstance().criaContasAReceber());
+		i.setContasAReceber(ContaAReceberFabricaTest.getInstance().criaContasAReceber());
 		// Contas a receber primeira parcela
-		i.setContasAReceberPrimeiraParcela(ContasAReceberFabricaTest.getInstance().criaContasAReceberPrimeiraParcela());
+		i.setContasAReceberPrimeiraParcela(ContaAReceberFabricaTest.getInstance().criaContasAReceberPrimeiraParcela());
 		i.setDataDiferenciadaPrimeiraParcela(Calendar.getInstance());
 		i.setDataInicial(Calendar.getInstance());
 		i.setDescricaoPlano("descricaoPlano");

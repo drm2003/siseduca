@@ -45,7 +45,7 @@ public class Conta implements Serializable {
 	private Boolean encerrada;
 
 	@OneToMany(mappedBy = "conta")
-	private Set<ContasAReceber> contasAReceber;
+	private Set<ContaAReceber> contasAReceber;
 
 	@OneToMany(mappedBy = "conta")
 	private Set<Caixa> caixas;
@@ -101,11 +101,11 @@ public class Conta implements Serializable {
 		this.encerrada = encerrada;
 	}
 
-	public Set<ContasAReceber> getContasAReceber() {
+	public Set<ContaAReceber> getContasAReceber() {
 		return contasAReceber;
 	}
 
-	public void setContasAReceber(Set<ContasAReceber> contasAReceber) {
+	public void setContasAReceber(Set<ContaAReceber> contasAReceber) {
 		this.contasAReceber = contasAReceber;
 	}
 

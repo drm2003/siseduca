@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.cdan.model.financeiro.ContasAReceber;
+import br.com.cdan.model.financeiro.ContaAReceber;
 import br.com.cdan.model.pedagogico.CalendarioLetivo;
 import br.com.cdan.model.pedagogico.HorarioDeAula;
 import br.com.cdan.model.pedagogico.SituacaoDaTurma;
@@ -87,7 +87,7 @@ public class Turma implements Serializable {
 	private Set<Ocorrencia> ocorrencias;
 
 	@ManyToMany(mappedBy = "turmas", fetch = FetchType.LAZY)
-	private Set<ContasAReceber> contasAReceber;
+	private Set<ContaAReceber> contasAReceber;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -212,11 +212,11 @@ public class Turma implements Serializable {
 		this.ocorrencias = ocorrencias;
 	}
 
-	public Set<ContasAReceber> getContasAReceber() {
+	public Set<ContaAReceber> getContasAReceber() {
 		return contasAReceber;
 	}
 
-	public void setContasAReceber(Set<ContasAReceber> contasAReceber) {
+	public void setContasAReceber(Set<ContaAReceber> contasAReceber) {
 		this.contasAReceber = contasAReceber;
 	}
 

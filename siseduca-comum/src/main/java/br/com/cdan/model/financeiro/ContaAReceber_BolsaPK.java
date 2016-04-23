@@ -5,19 +5,19 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class ContasAReceber_BolsaPK implements Serializable {
+public class ContaAReceber_BolsaPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 
 	 */
-	private Long contasAReceber;
+	private Long contaAReceber;
 	private Long bolsa;
 
-	public ContasAReceber_BolsaPK() {
+	public ContaAReceber_BolsaPK() {
 	}
 
-	public ContasAReceber_BolsaPK(Long contasAReceber, Long bolsa) {
-		this.contasAReceber = contasAReceber;
+	public ContaAReceber_BolsaPK(Long contaAReceber, Long bolsa) {
+		this.contaAReceber = contaAReceber;
 		this.bolsa = bolsa;
 	}
 
@@ -29,12 +29,12 @@ public class ContasAReceber_BolsaPK implements Serializable {
 		this.bolsa = bolsa;
 	}
 
-	public Long getContasAReceber() {
-		return contasAReceber;
+	public Long getContaAReceber() {
+		return contaAReceber;
 	}
 
-	public void setContasAReceber(Long contasAReceber) {
-		this.contasAReceber = contasAReceber;
+	public void setContaAReceber(Long contaAReceber) {
+		this.contaAReceber = contaAReceber;
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class ContasAReceber_BolsaPK implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((bolsa == null) ? 0 : bolsa.hashCode());
-		result = prime * result + ((contasAReceber == null) ? 0 : contasAReceber.hashCode());
+		result = prime * result + ((contaAReceber == null) ? 0 : contaAReceber.hashCode());
 		return result;
 	}
 
@@ -54,23 +54,23 @@ public class ContasAReceber_BolsaPK implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ContasAReceber_BolsaPK other = (ContasAReceber_BolsaPK) obj;
+		ContaAReceber_BolsaPK other = (ContaAReceber_BolsaPK) obj;
 		if (bolsa == null) {
 			if (other.bolsa != null)
 				return false;
 		} else if (!bolsa.equals(other.bolsa))
 			return false;
-		if (contasAReceber == null) {
-			if (other.contasAReceber != null)
+		if (contaAReceber == null) {
+			if (other.contaAReceber != null)
 				return false;
-		} else if (!contasAReceber.equals(other.contasAReceber))
+		} else if (!contaAReceber.equals(other.contaAReceber))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ContasAReceber_BolsaPK [contasAReceber=" + contasAReceber + ", bolsa=" + bolsa + "]";
+		return "ContaAReceber_BolsaPK [contaAReceber=" + contaAReceber + ", bolsa=" + bolsa + "]";
 	}
 
 }

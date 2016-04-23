@@ -22,8 +22,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import br.com.cdan.comum.EnumTipoDePlanoDeContas;
 
 @Entity
-@Table(name = "PlanoDeContas")
-public class PlanoDeContas implements Serializable {
+@Table(name = "PlanoDeConta")
+public class PlanoDeConta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -68,7 +68,7 @@ public class PlanoDeContas implements Serializable {
 	private String outrosDetalhes;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private Set<ContasAReceber> ContasAReceber;
+	private Set<ContaAReceber> ContasAReceber;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -161,11 +161,11 @@ public class PlanoDeContas implements Serializable {
 		this.outrosDetalhes = outrosDetalhes;
 	}
 
-	public Set<ContasAReceber> getContasAReceber() {
+	public Set<ContaAReceber> getContasAReceber() {
 		return ContasAReceber;
 	}
 
-	public void setContasAReceber(Set<ContasAReceber> contasAReceber) {
+	public void setContasAReceber(Set<ContaAReceber> contasAReceber) {
 		ContasAReceber = contasAReceber;
 	}
 
@@ -194,7 +194,7 @@ public class PlanoDeContas implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PlanoDeContas other = (PlanoDeContas) obj;
+		PlanoDeConta other = (PlanoDeConta) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;

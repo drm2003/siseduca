@@ -42,7 +42,9 @@ public class DependenciaFabricaTest {
 		// Aluno
 		Aluno aluno = d.getAluno();
 		AlunoDao alunoDao = new AlunoDao();
-		alunoDao.persist(em);
+		alunoDao.setEntityManager(em);
+		alunoDao.persist(aluno);
+		d.setAluno(aluno);
 		// Disciplinas
 		Set<Disciplina> disciplinas = new LinkedHashSet<>();
 		DisciplinaDao disciplinaDao = new DisciplinaDao();

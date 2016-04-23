@@ -20,8 +20,8 @@ import br.com.cdan.model.acesso.Permissao_Empresa;
 import br.com.cdan.model.biblioteca.TipoDeObra;
 import br.com.cdan.model.estoque.Item_Empresa;
 import br.com.cdan.model.financeiro.Bolsa;
-import br.com.cdan.model.financeiro.ContasAPagar;
-import br.com.cdan.model.financeiro.ContasAReceber;
+import br.com.cdan.model.financeiro.ContaAPagar;
+import br.com.cdan.model.financeiro.ContaAReceber;
 import br.com.cdan.model.financeiro.OperadoraCartao;
 import br.com.cdan.model.geral.Email;
 import br.com.cdan.model.geral.Endereco;
@@ -89,13 +89,13 @@ public class Empresa implements Serializable {
 	@JoinColumn(name = "tipoDeObra")
 	private TipoDeObra tipoDeObra;
 
-	@ManyToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "empresas", fetch = FetchType.LAZY)
 	private Set<Bolsa> bolsas;
 
 	@ManyToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
 	private Set<OperadoraCartao> operadoraCartao;
 
-	@ManyToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "empresas", fetch = FetchType.LAZY)
 	private Set<TipoDeServico> tiposDeServicos;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "empresa", targetEntity = Item_Empresa.class)
@@ -111,10 +111,10 @@ public class Empresa implements Serializable {
 	private Set<EstagioMonografia> estagioMonografia;
 
 	@ManyToMany(mappedBy = "empresas", fetch = FetchType.LAZY)
-	private Set<ContasAReceber> contasAReceber;
+	private Set<ContaAReceber> contasAReceber;
 
 	@ManyToMany(mappedBy = "empresas", fetch = FetchType.LAZY)
-	private Set<ContasAPagar> contasAPagar;
+	private Set<ContaAPagar> contasAPagar;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -303,19 +303,19 @@ public class Empresa implements Serializable {
 		this.estagioMonografia = estagioMonografia;
 	}
 
-	public Set<ContasAReceber> getContasAReceber() {
+	public Set<ContaAReceber> getContasAReceber() {
 		return contasAReceber;
 	}
 
-	public void setContasAReceber(Set<ContasAReceber> contasAReceber) {
+	public void setContasAReceber(Set<ContaAReceber> contasAReceber) {
 		this.contasAReceber = contasAReceber;
 	}
 
-	public Set<ContasAPagar> getContasAPagar() {
+	public Set<ContaAPagar> getContasAPagar() {
 		return contasAPagar;
 	}
 
-	public void setContasAPagar(Set<ContasAPagar> contasAPagar) {
+	public void setContasAPagar(Set<ContaAPagar> contasAPagar) {
 		this.contasAPagar = contasAPagar;
 	}
 

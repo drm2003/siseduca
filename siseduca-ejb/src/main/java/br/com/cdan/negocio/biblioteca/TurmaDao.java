@@ -1,9 +1,9 @@
 package br.com.cdan.negocio.biblioteca;
 
 import br.com.cdan.dao.SiseducaDao;
-import br.com.cdan.model.biblioteca.Setor;
+import br.com.cdan.model.pedagogico.curso.Turma;
 
-public class SetorDao extends SiseducaDao {
+public class TurmaDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -11,8 +11,8 @@ public class SetorDao extends SiseducaDao {
 	 */
 	@Override
 	public void remove(Object obj) {
-		Setor setor = (Setor) obj;
-		setor.setAtivo(false);
-		getEntityManager().merge(setor);
+		Turma turma = (Turma) obj;
+		turma.setAtivo(false);
+		getEntityManager().merge(turma);
 	}
 }

@@ -55,6 +55,9 @@ public class DiaDaSemanaAula implements Serializable {
 	@ManyToMany(mappedBy = "diasDaSemanaAula", fetch = FetchType.LAZY)
 	private Set<DiarioDeAula> diariosDeAula;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -95,4 +98,19 @@ public class DiaDaSemanaAula implements Serializable {
 		this.turma_Disciplina = turma_Disciplina;
 	}
 
+	public Set<DiarioDeAula> getDiariosDeAula() {
+		return diariosDeAula;
+	}
+
+	public void setDiariosDeAula(Set<DiarioDeAula> diariosDeAula) {
+		this.diariosDeAula = diariosDeAula;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 }

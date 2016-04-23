@@ -1,7 +1,7 @@
 package br.com.cdan.negocio.biblioteca;
 
 import br.com.cdan.dao.SiseducaDao;
-import br.com.cdan.model.pessoa.Interessado;
+import br.com.cdan.model.pedagogico.contrato.Matricula;
 
 public class MatriculaDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
@@ -11,8 +11,8 @@ public class MatriculaDao extends SiseducaDao {
 	 */
 	@Override
 	public void remove(Object obj) {
-		Interessado interessado = (Interessado) obj;
-		interessado.setAtivo(false);
-		getEntityManager().merge(interessado);
+		Matricula matricula = (Matricula) obj;
+		matricula.setAtivo(false);
+		getEntityManager().merge(matricula);
 	}
 }

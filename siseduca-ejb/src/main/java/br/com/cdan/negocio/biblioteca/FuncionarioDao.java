@@ -1,7 +1,7 @@
 package br.com.cdan.negocio.biblioteca;
 
 import br.com.cdan.dao.SiseducaDao;
-import br.com.cdan.model.biblioteca.Exemplar;
+import br.com.cdan.model.pessoa.Funcionario;
 
 public class FuncionarioDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
@@ -11,8 +11,8 @@ public class FuncionarioDao extends SiseducaDao {
 	 */
 	@Override
 	public void remove(Object obj) {
-		Exemplar exemplar = (Exemplar) obj;
-		exemplar.setAtivo(false);
-		getEntityManager().merge(exemplar);
+		Funcionario funcionario = (Funcionario) obj;
+		funcionario.setAtivo(false);
+		getEntityManager().merge(funcionario);
 	}
 }

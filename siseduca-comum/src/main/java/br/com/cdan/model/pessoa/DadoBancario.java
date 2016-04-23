@@ -38,6 +38,9 @@ public class DadoBancario implements Serializable {
 	@OneToOne(mappedBy = "dadoBancario")
 	private Aluno aluno;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -78,13 +81,24 @@ public class DadoBancario implements Serializable {
 		this.inadimplente = inadimplente;
 	}
 
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public void setBolsas(Set<Bolsa> bolsas) {
+		this.bolsas = bolsas;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((bolsas == null) ? 0 : bolsas.hashCode());
-		result = prime * result
-				+ ((diaDoVencimento == null) ? 0 : diaDoVencimento.hashCode());
+		result = prime * result + ((diaDoVencimento == null) ? 0 : diaDoVencimento.hashCode());
 		return result;
 	}
 
@@ -112,7 +126,7 @@ public class DadoBancario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "DadoBancario [bolsa=" + bolsas + ", diaDoVencimento="
-				+ diaDoVencimento + ", inadimplente=" + inadimplente + "]";
+		return "DadoBancario [bolsa=" + bolsas + ", diaDoVencimento=" + diaDoVencimento + ", inadimplente="
+				+ inadimplente + "]";
 	}
 }
