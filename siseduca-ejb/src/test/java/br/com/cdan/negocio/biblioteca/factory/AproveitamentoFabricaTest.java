@@ -29,11 +29,9 @@ public class AproveitamentoFabricaTest {
 
 	public Aproveitamento criaAproveitamento(EntityManager em) {
 		Aproveitamento aproveitamento = criaAproveitamento();
-		AproveitamentoDao aproveitamentoDao = new AproveitamentoDao();
-		aproveitamentoDao.setEntityManager(em);
+		AproveitamentoDao aproveitamentoDao = new AproveitamentoDao(em);
 		// Cep
-		CEPDao cepDao = new CEPDao();
-		cepDao.setEntityManager(em);
+		CEPDao cepDao = new CEPDao(em);
 		CEP cepEstabelecimento = aproveitamento.getCepEstabelecimento();
 		cepDao.persist(cepEstabelecimento);
 		aproveitamento.setCepEstabelecimento(cepEstabelecimento);

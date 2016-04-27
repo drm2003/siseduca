@@ -2,7 +2,7 @@ package br.com.cdan.model.pedagogico.contrato;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.Calendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -56,7 +56,7 @@ public class DisciplinaMatricula implements Serializable {
 
 	@Temporal(TemporalType.TIME)
 	@Column(name = "cargaHoraria")
-	private Date cargaHoraria;
+	private Calendar cargaHoraria;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "aproveitamento")
@@ -147,7 +147,7 @@ public class DisciplinaMatricula implements Serializable {
 		return matricula;
 	}
 
-	public Date getCargaHoraria() {
+	public Calendar getCargaHoraria() {
 		return cargaHoraria;
 	}
 
@@ -163,7 +163,7 @@ public class DisciplinaMatricula implements Serializable {
 		this.matricula = matricula;
 	}
 
-	public void setCargaHoraria(Date cargaHoraria) {
+	public void setCargaHoraria(Calendar cargaHoraria) {
 		this.cargaHoraria = cargaHoraria;
 	}
 

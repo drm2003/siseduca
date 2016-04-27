@@ -24,7 +24,7 @@ public class ControleDeConteudoFabricaTest {
 
 	public ControleDeConteudo criaControleDeConteudoPersistido(EntityManager em) {
 		ControleDeConteudo c = new ControleDeConteudo();
-		ControleDeConteudoDao controleDeConteudoDao = new ControleDeConteudoDao();
+		ControleDeConteudoDao controleDeConteudoDao = new ControleDeConteudoDao(em);
 		controleDeConteudoDao.setEntityManager(em);
 		controleDeConteudoDao.persist(c);
 		return c;

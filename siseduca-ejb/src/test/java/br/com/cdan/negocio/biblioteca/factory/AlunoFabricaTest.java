@@ -5,8 +5,8 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.financeiro.ContaAReceber;
 import br.com.cdan.model.financeiro.ContaAPagar;
+import br.com.cdan.model.financeiro.ContaAReceber;
 import br.com.cdan.model.geral.SituacaoDoAluno;
 import br.com.cdan.model.pedagogico.contrato.Dependencia;
 import br.com.cdan.model.pedagogico.contrato.EstagioMonografia;
@@ -20,8 +20,8 @@ import br.com.cdan.model.pessoa.Interessado;
 import br.com.cdan.model.pessoa.Pessoa;
 import br.com.cdan.model.pessoa.Responsavel;
 import br.com.cdan.negocio.biblioteca.AlunoDao;
-import br.com.cdan.negocio.biblioteca.ContaAReceberDao;
 import br.com.cdan.negocio.biblioteca.ContaAPagarDao;
+import br.com.cdan.negocio.biblioteca.ContaAReceberDao;
 import br.com.cdan.negocio.biblioteca.DadoBancarioDao;
 import br.com.cdan.negocio.biblioteca.DependenciaDao;
 import br.com.cdan.negocio.biblioteca.DiarioDeAulaDao;
@@ -103,13 +103,11 @@ public class AlunoFabricaTest {
 	}
 
 	public Aluno criaAlunoPersistido(EntityManager em) {
-		AlunoDao dao = new AlunoDao();
-		dao.setEntityManager(em);
+		AlunoDao dao = new AlunoDao(em);
 		Aluno aluno = criaAluno();
 		// Contas a pagar
 		Set<ContaAPagar> contasAPagar = new LinkedHashSet<>();
-		ContaAPagarDao contasAPagarDao = new ContaAPagarDao();
-		contasAPagarDao.setEntityManager(em);
+		ContaAPagarDao contasAPagarDao = new ContaAPagarDao(em);
 		aluno.getContasAPagar().forEach(contasPagar -> {
 			contasAPagarDao.persist(contasPagar);
 			contasAPagar.add(contasPagar);
@@ -137,7 +135,7 @@ public class AlunoFabricaTest {
 		dependenciaDao.persist(dependencia);
 		aluno.setDependencia(dependencia);
 		// Diário de aula
-		DiarioDeAulaDao diarioDeAulaDao = new DiarioDeAulaDao();
+		DiarioDeAulaDao diarioDeAulaDao = new DiarioDeAulaDao(em);
 		diarioDeAulaDao.setEntityManager(em);
 		DiarioDeAula diarioDeAula = aluno.getDiarioDeAula();
 		diarioDeAulaDao.persist(diarioDeAula);
@@ -159,8 +157,7 @@ public class AlunoFabricaTest {
 		aluno.setInteressado(interessado);
 		// Matrículas
 		Set<Matricula> matriculas = new LinkedHashSet<>();
-		MatriculaDao matriculaDao = new MatriculaDao();
-		matriculaDao.setEntityManager(em);
+		MatriculaDao matriculaDao = new MatriculaDao(em);
 		aluno.getMatriculas().forEach(matricula -> {
 			matriculaDao.persist(matricula);
 			matriculas.add(matricula);
@@ -168,7 +165,7 @@ public class AlunoFabricaTest {
 		aluno.setMatriculas(matriculas);
 		//
 		Set<Ocorrencia> ocorrencias = new LinkedHashSet<>();
-		OcorrenciaDao ocorrenciaDao = new OcorrenciaDao();
+		OcorrenciaDao ocorrenciaDao = new OcorrenciaDao(em);
 		ocorrenciaDao.setEntityManager(em);
 		aluno.getOcorrencias().forEach(ocorrencia -> {
 			ocorrenciaDao.persist(ocorrencia);
@@ -200,18 +197,17 @@ public class AlunoFabricaTest {
 		Responsavel responsavelEmpresa = aluno.getResponsavelEmpresa();
 		responsavelDao.persist(responsavelEmpresa);
 		//
-		SituacaoDoAlunoDao situacaoDoAlunoDao = new SituacaoDoAlunoDao();
-		situacaoDoAlunoDao.setEntityManager(em);
+		SituacaoDoAlunoDao situacaoDoAlunoDao = new SituacaoDoAlunoDao(em);
 		SituacaoDoAluno situacaoDoAluno = aluno.getSituacaoDoAluno();
 		situacaoDoAlunoDao.persist(situacaoDoAluno);
 		aluno.setSituacaoDoAluno(situacaoDoAluno);
 		//
-		Turma_DisciplinaDao turma_DisciplinaDao = new Turma_DisciplinaDao();
-		turma_DisciplinaDao.setEntityManager(em);
+		Turma_DisciplinaDao turma_DisciplinaDao = new Turma_DisciplinaDao(em);
 		Turma_Disciplina turma_Disciplina = aluno.getTurma_Disciplina();
 		turma_DisciplinaDao.persist(turma_Disciplina);
 		aluno.setTurma_Disciplina(turma_Disciplina);
 		//
+		dao.persist(aluno);
 		return aluno;
 	}
 }

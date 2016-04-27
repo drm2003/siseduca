@@ -115,8 +115,7 @@ public class ContaAReceberFabricaTest {
 		c.setEmpresas(empresas);
 		// Funcionários
 		Set<Funcionario> funcionarios = new LinkedHashSet<>();
-		FuncionarioDao funcionarioDao = new FuncionarioDao();
-		funcionarioDao.setEntityManager(em);
+		FuncionarioDao funcionarioDao = new FuncionarioDao(em);
 		c.getFuncionarios().forEach(funcionario -> {
 			funcionarioDao.persist(funcionario);
 			funcionarios.add(funcionario);

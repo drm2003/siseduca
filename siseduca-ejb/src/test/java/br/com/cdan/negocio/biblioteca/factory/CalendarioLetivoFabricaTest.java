@@ -65,7 +65,7 @@ public class CalendarioLetivoFabricaTest {
 		calendarioLetivoDao.setEntityManager(em);
 		// Controle de Frequencia
 		Set<ControleDeFrequencia> controlesDeFrequencia = new LinkedHashSet<>();
-		ControleDeFrequenciaDao controleDeFrequenciaDao = new ControleDeFrequenciaDao();
+		ControleDeFrequenciaDao controleDeFrequenciaDao = new ControleDeFrequenciaDao(em);
 		controleDeFrequenciaDao.setEntityManager(em);
 		c.getControleDeFrequencia().forEach(controleDeFrequencia -> {
 			controleDeFrequenciaDao.persist(controleDeFrequencia);

@@ -41,7 +41,7 @@ public class DiaDaSemanaAulaFabricaTest {
 
 	public DiaDaSemanaAula criaDiaDaSemanaAulaPersistido(EntityManager em) {
 		DiaDaSemanaAula d = criaDiaDaSemanaAula();
-		DiaDaSemanaAulaDao diaDaSemanaAulaDao = new DiaDaSemanaAulaDao();
+		DiaDaSemanaAulaDao diaDaSemanaAulaDao = new DiaDaSemanaAulaDao(em);
 		diaDaSemanaAulaDao.setEntityManager(em);
 		// Turma e Disciplina
 		Turma_DisciplinaDao turma_DisciplinaDao = new Turma_DisciplinaDao();

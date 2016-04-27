@@ -1,10 +1,19 @@
 package br.com.cdan.negocio.biblioteca;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.dao.SiseducaDao;
 import br.com.cdan.model.pedagogico.contrato.Matricula;
 
 public class MatriculaDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
+
+	public MatriculaDao(EntityManager em) {
+		setEntityManager(em);
+	}
+
+	public MatriculaDao() {
+	}
 
 	/**
 	 * 
