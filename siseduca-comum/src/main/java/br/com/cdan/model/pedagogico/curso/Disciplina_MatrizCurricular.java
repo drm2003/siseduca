@@ -83,13 +83,16 @@ public class Disciplina_MatrizCurricular implements Serializable {
 	private PlanoDeEnsino planoDeEnsino;
 
 	@OneToMany(mappedBy = "disciplina_MatrizCurricular")
-	private Set<LinhaProgramatica> linhaProgramatica;
+	private Set<LinhaProgramatica> linhasProgramaticas;
 
 	@OneToMany(mappedBy = "disciplina_MatrizCurricular")
 	private Set<Conteudo> conteudos;
 
 	@Column(name = "equivalencias")
 	private String equivalencias;
+
+	@Column(name = "ativo")
+	private Boolean ativo;
 
 	public Disciplina_MatrizCurricularPK getId() {
 		return id;
@@ -219,12 +222,12 @@ public class Disciplina_MatrizCurricular implements Serializable {
 		this.planoDeEnsino = planoDeEnsino;
 	}
 
-	public Set<LinhaProgramatica> getLinhaProgramatica() {
-		return linhaProgramatica;
+	public Set<LinhaProgramatica> getLinhasProgramaticas() {
+		return linhasProgramaticas;
 	}
 
-	public void setLinhaProgramatica(Set<LinhaProgramatica> linhaProgramatica) {
-		this.linhaProgramatica = linhaProgramatica;
+	public void setLinhasProgramaticas(Set<LinhaProgramatica> linhasProgramaticas) {
+		this.linhasProgramaticas = linhasProgramaticas;
 	}
 
 	public Set<Conteudo> getConteudos() {
@@ -241,6 +244,38 @@ public class Disciplina_MatrizCurricular implements Serializable {
 
 	public void setEquivalencias(String equivalencias) {
 		this.equivalencias = equivalencias;
+	}
+
+	public Date getCargaHorariaSemanal() {
+		return cargaHorariaSemanal;
+	}
+
+	public void setCargaHorariaSemanal(Date cargaHorariaSemanal) {
+		this.cargaHorariaSemanal = cargaHorariaSemanal;
+	}
+
+	public Date getCargaHorariaTotal() {
+		return cargaHorariaTotal;
+	}
+
+	public void setCargaHorariaTotal(Date cargaHorariaTotal) {
+		this.cargaHorariaTotal = cargaHorariaTotal;
+	}
+
+	public Date getCargaHorariaPratica() {
+		return cargaHorariaPratica;
+	}
+
+	public void setCargaHorariaPratica(Date cargaHorariaPratica) {
+		this.cargaHorariaPratica = cargaHorariaPratica;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override
@@ -276,7 +311,7 @@ public class Disciplina_MatrizCurricular implements Serializable {
 				+ cargaHorariaTotal + ", cargaHorariaPratica=" + cargaHorariaPratica + ", ordem=" + ordem
 				+ ", sistemaDeAvaliacao=" + sistemaDeAvaliacao + ", equivalencia=" + equivalencia + ", requisitos="
 				+ requisitos + ", disciplinaOptativa=" + disciplinaOptativa + ", metodologia=" + metodologia
-				+ ", planoDeEnsino=" + planoDeEnsino + ", linhaProgramatica=" + linhaProgramatica + ", conteudos="
+				+ ", planoDeEnsino=" + planoDeEnsino + ", linhaProgramatica=" + linhasProgramaticas + ", conteudos="
 				+ conteudos + ", equivalencias=" + equivalencias + "]";
 	}
 }

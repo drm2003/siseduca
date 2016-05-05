@@ -3,16 +3,15 @@ package br.com.cdan.negocio.biblioteca;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.dao.SiseducaDao;
-import br.com.cdan.model.geral.Pais;
+import br.com.cdan.model.pedagogico.curso.Conteudo;
 
-public class PaisDao extends SiseducaDao {
+public class ConteudoDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
 
-	public PaisDao() {
-		// TODO Auto-generated constructor stub
+	public ConteudoDao() {
 	}
 
-	public PaisDao(EntityManager em) {
+	public ConteudoDao(EntityManager em) {
 		setEntityManager(em);
 	}
 
@@ -21,8 +20,8 @@ public class PaisDao extends SiseducaDao {
 	 */
 	@Override
 	public void remove(Object obj) {
-		Pais pais = (Pais) obj;
-		pais.setAtivo(false);
-		getEntityManager().merge(pais);
+		Conteudo conteudo = (Conteudo) obj;
+		conteudo.setAtivo(false);
+		getEntityManager().merge(conteudo);
 	}
 }

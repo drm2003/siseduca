@@ -4,9 +4,20 @@ import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+
+import br.com.cdan.model.pedagogico.TipoDeCurso;
+import br.com.cdan.model.pedagogico.TipoDeDisciplina;
 import br.com.cdan.model.pedagogico.curso.Disciplina;
 import br.com.cdan.model.pedagogico.curso.Disciplina_MatrizCurricular;
+import br.com.cdan.model.pedagogico.curso.MatrizCurricular;
 import br.com.cdan.model.pedagogico.curso.Turma_Disciplina;
+import br.com.cdan.negocio.biblioteca.DisciplinaDao;
+import br.com.cdan.negocio.biblioteca.Disciplina_MatrizCurricularDao;
+import br.com.cdan.negocio.biblioteca.MatrizCurricularDao;
+import br.com.cdan.negocio.biblioteca.TipoDeCursoDao;
+import br.com.cdan.negocio.biblioteca.TipoDeDisciplinaDao;
+import br.com.cdan.negocio.biblioteca.Turma_DisciplinaDao;
 
 public class DisciplinaFabricaTest {
 	private static DisciplinaFabricaTest instance = null;
@@ -46,4 +57,48 @@ public class DisciplinaFabricaTest {
 		d.setValorHoraAula(BigDecimal.TEN);
 		return d;
 	}
+
+	public Disciplina criaDisciplinaPersistido(EntityManager em) {
+		Disciplina d = criaDisciplina();
+		DisciplinaDao dao = new DisciplinaDao(em);
+		//
+		MatrizCurricularDao matrizCurricularDao = new MatrizCurricularDao(em);
+		MatrizCurricular disciplinaDependente = d.getDisciplinaDependente();
+		matrizCurricularDao.persist(disciplinaDependente);
+		d.setDisciplinaDependente(disciplinaDependente);
+		// Disciplinas e Matriz curricular
+		Set<Disciplina_MatrizCurricular> disciplinas_MatrizesCurricular = new LinkedHashSet<>();
+		Disciplina_MatrizCurricularDao disciplina_MatrizCurricularDao = new Disciplina_MatrizCurricularDao(em);
+		d.getDisciplinas_MatrizCurricular().forEach(disciplina_MatrizCurricular -> {
+			disciplina_MatrizCurricularDao.persist(disciplina_MatrizCurricular);
+			disciplinas_MatrizesCurricular.add(disciplina_MatrizCurricular);
+		});
+		d.setDisciplinas_MatrizCurricular(disciplinas_MatrizesCurricular);
+		//
+		MatrizCurricular matrizCurricular = d.getMatrizCurricular();
+		matrizCurricularDao.persist(matrizCurricular);
+		d.setMatrizCurricular(matrizCurricular);
+		//
+		TipoDeCursoDao tipoDeCursoDao = new TipoDeCursoDao(em);
+		TipoDeCurso tipoDeCurso = d.getTipoDeCurso();
+		tipoDeCursoDao.persist(tipoDeCurso);
+		d.setTipoDeCurso(tipoDeCurso);
+		//
+		TipoDeDisciplinaDao tipoDeDisciplinaDao = new TipoDeDisciplinaDao(em);
+		TipoDeDisciplina tipoDeDisciplina = d.getTipoDeDisciplina();
+		tipoDeDisciplinaDao.persist(tipoDeDisciplina);
+		d.setTipoDeDisciplina(tipoDeDisciplina);
+		// Turmas e disciplinas
+		Set<Turma_Disciplina> turmas_Disciplinas = new LinkedHashSet<>();
+		Turma_DisciplinaDao turma_DisciplinaDao = new Turma_DisciplinaDao(em);
+		d.getTurma_Disciplina().forEach(turma_Disciplina -> {
+			turma_DisciplinaDao.persist(turma_Disciplina);
+			turmas_Disciplinas.add(turma_Disciplina);
+		});
+		d.setTurma_Disciplina(turmas_Disciplinas);
+		//
+		dao.persist(d);
+		return d;
+	}
+
 }

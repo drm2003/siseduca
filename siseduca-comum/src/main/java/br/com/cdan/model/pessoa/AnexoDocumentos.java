@@ -38,6 +38,9 @@ public class AnexoDocumentos implements Serializable {
 	@JoinColumn(name = "estagioMonografia")
 	private EstagioMonografia estagioMonografia;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -60,6 +63,22 @@ public class AnexoDocumentos implements Serializable {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+
+	public EstagioMonografia getEstagioMonografia() {
+		return estagioMonografia;
+	}
+
+	public void setEstagioMonografia(EstagioMonografia estagioMonografia) {
+		this.estagioMonografia = estagioMonografia;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

@@ -28,7 +28,7 @@ public class TipoDeDisciplina implements Serializable {
 	private String descricao;
 
 	@OneToMany(mappedBy = "tipoDeDisciplina")
-	private Set<Disciplina> disciplina;
+	private Set<Disciplina> disciplinas;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -49,12 +49,12 @@ public class TipoDeDisciplina implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Set<Disciplina> getDisciplina() {
-		return disciplina;
+	public Set<Disciplina> getDisciplinas() {
+		return disciplinas;
 	}
 
-	public void setDisciplina(Set<Disciplina> disciplina) {
-		this.disciplina = disciplina;
+	public void setDisciplinas(Set<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
 
 	public Boolean getAtivo() {
@@ -69,8 +69,7 @@ public class TipoDeDisciplina implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 
