@@ -26,7 +26,7 @@ public class InteressadoFabricaTest {
 		Set<Curso> cursos = new LinkedHashSet<>();
 		cursos.add(CursoFabricaTest.getInstance().criaCurso());
 		cursos.add(CursoFabricaTest.getInstance().criaCurso());
-		i.setCursosTumasDeInteresse();
+		i.setCursosTumasDeInteresse(cursos);
 		// Follows do interessado
 		Set<Follow> followsDoInteressado = new LinkedHashSet<>();
 		followsDoInteressado.add(FollowFabricaTest.getInstance().criaFollow());

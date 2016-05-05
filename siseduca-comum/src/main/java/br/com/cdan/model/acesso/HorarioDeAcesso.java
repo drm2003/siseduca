@@ -29,7 +29,7 @@ public class HorarioDeAcesso implements Serializable {
 	private Long id;
 
 	@OneToMany(mappedBy = "horarioDeAcesso")
-	private Set<Usuario> usuario;
+	private Set<Usuario> usuarios;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "calendarioLetivo_horarioDeAcesso", joinColumns = @JoinColumn(name = "id_calendarioLetivo"), inverseJoinColumns = @JoinColumn(name = "id_horarioDeAcesso"))
@@ -57,12 +57,12 @@ public class HorarioDeAcesso implements Serializable {
 		this.acessoDiasDaSemana = acessoDiasDaSemana;
 	}
 
-	public Set<Usuario> getUsuario() {
-		return usuario;
+	public Set<Usuario> getUsuarios() {
+		return usuarios;
 	}
 
-	public void setUsuario(Set<Usuario> usuario) {
-		this.usuario = usuario;
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	public Set<AcessoDiasDaSemana> getAcessoDiasDaSemana() {
@@ -95,7 +95,6 @@ public class HorarioDeAcesso implements Serializable {
 		int result = 1;
 		result = prime * result + ((calendarioLetivo == null) ? 0 : calendarioLetivo.hashCode());
 		result = prime * result + ((acessoDiasDaSemana == null) ? 0 : acessoDiasDaSemana.hashCode());
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
 
@@ -117,11 +116,6 @@ public class HorarioDeAcesso implements Serializable {
 			if (other.acessoDiasDaSemana != null)
 				return false;
 		} else if (!acessoDiasDaSemana.equals(other.acessoDiasDaSemana))
-			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
-				return false;
-		} else if (!usuario.equals(other.usuario))
 			return false;
 		return true;
 	}

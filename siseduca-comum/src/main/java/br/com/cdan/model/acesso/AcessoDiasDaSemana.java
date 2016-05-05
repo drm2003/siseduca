@@ -50,6 +50,9 @@ public class AcessoDiasDaSemana implements Serializable {
 	@Column(name = "horaSaida")
 	private Date horaSaida;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -98,4 +101,11 @@ public class AcessoDiasDaSemana implements Serializable {
 		this.horaSaida = horaSaida;
 	}
 
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 }

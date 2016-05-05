@@ -84,7 +84,7 @@ public class Curso implements Serializable {
 	private Boolean modular;
 
 	@OneToMany(mappedBy = "curso", fetch = FetchType.LAZY, targetEntity = Curso_MatrizCurricular.class)
-	private Set<Curso_MatrizCurricular> curso_MatrizCurricular;
+	private Set<Curso_MatrizCurricular> cursos_MatrizesCurricular;
 
 	@OneToMany(mappedBy = "curso")
 	private Set<RequisitoParaOCurso> requisitosParaOCurso;
@@ -96,10 +96,10 @@ public class Curso implements Serializable {
 	private String perfilDoCurso;
 
 	@OneToMany(mappedBy = "curso")
-	private Set<PlanoFinanceiroDoCurso> planoFinanceiroDoCurso;
+	private Set<PlanoFinanceiroDoCurso> planosFinanceiroDoCurso;
 
 	@OneToMany(mappedBy = "curso")
-	private Set<Turma> turma;
+	private Set<Turma> turmas;
 
 	@ManyToOne
 	@JoinColumn(name = "curso")
@@ -235,8 +235,7 @@ public class Curso implements Serializable {
 		return tempoMaximoParaConclusaoDoCurso;
 	}
 
-	public void setTempoMaximoParaConclusaoDoCurso(
-			Long tempoMaximoParaConclusaoDoCurso) {
+	public void setTempoMaximoParaConclusaoDoCurso(Long tempoMaximoParaConclusaoDoCurso) {
 		this.tempoMaximoParaConclusaoDoCurso = tempoMaximoParaConclusaoDoCurso;
 	}
 
@@ -248,21 +247,19 @@ public class Curso implements Serializable {
 		this.modular = modular;
 	}
 
-	public Set<Curso_MatrizCurricular> getCurso_MatrizCurricular() {
-		return curso_MatrizCurricular;
+	public Set<Curso_MatrizCurricular> getCursos_MatrizesCurricular() {
+		return cursos_MatrizesCurricular;
 	}
 
-	public void setCurso_MatrizCurricular(
-			Set<Curso_MatrizCurricular> curso_MatrizCurricular) {
-		this.curso_MatrizCurricular = curso_MatrizCurricular;
+	public void setCursos_MatrizesCurricular(Set<Curso_MatrizCurricular> cursos_MatrizesCurricular) {
+		this.cursos_MatrizesCurricular = cursos_MatrizesCurricular;
 	}
 
 	public Set<RequisitoParaOCurso> getRequisitosParaOCurso() {
 		return requisitosParaOCurso;
 	}
 
-	public void setRequisitosParaOCurso(
-			Set<RequisitoParaOCurso> requisitosParaOCurso) {
+	public void setRequisitosParaOCurso(Set<RequisitoParaOCurso> requisitosParaOCurso) {
 		this.requisitosParaOCurso = requisitosParaOCurso;
 	}
 
@@ -282,21 +279,20 @@ public class Curso implements Serializable {
 		this.perfilDoCurso = perfilDoCurso;
 	}
 
-	public Set<PlanoFinanceiroDoCurso> getPlanoFinanceiroDoCurso() {
-		return planoFinanceiroDoCurso;
+	public Set<PlanoFinanceiroDoCurso> getPlanosFinanceiroDoCurso() {
+		return planosFinanceiroDoCurso;
 	}
 
-	public void setPlanoFinanceiroDoCurso(
-			Set<PlanoFinanceiroDoCurso> planoFinanceiroDoCurso) {
-		this.planoFinanceiroDoCurso = planoFinanceiroDoCurso;
+	public void setPlanosFinanceiroDoCurso(Set<PlanoFinanceiroDoCurso> planosFinanceiroDoCurso) {
+		this.planosFinanceiroDoCurso = planosFinanceiroDoCurso;
 	}
 
-	public Set<Turma> getTurma() {
-		return turma;
+	public Set<Turma> getTurmas() {
+		return turmas;
 	}
 
-	public void setTurma(Set<Turma> turma) {
-		this.turma = turma;
+	public void setTurmas(Set<Turma> turmas) {
+		this.turmas = turmas;
 	}
 
 	public Boolean getCompartilhado() {
@@ -319,15 +315,10 @@ public class Curso implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((curso_MatrizCurricular == null) ? 0
-						: curso_MatrizCurricular.hashCode());
 		result = prime * result + ((modular == null) ? 0 : modular.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((sigla == null) ? 0 : sigla.hashCode());
-		result = prime * result
-				+ ((tipoDeCurso == null) ? 0 : tipoDeCurso.hashCode());
+		result = prime * result + ((tipoDeCurso == null) ? 0 : tipoDeCurso.hashCode());
 		return result;
 	}
 
@@ -340,11 +331,6 @@ public class Curso implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Curso other = (Curso) obj;
-		if (curso_MatrizCurricular == null) {
-			if (other.curso_MatrizCurricular != null)
-				return false;
-		} else if (!curso_MatrizCurricular.equals(other.curso_MatrizCurricular))
-			return false;
 		if (modular == null) {
 			if (other.modular != null)
 				return false;
@@ -370,10 +356,8 @@ public class Curso implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Curso [nome=" + nome + ", tipoDeCurso=" + tipoDeCurso
-				+ ", sigla=" + sigla + ", numeroDeModulos=" + numeroDeModulos
-				+ ", numeroDeVagas=" + numeroDeVagas + ", nomeInstituicao="
-				+ nomeInstituicao + ", curso_MatrizCurricular="
-				+ curso_MatrizCurricular + "]";
+		return "Curso [nome=" + nome + ", tipoDeCurso=" + tipoDeCurso + ", sigla=" + sigla + ", numeroDeModulos="
+				+ numeroDeModulos + ", numeroDeVagas=" + numeroDeVagas + ", nomeInstituicao=" + nomeInstituicao
+				+ ", curso_MatrizCurricular=" + cursos_MatrizesCurricular + "]";
 	}
 }

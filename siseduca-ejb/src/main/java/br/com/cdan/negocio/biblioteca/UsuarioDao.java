@@ -1,10 +1,20 @@
 package br.com.cdan.negocio.biblioteca;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.dao.SiseducaDao;
 import br.com.cdan.model.acesso.Usuario;
 
 public class UsuarioDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
+
+	public UsuarioDao() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public UsuarioDao(EntityManager em) {
+		setEntityManager(em);
+	}
 
 	/**
 	 * 

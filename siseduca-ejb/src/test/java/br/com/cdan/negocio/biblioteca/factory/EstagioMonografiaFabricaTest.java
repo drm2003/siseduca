@@ -5,10 +5,21 @@ import java.util.Calendar;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.comum.EnumTipoEstagioMonografia;
+import br.com.cdan.model.pedagogico.contrato.DadosEmpresaConcedente;
 import br.com.cdan.model.pedagogico.contrato.EstagioMonografia;
 import br.com.cdan.model.pedagogico.curso.Turma_Disciplina;
+import br.com.cdan.model.pessoa.Aluno;
 import br.com.cdan.model.pessoa.AnexoDocumentos;
+import br.com.cdan.model.pessoa.Funcionario;
+import br.com.cdan.negocio.biblioteca.AlunoDao;
+import br.com.cdan.negocio.biblioteca.AnexoDocumentosDao;
+import br.com.cdan.negocio.biblioteca.DadosEmpresaConcedenteDao;
+import br.com.cdan.negocio.biblioteca.EstagioMonografiaDao;
+import br.com.cdan.negocio.biblioteca.FuncionarioDao;
+import br.com.cdan.negocio.biblioteca.Turma_DisciplinaDao;
 
 public class EstagioMonografiaFabricaTest {
 	private static EstagioMonografiaFabricaTest instance = null;
@@ -47,6 +58,45 @@ public class EstagioMonografiaFabricaTest {
 		turma_disciplinas.add(Turma_DisciplinaFabricaTest.getInstance().criaTurma_Disciplina());
 		turma_disciplinas.add(Turma_DisciplinaFabricaTest.getInstance().criaTurma_Disciplina());
 		e.setTurma_Disciplina(turma_disciplinas);
+		return e;
+	}
+
+	public EstagioMonografia criaEstagioMonografiaPersistido(EntityManager em) {
+		EstagioMonografia e = criaEstagioMonografia();
+		EstagioMonografiaDao dao = new EstagioMonografiaDao(em);
+		//
+		Aluno aluno = e.getAluno();
+		AlunoDao alunoDao = new AlunoDao(em);
+		alunoDao.persist(aluno);
+		e.setAluno(aluno);
+		// Anexos
+		Set<AnexoDocumentos> anexos = new LinkedHashSet<>();
+		AnexoDocumentosDao anexoDocumentosDao = new AnexoDocumentosDao(em);
+		e.getAnexos().forEach(anexoDocumento -> {
+			anexoDocumentosDao.persist(anexoDocumento);
+			anexos.add(anexoDocumento);
+		});
+		e.setAnexos(anexos);
+		//
+		DadosEmpresaConcedenteDao dadosEmpresaConcedenteDao = new DadosEmpresaConcedenteDao(em);
+		DadosEmpresaConcedente dadosEmpresaConcedente = e.getDadosEmpresaConcedente();
+		dadosEmpresaConcedenteDao.persist(dadosEmpresaConcedente);
+		e.setDadosEmpresaConcedente(dadosEmpresaConcedente);
+		//
+		FuncionarioDao funcionarioDao = new FuncionarioDao(em);
+		Funcionario orientadorSupervisor = e.getOrientadorSupervisor();
+		funcionarioDao.persist(orientadorSupervisor);
+		e.setOrientadorSupervisor(orientadorSupervisor);
+		// Turma_Disciplina
+		Set<Turma_Disciplina> turma_disciplinas = new LinkedHashSet<>();
+		Turma_DisciplinaDao turma_DisciplinaDao = new Turma_DisciplinaDao(em);
+		e.getTurma_Disciplina().forEach(turma_Disciplina -> {
+			turma_DisciplinaDao.persist(turma_Disciplina);
+			turma_disciplinas.add(turma_Disciplina);
+		});
+		e.setTurma_Disciplina(turma_disciplinas);
+		//
+		dao.persist(e);
 		return e;
 	}
 

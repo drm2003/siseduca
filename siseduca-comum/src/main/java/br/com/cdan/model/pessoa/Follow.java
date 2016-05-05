@@ -2,6 +2,7 @@ package br.com.cdan.model.pessoa;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -37,6 +38,9 @@ public class Follow implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_alunoInteressado")
 	private AlunoInteressado alunoInteressado;
+
+	@Column(name = "ativo")
+	private Boolean ativo;
 
 	public Long getId() {
 		return id;
@@ -78,4 +82,11 @@ public class Follow implements Serializable {
 		this.alunoInteressado = alunoInteressado;
 	}
 
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 }

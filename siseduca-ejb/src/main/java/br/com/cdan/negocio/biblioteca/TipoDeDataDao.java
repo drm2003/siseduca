@@ -3,16 +3,16 @@ package br.com.cdan.negocio.biblioteca;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.dao.SiseducaDao;
-import br.com.cdan.model.pessoa.Interessado;
+import br.com.cdan.model.pessoa.TipoDeData;
 
-public class InteressadoDao extends SiseducaDao {
+public class TipoDeDataDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
 
-	public InteressadoDao() {
+	public TipoDeDataDao() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public InteressadoDao(EntityManager em) {
+	public TipoDeDataDao(EntityManager em) {
 		setEntityManager(em);
 	}
 
@@ -21,8 +21,8 @@ public class InteressadoDao extends SiseducaDao {
 	 */
 	@Override
 	public void remove(Object obj) {
-		Interessado interessado = (Interessado) obj;
-		interessado.setAtivo(false);
-		getEntityManager().merge(interessado);
+		TipoDeData tipoDeData = (TipoDeData) obj;
+		tipoDeData.setAtivo(false);
+		getEntityManager().merge(tipoDeData);
 	}
 }

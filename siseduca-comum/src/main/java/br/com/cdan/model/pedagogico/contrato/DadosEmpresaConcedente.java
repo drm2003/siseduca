@@ -38,6 +38,9 @@ public class DadosEmpresaConcedente implements Serializable {
 	@Column(name = "observacaoDoResponsavel")
 	private String observacaoDoResponsavel;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public String getAreaEstagioMonografia() {
 		return areaEstagioMonografia;
 	}
@@ -92,5 +95,13 @@ public class DadosEmpresaConcedente implements Serializable {
 
 	public void setObservacaoDoResponsavel(String observacaoDoResponsavel) {
 		this.observacaoDoResponsavel = observacaoDoResponsavel;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 }

@@ -31,9 +31,9 @@ public class AnexoDocumentosFabricaTest {
 		PessoaDao pessoaDao = new PessoaDao(em);
 		Pessoa pessoa = a.getPessoa();
 		pessoaDao.persist(pessoa);
-
-		anexoDocumentosDao.persist(pessoa);
 		a.setPessoa(pessoa);
+		//
+		anexoDocumentosDao.persist(a);
 		return a;
 	}
 }

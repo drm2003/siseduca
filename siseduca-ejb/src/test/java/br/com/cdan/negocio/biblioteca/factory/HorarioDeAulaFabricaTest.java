@@ -22,8 +22,8 @@ public class HorarioDeAulaFabricaTest {
 		HorarioDeAula h = new HorarioDeAula();
 		// Acessos Dias da semana
 		Set<AcessoDiasDaSemana> acessosDiasDaSemana = new LinkedHashSet<>();
-		acessosDiasDaSemana.add(AcessoDiasDaSemanaFabricaTest.getInstance().criaAcessoDiaDaSemana());
-		acessosDiasDaSemana.add(AcessoDiasDaSemanaFabricaTest.getInstance().criaAcessoDiaDaSemana());
+		acessosDiasDaSemana.add(AcessoDiasDaSemanaFabricaTest.getInstance().criaAcessoDiasDaSemana());
+		acessosDiasDaSemana.add(AcessoDiasDaSemanaFabricaTest.getInstance().criaAcessoDiasDaSemana());
 		h.setAcessoDiasDaSemana(acessosDiasDaSemana);
 		//
 		h.setAtivo(Boolean.TRUE);

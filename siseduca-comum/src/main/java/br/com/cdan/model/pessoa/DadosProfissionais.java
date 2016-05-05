@@ -59,6 +59,9 @@ public class DadosProfissionais implements Serializable {
 	@Column(name = "curriculo")
 	private String curriculo;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -137,6 +140,14 @@ public class DadosProfissionais implements Serializable {
 
 	public void setCurriculo(String curriculo) {
 		this.curriculo = curriculo;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

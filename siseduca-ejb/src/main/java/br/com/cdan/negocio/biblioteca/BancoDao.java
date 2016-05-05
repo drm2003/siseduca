@@ -1,10 +1,20 @@
 package br.com.cdan.negocio.biblioteca;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.dao.SiseducaDao;
 import br.com.cdan.model.financeiro.Banco;
 
 public class BancoDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
+
+	public BancoDao() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public BancoDao(EntityManager em) {
+		setEntityManager(em);
+	}
 
 	/**
 	 * 
