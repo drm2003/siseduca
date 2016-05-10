@@ -67,15 +67,13 @@ public class EditoraFabricaTest {
 	}
 
 	public Editora criaEditoraPersistido(EntityManager em) {
-		EditoraDao dao = new EditoraDao();
-		dao.setEntityManager(em);
+		EditoraDao dao = new EditoraDao(em);
 		//
 		Editora a = criaEditora();
 		// Gravando primeiramente os objetos
 		// Email
 		Set<Email> emails = new LinkedHashSet<>();
-		EmailDao daoEmail = new EmailDao();
-		daoEmail.setEntityManager(em);
+		EmailDao daoEmail = new EmailDao(em);
 		a.getEmails().forEach(e -> {
 			daoEmail.persist(e);
 			emails.add(e);
@@ -83,8 +81,7 @@ public class EditoraFabricaTest {
 		a.setEmails(emails);
 		// Endereços
 		Set<Endereco> enderecos = new LinkedHashSet<>();
-		EnderecoDao daoEndereco = new EnderecoDao();
-		daoEndereco.setEntityManager(em);
+		EnderecoDao daoEndereco = new EnderecoDao(em);
 		a.getEndereco().forEach(endereco -> {
 			daoEndereco.persist(endereco);
 			enderecos.add(endereco);
@@ -92,8 +89,7 @@ public class EditoraFabricaTest {
 		a.setEndereco(enderecos);
 		// Obras
 		Set<Obra> obras = new LinkedHashSet<>();
-		ObraDao daoObra = new ObraDao();
-		daoObra.setEntityManager(em);
+		ObraDao daoObra = new ObraDao(em);
 		a.getObras().forEach(obra -> {
 			daoObra.persist(obra);
 			obras.add(obra);
@@ -101,8 +97,7 @@ public class EditoraFabricaTest {
 		a.setObras(obras);
 		// Telefones
 		Set<Telefone> telefones = new LinkedHashSet<>();
-		TelefoneDao daoTelefone = new TelefoneDao();
-		daoTelefone.setEntityManager(em);
+		TelefoneDao daoTelefone = new TelefoneDao(em);
 		a.getTelefones().forEach(telefone -> {
 			daoTelefone.persist(telefone);
 			telefones.add(telefone);

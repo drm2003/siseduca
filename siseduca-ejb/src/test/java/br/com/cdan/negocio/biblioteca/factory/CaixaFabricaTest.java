@@ -37,18 +37,15 @@ public class CaixaFabricaTest {
 	}
 
 	public Caixa criaCaixaPersistido(EntityManager em) {
-		CaixaDao caixaDao = new CaixaDao();
-		caixaDao.setEntityManager(em);
+		CaixaDao caixaDao = new CaixaDao(em);
 		Caixa c = criaCaixa();
 		//
-		CategoriaDao categoriaDao = new CategoriaDao();
-		categoriaDao.setEntityManager(em);
+		CategoriaDao categoriaDao = new CategoriaDao(em);
 		Categoria categoria = c.getCategoria();
 		categoriaDao.persist(categoria);
 		c.setCategoria(categoria);
 		//
-		TipoDeCobrancaRecebimentoDao tipoDeCobrancaRecebimentoDao = new TipoDeCobrancaRecebimentoDao();
-		tipoDeCobrancaRecebimentoDao.setEntityManager(em);
+		TipoDeCobrancaRecebimentoDao tipoDeCobrancaRecebimentoDao = new TipoDeCobrancaRecebimentoDao(em);
 		TipoDeCobrancaRecebimento tipoDeMovimentacao = c.getTipoDeMovimentacao();
 		tipoDeCobrancaRecebimentoDao.persist(tipoDeMovimentacao);
 		c.setTipoDeMovimentacao(tipoDeMovimentacao);

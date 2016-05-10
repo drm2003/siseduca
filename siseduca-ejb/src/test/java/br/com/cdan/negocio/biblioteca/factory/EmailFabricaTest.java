@@ -42,24 +42,20 @@ public class EmailFabricaTest {
 
 	public Email criaEmailPersistido(EntityManager em) {
 		Email a = criaEmail();
-		EmailDao dao = new EmailDao();
-		dao.setEntityManager(em);
+		EmailDao dao = new EmailDao(em);
 		// gravar empresas
-		EmpresaDao empresaDao = new EmpresaDao();
-		empresaDao.setEntityManager(em);
+		EmpresaDao empresaDao = new EmpresaDao(em);
 		Set<Empresa> empresas = new LinkedHashSet<>();
 		a.getEmpresas().forEach(e -> {
 			empresaDao.persist(e);
 			empresas.add(e);
 		});
 		// gravar pessoa
-		PessoaDao pessoaDao = new PessoaDao();
-		pessoaDao.setEntityManager(em);
+		PessoaDao pessoaDao = new PessoaDao(em);
 		Pessoa pessoa = a.getPessoa();
 		pessoaDao.persist(pessoa);
 		// gravar usuário
-		UsuarioDao usuarioDao = new UsuarioDao();
-		usuarioDao.setEntityManager(em);
+		UsuarioDao usuarioDao = new UsuarioDao(em);
 		Usuario usuario = a.getUsuario();
 		usuarioDao.persist(usuario);
 		//

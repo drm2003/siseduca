@@ -5,9 +5,21 @@ import java.util.Calendar;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.comum.EnumTipoDeSituacaoInvestimento;
+import br.com.cdan.model.estoque.Item;
+import br.com.cdan.model.financeiro.ContaAReceber;
+import br.com.cdan.model.geral.Categoria;
 import br.com.cdan.model.pedagogico.contrato.Matricula;
 import br.com.cdan.model.pedagogico.curso.Investimento;
+import br.com.cdan.model.pedagogico.curso.TipoDeInvestimento;
+import br.com.cdan.negocio.biblioteca.CategoriaDao;
+import br.com.cdan.negocio.biblioteca.ContaAReceberDao;
+import br.com.cdan.negocio.biblioteca.InvestimentoDao;
+import br.com.cdan.negocio.biblioteca.ItemDao;
+import br.com.cdan.negocio.biblioteca.MatriculaDao;
+import br.com.cdan.negocio.biblioteca.TipoDeInvestimentoDao;
 
 public class InvestimentoFabricaTest {
 	private static InvestimentoFabricaTest instance = null;
@@ -25,9 +37,9 @@ public class InvestimentoFabricaTest {
 		i.setCategoria(CategoriaFabricaTest.getInstance().criaCategoria());
 		i.setConsiderarMesAtual(Boolean.TRUE);
 		// Contas a receber
-		i.setContasAReceber(ContaAReceberFabricaTest.getInstance().criaContasAReceber());
+		i.setContaAReceber(ContaAReceberFabricaTest.getInstance().criaContaAReceber());
 		// Contas a receber primeira parcela
-		i.setContasAReceberPrimeiraParcela(ContaAReceberFabricaTest.getInstance().criaContasAReceberPrimeiraParcela());
+		i.setContaAReceberPrimeiraParcela(ContaAReceberFabricaTest.getInstance().criaContaAReceber());
 		i.setDataDiferenciadaPrimeiraParcela(Calendar.getInstance());
 		i.setDataInicial(Calendar.getInstance());
 		i.setDescricaoPlano("descricaoPlano");
@@ -48,4 +60,45 @@ public class InvestimentoFabricaTest {
 		return i;
 	}
 
+	public Investimento criaInvestimentoPersistido(EntityManager em) {
+		Investimento i = criaInvestimento();
+		InvestimentoDao dao = new InvestimentoDao(em);
+		//
+		CategoriaDao categoriaDao = new CategoriaDao(em);
+		Categoria categoria = i.getCategoria();
+		categoriaDao.persist(categoria);
+		i.setCategoria(categoria);
+		// Contas a receber
+		ContaAReceberDao contaAReceberDao = new ContaAReceberDao(em);
+		ContaAReceber contaAReceber3 = i.getContaAReceber();
+		ContaAReceber contaAReceber2 = contaAReceber3;
+		ContaAReceber contaAReceber = contaAReceber2;
+		contaAReceberDao.persist(contaAReceber);
+		i.setContaAReceber(contaAReceber);
+		// Contas a receber primeira parcela
+		ContaAReceber contaAReceberPrimeiraParcela = i.getContaAReceberPrimeiraParcela();
+		contaAReceberDao.persist(contaAReceberPrimeiraParcela);
+		i.setContaAReceberPrimeiraParcela(contaAReceberPrimeiraParcela);
+		//
+		ItemDao itemDao = new ItemDao(em);
+		Item item = i.getItem();
+		itemDao.persist(item);
+		i.setItem(item);
+		// Matrículas
+		MatriculaDao matriculaDao = new MatriculaDao(em);
+		Set<Matricula> matriculas = new LinkedHashSet<>();
+		i.getMatriculas().forEach(matricula -> {
+			matriculaDao.persist(matricula);
+			matriculas.add(matricula);
+		});
+		i.setMatriculas(matriculas);
+		//
+		TipoDeInvestimentoDao tipoDeInvestimentoDao = new TipoDeInvestimentoDao(em);
+		TipoDeInvestimento tipoDeInvestimento = i.getTipoDeInvestimento();
+		tipoDeInvestimentoDao.persist(tipoDeInvestimento);
+		i.setTipoDeInvestimento(tipoDeInvestimento);
+		//
+		dao.persist(i);
+		return i;
+	}
 }

@@ -29,9 +29,9 @@ public class MatrizCurricularFabricaTest {
 		// Disciplinas MatrizCurricular
 		Set<Disciplina_MatrizCurricular> disciplinasMatrizCurricular = new LinkedHashSet<>();
 		disciplinasMatrizCurricular
-				.add(Disciplina_MatrizCurricularFabricaTest.getInstance.criaDisciplina_MatrizCurricular());
+				.add(Disciplina_MatrizCurricularFabricaTest.getInstance().criaDisciplina_MatrizCurricular());
 		disciplinasMatrizCurricular
-				.add(Disciplina_MatrizCurricularFabricaTest.getInstance.criaDisciplina_MatrizCurricular());
+				.add(Disciplina_MatrizCurricularFabricaTest.getInstance().criaDisciplina_MatrizCurricular());
 		m.setDisciplina_MatrizCurricular(disciplinasMatrizCurricular);
 		//
 		m.setNome("nome");

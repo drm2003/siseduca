@@ -27,7 +27,7 @@ public class TipoDeInvestimento implements Serializable {
 	private String descricao;
 
 	@OneToMany(mappedBy = "tipoDeInvestimento", fetch = FetchType.EAGER)
-	private Set<Turma_Disciplina> Turma_Disciplina;
+	private Set<Turma_Disciplina> turmas_Disciplinas;
 
 	@OneToMany(mappedBy = "tipoDeInvestimento", fetch = FetchType.EAGER)
 	private Set<Investimento> investimento;
@@ -51,12 +51,12 @@ public class TipoDeInvestimento implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Set<Turma_Disciplina> getTurma_Disciplina() {
-		return Turma_Disciplina;
+	public Set<Turma_Disciplina> getTurmas_Disciplinas() {
+		return turmas_Disciplinas;
 	}
 
-	public void setTurma_Disciplina(Set<Turma_Disciplina> turma_Disciplina) {
-		Turma_Disciplina = turma_Disciplina;
+	public void setTurmas_Disciplinas(Set<Turma_Disciplina> turmas_Disciplinas) {
+		this.turmas_Disciplinas = turmas_Disciplinas;
 	}
 
 	public Boolean getAtivo() {

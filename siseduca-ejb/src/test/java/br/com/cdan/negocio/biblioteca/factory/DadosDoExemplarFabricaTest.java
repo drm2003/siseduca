@@ -32,11 +32,11 @@ public class DadosDoExemplarFabricaTest {
 	}
 
 	public DadosDoExemplar criaDadosDoExemplarPersistido(EntityManager em) {
-		DadosDoExemplar dadosDoExemplar = criaDadosDoExemplar();
-		DadosDoExemplarDao dao = new DadosDoExemplarDao();
-		dao.setEntityManager(em);
-		dao.persist(dadosDoExemplar);
-		return dadosDoExemplar;
+		DadosDoExemplar d = criaDadosDoExemplar();
+		DadosDoExemplarDao dao = new DadosDoExemplarDao(em);
+		//
+		dao.persist(d);
+		return d;
 	}
 
 }

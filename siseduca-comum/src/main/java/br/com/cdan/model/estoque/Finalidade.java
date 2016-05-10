@@ -26,7 +26,7 @@ public class Finalidade implements Serializable {
 	private String descricao;
 
 	@OneToMany(mappedBy = "finalidade")
-	private Set<Item> item;
+	private Set<Item> itens;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -47,12 +47,12 @@ public class Finalidade implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Set<Item> getItem() {
-		return item;
+	public Set<Item> getItens() {
+		return itens;
 	}
 
-	public void setItem(Set<Item> item) {
-		this.item = item;
+	public void setItens(Set<Item> itens) {
+		this.itens = itens;
 	}
 
 	public Boolean getAtivo() {
@@ -67,8 +67,7 @@ public class Finalidade implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 

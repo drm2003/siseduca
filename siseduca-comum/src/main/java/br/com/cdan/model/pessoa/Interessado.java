@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import br.com.cdan.model.contato.MelhorHorarioParaContato;
 import br.com.cdan.model.contato.Midia;
 import br.com.cdan.model.contato.TipoDeContato;
-import br.com.cdan.model.contrato.MotivosDeNaoFechamentoDeContrato;
+import br.com.cdan.model.contrato.MotivoDeNaoFechamentoDeContrato;
 import br.com.cdan.model.geral.Origem;
 import br.com.cdan.model.pedagogico.curso.Curso;
 
@@ -47,8 +47,8 @@ public class Interessado implements Serializable {
 	@Column(name = "melhorHorarioParaContato")
 	private MelhorHorarioParaContato melhorHorarioParaContato;
 
-	@Column(name = "motivosDeNaoFechamentoDeContrato")
-	private MotivosDeNaoFechamentoDeContrato motivosDeNaoFechamentoDeContrato;
+	@Column(name = "motivoDeNaoFechamentoDeContrato")
+	private MotivoDeNaoFechamentoDeContrato motivoDeNaoFechamentoDeContrato;
 
 	@Column(name = "tipoDeContato")
 	private TipoDeContato tipoDeContato;
@@ -111,18 +111,16 @@ public class Interessado implements Serializable {
 		return melhorHorarioParaContato;
 	}
 
-	public void setMelhorHorarioParaContato(
-			MelhorHorarioParaContato melhorHorarioParaContato) {
+	public void setMelhorHorarioParaContato(MelhorHorarioParaContato melhorHorarioParaContato) {
 		this.melhorHorarioParaContato = melhorHorarioParaContato;
 	}
 
-	public MotivosDeNaoFechamentoDeContrato getMotivosDeNaoFechamentoDeContrato() {
-		return motivosDeNaoFechamentoDeContrato;
+	public MotivoDeNaoFechamentoDeContrato getMotivoDeNaoFechamentoDeContrato() {
+		return motivoDeNaoFechamentoDeContrato;
 	}
 
-	public void setMotivosDeNaoFechamentoDeContrato(
-			MotivosDeNaoFechamentoDeContrato motivosDeNaoFechamentoDeContrato) {
-		this.motivosDeNaoFechamentoDeContrato = motivosDeNaoFechamentoDeContrato;
+	public void setMotivoDeNaoFechamentoDeContrato(MotivoDeNaoFechamentoDeContrato motivoDeNaoFechamentoDeContrato) {
+		this.motivoDeNaoFechamentoDeContrato = motivoDeNaoFechamentoDeContrato;
 	}
 
 	public TipoDeContato getTipoDeContato() {
@@ -193,39 +191,18 @@ public class Interessado implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((atendente == null) ? 0 : atendente.hashCode());
-		result = prime
-				* result
-				+ ((cursosTumasDeInteresse == null) ? 0
-						: cursosTumasDeInteresse.hashCode());
-		result = prime
-				* result
-				+ ((followsDoInteressado == null) ? 0 : followsDoInteressado
-						.hashCode());
-		result = prime
-				* result
-				+ ((melhorHorarioParaContato == null) ? 0
-						: melhorHorarioParaContato.hashCode());
+		result = prime * result + ((atendente == null) ? 0 : atendente.hashCode());
+		result = prime * result + ((cursosTumasDeInteresse == null) ? 0 : cursosTumasDeInteresse.hashCode());
+		result = prime * result + ((followsDoInteressado == null) ? 0 : followsDoInteressado.hashCode());
+		result = prime * result + ((melhorHorarioParaContato == null) ? 0 : melhorHorarioParaContato.hashCode());
 		result = prime * result + ((midia == null) ? 0 : midia.hashCode());
-		result = prime
-				* result
-				+ ((motivosDeNaoFechamentoDeContrato == null) ? 0
-						: motivosDeNaoFechamentoDeContrato.hashCode());
-		result = prime
-				* result
-				+ ((observacaoDoAluno == null) ? 0 : observacaoDoAluno
-						.hashCode());
-		result = prime * result + ((origem == null) ? 0 : origem.hashCode());
-		result = prime
-				* result
-				+ ((outraEscolaDoAluno == null) ? 0 : outraEscolaDoAluno
-						.hashCode());
-		result = prime
-				* result
-				+ ((promotorDeVendas == null) ? 0 : promotorDeVendas.hashCode());
 		result = prime * result
-				+ ((tipoDeContato == null) ? 0 : tipoDeContato.hashCode());
+				+ ((motivoDeNaoFechamentoDeContrato == null) ? 0 : motivoDeNaoFechamentoDeContrato.hashCode());
+		result = prime * result + ((observacaoDoAluno == null) ? 0 : observacaoDoAluno.hashCode());
+		result = prime * result + ((origem == null) ? 0 : origem.hashCode());
+		result = prime * result + ((outraEscolaDoAluno == null) ? 0 : outraEscolaDoAluno.hashCode());
+		result = prime * result + ((promotorDeVendas == null) ? 0 : promotorDeVendas.hashCode());
+		result = prime * result + ((tipoDeContato == null) ? 0 : tipoDeContato.hashCode());
 		return result;
 	}
 
@@ -256,19 +233,17 @@ public class Interessado implements Serializable {
 		if (melhorHorarioParaContato == null) {
 			if (other.melhorHorarioParaContato != null)
 				return false;
-		} else if (!melhorHorarioParaContato
-				.equals(other.melhorHorarioParaContato))
+		} else if (!melhorHorarioParaContato.equals(other.melhorHorarioParaContato))
 			return false;
 		if (midia == null) {
 			if (other.midia != null)
 				return false;
 		} else if (!midia.equals(other.midia))
 			return false;
-		if (motivosDeNaoFechamentoDeContrato == null) {
-			if (other.motivosDeNaoFechamentoDeContrato != null)
+		if (motivoDeNaoFechamentoDeContrato == null) {
+			if (other.motivoDeNaoFechamentoDeContrato != null)
 				return false;
-		} else if (!motivosDeNaoFechamentoDeContrato
-				.equals(other.motivosDeNaoFechamentoDeContrato))
+		} else if (!motivoDeNaoFechamentoDeContrato.equals(other.motivoDeNaoFechamentoDeContrato))
 			return false;
 		if (observacaoDoAluno == null) {
 			if (other.observacaoDoAluno != null)
@@ -300,16 +275,12 @@ public class Interessado implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Interessado [promotorDeVendas=" + promotorDeVendas
-				+ ", atendente=" + atendente + ", melhorHorarioParaContato="
-				+ melhorHorarioParaContato
-				+ ", motivosDeNaoFechamentoDeContrato="
-				+ motivosDeNaoFechamentoDeContrato + ", tipoDeContato="
-				+ tipoDeContato + ", origem=" + origem + ", midia=" + midia
-				+ ", outraEscolaDoAluno=" + outraEscolaDoAluno
-				+ ", cursosTumasDeInteresse=" + cursosTumasDeInteresse
-				+ ", followsDoInteressado=" + followsDoInteressado
-				+ ", observacaoDoAluno=" + observacaoDoAluno;
+		return "Interessado [promotorDeVendas=" + promotorDeVendas + ", atendente=" + atendente
+				+ ", melhorHorarioParaContato=" + melhorHorarioParaContato + ", motivosDeNaoFechamentoDeContrato="
+				+ motivoDeNaoFechamentoDeContrato + ", tipoDeContato=" + tipoDeContato + ", origem=" + origem
+				+ ", midia=" + midia + ", outraEscolaDoAluno=" + outraEscolaDoAluno + ", cursosTumasDeInteresse="
+				+ cursosTumasDeInteresse + ", followsDoInteressado=" + followsDoInteressado + ", observacaoDoAluno="
+				+ observacaoDoAluno;
 	}
 
 }

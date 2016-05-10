@@ -16,8 +16,8 @@ import br.com.cdan.model.pedagogico.curso.Investimento;
 import br.com.cdan.model.pessoa.Aluno;
 import br.com.cdan.model.pessoa.Funcionario;
 import br.com.cdan.negocio.biblioteca.AlunoDao;
-import br.com.cdan.negocio.biblioteca.ContaDao;
 import br.com.cdan.negocio.biblioteca.ContaAPagarDao;
+import br.com.cdan.negocio.biblioteca.ContaDao;
 import br.com.cdan.negocio.biblioteca.EmpresaDao;
 import br.com.cdan.negocio.biblioteca.FuncionarioDao;
 import br.com.cdan.negocio.biblioteca.InvestimentoDao;
@@ -71,10 +71,10 @@ public class ContasAPagarFabricaTest {
 
 	public ContaAPagar criaContasAPagarPersistido(EntityManager em) {
 		ContaAPagar c = criaContasAPagar();
-		ContaAPagarDao dao = new ContaAPagarDao();
+		ContaAPagarDao dao = new ContaAPagarDao(em);
 		dao.setEntityManager(em);
 		// Alunos
-		AlunoDao daoAluno = new AlunoDao();
+		AlunoDao daoAluno = new AlunoDao(em);
 		Set<Aluno> alunos = new LinkedHashSet<>();
 		c.getAlunos().forEach(a -> {
 			daoAluno.persist(a);
@@ -83,11 +83,11 @@ public class ContasAPagarFabricaTest {
 		c.setAlunos(alunos);
 		// Conta
 		Conta conta = c.getConta();
-		ContaDao daoConta = new ContaDao();
+		ContaDao daoConta = new ContaDao(em);
 		daoConta.persist(conta);
 		c.setConta(conta);
 		// Empresas
-		EmpresaDao daoEmpresa = new EmpresaDao();
+		EmpresaDao daoEmpresa = new EmpresaDao(em);
 		Set<Empresa> empresas = new LinkedHashSet<>();
 		c.getEmpresas().forEach(e -> {
 			daoEmpresa.persist(e);
@@ -95,7 +95,7 @@ public class ContasAPagarFabricaTest {
 		});
 		c.setEmpresas(empresas);
 		// Funcionários
-		FuncionarioDao daoFuncionario = new FuncionarioDao();
+		FuncionarioDao daoFuncionario = new FuncionarioDao(em);
 		Set<Funcionario> funcionarios = new LinkedHashSet<>();
 		c.getFuncionarios().forEach(f -> {
 			daoFuncionario.persist(f);
@@ -103,7 +103,7 @@ public class ContasAPagarFabricaTest {
 		});
 		c.setFuncionarios(funcionarios);
 		// Investimento
-		InvestimentoDao daoInvestimento = new InvestimentoDao();
+		InvestimentoDao daoInvestimento = new InvestimentoDao(em);
 		Investimento investimento = c.getInvestimento();
 		daoInvestimento.persist(investimento);
 		c.setInvestimento(investimento);
@@ -112,12 +112,12 @@ public class ContasAPagarFabricaTest {
 		daoInvestimento.persist(primeiraParcela);
 		c.setPrimeiraParcela(primeiraParcela);
 		// Plano de Conta
-		PlanoDeContaDao daoPlanoDeContas = new PlanoDeContaDao();
+		PlanoDeContaDao daoPlanoDeContas = new PlanoDeContaDao(em);
 		PlanoDeConta planoDeConta = c.getPlanoDeConta();
 		daoPlanoDeContas.persist(planoDeConta);
 		c.setPlanoDeConta(planoDeConta);
 		// tipo de Cobrança Recebimento
-		TipoDeCobrancaRecebimentoDao tipoDeCobrancaRecebimentoDao = new TipoDeCobrancaRecebimentoDao();
+		TipoDeCobrancaRecebimentoDao tipoDeCobrancaRecebimentoDao = new TipoDeCobrancaRecebimentoDao(em);
 		TipoDeCobrancaRecebimento tipoDeCobranca = c.getTipoDeCobranca();
 		tipoDeCobrancaRecebimentoDao.persist(tipoDeCobranca);
 		c.setTipoDeCobranca(tipoDeCobranca);

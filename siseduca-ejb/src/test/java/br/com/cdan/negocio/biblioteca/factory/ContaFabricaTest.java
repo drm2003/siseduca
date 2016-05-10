@@ -54,18 +54,15 @@ public class ContaFabricaTest {
 	}
 
 	public Conta criaContaPersistido(EntityManager em) {
-		ContaDao contaDao = new ContaDao();
-		contaDao.setEntityManager(em);
+		ContaDao dao = new ContaDao(em);
 		Conta c = criaConta();
 		// Banco
-		BancoDao bancoDao = new BancoDao();
-		bancoDao.setEntityManager(em);
+		BancoDao bancoDao = new BancoDao(em);
 		Banco banco = c.getBanco();
 		bancoDao.persist(banco);
 		c.setBanco(banco);
 		// Caixas
-		CaixaDao caixaDao = new CaixaDao();
-		caixaDao.setEntityManager(em);
+		CaixaDao caixaDao = new CaixaDao(em);
 		Set<Caixa> caixas = new LinkedHashSet<>();
 		c.getCaixas().forEach(caixa -> {
 			caixaDao.persist(caixa);
@@ -73,8 +70,7 @@ public class ContaFabricaTest {
 		});
 		c.setCaixas(caixas);
 		// Contas a receber
-		ContaAReceberDao contasAReceberDao = new ContaAReceberDao();
-		contasAReceberDao.setEntityManager(em);
+		ContaAReceberDao contasAReceberDao = new ContaAReceberDao(em);
 		Set<ContaAReceber> contasAReceber = new LinkedHashSet<>();
 		c.getContasAReceber().forEach(contaAReceber -> {
 			contasAReceberDao.persist(contaAReceber);
@@ -82,8 +78,7 @@ public class ContaFabricaTest {
 		});
 		c.setContasAReceber(contasAReceber);
 		// Empresas
-		EmpresaDao empresaDao = new EmpresaDao();
-		empresaDao.setEntityManager(em);
+		EmpresaDao empresaDao = new EmpresaDao(em);
 		Set<Empresa> empresas = new LinkedHashSet<>();
 		c.getEmpresas().forEach(empresa -> {
 			empresaDao.persist(empresa);
@@ -91,6 +86,7 @@ public class ContaFabricaTest {
 		});
 		c.setEmpresas(empresas);
 		//
+		dao.persist(c);
 		return c;
 	}
 }

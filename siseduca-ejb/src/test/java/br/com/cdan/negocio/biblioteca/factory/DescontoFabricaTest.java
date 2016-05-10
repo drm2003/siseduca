@@ -29,13 +29,12 @@ public class DescontoFabricaTest {
 	}
 
 	public Desconto criaDescontoPersistido(EntityManager em) {
-		DescontoDao descontoDao = new DescontoDao();
-		descontoDao.setEntityManager(em);
+		DescontoDao descontoDao = new DescontoDao(em);
 		Desconto d = criaDesconto();
 		// Bolsa
-		BolsaDao bolsaDao = new BolsaDao();
-		bolsaDao.setEntityManager(em);
+		BolsaDao bolsaDao = new BolsaDao(em);
 		Bolsa bolsa = d.getBolsa();
+		bolsaDao.persist(bolsa);
 		d.setBolsa(bolsa);
 		//
 		descontoDao.persist(d);

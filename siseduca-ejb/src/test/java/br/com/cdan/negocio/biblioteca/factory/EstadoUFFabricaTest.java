@@ -56,7 +56,7 @@ public class EstadoUFFabricaTest {
 		});
 		e.setCidades(cidades);
 		//
-		EnderecoDao enderecoDao = new EnderecoDao();
+		EnderecoDao enderecoDao = new EnderecoDao(em);
 		Set<Endereco> enderecos = new LinkedHashSet<>();
 		e.getEnderecos().forEach(endereco -> {
 			enderecoDao.persist(endereco);

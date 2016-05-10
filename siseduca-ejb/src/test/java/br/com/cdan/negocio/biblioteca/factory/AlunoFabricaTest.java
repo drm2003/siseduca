@@ -115,34 +115,29 @@ public class AlunoFabricaTest {
 		aluno.setContasAPagar(contasAPagar);
 		// Contas a receber
 		Set<ContaAReceber> contasAReceber = new LinkedHashSet<>();
-		ContaAReceberDao contasAReceberDao = new ContaAReceberDao();
-		contasAReceberDao.setEntityManager(em);
+		ContaAReceberDao contasAReceberDao = new ContaAReceberDao(em);
 		aluno.getContasAReceber().forEach(contasReceber -> {
 			contasAReceberDao.persist(contasReceber);
 			contasAReceber.add(contasReceber);
 		});
 		aluno.setContasAReceber(contasAReceber);
 		// Dado bancario
-		DadoBancarioDao dadoBancarioDao = new DadoBancarioDao();
-		dadoBancarioDao.setEntityManager(em);
+		DadoBancarioDao dadoBancarioDao = new DadoBancarioDao(em);
 		DadoBancario dadoBancario = aluno.getDadoBancario();
 		dadoBancarioDao.persist(dadoBancario);
 		aluno.setDadoBancario(dadoBancario);
 		// Dependência
-		DependenciaDao dependenciaDao = new DependenciaDao();
-		dependenciaDao.setEntityManager(em);
+		DependenciaDao dependenciaDao = new DependenciaDao(em);
 		Dependencia dependencia = aluno.getDependencia();
 		dependenciaDao.persist(dependencia);
 		aluno.setDependencia(dependencia);
 		// Diário de aula
 		DiarioDeAulaDao diarioDeAulaDao = new DiarioDeAulaDao(em);
-		diarioDeAulaDao.setEntityManager(em);
 		DiarioDeAula diarioDeAula = aluno.getDiarioDeAula();
 		diarioDeAulaDao.persist(diarioDeAula);
 		aluno.setDiarioDeAula(diarioDeAula);
 		// Estagio Monografia
-		EstagioMonografiaDao estagioMonografiaDao = new EstagioMonografiaDao();
-		estagioMonografiaDao.setEntityManager(em);
+		EstagioMonografiaDao estagioMonografiaDao = new EstagioMonografiaDao(em);
 		Set<EstagioMonografia> estagiosMonografia = new LinkedHashSet<>();
 		aluno.getEstagioMonografia().forEach(eMonografia -> {
 			estagioMonografiaDao.persist(eMonografia);
@@ -150,8 +145,7 @@ public class AlunoFabricaTest {
 		});
 		aluno.setEstagioMonografia(estagiosMonografia);
 		// Interessado
-		InteressadoDao interessadoDao = new InteressadoDao();
-		interessadoDao.setEntityManager(em);
+		InteressadoDao interessadoDao = new InteressadoDao(em);
 		Interessado interessado = aluno.getInteressado();
 		interessadoDao.persist(interessado);
 		aluno.setInteressado(interessado);
@@ -166,22 +160,19 @@ public class AlunoFabricaTest {
 		//
 		Set<Ocorrencia> ocorrencias = new LinkedHashSet<>();
 		OcorrenciaDao ocorrenciaDao = new OcorrenciaDao(em);
-		ocorrenciaDao.setEntityManager(em);
 		aluno.getOcorrencias().forEach(ocorrencia -> {
 			ocorrenciaDao.persist(ocorrencia);
 			ocorrencias.add(ocorrencia);
 		});
 		aluno.setOcorrencias(ocorrencias);
 		//
-		PessoaDao pessoaDao = new PessoaDao();
-		pessoaDao.setEntityManager(em);
+		PessoaDao pessoaDao = new PessoaDao(em);
 		Pessoa pessoa = aluno.getPessoa();
 		pessoaDao.persist(pessoa);
 		aluno.setPessoa(pessoa);
 		//
 		Set<Responsavel> responsaveis = new LinkedHashSet<>();
-		ResponsavelDao responsavelDao = new ResponsavelDao();
-		responsavelDao.setEntityManager(em);
+		ResponsavelDao responsavelDao = new ResponsavelDao(em);
 		aluno.getResponsaveis().forEach(responsavel -> {
 			responsavelDao.persist(responsavel);
 			responsaveis.add(responsavel);

@@ -51,31 +51,27 @@ public class CEPFabricaTest {
 
 	public CEP criaCepPersistido(EntityManager em) {
 		CEP cep = criaCEP();
-		CEPDao cepDao = new CEPDao();
-		cepDao.setEntityManager(em);
+		CEPDao dao = new CEPDao(em);
 		// Aproveitamento
-		AproveitamentoDao aproveitamentoDao = new AproveitamentoDao();
+		AproveitamentoDao aproveitamentoDao = new AproveitamentoDao(em);
 		Aproveitamento aproveitamento = cep.getAproveitamento();
-		aproveitamentoDao.setEntityManager(em);
 		aproveitamentoDao.persist(aproveitamento);
 		// Endereços
 		Set<Endereco> enderecos = new LinkedHashSet<>();
-		EnderecoDao enderecoDao = new EnderecoDao();
-		enderecoDao.setEntityManager(em);
+		EnderecoDao enderecoDao = new EnderecoDao(em);
 		cep.getEnderecos().forEach(e -> {
 			enderecoDao.persist(e);
 			enderecos.add(e);
 		});
 		cep.setEnderecos(enderecos);
 		// Estado UF
-		EstadoUFDao estadoUFDao = new EstadoUFDao();
-		estadoUFDao.persist(em);
+		EstadoUFDao estadoUFDao = new EstadoUFDao(em);
 		EstadoUF estadoUF = cep.getEstadoUF();
 		estadoUFDao.persist(estadoUF);
 		cep.setEstadoUF(estadoUF);
 		//
+		dao.persist(cep);
 		return cep;
-
 	}
 
 }

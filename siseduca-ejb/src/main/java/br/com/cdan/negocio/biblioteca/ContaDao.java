@@ -1,10 +1,16 @@
 package br.com.cdan.negocio.biblioteca;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.dao.SiseducaDao;
 import br.com.cdan.model.financeiro.Conta;
 
 public class ContaDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
+
+	public ContaDao(EntityManager em) {
+		setEntityManager(em);
+	}
 
 	/**
 	 * 

@@ -47,13 +47,11 @@ public class EmpresaFabricaTest {
 	}
 
 	public Empresa criaEmpresaPersistido(EntityManager em) {
-		EmpresaDao dao = new EmpresaDao();
-		dao.setEntityManager(em);
+		EmpresaDao dao = new EmpresaDao(em);
 		Empresa empresa = criaEmpresa();
 		// Bolsas
 		Set<Bolsa> bolsas = new LinkedHashSet<>();
-		BolsaDao bolsaDao = new BolsaDao();
-		bolsaDao.setEntityManager(em);
+		BolsaDao bolsaDao = new BolsaDao(em);
 		empresa.getBolsas().forEach(b -> {
 			bolsaDao.persist(b);
 			bolsas.add(b);
@@ -61,8 +59,7 @@ public class EmpresaFabricaTest {
 		empresa.setBolsas(bolsas);
 		// CEPs
 		Set<CEP> ceps = new LinkedHashSet<>();
-		CEPDao cepDao = new CEPDao();
-		cepDao.setEntityManager(em);
+		CEPDao cepDao = new CEPDao(em);
 		empresa.getCep().forEach(c -> {
 			cepDao.persist(c);
 			ceps.add(c);

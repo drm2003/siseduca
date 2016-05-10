@@ -48,7 +48,7 @@ public class Item implements Serializable {
 	private ClassificacaoDeItens classificacaoDeItens;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "item", targetEntity = Item_Empresa.class)
-	private Set<Item_Empresa> item_Empresa;
+	private Set<Item_Empresa> itens_Empresa;
 
 	@Column(name = "observacoes")
 	private String observacoes;
@@ -108,8 +108,7 @@ public class Item implements Serializable {
 		return classificacaoDeItens;
 	}
 
-	public void setClassificacaoDeItens(
-			ClassificacaoDeItens classificacaoDeItens) {
+	public void setClassificacaoDeItens(ClassificacaoDeItens classificacaoDeItens) {
 		this.classificacaoDeItens = classificacaoDeItens;
 	}
 
@@ -121,12 +120,12 @@ public class Item implements Serializable {
 		this.observacoes = observacoes;
 	}
 
-	public Set<Item_Empresa> getItem_Empresa() {
-		return item_Empresa;
+	public Set<Item_Empresa> getItens_Empresa() {
+		return itens_Empresa;
 	}
 
-	public void setItem_Empresa(Set<Item_Empresa> item_Empresa) {
-		this.item_Empresa = item_Empresa;
+	public void setItens_Empresa(Set<Item_Empresa> itens_Empresa) {
+		this.itens_Empresa = itens_Empresa;
 	}
 
 	public Boolean getAtivo() {
@@ -141,10 +140,8 @@ public class Item implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((codigoBarra == null) ? 0 : codigoBarra.hashCode());
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((codigoBarra == null) ? 0 : codigoBarra.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 
@@ -172,10 +169,8 @@ public class Item implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Item [descricao=" + descricao + ", codigoBarra=" + codigoBarra
-				+ ", unidadeMedida=" + unidadeDeMedida + ", finalidade="
-				+ finalidade + ", ncm=" + ncm + ", classificacaoDeItens="
-				+ classificacaoDeItens + ", Empresa=" + item_Empresa
-				+ ", observacoes=" + observacoes + "]";
+		return "Item [descricao=" + descricao + ", codigoBarra=" + codigoBarra + ", unidadeMedida=" + unidadeDeMedida
+				+ ", finalidade=" + finalidade + ", ncm=" + ncm + ", classificacaoDeItens=" + classificacaoDeItens
+				+ ", Empresa=" + itens_Empresa + ", observacoes=" + observacoes + "]";
 	}
 }

@@ -35,18 +35,17 @@ public class CategoriaFabricaTest {
 
 	public Categoria criaCategoriaPersistido(EntityManager em) {
 		Categoria c = criaCategoria();
-		CategoriaDao categoriaDao = new CategoriaDao();
-		categoriaDao.setEntityManager(em);
+		CategoriaDao dao = new CategoriaDao(em);
 		//
 		Set<TipoDeServico> tiposDeServico = new LinkedHashSet<>();
-		TipoDeServicoDao tipoDeServicoDao = new TipoDeServicoDao();
-		tipoDeServicoDao.setEntityManager(em);
+		TipoDeServicoDao tipoDeServicoDao = new TipoDeServicoDao(em);
 		c.getTiposDeServico().forEach(tipoDeServico -> {
 			tipoDeServicoDao.persist(tipoDeServico);
 			tiposDeServico.add(tipoDeServico);
 		});
 		c.setTiposDeServico(tiposDeServico);
 		//
+		dao.persist(c);
 		return c;
 	}
 }
