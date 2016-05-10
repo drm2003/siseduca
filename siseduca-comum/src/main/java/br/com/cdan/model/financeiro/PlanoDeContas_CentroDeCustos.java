@@ -44,6 +44,9 @@ public class PlanoDeContas_CentroDeCustos implements Serializable {
 	@Column(name = "percentual")
 	private BigDecimal percentual;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public PlanoDeContas_CentroDeCustosPK getId() {
 		return id;
 	}
@@ -74,5 +77,13 @@ public class PlanoDeContas_CentroDeCustos implements Serializable {
 
 	public void setPercentual(BigDecimal percentual) {
 		this.percentual = percentual;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 }
