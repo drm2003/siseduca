@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +28,10 @@ public class Permissao implements Serializable {
 	private Usuario usuario;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "permissao")
-	private Set<Permissao_Empresa> empresa;
+	private Set<Permissao_Empresa> permissoesEmpresas;
+
+	@Column(name = "ativo")
+	private Boolean ativo;
 
 	public Long getId() {
 		return id;
@@ -45,19 +49,27 @@ public class Permissao implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public Set<Permissao_Empresa> getEmpresa() {
-		return empresa;
+	public Set<Permissao_Empresa> getPermissoesEmpresas() {
+		return permissoesEmpresas;
 	}
 
-	public void setEmpresa(Set<Permissao_Empresa> empresa) {
-		this.empresa = empresa;
+	public void setPermissoesEmpresas(Set<Permissao_Empresa> permissoesEmpresas) {
+		this.permissoesEmpresas = permissoesEmpresas;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
+		result = prime * result + ((permissoesEmpresas == null) ? 0 : permissoesEmpresas.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
@@ -71,10 +83,10 @@ public class Permissao implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Permissao other = (Permissao) obj;
-		if (empresa == null) {
-			if (other.empresa != null)
+		if (permissoesEmpresas == null) {
+			if (other.permissoesEmpresas != null)
 				return false;
-		} else if (!empresa.equals(other.empresa))
+		} else if (!permissoesEmpresas.equals(other.permissoesEmpresas))
 			return false;
 		if (usuario == null) {
 			if (other.usuario != null)
@@ -86,7 +98,6 @@ public class Permissao implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Permissao [id=" + id + ", usuario=" + usuario + ", empresas="
-				+ empresa + "]";
+		return "Permissao [id=" + id + ", usuario=" + usuario + ", empresas=" + permissoesEmpresas + "]";
 	}
 }

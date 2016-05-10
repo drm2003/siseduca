@@ -37,7 +37,7 @@ public class Turma implements Serializable {
 	private Long id;
 
 	@OneToMany(mappedBy = "turma", fetch = FetchType.LAZY, targetEntity = Turma_Disciplina.class)
-	private Set<Turma_Disciplina> turma_Disciplina;
+	private Set<Turma_Disciplina> turmas_Disciplinas;
 
 	@Column(name = "nome", nullable = false, length = 200)
 	private String nome;
@@ -100,12 +100,12 @@ public class Turma implements Serializable {
 		this.id = id;
 	}
 
-	public Set<Turma_Disciplina> getTurma_Disciplina() {
-		return turma_Disciplina;
+	public Set<Turma_Disciplina> getTurmas_Disciplinas() {
+		return turmas_Disciplinas;
 	}
 
-	public void setTurma_Disciplina(Set<Turma_Disciplina> turma_Disciplina) {
-		this.turma_Disciplina = turma_Disciplina;
+	public void setTurmas_Disciplinas(Set<Turma_Disciplina> turmas_Disciplinas) {
+		this.turmas_Disciplinas = turmas_Disciplinas;
 	}
 
 	public String getNome() {
@@ -273,7 +273,7 @@ public class Turma implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Turma [turma_Disciplina=" + turma_Disciplina + ", nome=" + nome + ", sigla=" + sigla + ", codigo="
+		return "Turma [turma_Disciplina=" + turmas_Disciplinas + ", nome=" + nome + ", sigla=" + sigla + ", codigo="
 				+ codigo + ", curso=" + curso + ", situacaoDaTurma=" + situacaoDaTurma + "]";
 	}
 }

@@ -44,6 +44,9 @@ public class Recuperacao implements Serializable {
 	@OneToOne(mappedBy = "recuperacao")
 	private SistemaDeAvaliacao sistemaDeAvaliacao;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -90,6 +93,14 @@ public class Recuperacao implements Serializable {
 
 	public void setSistemaDeAvaliacao(SistemaDeAvaliacao sistemaDeAvaliacao) {
 		this.sistemaDeAvaliacao = sistemaDeAvaliacao;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

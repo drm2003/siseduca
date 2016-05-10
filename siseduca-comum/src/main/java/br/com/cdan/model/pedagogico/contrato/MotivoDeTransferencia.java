@@ -37,4 +37,36 @@ public class MotivoDeTransferencia implements Serializable {
 
 	@Column(name = "ativo")
 	private Boolean ativo;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Set<Transferencia> getTranferencias() {
+		return tranferencias;
+	}
+
+	public void setTranferencias(Set<Transferencia> tranferencias) {
+		this.tranferencias = tranferencias;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 }
