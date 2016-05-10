@@ -22,7 +22,7 @@ public class AproveitamentoFabricaTest {
 	public Aproveitamento criaAproveitamento() {
 		Aproveitamento aproveitamento = new Aproveitamento();
 		aproveitamento.setAtivo(Boolean.TRUE);
-		aproveitamento.setCargaHoraria(Calendar.getInstance());
+		aproveitamento.setCargaHoraria(Calendar.getInstance().getTime());
 		aproveitamento.setCepEstabelecimento(CEPFabricaTest.getInstance().criaCEP());
 		return aproveitamento;
 	}

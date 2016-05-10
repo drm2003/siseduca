@@ -50,7 +50,7 @@ public class Exemplar implements Serializable {
 	@Embedded
 	private DadosDoExemplar dadosDoExemplar;
 
-	@Column(name = "ativo")
+	@Column(name = "ativo", insertable = false, updatable = false)
 	private Boolean ativo;
 
 	public Long getId() {

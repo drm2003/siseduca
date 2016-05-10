@@ -83,7 +83,7 @@ public class EstagioMonografia implements Serializable {
 	@OneToMany(mappedBy = "estagioMonografia")
 	private Set<AnexoDocumentos> anexos;
 
-	@Column(name = "ativo")
+	@Column(name = "ativo", insertable = false, updatable = false)
 	private Boolean ativo;
 
 	public Long getId() {

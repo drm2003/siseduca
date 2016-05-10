@@ -26,7 +26,7 @@ public class DisciplinaMatriculaFabricaTest {
 		DisciplinaMatricula d = new DisciplinaMatricula();
 		d.setAproveitamento(AproveitamentoFabricaTest.getInstance().criaAproveitamento());
 		d.setAtivo(Boolean.TRUE);
-		d.setCargaHoraria(Calendar.getInstance());
+		d.setCargaHoraria(Calendar.getInstance().getTime());
 		d.setCodigoINEP("codigoINEP");
 		d.setCompartilhado(Boolean.TRUE);
 		d.setMatricula(MatriculaFabricaTest.getInstance().criaMatricula());
