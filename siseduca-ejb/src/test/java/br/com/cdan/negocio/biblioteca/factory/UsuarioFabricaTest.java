@@ -23,9 +23,9 @@ public class UsuarioFabricaTest {
 		u.setCoordenadorDoCurso(Boolean.TRUE);
 		// Cursos
 		Set<Curso> cursos = new LinkedHashSet<>();
-		cursos.add(CursoFabricaTest.getIntance().criaCurso());
-		cursos.add(CursoFabricaTest.getIntance().criaCurso());
-		u.setCurso(cursos);
+		cursos.add(CursoFabricaTest.getInstance().criaCurso());
+		cursos.add(CursoFabricaTest.getInstance().criaCurso());
+		u.setCursos(cursos);
 		// Emails
 		Set<Email> emails = new LinkedHashSet<>();
 		emails.add(EmailFabricaTest.getInstance().criaEmail());
@@ -39,7 +39,7 @@ public class UsuarioFabricaTest {
 		u.setPermissao(PermissaoFabricaTest.getInstance().criaPermissao());
 		u.setProfessor(Boolean.TRUE);
 		u.setSenha("teste");
-		return usuario;
+		return u;
 	}
 
 }

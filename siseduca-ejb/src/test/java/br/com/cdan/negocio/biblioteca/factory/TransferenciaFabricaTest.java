@@ -2,8 +2,19 @@ package br.com.cdan.negocio.biblioteca.factory;
 
 import java.util.Calendar;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.comum.EnumTipoDeTransferencia;
+import br.com.cdan.model.geral.Cidade;
+import br.com.cdan.model.pedagogico.contrato.MotivoDeTransferencia;
 import br.com.cdan.model.pedagogico.contrato.Transferencia;
+import br.com.cdan.model.pedagogico.curso.Turma;
+import br.com.cdan.model.pessoa.Aluno;
+import br.com.cdan.negocio.biblioteca.AlunoDao;
+import br.com.cdan.negocio.biblioteca.CidadeDao;
+import br.com.cdan.negocio.biblioteca.MotivoDeTransferenciaDao;
+import br.com.cdan.negocio.biblioteca.TransferenciaDao;
+import br.com.cdan.negocio.biblioteca.TurmaDao;
 
 public class TransferenciaFabricaTest {
 	private static TransferenciaFabricaTest instance = null;
@@ -28,8 +39,31 @@ public class TransferenciaFabricaTest {
 		return t;
 	}
 
-	public Transferencia criaTransferenciaPersistido() {
+	public Transferencia criaTransferenciaPersistido(EntityManager em) {
 		Transferencia t = criaTransferencia();
+		TransferenciaDao dao = new TransferenciaDao(em);
+		//
+		AlunoDao alunoDao = new AlunoDao(em);
+		Aluno aluno = t.getAluno();
+		alunoDao.persist(aluno);
+		t.setAluno(aluno);
+		//
+		CidadeDao cidadeDao = new CidadeDao(em);
+		Cidade cidade = t.getCidade();
+		cidadeDao.persist(cidade);
+		t.setCidade(cidade);
+		//
+		MotivoDeTransferenciaDao motivoDeTransferenciaDao = new MotivoDeTransferenciaDao(em);
+		MotivoDeTransferencia motivoDeTransferencia = t.getMotivoDeTransferencia();
+		motivoDeTransferenciaDao.persist(motivoDeTransferencia);
+		t.setMotivoDeTransferencia(motivoDeTransferencia);
+		//
+		TurmaDao turmaDao = new TurmaDao(em);
+		Turma turma = t.getTurma();
+		turmaDao.persist(turma);
+		t.setTurma(turma);
+		//
+		dao.persist(t);
 		return t;
 	}
 }

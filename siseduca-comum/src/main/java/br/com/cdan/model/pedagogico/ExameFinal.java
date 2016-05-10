@@ -42,6 +42,9 @@ public class ExameFinal implements Serializable {
 	@OneToOne(mappedBy = "exameFinal")
 	private SistemaDeAvaliacao sistemaDeAvaliacao;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -96,6 +99,75 @@ public class ExameFinal implements Serializable {
 
 	public void setSistemaDeAvaliacao(SistemaDeAvaliacao sistemaDeAvaliacao) {
 		this.sistemaDeAvaliacao = sistemaDeAvaliacao;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ativo == null) ? 0 : ativo.hashCode());
+		result = prime * result + ((mediaAposExameFinal == null) ? 0 : mediaAposExameFinal.hashCode());
+		result = prime * result + ((mediaExameFinal == null) ? 0 : mediaExameFinal.hashCode());
+		result = prime * result + ((pesoExameFinal == null) ? 0 : pesoExameFinal.hashCode());
+		result = prime * result + ((sistemaDeAvaliacao == null) ? 0 : sistemaDeAvaliacao.hashCode());
+		result = prime * result + ((usarConselhoDeClasse == null) ? 0 : usarConselhoDeClasse.hashCode());
+		result = prime * result + ((valorMediaAposExameFinal == null) ? 0 : valorMediaAposExameFinal.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ExameFinal other = (ExameFinal) obj;
+		if (ativo == null) {
+			if (other.ativo != null)
+				return false;
+		} else if (!ativo.equals(other.ativo))
+			return false;
+		if (mediaAposExameFinal == null) {
+			if (other.mediaAposExameFinal != null)
+				return false;
+		} else if (!mediaAposExameFinal.equals(other.mediaAposExameFinal))
+			return false;
+		if (mediaExameFinal == null) {
+			if (other.mediaExameFinal != null)
+				return false;
+		} else if (!mediaExameFinal.equals(other.mediaExameFinal))
+			return false;
+		if (pesoExameFinal == null) {
+			if (other.pesoExameFinal != null)
+				return false;
+		} else if (!pesoExameFinal.equals(other.pesoExameFinal))
+			return false;
+		if (sistemaDeAvaliacao == null) {
+			if (other.sistemaDeAvaliacao != null)
+				return false;
+		} else if (!sistemaDeAvaliacao.equals(other.sistemaDeAvaliacao))
+			return false;
+		if (usarConselhoDeClasse == null) {
+			if (other.usarConselhoDeClasse != null)
+				return false;
+		} else if (!usarConselhoDeClasse.equals(other.usarConselhoDeClasse))
+			return false;
+		if (valorMediaAposExameFinal == null) {
+			if (other.valorMediaAposExameFinal != null)
+				return false;
+		} else if (!valorMediaAposExameFinal.equals(other.valorMediaAposExameFinal))
+			return false;
+		return true;
 	}
 
 	@Override

@@ -38,6 +38,9 @@ public class MediaAposExameFinal implements Serializable {
 	@OneToOne(mappedBy = "mediaAposExameFinal")
 	private ExameFinal exameFinal;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -50,8 +53,7 @@ public class MediaAposExameFinal implements Serializable {
 		return enumTipoMediaAposExameFinal;
 	}
 
-	public void setEnumTipoMediaAposExameFinal(
-			EnumTipoMediaAposExameFinal enumTipoMediaAposExameFinal) {
+	public void setEnumTipoMediaAposExameFinal(EnumTipoMediaAposExameFinal enumTipoMediaAposExameFinal) {
 		this.enumTipoMediaAposExameFinal = enumTipoMediaAposExameFinal;
 	}
 
@@ -59,8 +61,7 @@ public class MediaAposExameFinal implements Serializable {
 		return desconsiderarANotaDeExameFinal;
 	}
 
-	public void setDesconsiderarANotaDeExameFinal(
-			Boolean desconsiderarANotaDeExameFinal) {
+	public void setDesconsiderarANotaDeExameFinal(Boolean desconsiderarANotaDeExameFinal) {
 		this.desconsiderarANotaDeExameFinal = desconsiderarANotaDeExameFinal;
 	}
 
@@ -68,8 +69,7 @@ public class MediaAposExameFinal implements Serializable {
 		return considerarANotaDeExameFinal;
 	}
 
-	public void setConsiderarANotaDeExameFinal(
-			Boolean considerarANotaDeExameFinal) {
+	public void setConsiderarANotaDeExameFinal(Boolean considerarANotaDeExameFinal) {
 		this.considerarANotaDeExameFinal = considerarANotaDeExameFinal;
 	}
 
@@ -81,14 +81,19 @@ public class MediaAposExameFinal implements Serializable {
 		this.exameFinal = exameFinal;
 	}
 
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((enumTipoMediaAposExameFinal == null) ? 0
-						: enumTipoMediaAposExameFinal.hashCode());
+		result = prime * result + ((enumTipoMediaAposExameFinal == null) ? 0 : enumTipoMediaAposExameFinal.hashCode());
 		return result;
 	}
 
@@ -108,12 +113,8 @@ public class MediaAposExameFinal implements Serializable {
 
 	@Override
 	public String toString() {
-		return "MediaAposExameFinal [enumTipoMediaAposExameFinal="
-				+ enumTipoMediaAposExameFinal
-				+ ", desconsiderarANotaDeExameFinal="
-				+ desconsiderarANotaDeExameFinal
-				+ ", considerarANotaDeExameFinal="
-				+ considerarANotaDeExameFinal + ", exameFinal=" + exameFinal
-				+ "]";
+		return "MediaAposExameFinal [enumTipoMediaAposExameFinal=" + enumTipoMediaAposExameFinal
+				+ ", desconsiderarANotaDeExameFinal=" + desconsiderarANotaDeExameFinal
+				+ ", considerarANotaDeExameFinal=" + considerarANotaDeExameFinal + ", exameFinal=" + exameFinal + "]";
 	}
 }

@@ -39,6 +39,9 @@ public class Permissao_Empresa implements Serializable {
 	@JoinColumn(name = "id_grupoDeUsuarios")
 	private GrupoDeUsuarios grupoDeUsuarios;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Permissao_EmpresaPK getId() {
 		return id;
 	}
@@ -69,6 +72,22 @@ public class Permissao_Empresa implements Serializable {
 
 	public void setUsuarioTemAcesso(Boolean usuarioTemAcesso) {
 		this.usuarioTemAcesso = usuarioTemAcesso;
+	}
+
+	public GrupoDeUsuarios getGrupoDeUsuarios() {
+		return grupoDeUsuarios;
+	}
+
+	public void setGrupoDeUsuarios(GrupoDeUsuarios grupoDeUsuarios) {
+		this.grupoDeUsuarios = grupoDeUsuarios;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

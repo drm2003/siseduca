@@ -42,7 +42,7 @@ public class Telefone implements Serializable {
 
 	@ManyToMany
 	@JoinTable(name = "telefone_empresa", joinColumns = @JoinColumn(name = "id_telefone"), inverseJoinColumns = @JoinColumn(name = "id_empresa"))
-	private Set<Empresa> empresa;
+	private Set<Empresa> empresas;
 
 	@Column(name = "telefonePrincipal")
 	private Boolean telefonePrincipal;
@@ -82,12 +82,12 @@ public class Telefone implements Serializable {
 		this.numero = numero;
 	}
 
-	public Set<Empresa> getEmpresa() {
-		return empresa;
+	public Set<Empresa> getEmpresas() {
+		return empresas;
 	}
 
-	public void setEmpresa(Set<Empresa> empresa) {
-		this.empresa = empresa;
+	public void setEmpresas(Set<Empresa> empresas) {
+		this.empresas = empresas;
 	}
 
 	public TipoDeCelular getTipoDeCelular() {

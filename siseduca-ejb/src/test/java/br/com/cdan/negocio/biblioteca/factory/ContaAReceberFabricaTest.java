@@ -81,13 +81,11 @@ public class ContaAReceberFabricaTest {
 	}
 
 	public ContaAReceber criaContaAReceberPersistido(EntityManager em) {
-		ContaAReceberDao contaAReceberDao = new ContaAReceberDao();
-		contaAReceberDao.setEntityManager(em);
+		ContaAReceberDao contaAReceberDao = new ContaAReceberDao(em);
 		ContaAReceber c = criaContaAReceber();
 		// Alunos
 		Set<Aluno> alunos = new LinkedHashSet<>();
-		AlunoDao alunoDao = new AlunoDao();
-		alunoDao.setEntityManager(em);
+		AlunoDao alunoDao = new AlunoDao(em);
 		c.getAlunos().forEach(aluno -> {
 			alunoDao.persist(aluno);
 			alunos.add(aluno);
@@ -97,17 +95,15 @@ public class ContaAReceberFabricaTest {
 		c.setConta(ContaFabricaTest.getInstance().criaConta());
 		// Contas a receber
 		Set<ContaAReceber_Bolsa> contasAReceberBolsa = new LinkedHashSet<>();
-		ContasAReceber_BolsaDao contasAReceber_BolsaDao = new ContasAReceber_BolsaDao();
-		contasAReceber_BolsaDao.setEntityManager(em);
+		ContasAReceber_BolsaDao contasAReceber_BolsaDao = new ContasAReceber_BolsaDao(em);
 		c.getcontasAReceberBolsa().forEach(contaAReceberBolsa -> {
-			contaAReceberDao.persist(contaAReceberBolsa);
+			contasAReceber_BolsaDao.persist(contaAReceberBolsa);
 			contasAReceberBolsa.add(contaAReceberBolsa);
 		});
 		c.setcontaAReceber_Bolsa(contasAReceberBolsa);
 		// Empresas
 		Set<Empresa> empresas = new LinkedHashSet<>();
-		EmpresaDao empresaDao = new EmpresaDao();
-		empresaDao.setEntityManager(em);
+		EmpresaDao empresaDao = new EmpresaDao(em);
 		c.getEmpresas().forEach(empresa -> {
 			empresaDao.persist(empresa);
 			empresas.add(empresa);
@@ -123,15 +119,13 @@ public class ContaAReceberFabricaTest {
 		c.setFuncionarios(funcionarios);
 		//
 		Investimento investimento = new Investimento();
-		InvestimentoDao investimentoDao = new InvestimentoDao();
-		investimentoDao.setEntityManager(em);
+		InvestimentoDao investimentoDao = new InvestimentoDao(em);
 		investimento = c.getInvestimento();
 		investimentoDao.persist(investimento);
 		c.setInvestimento(investimento);
 		//
 		PlanoDeConta planoDeConta = new PlanoDeConta();
-		PlanoDeContaDao planoDeContaDao = new PlanoDeContaDao();
-		planoDeContaDao.setEntityManager(em);
+		PlanoDeContaDao planoDeContaDao = new PlanoDeContaDao(em);
 		planoDeConta = c.getPlanoDeConta();
 		planoDeContaDao.persist(planoDeConta);
 		c.setPlanoDeConta(planoDeConta);
@@ -140,16 +134,14 @@ public class ContaAReceberFabricaTest {
 		investimentoDao.persist(investimento);
 		c.setPrimeiraParcela(investimento);
 		//
-		TipoDeCobrancaRecebimentoDao tipoDeCobrancaRecebimentoDao = new TipoDeCobrancaRecebimentoDao();
-		tipoDeCobrancaRecebimentoDao.setEntityManager(em);
+		TipoDeCobrancaRecebimentoDao tipoDeCobrancaRecebimentoDao = new TipoDeCobrancaRecebimentoDao(em);
 		TipoDeCobrancaRecebimento tipoDeCobrancaRecebimento = new TipoDeCobrancaRecebimento();
 		tipoDeCobrancaRecebimento = c.getTipoDeCobranca();
 		tipoDeCobrancaRecebimentoDao.persist(tipoDeCobrancaRecebimento);
 		c.setTipoDeCobranca(tipoDeCobrancaRecebimento);
 		// Turmas
 		Set<Turma> turmas = new LinkedHashSet<>();
-		TurmaDao turmaDao = new TurmaDao();
-		turmaDao.setEntityManager(em);
+		TurmaDao turmaDao = new TurmaDao(em);
 		c.getTurmas().forEach(turma -> {
 			turmaDao.persist(turma);
 			turmas.add(turma);

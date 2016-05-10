@@ -39,12 +39,10 @@ public class BairroFabricaTest {
 
 	public Bairro criaBairroPersistido(EntityManager em) {
 		Bairro bairro = criaBairro();
-		BairroDao dao = new BairroDao();
-		dao.setEntityManager(em);
+		BairroDao dao = new BairroDao(em);
 		// Gravando Endereços
 		Set<Endereco> enderecos = new LinkedHashSet<>();
-		EnderecoDao daoEndereco = new EnderecoDao();
-		daoEndereco.setEntityManager(em);
+		EnderecoDao daoEndereco = new EnderecoDao(em);
 		bairro.getEnderecos().forEach(e -> {
 			daoEndereco.persist(e);
 			enderecos.add(e);
@@ -52,8 +50,7 @@ public class BairroFabricaTest {
 		bairro.setEnderecos(enderecos);
 		// Gravando cidade
 		Cidade cidade = bairro.getCidade();
-		CidadeDao cidadeDao = new CidadeDao();
-		cidadeDao.setEntityManager(em);
+		CidadeDao cidadeDao = new CidadeDao(em);
 		cidadeDao.persist(cidade);
 		bairro.setCidade(cidade);
 		//

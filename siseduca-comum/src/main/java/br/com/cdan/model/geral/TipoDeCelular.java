@@ -29,6 +29,9 @@ public class TipoDeCelular implements Serializable {
 	@OneToMany(mappedBy = "tipoDeCelular", fetch = FetchType.LAZY)
 	private Set<Telefone> telefones;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -53,12 +56,19 @@ public class TipoDeCelular implements Serializable {
 		this.telefones = telefones;
 	}
 
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}

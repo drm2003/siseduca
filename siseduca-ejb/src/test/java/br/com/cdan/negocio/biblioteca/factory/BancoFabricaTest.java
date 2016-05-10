@@ -44,12 +44,10 @@ public class BancoFabricaTest {
 
 	public Banco criaBancoPersistido(EntityManager em) {
 		Banco b = criaBanco();
-		BancoDao bancoDao = new BancoDao();
-		bancoDao.setEntityManager(em);
+		BancoDao bancoDao = new BancoDao(em);
 		// Contas
 		Set<Conta> contas = new LinkedHashSet<>();
-		ContaDao contaDao = new ContaDao();
-		contaDao.setEntityManager(em);
+		ContaDao contaDao = new ContaDao(em);
 		b.getContas().forEach(conta -> {
 			contaDao.persist(conta);
 			contas.add(conta);
@@ -57,14 +55,14 @@ public class BancoFabricaTest {
 		b.setContas(contas);
 		// Telefones
 		Set<Telefone> telefones = new LinkedHashSet<>();
-		TelefoneDao telefoneDao = new TelefoneDao();
-		telefoneDao.setEntityManager(em);
+		TelefoneDao telefoneDao = new TelefoneDao(em);
 		b.getTelefones().forEach(telefone -> {
 			telefoneDao.persist(telefone);
 			telefones.add(telefone);
 		});
 		b.setTelefones(telefones);
 		//
+		bancoDao.persist(b);
 		return b;
 	}
 }

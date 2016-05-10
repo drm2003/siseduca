@@ -61,53 +61,45 @@ public class ObraFabricaTest {
 	}
 
 	public Obra criaObraPersistido(EntityManager em) {
-		ObraDao dao = new ObraDao();
-		dao.setEntityManager(em);
+		ObraDao dao = new ObraDao(em);
 		Obra a = criaObra();
 		// Gravando primeiramente os objetos
 		// Exemplar
 		Set<Exemplar> exemplares = new LinkedHashSet<>();
-		ExemplarDao daoExemplar = new ExemplarDao();
-		daoExemplar.setEntityManager(em);
+		ExemplarDao daoExemplar = new ExemplarDao(em);
 		a.getExemplares().forEach(e -> {
 			daoExemplar.persist(e);
 			exemplares.add(e);
 		});
 		a.setExemplares(exemplares);
 		// Gravando Idioma
-		IdiomaDao daoIdioma = new IdiomaDao();
+		IdiomaDao daoIdioma = new IdiomaDao(em);
 		Idioma idioma = a.getIdioma();
-		daoIdioma.setEntityManager(em);
 		daoIdioma.persist(idioma);
 		a.setIdioma(idioma);
 		// Gravando Nível
-		NivelDao daoNivel = new NivelDao();
+		NivelDao daoNivel = new NivelDao(em);
 		Nivel nivel = a.getNivel();
-		daoNivel.setEntityManager(em);
 		daoNivel.persist(nivel);
 		a.setNivel(nivel);
 		// Gravando Origem
-		OrigemDao daoOrigem = new OrigemDao();
+		OrigemDao daoOrigem = new OrigemDao(em);
 		Origem origem = a.getOrigem();
-		daoOrigem.setEntityManager(em);
 		daoOrigem.persist(origem);
 		a.setOrigem(origem);
 		// Gravando SerieColecaoLiteral
-		SerieColecaoLiteralDao daoSerieColecaoLiteral = new SerieColecaoLiteralDao();
+		SerieColecaoLiteralDao daoSerieColecaoLiteral = new SerieColecaoLiteralDao(em);
 		SerieColecaoLiteral serieColecaoLiteral = a.getSerieColecaoLiteral();
-		daoSerieColecaoLiteral.setEntityManager(em);
 		daoSerieColecaoLiteral.persist(serieColecaoLiteral);
 		a.setSerieColecaoLiteral(serieColecaoLiteral);
 		// Gravando Setor
-		SetorDao daoSetor = new SetorDao();
+		SetorDao daoSetor = new SetorDao(em);
 		Setor setor = a.getSetor();
-		daoSetor.setEntityManager(em);
 		daoSetor.persist(setor);
 		a.setSetor(setor);
 		// Gravando Tipo de Obra
-		TipoDeObraDao daoTipoDeObra = new TipoDeObraDao();
+		TipoDeObraDao daoTipoDeObra = new TipoDeObraDao(em);
 		TipoDeObra tipoDeObra = a.getTipoDeObra();
-		daoTipoDeObra.setEntityManager(em);
 		daoTipoDeObra.persist(tipoDeObra);
 		a.setTipoDeObra(tipoDeObra);
 

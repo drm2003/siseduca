@@ -2,9 +2,17 @@ package br.com.cdan.negocio.biblioteca.factory;
 
 import javax.persistence.EntityManager;
 
+import br.com.cdan.model.biblioteca.Editora;
+import br.com.cdan.model.geral.Bairro;
+import br.com.cdan.model.geral.Cidade;
 import br.com.cdan.model.geral.Endereco;
+import br.com.cdan.model.geral.cep.CEP;
 import br.com.cdan.model.pedagogico.contrato.Aproveitamento;
 import br.com.cdan.negocio.biblioteca.AproveitamentoDao;
+import br.com.cdan.negocio.biblioteca.BairroDao;
+import br.com.cdan.negocio.biblioteca.CEPDao;
+import br.com.cdan.negocio.biblioteca.CidadeDao;
+import br.com.cdan.negocio.biblioteca.EditoraDao;
 import br.com.cdan.negocio.biblioteca.EnderecoDao;
 
 public class EnderecoFabricaTest {
@@ -32,19 +40,32 @@ public class EnderecoFabricaTest {
 
 	public Endereco criaEnderecoPersistido(EntityManager em) {
 		Endereco e = criaEndereco();
-		EnderecoDao dao = new EnderecoDao();
+		EnderecoDao dao = new EnderecoDao(em);
 		//
 		AproveitamentoDao aproveitamentoDao = new AproveitamentoDao(em);
 		Aproveitamento aproveitamento = e.getAproveitamento();
 		aproveitamentoDao.persist(aproveitamento);
 		e.setAproveitamento(aproveitamento);
 		//
-		e.setAtivo(Boolean.TRUE);
-		e.setBairro(BairroFabricaTest.getInstance().criaBairro());
-		e.setCep(CEPFabricaTest.getInstance().criaCEP());
-		e.setCidade(CidadeFabricaTest.getInstance().criaCidade());
-		e.setComplemento("teste");
-		e.setEditora(EditoraFabricaTest.getInstance().criaEditora());
+		BairroDao bairroDao = new BairroDao(em);
+		Bairro bairro = e.getBairro();
+		bairroDao.persist(bairro);
+		e.setBairro(bairro);
+		//
+		CEPDao cepDao = new CEPDao(em);
+		CEP cep = e.getCep();
+		cepDao.persist(cep);
+		e.setCep(cep);
+		//
+		CidadeDao cidadeDao = new CidadeDao(em);
+		Cidade cidade = e.getCidade();
+		cidadeDao.persist(cidade);
+		e.setCidade(cidade);
+		//
+		EditoraDao editoraDao = new EditoraDao(em);
+		Editora editora = e.getEditora();
+		editoraDao.persist(editora);
+		e.setEditora(editora);
 		//
 		dao.persist(e);
 		return e;

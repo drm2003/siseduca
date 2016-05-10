@@ -36,11 +36,9 @@ public class DadoBancarioFabricaTest {
 
 	public DadoBancario criaDadoBancarioPersistido(EntityManager em) {
 		DadoBancario d = criaDadoBancario();
-		DadoBancarioDao dao = new DadoBancarioDao();
-		dao.setEntityManager(em);
+		DadoBancarioDao dao = new DadoBancarioDao(em);
 		//
-		BolsaDao bolsaDao = new BolsaDao();
-		bolsaDao.setEntityManager(em);
+		BolsaDao bolsaDao = new BolsaDao(em);
 		Set<Bolsa> bolsas = new LinkedHashSet<>();
 		d.getBolsas().forEach(b -> {
 			bolsaDao.persist(b);

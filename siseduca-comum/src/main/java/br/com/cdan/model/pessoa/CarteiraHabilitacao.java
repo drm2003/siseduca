@@ -50,6 +50,9 @@ public class CarteiraHabilitacao implements Serializable {
 	@OneToOne(mappedBy = "carteiraHabilitacao", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Pessoa pessoa;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -106,14 +109,28 @@ public class CarteiraHabilitacao implements Serializable {
 		this.categoria = categoria;
 	}
 
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((numeroCNH == null) ? 0 : numeroCNH.hashCode());
-		result = prime * result
-				+ ((numeroRegistro == null) ? 0 : numeroRegistro.hashCode());
+		result = prime * result + ((numeroCNH == null) ? 0 : numeroCNH.hashCode());
+		result = prime * result + ((numeroRegistro == null) ? 0 : numeroRegistro.hashCode());
 		return result;
 	}
 
@@ -141,9 +158,7 @@ public class CarteiraHabilitacao implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CarteiraHabilitacao [orgaoEmissor=" + orgaoEmissor
-				+ ", estado=" + estado + ", validade=" + validade
-				+ ", numeroCNH=" + numeroCNH + ", numeroRegistro="
-				+ numeroRegistro + ", categoria=" + categoria + "]";
+		return "CarteiraHabilitacao [orgaoEmissor=" + orgaoEmissor + ", estado=" + estado + ", validade=" + validade
+				+ ", numeroCNH=" + numeroCNH + ", numeroRegistro=" + numeroRegistro + ", categoria=" + categoria + "]";
 	}
 }

@@ -37,18 +37,15 @@ public class DependenciaFabricaTest {
 
 	public Dependencia criaDependenciaPersistido(EntityManager em) {
 		Dependencia d = criaDependencia();
-		DependenciaDao dependenciaDao = new DependenciaDao();
-		dependenciaDao.setEntityManager(em);
+		DependenciaDao dependenciaDao = new DependenciaDao(em);
 		// Aluno
 		Aluno aluno = d.getAluno();
-		AlunoDao alunoDao = new AlunoDao();
-		alunoDao.setEntityManager(em);
+		AlunoDao alunoDao = new AlunoDao(em);
 		alunoDao.persist(aluno);
 		d.setAluno(aluno);
 		// Disciplinas
 		Set<Disciplina> disciplinas = new LinkedHashSet<>();
-		DisciplinaDao disciplinaDao = new DisciplinaDao();
-		disciplinaDao.setEntityManager(em);
+		DisciplinaDao disciplinaDao = new DisciplinaDao(em);
 		d.getDisciplinas().forEach(disciplina -> {
 			disciplinaDao.persist(disciplina);
 			disciplinas.add(disciplina);

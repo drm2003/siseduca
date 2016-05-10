@@ -31,21 +31,19 @@ public class ContasAReceber_BolsaFabricaTest {
 
 	public ContaAReceber_Bolsa criaContasAReceber_BolsaFabricaPersistido(EntityManager em) {
 		ContaAReceber_Bolsa c = criaContasAReceber_Bolsa();
-		ContasAReceber_BolsaDao contasAReceber_BolsaDao = new ContasAReceber_BolsaDao();
-		contasAReceber_BolsaDao.setEntityManager(em);
+		ContasAReceber_BolsaDao dao = new ContasAReceber_BolsaDao(em);
 		// Bolsa
-		BolsaDao bolsaDao = new BolsaDao();
-		bolsaDao.setEntityManager(em);
+		BolsaDao bolsaDao = new BolsaDao(em);
 		Bolsa bolsa = c.getBolsa();
 		bolsaDao.persist(bolsa);
 		c.setBolsa(bolsa);
 		// Contas a receber
-		ContaAReceberDao contasAReceberDao = new ContaAReceberDao();
-		contasAReceberDao.setEntityManager(em);
+		ContaAReceberDao contasAReceberDao = new ContaAReceberDao(em);
 		ContaAReceber contasAReceber = c.getContaAReceber();
 		contasAReceberDao.persist(contasAReceber);
 		c.setContaAReceber(contasAReceber);
 		//
+		dao.persist(c);
 		return c;
 	}
 }

@@ -12,6 +12,7 @@ import br.com.cdan.model.financeiro.Bolsa;
 import br.com.cdan.model.financeiro.ContaAReceber_Bolsa;
 import br.com.cdan.model.financeiro.Desconto;
 import br.com.cdan.model.pessoa.DadoBancario;
+import br.com.cdan.negocio.biblioteca.BolsaDao;
 import br.com.cdan.negocio.biblioteca.ContasAReceber_BolsaDao;
 import br.com.cdan.negocio.biblioteca.DadoBancarioDao;
 import br.com.cdan.negocio.biblioteca.DescontoDao;
@@ -58,9 +59,9 @@ public class BolsaFabricaTest {
 
 	public Bolsa criaBolsaPersistido(EntityManager em) {
 		Bolsa b = criaBolsa();
+		BolsaDao dao = new BolsaDao(em);
 		// contas a receber e bolsa
-		ContasAReceber_BolsaDao contasAReceber_BolsaDao = new ContasAReceber_BolsaDao();
-		contasAReceber_BolsaDao.setEntityManager(em);
+		ContasAReceber_BolsaDao contasAReceber_BolsaDao = new ContasAReceber_BolsaDao(em);
 		Set<ContaAReceber_Bolsa> contasAReceber_Bolsas = new LinkedHashSet<>();
 		b.getContasAReceber_Bolsa().forEach(cReceberBolsa -> {
 			contasAReceber_BolsaDao.persist(cReceberBolsa);
@@ -68,13 +69,11 @@ public class BolsaFabricaTest {
 		});
 		b.setContasAReceber_Bolsa(contasAReceber_Bolsas);
 		// Dado bancário
-		DadoBancarioDao dadoBancarioDao = new DadoBancarioDao();
-		dadoBancarioDao.setEntityManager(em);
+		DadoBancarioDao dadoBancarioDao = new DadoBancarioDao(em);
 		DadoBancario dadoBancario = b.getDadoBancario();
 		dadoBancarioDao.persist(dadoBancario);
 		// Descontos
-		DescontoDao descontoDao = new DescontoDao();
-		descontoDao.setEntityManager(em);
+		DescontoDao descontoDao = new DescontoDao(em);
 		Set<Desconto> descontos = new LinkedHashSet<>();
 		b.getDescontos().forEach(desconto -> {
 			descontoDao.persist(desconto);
@@ -82,8 +81,7 @@ public class BolsaFabricaTest {
 		});
 		b.setDescontos(descontos);
 		// Empresas
-		EmpresaDao empresaDao = new EmpresaDao();
-		empresaDao.setEntityManager(em);
+		EmpresaDao empresaDao = new EmpresaDao(em);
 		Set<Empresa> empresas = new LinkedHashSet<>();
 		b.getEmpresas().forEach(empresa -> {
 			empresaDao.persist(empresa);
@@ -91,6 +89,7 @@ public class BolsaFabricaTest {
 		});
 		b.setEmpresas(empresas);
 		//
+		dao.persist(b);
 		return b;
 	}
 }

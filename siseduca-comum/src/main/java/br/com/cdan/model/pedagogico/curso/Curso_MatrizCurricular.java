@@ -35,6 +35,9 @@ public class Curso_MatrizCurricular implements Serializable {
 	@Column(name = "dataValidade", nullable = false)
 	private Calendar dataValidade;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Curso_MatrizCurricularPK getId() {
 		return id;
 	}
@@ -65,6 +68,14 @@ public class Curso_MatrizCurricular implements Serializable {
 
 	public void setDataValidade(Calendar dataValidade) {
 		this.dataValidade = dataValidade;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

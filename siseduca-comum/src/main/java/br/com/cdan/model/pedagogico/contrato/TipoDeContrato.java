@@ -1,6 +1,6 @@
 package br.com.cdan.model.pedagogico.contrato;
 
-import java.io.Serializable; 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -26,7 +26,7 @@ public class TipoDeContrato implements Serializable {
 	private String descricao;
 
 	@OneToMany
-	private Set<Matricula> matricula;
+	private Set<Matricula> matriculas;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -47,12 +47,12 @@ public class TipoDeContrato implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Set<Matricula> getMatricula() {
-		return matricula;
+	public Set<Matricula> getMatriculas() {
+		return matriculas;
 	}
 
-	public void setMatricula(Set<Matricula> matricula) {
-		this.matricula = matricula;
+	public void setMatriculas(Set<Matricula> matriculas) {
+		this.matriculas = matriculas;
 	}
 
 	public Boolean getAtivo() {

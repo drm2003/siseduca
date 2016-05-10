@@ -50,29 +50,23 @@ public class TipoDeServicoFabricaTest {
 	}
 
 	public TipoDeServico criaTipoDeServicoPersistido(EntityManager em) {
-		TipoDeServicoDao tipoDeServicoDao = new TipoDeServicoDao();
-		tipoDeServicoDao.setEntityManager(em);
+		TipoDeServicoDao dao = new TipoDeServicoDao(em);
 		TipoDeServico t = criaTipoDeServico();
 		//
-		CategoriaDao categoriaDao = new CategoriaDao();
-		categoriaDao.setEntityManager(em);
+		CategoriaDao categoriaDao = new CategoriaDao(em);
 		Categoria categoria = t.getCategoria();
 		categoriaDao.persist(categoria);
 		t.setCategoria(categoria);
 		//
-		EmpresaDao empresaDao = new EmpresaDao();
-		empresaDao.setEntityManager(em);
+		EmpresaDao empresaDao = new EmpresaDao(em);
 		Set<Empresa> empresas = new LinkedHashSet<>();
-		empresas.add(EmpresaFabricaTest.getInstance().criaEmpresa());
-		empresas.add(EmpresaFabricaTest.getInstance().criaEmpresa());
 		t.getEmpresas().forEach(empresa -> {
 			empresaDao.persist(empresa);
 			empresas.add(empresa);
 		});
 		t.setEmpresas(empresas);
 		//
-		TipoDeCursoDao tipoDeCursoDao = new TipoDeCursoDao();
-		tipoDeCursoDao.setEntityManager(em);
+		TipoDeCursoDao tipoDeCursoDao = new TipoDeCursoDao(em);
 		Set<TipoDeCurso> tiposDeCurso = new LinkedHashSet<TipoDeCurso>();
 		t.getTipoDeCurso().forEach(tipoDeCurso -> {
 			tipoDeCursoDao.persist(tipoDeCurso);
@@ -80,6 +74,7 @@ public class TipoDeServicoFabricaTest {
 		});
 		t.setTipoDeCurso(tiposDeCurso);
 		//
+		dao.persist(t);
 		return t;
 	}
 }

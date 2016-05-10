@@ -4,8 +4,12 @@ import java.util.Calendar;
 
 import javax.persistence.EntityManager;
 
+import br.com.cdan.model.biblioteca.DadosDoExemplar;
 import br.com.cdan.model.biblioteca.Exemplar;
+import br.com.cdan.model.biblioteca.Obra;
+import br.com.cdan.negocio.biblioteca.DadosDoExemplarDao;
 import br.com.cdan.negocio.biblioteca.ExemplarDao;
+import br.com.cdan.negocio.biblioteca.ObraDao;
 
 public class ExemplarFabricaTest {
 	private static ExemplarFabricaTest instance;
@@ -32,9 +36,20 @@ public class ExemplarFabricaTest {
 	}
 
 	public Exemplar criaExemplarPersistido(EntityManager em) {
-		ExemplarDao dao = new ExemplarDao();
-		dao.setEntityManager(em);
-		Exemplar exemplar = criaExemplar();
-		return exemplar;
+		ExemplarDao dao = new ExemplarDao(em);
+		Exemplar e = criaExemplar();
+		//
+		DadosDoExemplarDao dadosDoExemplarDao = new DadosDoExemplarDao(em);
+		DadosDoExemplar dadosDoExemplar = e.getDadosDoExemplar();
+		dadosDoExemplarDao.persist(dadosDoExemplar);
+		e.setDadosDoExemplar(dadosDoExemplar);
+		//
+		ObraDao obraDao = new ObraDao(em);
+		Obra obra = e.getObra();
+		obraDao.persist(obra);
+		e.setObra(obra);
+		//
+		dao.persist(e);
+		return e;
 	}
 }

@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "MotivosDeNaoFechamentoDeContrato")
-public class MotivosDeNaoFechamentoDeContrato implements Serializable {
+@Table(name = "MotivoDeNaoFechamentoDeContrato")
+public class MotivoDeNaoFechamentoDeContrato implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -52,8 +52,7 @@ public class MotivosDeNaoFechamentoDeContrato implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -66,7 +65,7 @@ public class MotivosDeNaoFechamentoDeContrato implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MotivosDeNaoFechamentoDeContrato other = (MotivosDeNaoFechamentoDeContrato) obj;
+		MotivoDeNaoFechamentoDeContrato other = (MotivoDeNaoFechamentoDeContrato) obj;
 		if (descricao == null) {
 			if (other.descricao != null)
 				return false;
@@ -82,7 +81,6 @@ public class MotivosDeNaoFechamentoDeContrato implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Motivos de não fechamento de contrato [descricao=" + descricao
-				+ ", ativo=" + ativo + "]";
+		return "Motivos de não fechamento de contrato [descricao=" + descricao + ", ativo=" + ativo + "]";
 	}
 }

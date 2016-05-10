@@ -27,4 +27,39 @@ public class Escolaridade implements Serializable {
 
 	@OneToMany(mappedBy = "escolaridade")
 	private Set<SeriePadrao> seriesPadrao;
+
+	@Column(name = "ativo")
+	private Boolean ativo;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public Set<SeriePadrao> getSeriesPadrao() {
+		return seriesPadrao;
+	}
+
+	public void setSeriesPadrao(Set<SeriePadrao> seriesPadrao) {
+		this.seriesPadrao = seriesPadrao;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 }

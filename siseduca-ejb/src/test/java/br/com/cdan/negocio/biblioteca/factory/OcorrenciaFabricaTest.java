@@ -2,8 +2,19 @@ package br.com.cdan.negocio.biblioteca.factory;
 
 import java.util.Calendar;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.comum.EnumOcorrenciaAlunoTurma;
+import br.com.cdan.model.pedagogico.TipoDeOcorrencia;
 import br.com.cdan.model.pedagogico.contrato.Ocorrencia;
+import br.com.cdan.model.pedagogico.curso.Turma;
+import br.com.cdan.model.pessoa.Aluno;
+import br.com.cdan.model.pessoa.Funcionario;
+import br.com.cdan.negocio.biblioteca.AlunoDao;
+import br.com.cdan.negocio.biblioteca.FuncionarioDao;
+import br.com.cdan.negocio.biblioteca.OcorrenciaDao;
+import br.com.cdan.negocio.biblioteca.TipoDeOcorrenciaDao;
+import br.com.cdan.negocio.biblioteca.TurmaDao;
 
 public class OcorrenciaFabricaTest {
 	private static OcorrenciaFabricaTest instance = null;
@@ -29,4 +40,32 @@ public class OcorrenciaFabricaTest {
 		return o;
 	}
 
+	public Ocorrencia criaOcorrenciaPersistido(EntityManager em) {
+		Ocorrencia o = criaOcorrencia();
+		OcorrenciaDao dao = new OcorrenciaDao(em);
+		//
+		AlunoDao alunoDao = new AlunoDao(em);
+		Aluno aluno = o.getAluno();
+		alunoDao.persist(aluno);
+		o.setAluno(aluno);
+		//
+		FuncionarioDao funcionarioDao = new FuncionarioDao(em);
+		Funcionario funcionario = o.getFuncionario();
+		funcionarioDao.persist(funcionario);
+		funcionarioDao.persist(funcionario);
+		o.setFuncionario(funcionario);
+		//
+		TipoDeOcorrenciaDao tipoDeOcorrenciaDao = new TipoDeOcorrenciaDao(em);
+		TipoDeOcorrencia tipoDeOcorrencia = o.getTipoDeOcorrencia();
+		tipoDeOcorrenciaDao.persist(tipoDeOcorrencia);
+		o.setTipoDeOcorrencia(tipoDeOcorrencia);
+		//
+		TurmaDao turmaDao = new TurmaDao(em);
+		Turma turma = o.getTurma();
+		turmaDao.persist(turma);
+		o.setTurma(turma);
+		//
+		dao.persist(o);
+		return o;
+	}
 }
