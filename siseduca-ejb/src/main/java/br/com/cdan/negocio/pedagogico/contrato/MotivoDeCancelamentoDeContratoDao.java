@@ -3,7 +3,7 @@ package br.com.cdan.negocio.pedagogico.contrato;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.dao.SiseducaDao;
-import br.com.cdan.model.contrato.MotivoDeCancelamentoDeContrato;
+import br.com.cdan.model.pedagogico.contrato.MotivoDeCancelamentoDeContrato;
 
 public class MotivoDeCancelamentoDeContratoDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
