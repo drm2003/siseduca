@@ -39,6 +39,7 @@ public class Autor implements Serializable {
 	@Column(name = "ativo")
 	private Boolean ativo;
 
+	@NotNull
 	@Column(name = "compartilhado")
 	private Boolean compartilhado;
 

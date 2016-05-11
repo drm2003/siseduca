@@ -1,4 +1,4 @@
-package br.com.cdan.negocio.teste.acesso;
+package br.com.cdan.negocio.teste.biblioteca;
 
 import java.util.List;
 
@@ -126,6 +126,14 @@ public class AreasDeConhecimentoDAOTeste extends PersistenciaJUnit {
 	public void nao_deve_permitir_ativo_nulo() {
 		AreasDeConhecimento a = criaAreasDeConhecimento();
 		a.setAtivo(null);
+		dao.persist(a);
+		Assert.assertNotNull(a.getId());
+	}
+
+	@Test(expected = ConstraintViolationException.class)
+	public void nao_deve_permitir_compartilhado_nulo() {
+		AreasDeConhecimento a = criaAreasDeConhecimento();
+		a.setCompartilhado(null);
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
 	}

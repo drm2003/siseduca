@@ -10,6 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "ClassificacaoLiteraria")
@@ -23,7 +28,11 @@ public class ClassificacaoLiteraria implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "descricao", length = 50, nullable = false, unique = true)
+	@NotNull
+	@NotEmpty
+	@NotBlank
+	@Size(max = 50, min = 3)
+	@Column(name = "descricao", length = 50)
 	private String descricao;
 
 	@Column(name = "compartilhado")

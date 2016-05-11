@@ -31,6 +31,7 @@ public class AreasDeConhecimento implements Serializable {
 	@Column(name = "descricao", length = 50, nullable = false, unique = true)
 	private String descricao;
 
+	@NotNull
 	@Column(name = "compartilhado")
 	private Boolean compartilhado;
 
