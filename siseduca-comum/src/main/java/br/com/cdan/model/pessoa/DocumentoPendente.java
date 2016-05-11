@@ -35,6 +35,9 @@ public class DocumentoPendente implements Serializable {
 	@OneToMany(mappedBy = "documentoPendente", fetch = FetchType.LAZY)
 	private Set<Documento> documentos;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -75,13 +78,20 @@ public class DocumentoPendente implements Serializable {
 		this.documentos = documentos;
 	}
 
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
-		result = prime * result
-				+ ((funcionario == null) ? 0 : funcionario.hashCode());
+		result = prime * result + ((funcionario == null) ? 0 : funcionario.hashCode());
 		return result;
 	}
 
@@ -109,8 +119,7 @@ public class DocumentoPendente implements Serializable {
 
 	@Override
 	public String toString() {
-		return "DocumentoPendente [aluno=" + aluno + ", funcionario="
-				+ funcionario + ", observacoes=" + observacoes
+		return "DocumentoPendente [aluno=" + aluno + ", funcionario=" + funcionario + ", observacoes=" + observacoes
 				+ ", documentos=" + documentos + "]";
 	}
 }

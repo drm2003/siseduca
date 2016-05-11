@@ -33,6 +33,9 @@ public class Matricula_DisciplinaMatricula implements Serializable {
 	@Column(name = "observacao")
 	private String observacao;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 	public Matricula_DisciplinaMatriculaPK getId() {
 		return id;
 	}
@@ -79,5 +82,13 @@ public class Matricula_DisciplinaMatricula implements Serializable {
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 }

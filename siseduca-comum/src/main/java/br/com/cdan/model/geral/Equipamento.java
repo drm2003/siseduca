@@ -39,7 +39,7 @@ public class Equipamento implements Serializable {
 	private Calendar dataAquisicao;
 
 	@OneToMany(mappedBy = "equipamento", fetch = FetchType.LAZY)
-	private Set<Utilizacao> utilizacao;
+	private Set<Utilizacao> utilizacoes;
 
 	@ManyToOne
 	@JoinColumn(name = "id_sala")
@@ -80,12 +80,12 @@ public class Equipamento implements Serializable {
 		this.dataAquisicao = dataAquisicao;
 	}
 
-	public Set<Utilizacao> getUtilizacao() {
-		return utilizacao;
+	public Set<Utilizacao> getUtilizacoes() {
+		return utilizacoes;
 	}
 
-	public void setUtilizacao(Set<Utilizacao> utilizacao) {
-		this.utilizacao = utilizacao;
+	public void setUtilizacoes(Set<Utilizacao> utilizacoes) {
+		this.utilizacoes = utilizacoes;
 	}
 
 	public Sala getSala() {
@@ -108,8 +108,7 @@ public class Equipamento implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
@@ -138,8 +137,7 @@ public class Equipamento implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Equipamento [nome=" + nome + ", descricao=" + descricao
-				+ ", dataAquisicao=" + dataAquisicao + ", utilizacao="
-				+ utilizacao + ", sala=" + sala + "]";
+		return "Equipamento [nome=" + nome + ", descricao=" + descricao + ", dataAquisicao=" + dataAquisicao
+				+ ", utilizacao=" + utilizacoes + ", sala=" + sala + "]";
 	}
 }

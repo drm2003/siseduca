@@ -11,10 +11,13 @@ import br.com.cdan.model.geral.Email;
 import br.com.cdan.model.geral.Endereco;
 import br.com.cdan.model.geral.Telefone;
 import br.com.cdan.negocio.biblioteca.EditoraDao;
-import br.com.cdan.negocio.biblioteca.EmailDao;
-import br.com.cdan.negocio.biblioteca.EnderecoDao;
 import br.com.cdan.negocio.biblioteca.ObraDao;
-import br.com.cdan.negocio.biblioteca.TelefoneDao;
+import br.com.cdan.negocio.geral.EmailDao;
+import br.com.cdan.negocio.geral.EnderecoDao;
+import br.com.cdan.negocio.geral.TelefoneDao;
+import br.com.cdan.negocio.geral.factory.EmailFabricaTest;
+import br.com.cdan.negocio.geral.factory.EnderecoFabricaTest;
+import br.com.cdan.negocio.geral.factory.TelefoneFabricaTest;
 
 public class EditoraFabricaTest {
 	private static EditoraFabricaTest instance = null;

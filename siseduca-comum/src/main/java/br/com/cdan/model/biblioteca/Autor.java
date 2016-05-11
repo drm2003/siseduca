@@ -10,12 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
-
-import com.drew.lang.annotations.NotNull;
 
 @Entity
 @Table(name = "Autor")
@@ -29,13 +28,14 @@ public class Autor implements Serializable {
 	@NotBlank
 	@NotEmpty
 	@NotNull
-	@Size(max=255, min=3)
+	@Size(max = 255, min = 3)
 	@Column(name = "nome", length = 255, nullable = false, unique = true)
 	private String nome;
 
 	@ManyToMany(mappedBy = "autores")
 	private Set<Obra> obras;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

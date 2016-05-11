@@ -27,7 +27,7 @@ public class Grupo implements Serializable {
 	private Long peso;
 
 	@OneToMany(mappedBy = "grupo")
-	private Set<AvaliacaoPadrao> avaliacaoPadrao;
+	private Set<AvaliacaoPadrao> avaliacoesPadrao;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -56,12 +56,12 @@ public class Grupo implements Serializable {
 		this.peso = peso;
 	}
 
-	public Set<AvaliacaoPadrao> getAvaliacaoPadrao() {
-		return avaliacaoPadrao;
+	public Set<AvaliacaoPadrao> getAvaliacoesPadrao() {
+		return avaliacoesPadrao;
 	}
 
-	public void setAvaliacaoPadrao(Set<AvaliacaoPadrao> avaliacaoPadrao) {
-		this.avaliacaoPadrao = avaliacaoPadrao;
+	public void setAvaliacoesPadrao(Set<AvaliacaoPadrao> avaliacoesPadrao) {
+		this.avaliacoesPadrao = avaliacoesPadrao;
 	}
 
 	public Boolean getAtivo() {
@@ -76,8 +76,7 @@ public class Grupo implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 
@@ -100,7 +99,6 @@ public class Grupo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Grupo [descricao=" + descricao + ", peso=" + peso
-				+ ", avaliacaoPadrao=" + avaliacaoPadrao + "]";
+		return "Grupo [descricao=" + descricao + ", peso=" + peso + ", avaliacaoPadrao=" + avaliacoesPadrao + "]";
 	}
 }

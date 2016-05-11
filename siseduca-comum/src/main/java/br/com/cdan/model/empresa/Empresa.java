@@ -73,7 +73,7 @@ public class Empresa implements Serializable {
 	@Column(name = "codigoArea")
 	private String codigoArea;
 
-	@ManyToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "empresas", fetch = FetchType.LAZY)
 	private Set<Telefone> telefone;
 
 	@Column(name = "fax")
@@ -92,7 +92,7 @@ public class Empresa implements Serializable {
 	@ManyToMany(mappedBy = "empresas", fetch = FetchType.LAZY)
 	private Set<Bolsa> bolsas;
 
-	@ManyToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
+	@ManyToMany(mappedBy = "empresas", fetch = FetchType.LAZY)
 	private Set<OperadoraCartao> operadoraCartao;
 
 	@ManyToMany(mappedBy = "empresas", fetch = FetchType.LAZY)

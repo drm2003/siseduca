@@ -25,6 +25,9 @@ public class Finalidade implements Serializable {
 	@Column(name = "descricao", nullable = false, unique = true)
 	private String descricao;
 
+	@Column(name = "venda")
+	private Boolean venda;
+
 	@OneToMany(mappedBy = "finalidade")
 	private Set<Item> itens;
 
@@ -61,6 +64,14 @@ public class Finalidade implements Serializable {
 
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public Boolean getVenda() {
+		return venda;
+	}
+
+	public void setVenda(Boolean venda) {
+		this.venda = venda;
 	}
 
 	@Override
