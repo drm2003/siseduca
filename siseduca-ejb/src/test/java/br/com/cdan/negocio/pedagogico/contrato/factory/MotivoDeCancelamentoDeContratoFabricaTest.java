@@ -2,7 +2,7 @@ package br.com.cdan.negocio.pedagogico.contrato.factory;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.contrato.MotivoDeCancelamentoDeContrato;
+import br.com.cdan.model.pedagogico.contrato.MotivoDeCancelamentoDeContrato;
 import br.com.cdan.negocio.pedagogico.contrato.MotivoDeCancelamentoDeContratoDao;
 
 public class MotivoDeCancelamentoDeContratoFabricaTest {

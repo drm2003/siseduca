@@ -1,4 +1,4 @@
-package br.com.cdan.model.contrato;
+package br.com.cdan.model.pedagogico.contrato;
 
 import java.io.Serializable;
 
