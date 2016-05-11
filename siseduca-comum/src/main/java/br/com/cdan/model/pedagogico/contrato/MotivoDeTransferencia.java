@@ -33,7 +33,7 @@ public class MotivoDeTransferencia implements Serializable {
 	private String descricao;
 
 	@OneToMany(mappedBy = "motivoDeTransferencia")
-	private Set<Transferencia> tranferencias;
+	private Set<Transferencia> transferencias;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -54,12 +54,12 @@ public class MotivoDeTransferencia implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Set<Transferencia> getTranferencias() {
-		return tranferencias;
+	public Set<Transferencia> getTransferencias() {
+		return transferencias;
 	}
 
-	public void setTranferencias(Set<Transferencia> tranferencias) {
-		this.tranferencias = tranferencias;
+	public void setTransferencias(Set<Transferencia> transferencias) {
+		this.transferencias = transferencias;
 	}
 
 	public Boolean getAtivo() {

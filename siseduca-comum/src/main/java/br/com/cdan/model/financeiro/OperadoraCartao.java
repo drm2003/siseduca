@@ -30,7 +30,7 @@ public class OperadoraCartao implements Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "operadoraCartao_empresa", joinColumns = @JoinColumn(name = "id_operadoraCartao"), inverseJoinColumns = @JoinColumn(name = "id_empresa"))
-	private Set<Empresa> empresa;
+	private Set<Empresa> empresas;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -51,12 +51,12 @@ public class OperadoraCartao implements Serializable {
 		this.nome = nome;
 	}
 
-	public Set<Empresa> getEmpresa() {
-		return empresa;
+	public Set<Empresa> getEmpresas() {
+		return empresas;
 	}
 
-	public void setEmpresa(Set<Empresa> empresa) {
-		this.empresa = empresa;
+	public void setEmpresas(Set<Empresa> empresas) {
+		this.empresas = empresas;
 	}
 
 	public Boolean getAtivo() {
@@ -71,7 +71,7 @@ public class OperadoraCartao implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
+		result = prime * result + ((empresas == null) ? 0 : empresas.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
@@ -85,10 +85,10 @@ public class OperadoraCartao implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		OperadoraCartao other = (OperadoraCartao) obj;
-		if (empresa == null) {
-			if (other.empresa != null)
+		if (empresas == null) {
+			if (other.empresas != null)
 				return false;
-		} else if (!empresa.equals(other.empresa))
+		} else if (!empresas.equals(other.empresas))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -100,6 +100,6 @@ public class OperadoraCartao implements Serializable {
 
 	@Override
 	public String toString() {
-		return "OperadoraCartao [nome=" + nome + ", empresa=" + empresa + "]";
+		return "OperadoraCartao [nome=" + nome + ", empresa=" + empresas + "]";
 	}
 }
