@@ -41,10 +41,15 @@ public class ObraFabricaTest {
 		a.setClassificacaoCDD("teste");
 		a.setClassificacaoCutter("teste");
 		//
-		Set<ClassificacaoLiteraria> classificacaoLiterarias = new LinkedHashSet<>();
-		classificacaoLiterarias.add(ClassificacaoLiterariaFabricaTest.getInstance().criaClassificacaoLiteraria());
-		classificacaoLiterarias.add(ClassificacaoLiterariaFabricaTest.getInstance().criaClassificacaoLiteraria());
-		a.setClassificacoesLiterarias(classificacaoLiterarias);
+		/*
+		 * Set<ClassificacaoLiteraria> classificacaoLiterarias = new
+		 * LinkedHashSet<>();
+		 * classificacaoLiterarias.add(ClassificacaoLiterariaFabricaTest.
+		 * getInstance().criaClassificacaoLiteraria());
+		 * classificacaoLiterarias.add(ClassificacaoLiterariaFabricaTest.
+		 * getInstance().criaClassificacaoLiteraria());
+		 * a.setClassificacoesLiterarias(classificacaoLiterarias);
+		 */
 		//
 		a.setEditora(EditoraFabricaTest.getInstance().criaEditora());
 		// Criando exemplares

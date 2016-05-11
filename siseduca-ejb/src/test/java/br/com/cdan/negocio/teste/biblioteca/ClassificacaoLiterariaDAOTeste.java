@@ -38,8 +38,7 @@ public class ClassificacaoLiterariaDAOTeste extends PersistenciaJUnit {
 
 	@Test
 	public void inserir() {
-		ClassificacaoLiteraria a = criaClassificacaoLiteraria();
-		dao.persist(a);// INSERE
+		ClassificacaoLiteraria a = criaClassificacaoLiterariaPersistido(); // INSERE
 		Assert.assertNotNull(a.getId());
 		ClassificacaoLiteraria consulta = dao.find(ClassificacaoLiteraria.class, a.getId());// CONSULTA
 		Assert.assertSame(a, consulta);// VERIFICA INSERÇÃO
@@ -149,5 +148,9 @@ public class ClassificacaoLiterariaDAOTeste extends PersistenciaJUnit {
 
 	private ClassificacaoLiteraria criaClassificacaoLiteraria() {
 		return ClassificacaoLiterariaFabricaTest.getInstance().criaClassificacaoLiteraria();
+	}
+
+	private ClassificacaoLiteraria criaClassificacaoLiterariaPersistido() {
+		return ClassificacaoLiterariaFabricaTest.getInstance().criaClassificacaoLiterariaPersistido(getEntityManager());
 	}
 }
