@@ -60,7 +60,7 @@ public class Exemplar implements Serializable {
 	private DadosDoExemplar dadosDoExemplar;
 
 	@NotNull
-	@Column(name = "ativo", insertable = false, updatable = false)
+	@Column(name = "ativo")
 	private Boolean ativo;
 
 	public Long getId() {
