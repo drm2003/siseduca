@@ -3,7 +3,6 @@ package br.com.cdan.negocio.teste.biblioteca;
 import java.util.List;
 
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 
 import org.apache.log4j.Logger;
@@ -11,14 +10,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.cdan.model.biblioteca.Autor;
-import br.com.cdan.negocio.biblioteca.AutorDao;
-import br.com.cdan.negocio.biblioteca.factory.AutorFabricaTest;
+import br.com.cdan.model.biblioteca.Editora;
+import br.com.cdan.negocio.biblioteca.EditoraDao;
+import br.com.cdan.negocio.biblioteca.factory.EditoraFabricaTest;
 import br.com.cdan.util.PersistenciaJUnit;
 
-public class AutorDAOTeste extends PersistenciaJUnit {
-	private static final Logger LOG = Logger.getLogger(AutorDAOTeste.class);
-	AutorDao dao;
+public class EditoraDAOTeste extends PersistenciaJUnit {
+	private static final Logger LOG = Logger.getLogger(EditoraDAOTeste.class);
+	EditoraDao dao;
 
 	/**
 	 * <c> Ao criar um teste da camada de persistï¿½ncia utilizando o JUnit ï¿½
@@ -33,54 +32,54 @@ public class AutorDAOTeste extends PersistenciaJUnit {
 	@Before
 	public void setUp() throws Exception {
 		LOG.info("Instanciando DAOTest.");
-		dao = new AutorDao(getEntityManager());
+		dao = new EditoraDao(getEntityManager());
 	}
 
 	@Test
 	public void inserir() {
-		Autor a = criaAutor();
+		Editora a = criaEditora();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
-		Autor consulta = dao.find(Autor.class, a.getId());// CONSULTA
-		Assert.assertSame(a, consulta);// VERIFICA INSERÇÃO
+		Editora consulta = dao.find(Editora.class, a.getId());// CONSULTA
+		Assert.assertSame(a, consulta);// VERIFICA INSERï¿½ï¿½O
 	}
 
 	@Test
 	public void alterar() {
-		Autor a = criaAutor();
+		Editora a = criaEditora();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
 		a.setAtivo(false);
-		a.setNome("");
+		a.setNome("alteração");
 		a.setCompartilhado(false);
 		dao.merge(a);
-		Autor consulta = dao.find(Autor.class, a.getId());// CONSULTA
+		Editora consulta = dao.find(Editora.class, a.getId());// CONSULTA
 		Assert.assertSame(a, consulta);// VERIFICA INSERï¿½ï¿½O
 	}
 
 	@Test
 	public void excluir() {
-		Autor a = criaAutor();
+		Editora a = criaEditora();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
-		Autor consulta = dao.find(Autor.class, a.getId());// CONSULTA
+		Editora consulta = dao.find(Editora.class, a.getId());// CONSULTA
 		consulta.setAtivo(false);
 		dao.remove(a);
-		Assert.assertSame(consulta, dao.find(Autor.class, a.getId()));
+		Assert.assertSame(consulta, dao.find(Editora.class, a.getId()));
 	}
 
 	@Test
 	public void consultar_todos() {
-		Autor a1 = criaAutor();
+		Editora a1 = criaEditora();
 		dao.persist(a1);
-		Autor a2 = criaAutor();
+		Editora a2 = criaEditora();
 		dao.persist(a2);
 		//
-		String sql = "SELECT a FROM Autor a";
-		Query query = dao.getEntityManager().createQuery(sql, Autor.class);
+		String sql = "SELECT a FROM Editora a";
+		Query query = dao.getEntityManager().createQuery(sql, Editora.class);
 		//
 		@SuppressWarnings("unchecked")
-		List<Autor> lista = query.getResultList(); //
+		List<Editora> lista = query.getResultList(); //
 		//
 		Assert.assertTrue(lista.contains(a1));
 		Assert.assertTrue(lista.contains(a2));
@@ -88,51 +87,43 @@ public class AutorDAOTeste extends PersistenciaJUnit {
 
 	@Test
 	public void consultar_por_nome() {
-		Autor a = criaAutor();
+		Editora a = criaEditora();
 		dao.persist(a);
 		Assert.assertNotNull(a);
-		String sql = "FROM Autor a WHERE a.nome = :nome";
-		TypedQuery<Autor> query = dao.getEntityManager().createQuery(sql, Autor.class);
+		String sql = "SELECT a FROM Editora a WHERE a.nome = :nome";
+		Query query = dao.getEntityManager().createQuery(sql);
 		query.setParameter("nome", a.getNome());
-		Autor consulta = query.getSingleResult();
+		Editora consulta = (Editora) query.getSingleResult();
 		Assert.assertSame(a, consulta);
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_nome_nulo() {
-		Autor a = criaAutor();
+	public void nao_deve_permitir_nome_nula() {
+		Editora a = criaEditora();
 		a.setNome(null);
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_nome_vazio() {
-		Autor a = criaAutor();
+	public void nao_deve_permitir_nome_vazia() {
+		Editora a = criaEditora();
 		a.setNome("");
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void descricao_maior_que_tamanho_maximo_permitido() {
-		Autor a = criaAutor();
-		a.setNome(criarStringDinamicaPorTamanho(256));
-		dao.persist(a);
-		Assert.assertNull(a.getId());
-	}
-
-	@Test(expected = ConstraintViolationException.class)
-	public void descricao_menor_que_tamanho_minimo_permitido() {
-		Autor a = criaAutor();
-		a.setNome(criarStringDinamicaPorTamanho(2));
+	public void nome_maior_que_tamanho_maximo_permitido() {
+		Editora a = criaEditora();
+		a.setNome(criarStringDinamicaPorTamanho(61));
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
 	public void nao_deve_permitir_ativo_nulo() {
-		Autor a = criaAutor();
+		Editora a = criaEditora();
 		a.setAtivo(null);
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
@@ -140,13 +131,13 @@ public class AutorDAOTeste extends PersistenciaJUnit {
 
 	@Test(expected = ConstraintViolationException.class)
 	public void nao_deve_permitir_compartilhado_nulo() {
-		Autor a = criaAutor();
+		Editora a = criaEditora();
 		a.setCompartilhado(null);
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
 	}
 
-	private Autor criaAutor() {
-		return AutorFabricaTest.getInstance().criaAutor();
+	private Editora criaEditora() {
+		return EditoraFabricaTest.getInstance().criaEditora();
 	}
 }

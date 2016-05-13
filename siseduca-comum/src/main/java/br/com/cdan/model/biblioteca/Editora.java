@@ -10,6 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.geral.Email;
 import br.com.cdan.model.geral.Endereco;
@@ -24,6 +29,10 @@ public class Editora implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@NotBlank
+	@Size(max = 60, min = 3)
 	@Column(name = "nome", length = 60, nullable = false, unique = true)
 	private String nome;
 
@@ -42,12 +51,14 @@ public class Editora implements Serializable {
 	@Column(name = "observacoes")
 	private String observacoes;
 
+	@NotNull
 	@Column(name = "compartilhado")
 	private Boolean compartilhado;
 
 	@OneToMany(mappedBy = "editora")
 	private Set<Obra> obras;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

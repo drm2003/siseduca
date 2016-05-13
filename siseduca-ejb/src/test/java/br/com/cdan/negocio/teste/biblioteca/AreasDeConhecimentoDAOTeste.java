@@ -51,7 +51,7 @@ public class AreasDeConhecimentoDAOTeste extends PersistenciaJUnit {
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
 		a.setAtivo(false);
-		a.setDescricao("alteraÃ§Ã£o");
+		a.setDescricao("alteração");
 		a.setCompartilhado(false);
 		dao.merge(a);
 		AreasDeConhecimento consulta = dao.find(AreasDeConhecimento.class, a.getId());// CONSULTA

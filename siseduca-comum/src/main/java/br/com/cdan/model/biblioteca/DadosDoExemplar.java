@@ -40,9 +40,6 @@ public class DadosDoExemplar {
 	@Column(name = "observacoes")
 	private String observacoes;
 
-	@Column(name = "ativo")
-	private Boolean ativo;
-
 	public EnumTipoAquisicao getTipoAquisicao() {
 		return tipoAquisicao;
 	}
@@ -123,14 +120,6 @@ public class DadosDoExemplar {
 		this.observacoes = observacoes;
 	}
 
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -179,6 +168,6 @@ public class DadosDoExemplar {
 		return "DadosDoExemplar [tipoAquisicao=" + tipoAquisicao + ", ISBN=" + ISBN + ", ISSN=" + ISSN
 				+ ", codigoDeBarras=" + codigoDeBarras + ", tombo=" + tombo + ", localizacao=" + localizacao
 				+ ", emprestar=" + emprestar + ", reservar=" + reservar + ", renovar=" + renovar + ", observacoes="
-				+ observacoes + ", ativo=" + ativo + "]";
+				+ observacoes + "]";
 	}
 }

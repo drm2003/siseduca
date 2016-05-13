@@ -19,7 +19,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name = "ClassificacaoLiteraria")
 public class ClassificacaoLiteraria implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 
@@ -32,16 +31,18 @@ public class ClassificacaoLiteraria implements Serializable {
 	@NotEmpty
 	@NotBlank
 	@Size(max = 50, min = 3)
-	@Column(name = "descricao", length = 50)
+	@Column(name = "descricao", length = 50, nullable = false, unique = true)
 	private String descricao;
 
-	@Column(name = "compartilhado")
+	@NotNull
+	@Column(name = "compartilhado", nullable = false)
 	private Boolean compartilhado;
 
 	@ManyToMany(mappedBy = "classificacoesLiterarias")
 	private Set<Obra> obras;
 
-	@Column(name = "ativo")
+	@NotNull
+	@Column(name = "ativo", nullable = false)
 	private Boolean ativo;
 
 	public Long getId() {
@@ -117,7 +118,7 @@ public class ClassificacaoLiteraria implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ClassificaÃ§Ãµes LiterÃ¡rias [descricao=" + descricao + ", compartilhado=" + compartilhado + ", ativo="
+		return "Classificações Literárias [descricao=" + descricao + ", compartilhado=" + compartilhado + ", ativo="
 				+ ativo + "]";
 	}
 }

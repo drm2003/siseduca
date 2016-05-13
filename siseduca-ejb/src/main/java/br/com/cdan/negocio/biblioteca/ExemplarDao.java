@@ -18,7 +18,7 @@ public class ExemplarDao extends SiseducaDao {
 	@Override
 	public void remove(Object obj) {
 		Exemplar exemplar = (Exemplar) obj;
-		exemplar.setAtivo(false);
+		exemplar.setAtivo(Boolean.FALSE);
 		getEntityManager().merge(exemplar);
 	}
 }

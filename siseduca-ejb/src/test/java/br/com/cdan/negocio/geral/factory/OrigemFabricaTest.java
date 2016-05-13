@@ -1,6 +1,9 @@
 package br.com.cdan.negocio.geral.factory;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.model.geral.Origem;
+import br.com.cdan.negocio.geral.OrigemDao;
 
 public class OrigemFabricaTest {
 	private static OrigemFabricaTest instance = null;
@@ -13,8 +16,17 @@ public class OrigemFabricaTest {
 	}
 
 	public Origem criaOrigem() {
-		// TODO Auto-generated method stub
-		return null;
+		Origem o = new Origem();
+		o.setAtivo(Boolean.TRUE);
+		o.setDescricao("descricao");
+		return o;
+	}
+
+	public Origem criaOrigemPersistido(EntityManager em) {
+		Origem o = criaOrigem();
+		OrigemDao dao = new OrigemDao(em);
+		dao.persist(o);
+		return o;
 	}
 
 }

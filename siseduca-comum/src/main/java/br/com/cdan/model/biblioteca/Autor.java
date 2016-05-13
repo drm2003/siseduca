@@ -1,6 +1,6 @@
 package br.com.cdan.model.biblioteca;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -36,11 +36,11 @@ public class Autor implements Serializable {
 	private Set<Obra> obras;
 
 	@NotNull
-	@Column(name = "ativo")
+	@Column(name = "ativo", nullable=false)
 	private Boolean ativo;
 
 	@NotNull
-	@Column(name = "compartilhado")
+	@Column(name = "compartilhado", nullable=false)
 	private Boolean compartilhado;
 
 	public Long getId() {
