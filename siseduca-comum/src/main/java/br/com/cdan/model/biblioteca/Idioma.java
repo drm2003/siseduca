@@ -10,11 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Idioma")
 public class Idioma implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 
@@ -23,16 +27,22 @@ public class Idioma implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@NotBlank
+	@Size(max = 50, min = 3)
 	@Column(name = "descricao", length = 50, nullable = false, unique = true)
 	private String descricao;
 
-	@Column(name = "compartilhado")
+	@NotNull
+	@Column(name = "compartilhado", nullable = false)
 	private Boolean compartilhado;
 
 	@OneToMany(mappedBy = "idioma")
 	private Set<Obra> obras;
 
-	@Column(name = "ativo")
+	@NotNull
+	@Column(name = "ativo", nullable = false)
 	private Boolean ativo;
 
 	public Long getId() {

@@ -11,14 +11,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.cdan.model.biblioteca.Exemplar;
-import br.com.cdan.negocio.biblioteca.ExemplarDao;
-import br.com.cdan.negocio.biblioteca.factory.ExemplarFabricaTest;
+import br.com.cdan.model.biblioteca.Setor;
+import br.com.cdan.negocio.biblioteca.SetorDao;
+import br.com.cdan.negocio.biblioteca.factory.SetorFabricaTest;
 import br.com.cdan.util.PersistenciaJUnit;
 
-public class ExemplarDAOTeste extends PersistenciaJUnit {
-	private static final Logger LOG = Logger.getLogger(ExemplarDAOTeste.class);
-	ExemplarDao dao;
+public class SetorDAOTeste extends PersistenciaJUnit {
+	private static final Logger LOG = Logger.getLogger(SetorDAOTeste.class);
+	SetorDao dao;
 
 	/**
 	 * <c> Ao criar um teste da camada de persistï¿½ncia utilizando o JUnit ï¿½
@@ -33,52 +33,53 @@ public class ExemplarDAOTeste extends PersistenciaJUnit {
 	@Before
 	public void setUp() throws Exception {
 		LOG.info("Instanciando DAOTest.");
-		dao = new ExemplarDao(getEntityManager());
+		dao = new SetorDao(getEntityManager());
 	}
 
 	@Test
 	public void inserir() {
-		Exemplar a = criaExemplar();
+		Setor a = criaSetor();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
-		Exemplar consulta = dao.find(Exemplar.class, a.getId());// CONSULTA
-		Assert.assertSame(a, consulta);// VERIFICA INSERï¿½ï¿½O
+		Setor consulta = dao.find(Setor.class, a.getId());// CONSULTA
+		Assert.assertSame(a, consulta);// VERIFICA INSERÇÃO
 	}
 
 	@Test
 	public void alterar() {
-		Exemplar a = criaExemplar();
+		Setor a = criaSetor();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
 		a.setAtivo(false);
-		a.setDescricao("alteração");
+		a.setDescricao("");
 		dao.merge(a);
-		Exemplar consulta = dao.find(Exemplar.class, a.getId());// CONSULTA
+		Setor consulta = dao.find(Setor.class, a.getId());// CONSULTA
 		Assert.assertSame(a, consulta);// VERIFICA INSERï¿½ï¿½O
 	}
 
 	@Test
 	public void excluir() {
-		Exemplar a = criaExemplar();
+		Setor a = criaSetor();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
-		Exemplar consulta = dao.find(Exemplar.class, a.getId());// CONSULTA
+		Setor consulta = dao.find(Setor.class, a.getId());// CONSULTA
 		consulta.setAtivo(false);
 		dao.remove(a);
-		Assert.assertSame(consulta, dao.find(Exemplar.class, a.getId()));
+		Assert.assertSame(consulta, dao.find(Setor.class, a.getId()));
 	}
 
 	@Test
 	public void consultar_todos() {
-		Exemplar a1 = criaExemplar();
+		Setor a1 = criaSetor();
 		dao.persist(a1);
-		Exemplar a2 = criaExemplar();
+		Setor a2 = criaSetor();
 		dao.persist(a2);
 		//
-		String sql = "SELECT a FROM Exemplar a";
-		TypedQuery<Exemplar> query = dao.getEntityManager().createQuery(sql, Exemplar.class);
+		String sql = "SELECT a FROM Setor a";
+		Query query = dao.getEntityManager().createQuery(sql, Setor.class);
 		//
-		List<Exemplar> lista = query.getResultList(); //
+		@SuppressWarnings("unchecked")
+		List<Setor> lista = query.getResultList(); //
 		//
 		Assert.assertTrue(lista.contains(a1));
 		Assert.assertTrue(lista.contains(a2));
@@ -86,27 +87,27 @@ public class ExemplarDAOTeste extends PersistenciaJUnit {
 
 	@Test
 	public void consultar_por_descricao() {
-		Exemplar a = criaExemplar();
+		Setor a = criaSetor();
 		dao.persist(a);
 		Assert.assertNotNull(a);
-		String sql = "SELECT a FROM Exemplar a WHERE a.descricao = :descricao";
-		Query query = dao.getEntityManager().createQuery(sql);
+		String sql = "FROM Setor a WHERE a.descricao = :descricao";
+		TypedQuery<Setor> query = dao.getEntityManager().createQuery(sql, Setor.class);
 		query.setParameter("descricao", a.getDescricao());
-		Exemplar consulta = (Exemplar) query.getSingleResult();
+		Setor consulta = query.getSingleResult();
 		Assert.assertSame(a, consulta);
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_descricao_nula() {
-		Exemplar a = criaExemplar();
+	public void nao_deve_permitir_descricao_nulo() {
+		Setor a = criaSetor();
 		a.setDescricao(null);
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_descricao_vazia() {
-		Exemplar a = criaExemplar();
+	public void nao_deve_permitir_descricao_vazio() {
+		Setor a = criaSetor();
 		a.setDescricao("");
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
@@ -114,21 +115,29 @@ public class ExemplarDAOTeste extends PersistenciaJUnit {
 
 	@Test(expected = ConstraintViolationException.class)
 	public void descricao_maior_que_tamanho_maximo_permitido() {
-		Exemplar a = criaExemplar();
-		a.setDescricao(criarStringDinamicaPorTamanho(251));
+		Setor a = criaSetor();
+		a.setDescricao(criarStringDinamicaPorTamanho(356));
+		dao.persist(a);
+		Assert.assertNull(a.getId());
+	}
+
+	@Test(expected = ConstraintViolationException.class)
+	public void descricao_menor_que_tamanho_minimo_permitido() {
+		Setor a = criaSetor();
+		a.setDescricao(criarStringDinamicaPorTamanho(2));
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
 	public void nao_deve_permitir_ativo_nulo() {
-		Exemplar a = criaExemplar();
+		Setor a = criaSetor();
 		a.setAtivo(null);
 		dao.persist(a);
-		Assert.assertNull(a.getId());
+		Assert.assertNotNull(a.getId());
 	}
 
-	private Exemplar criaExemplar() {
-		return ExemplarFabricaTest.getInstance().criaExemplar(getEntityManager());
+	private Setor criaSetor() {
+		return SetorFabricaTest.getInstance().criaSetor();
 	}
 }

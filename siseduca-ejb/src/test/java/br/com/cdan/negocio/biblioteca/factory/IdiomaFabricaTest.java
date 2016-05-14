@@ -6,7 +6,7 @@ import br.com.cdan.model.biblioteca.Idioma;
 import br.com.cdan.negocio.biblioteca.IdiomaDao;
 
 public class IdiomaFabricaTest {
-	private static IdiomaFabricaTest instance;
+	private static IdiomaFabricaTest instance = null;
 
 	public static synchronized IdiomaFabricaTest getInstance() {
 		if (instance == null) {
@@ -19,7 +19,7 @@ public class IdiomaFabricaTest {
 		Idioma i = new Idioma();
 		i.setAtivo(Boolean.TRUE);
 		i.setCompartilhado(Boolean.TRUE);
-		i.setDescricao("descricao");
+		i.setDescricao("descricao " + Math.random() * 10000);
 		return i;
 	}
 

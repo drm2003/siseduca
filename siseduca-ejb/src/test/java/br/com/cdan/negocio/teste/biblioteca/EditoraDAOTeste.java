@@ -126,7 +126,7 @@ public class EditoraDAOTeste extends PersistenciaJUnit {
 		Editora a = criaEditora();
 		a.setAtivo(null);
 		dao.persist(a);
-		Assert.assertNotNull(a.getId());
+		Assert.assertNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
@@ -134,7 +134,7 @@ public class EditoraDAOTeste extends PersistenciaJUnit {
 		Editora a = criaEditora();
 		a.setCompartilhado(null);
 		dao.persist(a);
-		Assert.assertNotNull(a.getId());
+		Assert.assertNull(a.getId());
 	}
 
 	private Editora criaEditora() {

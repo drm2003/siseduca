@@ -11,6 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "SerieColecaoLiteral")
@@ -24,15 +29,21 @@ public class SerieColecaoLiteral implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "descricao", length = 50, nullable = false, unique = true)
+	@NotBlank
+	@NotEmpty
+	@NotNull
+	@Size(min = 3, max = 350)
+	@Column(name = "descricao", length = 350, nullable = false, unique = true)
 	private String descricao;
 
+	@NotNull
 	@Column(name = "compartilhado")
 	private Boolean compartilhado;
 
 	@OneToMany(mappedBy = "serieColecaoLiteral", fetch = FetchType.LAZY)
 	private Set<Obra> obras;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -109,7 +120,7 @@ public class SerieColecaoLiteral implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Séries/Coleções Literárias [descricao=" + descricao + ", compartilhado=" + compartilhado + ", ativo="
-				+ ativo + "]";
+		return "Séries/Coleções Literárias [descricao=" + descricao + ", compartilhado=" + compartilhado
+				+ ", ativo=" + ativo + "]";
 	}
 }

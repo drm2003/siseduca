@@ -19,7 +19,7 @@ public class NivelFabricaTest {
 		Nivel n = new Nivel();
 		n.setAtivo(Boolean.TRUE);
 		n.setCompartilhado(Boolean.TRUE);
-		n.setDescricao("descricao");
+		n.setDescricao("descricao" + Math.random() * 10000);
 		return n;
 	}
 

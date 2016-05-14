@@ -11,14 +11,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.cdan.model.biblioteca.Autor;
-import br.com.cdan.negocio.biblioteca.AutorDao;
-import br.com.cdan.negocio.biblioteca.factory.AutorFabricaTest;
+import br.com.cdan.model.biblioteca.SerieColecaoLiteral;
+import br.com.cdan.negocio.biblioteca.SerieColecaoLiteralDao;
+import br.com.cdan.negocio.biblioteca.factory.SerieColecaoLiteralFabricaTest;
 import br.com.cdan.util.PersistenciaJUnit;
 
-public class AutorDAOTeste extends PersistenciaJUnit {
-	private static final Logger LOG = Logger.getLogger(AutorDAOTeste.class);
-	AutorDao dao;
+public class SerieColecaoLiteralDAOTeste extends PersistenciaJUnit {
+	private static final Logger LOG = Logger.getLogger(SerieColecaoLiteralDAOTeste.class);
+	SerieColecaoLiteralDao dao;
 
 	/**
 	 * <c> Ao criar um teste da camada de persistï¿½ncia utilizando o JUnit ï¿½
@@ -33,120 +33,111 @@ public class AutorDAOTeste extends PersistenciaJUnit {
 	@Before
 	public void setUp() throws Exception {
 		LOG.info("Instanciando DAOTest.");
-		dao = new AutorDao(getEntityManager());
+		dao = new SerieColecaoLiteralDao(getEntityManager());
 	}
 
 	@Test
 	public void inserir() {
-		Autor a = criaAutor();
+		SerieColecaoLiteral a = criaSerieColecaoLiteral();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
-		Autor consulta = dao.find(Autor.class, a.getId());// CONSULTA
+		SerieColecaoLiteral consulta = dao.find(SerieColecaoLiteral.class, a.getId());// CONSULTA
 		Assert.assertSame(a, consulta);// VERIFICA INSERÇÃO
 	}
 
 	@Test
 	public void alterar() {
-		Autor a = criaAutor();
+		SerieColecaoLiteral a = criaSerieColecaoLiteral();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
 		a.setAtivo(false);
-		a.setNome("");
-		a.setCompartilhado(false);
+		a.setDescricao("");
 		dao.merge(a);
-		Autor consulta = dao.find(Autor.class, a.getId());// CONSULTA
+		SerieColecaoLiteral consulta = dao.find(SerieColecaoLiteral.class, a.getId());// CONSULTA
 		Assert.assertSame(a, consulta);// VERIFICA INSERï¿½ï¿½O
 	}
 
 	@Test
 	public void excluir() {
-		Autor a = criaAutor();
+		SerieColecaoLiteral a = criaSerieColecaoLiteral();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
-		Autor consulta = dao.find(Autor.class, a.getId());// CONSULTA
+		SerieColecaoLiteral consulta = dao.find(SerieColecaoLiteral.class, a.getId());// CONSULTA
 		consulta.setAtivo(false);
 		dao.remove(a);
-		Assert.assertSame(consulta, dao.find(Autor.class, a.getId()));
+		Assert.assertSame(consulta, dao.find(SerieColecaoLiteral.class, a.getId()));
 	}
 
 	@Test
 	public void consultar_todos() {
-		Autor a1 = criaAutor();
+		SerieColecaoLiteral a1 = criaSerieColecaoLiteral();
 		dao.persist(a1);
-		Autor a2 = criaAutor();
+		SerieColecaoLiteral a2 = criaSerieColecaoLiteral();
 		dao.persist(a2);
 		//
-		String sql = "SELECT a FROM Autor a";
-		Query query = dao.getEntityManager().createQuery(sql, Autor.class);
+		String sql = "SELECT a FROM SerieColecaoLiteral a";
+		Query query = dao.getEntityManager().createQuery(sql, SerieColecaoLiteral.class);
 		//
 		@SuppressWarnings("unchecked")
-		List<Autor> lista = query.getResultList(); //
+		List<SerieColecaoLiteral> lista = query.getResultList(); //
 		//
 		Assert.assertTrue(lista.contains(a1));
 		Assert.assertTrue(lista.contains(a2));
 	}
 
 	@Test
-	public void consultar_por_nome() {
-		Autor a = criaAutor();
+	public void consultar_por_descricao() {
+		SerieColecaoLiteral a = criaSerieColecaoLiteral();
 		dao.persist(a);
 		Assert.assertNotNull(a);
-		String sql = "FROM Autor a WHERE a.nome = :nome";
-		TypedQuery<Autor> query = dao.getEntityManager().createQuery(sql, Autor.class);
-		query.setParameter("nome", a.getNome());
-		Autor consulta = query.getSingleResult();
+		String sql = "FROM SerieColecaoLiteral a WHERE a.descricao = :descricao";
+		TypedQuery<SerieColecaoLiteral> query = dao.getEntityManager().createQuery(sql, SerieColecaoLiteral.class);
+		query.setParameter("descricao", a.getDescricao());
+		SerieColecaoLiteral consulta = query.getSingleResult();
 		Assert.assertSame(a, consulta);
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_nome_nulo() {
-		Autor a = criaAutor();
-		a.setNome(null);
+	public void nao_deve_permitir_descricao_nulo() {
+		SerieColecaoLiteral a = criaSerieColecaoLiteral();
+		a.setDescricao(null);
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_nome_vazio() {
-		Autor a = criaAutor();
-		a.setNome("");
+	public void nao_deve_permitir_descricao_vazio() {
+		SerieColecaoLiteral a = criaSerieColecaoLiteral();
+		a.setDescricao("");
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
 	public void descricao_maior_que_tamanho_maximo_permitido() {
-		Autor a = criaAutor();
-		a.setNome(criarStringDinamicaPorTamanho(256));
+		SerieColecaoLiteral a = criaSerieColecaoLiteral();
+		a.setDescricao(criarStringDinamicaPorTamanho(356));
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
 	public void descricao_menor_que_tamanho_minimo_permitido() {
-		Autor a = criaAutor();
-		a.setNome(criarStringDinamicaPorTamanho(2));
+		SerieColecaoLiteral a = criaSerieColecaoLiteral();
+		a.setDescricao(criarStringDinamicaPorTamanho(2));
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
 	public void nao_deve_permitir_ativo_nulo() {
-		Autor a = criaAutor();
+		SerieColecaoLiteral a = criaSerieColecaoLiteral();
 		a.setAtivo(null);
 		dao.persist(a);
-		Assert.assertNull(a.getId());
+		Assert.assertNotNull(a.getId());
 	}
 
-	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_compartilhado_nulo() {
-		Autor a = criaAutor();
-		a.setCompartilhado(null);
-		dao.persist(a);
-		Assert.assertNull(a.getId());
-	}
-
-	private Autor criaAutor() {
-		return AutorFabricaTest.getInstance().criaAutor();
+	private SerieColecaoLiteral criaSerieColecaoLiteral() {
+		return SerieColecaoLiteralFabricaTest.getInstance().criaSerieColecaoLiteral();
 	}
 }

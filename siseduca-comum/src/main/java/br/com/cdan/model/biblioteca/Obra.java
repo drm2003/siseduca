@@ -16,8 +16,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import br.com.cdan.model.geral.Origem;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import br.com.cdan.model.empresa.Empresa;
 
 @Entity
 @Table(name = "Obra")
@@ -28,12 +33,18 @@ public class Obra implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "nome", length = 200, nullable = false, unique = true)
+	@NotBlank
+	@NotEmpty
+	@NotNull
+	@Size(max = 350, min = 3)
+	@Column(name = "nome", length = 350, nullable = false, unique = true)
 	private String nome;
 
-	@Column(name = "subtitulo", length = 200)
+	@Size(max = 350, min = 3)
+	@Column(name = "subtitulo", length = 350)
 	private String subtitulo;
 
+	@NotNull
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_tipoDeObra")
 	private TipoDeObra tipoDeObra;
@@ -74,21 +85,31 @@ public class Obra implements Serializable {
 	@Column(name = "observacoes")
 	private String observacoes;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "Obra_Autor", joinColumns = @JoinColumn(name = "id_obra"), inverseJoinColumns = @JoinColumn(name = "id_autor"))
 	private Set<Autor> autores;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "Obra_ClassificacaoLiteraria", joinColumns = @JoinColumn(name = "id_obra"), inverseJoinColumns = @JoinColumn(name = "id_classificacaoLiteraria"))
 	private Set<ClassificacaoLiteraria> classificacoesLiterarias;
 
 	@OneToMany(mappedBy = "obra", fetch = FetchType.LAZY)
 	private Set<Exemplar> exemplares;
 
-	@Column(name = "compartilhado")
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "Obra_AreaDeConhecimento", joinColumns = @JoinColumn(name = "id_obra"), inverseJoinColumns = @JoinColumn(name = "id_AreaDeConhecimento"))
+	private Set<AreasDeConhecimento> areasDeConhecimento;
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "Obra_Empresa", joinColumns = @JoinColumn(name = "id_obra"), inverseJoinColumns = @JoinColumn(name = "id_AreaDeConhecimento"))
+	private Set<Empresa> empresas;
+
+	@NotNull
+	@Column(name = "compartilhado", nullable = false)
 	private Boolean compartilhado;
 
-	@Column(name = "ativo")
+	@NotNull
+	@Column(name = "ativo", nullable = false)
 	private Boolean ativo;
 
 	public Long getId() {
@@ -225,6 +246,22 @@ public class Obra implements Serializable {
 
 	public void setExemplares(Set<Exemplar> exemplares) {
 		this.exemplares = exemplares;
+	}
+
+	public Set<AreasDeConhecimento> getAreasDeConhecimento() {
+		return areasDeConhecimento;
+	}
+
+	public void setAreasDeConhecimento(Set<AreasDeConhecimento> areasDeConhecimento) {
+		this.areasDeConhecimento = areasDeConhecimento;
+	}
+
+	public Set<Empresa> getEmpresas() {
+		return empresas;
+	}
+
+	public void setEmpresas(Set<Empresa> empresas) {
+		this.empresas = empresas;
 	}
 
 	public Boolean getCompartilhado() {

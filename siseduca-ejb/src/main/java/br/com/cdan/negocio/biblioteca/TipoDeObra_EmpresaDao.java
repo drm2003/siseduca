@@ -18,7 +18,7 @@ public class TipoDeObra_EmpresaDao extends SiseducaDao {
 	@Override
 	public void remove(Object obj) {
 		TipoDeObra_Empresa t = (TipoDeObra_Empresa) obj;
-		t.setAtivo(false);
+		t.setAtivo(Boolean.FALSE);
 		getEntityManager().merge(t);
 	}
 }

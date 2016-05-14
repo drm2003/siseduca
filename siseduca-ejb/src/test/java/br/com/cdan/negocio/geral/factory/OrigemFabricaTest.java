@@ -2,8 +2,8 @@ package br.com.cdan.negocio.geral.factory;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.geral.Origem;
-import br.com.cdan.negocio.geral.OrigemDao;
+import br.com.cdan.model.biblioteca.Origem;
+import br.com.cdan.negocio.biblioteca.OrigemDao;
 
 public class OrigemFabricaTest {
 	private static OrigemFabricaTest instance = null;
@@ -18,7 +18,8 @@ public class OrigemFabricaTest {
 	public Origem criaOrigem() {
 		Origem o = new Origem();
 		o.setAtivo(Boolean.TRUE);
-		o.setDescricao("descricao");
+		o.setCompartilhado(Boolean.TRUE);
+		o.setDescricao("descricao " + Math.random() * 10000);
 		return o;
 	}
 

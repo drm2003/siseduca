@@ -5,10 +5,10 @@ import java.util.Set;
 
 import javax.persistence.EntityManager;
 
+import br.com.cdan.model.biblioteca.Origem;
 import br.com.cdan.model.contato.MelhorHorarioParaContato;
 import br.com.cdan.model.contato.Midia;
 import br.com.cdan.model.contato.TipoDeContato;
-import br.com.cdan.model.geral.Origem;
 import br.com.cdan.model.pedagogico.contrato.MotivoDeNaoFechamentoDeContrato;
 import br.com.cdan.model.pedagogico.curso.Curso;
 import br.com.cdan.model.pessoa.Aluno;
@@ -16,13 +16,13 @@ import br.com.cdan.model.pessoa.Follow;
 import br.com.cdan.model.pessoa.Funcionario;
 import br.com.cdan.model.pessoa.Interessado;
 import br.com.cdan.model.pessoa.ObservacaoDoAluno;
+import br.com.cdan.negocio.biblioteca.OrigemDao;
 import br.com.cdan.negocio.contato.MelhorHorarioParaContatoDao;
 import br.com.cdan.negocio.contato.MidiaDao;
 import br.com.cdan.negocio.contato.TipoDeContatoDao;
 import br.com.cdan.negocio.contato.factory.MelhorHorarioParaContatoFabricaTest;
 import br.com.cdan.negocio.contato.factory.MidiaFabricaFabricaTest;
 import br.com.cdan.negocio.contato.factory.TipoDeContatoFabricaTest;
-import br.com.cdan.negocio.geral.OrigemDao;
 import br.com.cdan.negocio.geral.factory.OrigemFabricaTest;
 import br.com.cdan.negocio.pedagogico.contrato.MotivoDeNaoFechamentoDeContratoDao;
 import br.com.cdan.negocio.pedagogico.contrato.factory.MotivoDeNaoFechamentoDeContratoFabricaTest;

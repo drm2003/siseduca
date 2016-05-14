@@ -19,7 +19,7 @@ public class SerieColecaoLiteralFabricaTest {
 		SerieColecaoLiteral s = new SerieColecaoLiteral();
 		s.setAtivo(Boolean.TRUE);
 		s.setCompartilhado(Boolean.TRUE);
-		s.setDescricao("descricao");
+		s.setDescricao("descricao" + Math.random() * 10000);
 		//
 		return s;
 	}

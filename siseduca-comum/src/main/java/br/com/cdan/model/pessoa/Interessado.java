@@ -15,10 +15,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.cdan.model.biblioteca.Origem;
 import br.com.cdan.model.contato.MelhorHorarioParaContato;
 import br.com.cdan.model.contato.Midia;
 import br.com.cdan.model.contato.TipoDeContato;
-import br.com.cdan.model.geral.Origem;
 import br.com.cdan.model.pedagogico.contrato.MotivoDeNaoFechamentoDeContrato;
 import br.com.cdan.model.pedagogico.curso.Curso;
 

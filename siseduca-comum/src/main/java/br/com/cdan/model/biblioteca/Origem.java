@@ -1,4 +1,4 @@
-package br.com.cdan.model.geral;
+package br.com.cdan.model.biblioteca;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -10,8 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import br.com.cdan.model.biblioteca.Obra;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Origem")
@@ -22,12 +25,21 @@ public class Origem implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@NotBlank
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 
 	@OneToMany(mappedBy = "origem")
 	private Set<Obra> obras;
 
+	@NotNull
+	@Column(name = "compartilhado")
+	private Boolean compartilhado;
+
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -53,6 +65,14 @@ public class Origem implements Serializable {
 
 	public void setObras(Set<Obra> obras) {
 		this.obras = obras;
+	}
+
+	public Boolean getCompartilhado() {
+		return compartilhado;
+	}
+
+	public void setCompartilhado(Boolean compartilhado) {
+		this.compartilhado = compartilhado;
 	}
 
 	public Boolean getAtivo() {

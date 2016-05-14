@@ -19,7 +19,7 @@ public class ClassificacaoLiterariaFabricaTest {
 		ClassificacaoLiteraria c = new ClassificacaoLiteraria();
 		c.setAtivo(Boolean.TRUE);
 		c.setCompartilhado(Boolean.TRUE);
-		c.setDescricao("descricao");
+		c.setDescricao("descricao" + Math.random() * 10000);
 		return c;
 	}
 

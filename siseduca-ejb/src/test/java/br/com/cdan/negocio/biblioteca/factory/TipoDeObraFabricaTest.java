@@ -18,7 +18,7 @@ public class TipoDeObraFabricaTest {
 	public TipoDeObra criaTipoDeObra() {
 		TipoDeObra t = new TipoDeObra();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
+		t.setDescricao("descricao" + Math.random() * 10000);
 		return t;
 	}
 

@@ -18,7 +18,7 @@ public class ClassificacaoLiterariaDao extends SiseducaDao {
 	@Override
 	public void remove(Object obj) {
 		ClassificacaoLiteraria c = (ClassificacaoLiteraria) obj;
-		c.setAtivo(false);
+		c.setAtivo(Boolean.FALSE);
 		getEntityManager().merge(c);
 	}
 }

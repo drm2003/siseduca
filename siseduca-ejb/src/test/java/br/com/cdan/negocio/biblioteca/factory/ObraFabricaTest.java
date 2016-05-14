@@ -18,6 +18,7 @@ public class ObraFabricaTest {
 
 	public Obra criaObra(EntityManager em) {
 		Obra a = new Obra();
+		a.setSubtitulo("subtitulo" + Math.random() * 100000);
 		a.setAssuntoPalavraChave("teste");
 		a.setClassificacaoCDD("teste");
 		a.setClassificacaoCutter("teste");
@@ -31,7 +32,6 @@ public class ObraFabricaTest {
 		a.setOrigem(OrigemFabricaTest.getInstance().criaOrigemPersistido(em));
 		a.setSerieColecaoLiteral(SerieColecaoLiteralFabricaTest.getInstance().criaSerieColecaoLiteralPersistido(em));
 		a.setSetor(SetorFabricaTest.getInstance().criaSetorPersistido(em));
-		a.setSubtitulo("");
 		a.setTipoDeObra(TipoDeObraFabricaTest.getInstance().criaTipoDeObraPersistido(em));
 		a.setCompartilhado(Boolean.TRUE);
 		a.setAtivo(Boolean.TRUE);

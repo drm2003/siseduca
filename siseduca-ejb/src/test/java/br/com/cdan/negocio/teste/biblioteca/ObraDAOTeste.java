@@ -11,14 +11,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.cdan.model.biblioteca.Autor;
-import br.com.cdan.negocio.biblioteca.AutorDao;
-import br.com.cdan.negocio.biblioteca.factory.AutorFabricaTest;
+import br.com.cdan.model.biblioteca.Obra;
+import br.com.cdan.negocio.biblioteca.ObraDao;
+import br.com.cdan.negocio.biblioteca.factory.ObraFabricaTest;
 import br.com.cdan.util.PersistenciaJUnit;
 
-public class AutorDAOTeste extends PersistenciaJUnit {
-	private static final Logger LOG = Logger.getLogger(AutorDAOTeste.class);
-	AutorDao dao;
+public class ObraDAOTeste extends PersistenciaJUnit {
+	private static final Logger LOG = Logger.getLogger(ObraDAOTeste.class);
+	ObraDao dao;
 
 	/**
 	 * <c> Ao criar um teste da camada de persistï¿½ncia utilizando o JUnit ï¿½
@@ -33,54 +33,53 @@ public class AutorDAOTeste extends PersistenciaJUnit {
 	@Before
 	public void setUp() throws Exception {
 		LOG.info("Instanciando DAOTest.");
-		dao = new AutorDao(getEntityManager());
+		dao = new ObraDao(getEntityManager());
 	}
 
 	@Test
 	public void inserir() {
-		Autor a = criaAutor();
+		Obra a = criaObra();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
-		Autor consulta = dao.find(Autor.class, a.getId());// CONSULTA
+		Obra consulta = dao.find(Obra.class, a.getId());// CONSULTA
 		Assert.assertSame(a, consulta);// VERIFICA INSERÇÃO
 	}
 
 	@Test
 	public void alterar() {
-		Autor a = criaAutor();
+		Obra a = criaObra();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
 		a.setAtivo(false);
 		a.setNome("");
-		a.setCompartilhado(false);
 		dao.merge(a);
-		Autor consulta = dao.find(Autor.class, a.getId());// CONSULTA
+		Obra consulta = dao.find(Obra.class, a.getId());// CONSULTA
 		Assert.assertSame(a, consulta);// VERIFICA INSERï¿½ï¿½O
 	}
 
 	@Test
 	public void excluir() {
-		Autor a = criaAutor();
+		Obra a = criaObra();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
-		Autor consulta = dao.find(Autor.class, a.getId());// CONSULTA
+		Obra consulta = dao.find(Obra.class, a.getId());// CONSULTA
 		consulta.setAtivo(false);
 		dao.remove(a);
-		Assert.assertSame(consulta, dao.find(Autor.class, a.getId()));
+		Assert.assertSame(consulta, dao.find(Obra.class, a.getId()));
 	}
 
 	@Test
 	public void consultar_todos() {
-		Autor a1 = criaAutor();
+		Obra a1 = criaObra();
 		dao.persist(a1);
-		Autor a2 = criaAutor();
+		Obra a2 = criaObra();
 		dao.persist(a2);
 		//
-		String sql = "SELECT a FROM Autor a";
-		Query query = dao.getEntityManager().createQuery(sql, Autor.class);
+		String sql = "SELECT a FROM Obra a";
+		Query query = dao.getEntityManager().createQuery(sql, Obra.class);
 		//
 		@SuppressWarnings("unchecked")
-		List<Autor> lista = query.getResultList(); //
+		List<Obra> lista = query.getResultList(); //
 		//
 		Assert.assertTrue(lista.contains(a1));
 		Assert.assertTrue(lista.contains(a2));
@@ -88,19 +87,19 @@ public class AutorDAOTeste extends PersistenciaJUnit {
 
 	@Test
 	public void consultar_por_nome() {
-		Autor a = criaAutor();
+		Obra a = criaObra();
 		dao.persist(a);
 		Assert.assertNotNull(a);
-		String sql = "FROM Autor a WHERE a.nome = :nome";
-		TypedQuery<Autor> query = dao.getEntityManager().createQuery(sql, Autor.class);
+		String sql = "FROM Obra a WHERE a.nome = :nome";
+		TypedQuery<Obra> query = dao.getEntityManager().createQuery(sql, Obra.class);
 		query.setParameter("nome", a.getNome());
-		Autor consulta = query.getSingleResult();
+		Obra consulta = query.getSingleResult();
 		Assert.assertSame(a, consulta);
 	}
 
 	@Test(expected = ConstraintViolationException.class)
 	public void nao_deve_permitir_nome_nulo() {
-		Autor a = criaAutor();
+		Obra a = criaObra();
 		a.setNome(null);
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
@@ -108,45 +107,69 @@ public class AutorDAOTeste extends PersistenciaJUnit {
 
 	@Test(expected = ConstraintViolationException.class)
 	public void nao_deve_permitir_nome_vazio() {
-		Autor a = criaAutor();
+		Obra a = criaObra();
 		a.setNome("");
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void descricao_maior_que_tamanho_maximo_permitido() {
-		Autor a = criaAutor();
-		a.setNome(criarStringDinamicaPorTamanho(256));
+	public void nome_maior_que_tamanho_maximo_permitido() {
+		Obra a = criaObra();
+		a.setNome(criarStringDinamicaPorTamanho(356));
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void descricao_menor_que_tamanho_minimo_permitido() {
-		Autor a = criaAutor();
+	public void nome_menor_que_tamanho_minimo_permitido() {
+		Obra a = criaObra();
 		a.setNome(criarStringDinamicaPorTamanho(2));
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_ativo_nulo() {
-		Autor a = criaAutor();
-		a.setAtivo(null);
+	public void subtitulo_nao_pode_maior_que_tamanho_maximo_permitido() {
+		Obra a = criaObra();
+		a.setSubtitulo(criarStringDinamicaPorTamanho(356));
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_compartilhado_nulo() {
-		Autor a = criaAutor();
-		a.setCompartilhado(null);
+	public void subtitulo_nao_pode_menor_que_tamanho_minimo_permitido() {
+		Obra a = criaObra();
+		a.setSubtitulo(criarStringDinamicaPorTamanho(2));
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
-	private Autor criaAutor() {
-		return AutorFabricaTest.getInstance().criaAutor();
+	@Test
+	public void subtitulo_pode_ser_nulo() {
+		Obra a = criaObra();
+		a.setSubtitulo(null);
+		dao.persist(a);
+		Assert.assertNotNull(a.getId());
+	}
+
+	@Test(expected = ConstraintViolationException.class)
+	public void tipoDeObra_nao_deve_permitir_Nulo() {
+		Obra a = criaObra();
+		a.setTipoDeObra(null);
+		dao.persist(a);
+		Assert.assertNull(a.getId());
+	}
+
+	@Test(expected = ConstraintViolationException.class)
+	public void nao_deve_permitir_ativo_nulo() {
+		Obra a = criaObra();
+		a.setAtivo(null);
+		dao.persist(a);
+		Assert.assertNull(a.getId());
+	}
+
+	private Obra criaObra() {
+		return ObraFabricaTest.getInstance().criaObra(getEntityManager());
 	}
 }

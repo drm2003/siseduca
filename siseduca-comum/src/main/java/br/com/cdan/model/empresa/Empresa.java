@@ -15,8 +15,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.model.acesso.Permissao_Empresa;
+import br.com.cdan.model.biblioteca.Obra;
 import br.com.cdan.model.biblioteca.TipoDeObra;
 import br.com.cdan.model.estoque.Item_Empresa;
 import br.com.cdan.model.financeiro.Bolsa;
@@ -116,6 +118,10 @@ public class Empresa implements Serializable {
 	@ManyToMany(mappedBy = "empresas", fetch = FetchType.LAZY)
 	private Set<ContaAPagar> contasAPagar;
 
+	@ManyToMany(mappedBy = "empresas", fetch = FetchType.LAZY)
+	private Set<Obra> obras;
+
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -317,6 +323,14 @@ public class Empresa implements Serializable {
 
 	public void setContasAPagar(Set<ContaAPagar> contasAPagar) {
 		this.contasAPagar = contasAPagar;
+	}
+
+	public Set<Obra> getObras() {
+		return obras;
+	}
+
+	public void setObras(Set<Obra> obras) {
+		this.obras = obras;
 	}
 
 	public Boolean getAtivo() {

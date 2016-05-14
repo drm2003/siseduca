@@ -127,7 +127,7 @@ public class AreasDeConhecimentoDAOTeste extends PersistenciaJUnit {
 		AreasDeConhecimento a = criaAreasDeConhecimento();
 		a.setAtivo(null);
 		dao.persist(a);
-		Assert.assertNotNull(a.getId());
+		Assert.assertNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
@@ -135,7 +135,7 @@ public class AreasDeConhecimentoDAOTeste extends PersistenciaJUnit {
 		AreasDeConhecimento a = criaAreasDeConhecimento();
 		a.setCompartilhado(null);
 		dao.persist(a);
-		Assert.assertNotNull(a.getId());
+		Assert.assertNull(a.getId());
 	}
 
 	private AreasDeConhecimento criaAreasDeConhecimento() {

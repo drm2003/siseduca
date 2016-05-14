@@ -11,14 +11,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.cdan.model.biblioteca.ClassificacaoLiteraria;
-import br.com.cdan.negocio.biblioteca.ClassificacaoLiterariaDao;
-import br.com.cdan.negocio.biblioteca.factory.ClassificacaoLiterariaFabricaTest;
+import br.com.cdan.model.biblioteca.Idioma;
+import br.com.cdan.negocio.biblioteca.IdiomaDao;
+import br.com.cdan.negocio.biblioteca.factory.IdiomaFabricaTest;
 import br.com.cdan.util.PersistenciaJUnit;
 
-public class ClassificacaoLiterariaDAOTeste extends PersistenciaJUnit {
-	private static final Logger LOG = Logger.getLogger(ClassificacaoLiterariaDAOTeste.class);
-	ClassificacaoLiterariaDao dao;
+public class IdiomaDAOTeste extends PersistenciaJUnit {
+	private static final Logger LOG = Logger.getLogger(IdiomaDAOTeste.class);
+	IdiomaDao dao;
 
 	/**
 	 * <c> Ao criar um teste da camada de persistï¿½ncia utilizando o JUnit ï¿½
@@ -33,54 +33,54 @@ public class ClassificacaoLiterariaDAOTeste extends PersistenciaJUnit {
 	@Before
 	public void setUp() throws Exception {
 		LOG.info("Instanciando DAOTest.");
-		dao = new ClassificacaoLiterariaDao(getEntityManager());
+		dao = new IdiomaDao(getEntityManager());
 	}
 
 	@Test
 	public void inserir() {
-		ClassificacaoLiteraria a = criaClassificacaoLiteraria();
+		Idioma a = criaIdioma();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
-		ClassificacaoLiteraria consulta = dao.find(ClassificacaoLiteraria.class, a.getId());// CONSULTA
-		Assert.assertSame(a, consulta);// VERIFICA INSERï¿½ï¿½O
+		Idioma consulta = dao.find(Idioma.class, a.getId());// CONSULTA
+		Assert.assertSame(a, consulta);// VERIFICA INSERÇÃO
 	}
 
 	@Test
 	public void alterar() {
-		ClassificacaoLiteraria a = criaClassificacaoLiteraria();
+		Idioma a = criaIdioma();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
 		a.setAtivo(false);
-		a.setDescricao("alteração");
+		a.setDescricao("");
 		a.setCompartilhado(false);
 		dao.merge(a);
-		ClassificacaoLiteraria consulta = dao.find(ClassificacaoLiteraria.class, a.getId());// CONSULTA
+		Idioma consulta = dao.find(Idioma.class, a.getId());// CONSULTA
 		Assert.assertSame(a, consulta);// VERIFICA INSERï¿½ï¿½O
 	}
 
 	@Test
 	public void excluir() {
-		ClassificacaoLiteraria a = criaClassificacaoLiteraria();
+		Idioma a = criaIdioma();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
-		ClassificacaoLiteraria consulta = dao.find(ClassificacaoLiteraria.class, a.getId());// CONSULTA
+		Idioma consulta = dao.find(Idioma.class, a.getId());// CONSULTA
 		consulta.setAtivo(false);
 		dao.remove(a);
-		Assert.assertSame(consulta, dao.find(ClassificacaoLiteraria.class, a.getId()));
+		Assert.assertSame(consulta, dao.find(Idioma.class, a.getId()));
 	}
 
 	@Test
 	public void consultar_todos() {
-		ClassificacaoLiteraria a1 = criaClassificacaoLiteraria();
+		Idioma a1 = criaIdioma();
 		dao.persist(a1);
-		ClassificacaoLiteraria a2 = criaClassificacaoLiteraria();
+		Idioma a2 = criaIdioma();
 		dao.persist(a2);
 		//
-		String sql = "SELECT a FROM ClassificacaoLiteraria a";
-		TypedQuery<ClassificacaoLiteraria> query = dao.getEntityManager().createQuery(sql,
-				ClassificacaoLiteraria.class);
+		String sql = "SELECT a FROM Idioma a";
+		Query query = dao.getEntityManager().createQuery(sql, Idioma.class);
 		//
-		List<ClassificacaoLiteraria> lista = query.getResultList(); //
+		@SuppressWarnings("unchecked")
+		List<Idioma> lista = query.getResultList(); //
 		//
 		Assert.assertTrue(lista.contains(a1));
 		Assert.assertTrue(lista.contains(a2));
@@ -88,27 +88,27 @@ public class ClassificacaoLiterariaDAOTeste extends PersistenciaJUnit {
 
 	@Test
 	public void consultar_por_descricao() {
-		ClassificacaoLiteraria a = criaClassificacaoLiteraria();
+		Idioma a = criaIdioma();
 		dao.persist(a);
 		Assert.assertNotNull(a);
-		String sql = "SELECT a FROM ClassificacaoLiteraria a WHERE a.descricao = :descricao";
-		Query query = dao.getEntityManager().createQuery(sql);
+		String sql = "FROM Idioma a WHERE a.descricao = :descricao";
+		TypedQuery<Idioma> query = dao.getEntityManager().createQuery(sql, Idioma.class);
 		query.setParameter("descricao", a.getDescricao());
-		ClassificacaoLiteraria consulta = (ClassificacaoLiteraria) query.getSingleResult();
+		Idioma consulta = query.getSingleResult();
 		Assert.assertSame(a, consulta);
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_descricao_nula() {
-		ClassificacaoLiteraria a = criaClassificacaoLiteraria();
+	public void nao_deve_permitir_descricao_nulo() {
+		Idioma a = criaIdioma();
 		a.setDescricao(null);
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_descricao_vazia() {
-		ClassificacaoLiteraria a = criaClassificacaoLiteraria();
+	public void nao_deve_permitir_descricao_vazio() {
+		Idioma a = criaIdioma();
 		a.setDescricao("");
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
@@ -116,15 +116,23 @@ public class ClassificacaoLiterariaDAOTeste extends PersistenciaJUnit {
 
 	@Test(expected = ConstraintViolationException.class)
 	public void descricao_maior_que_tamanho_maximo_permitido() {
-		ClassificacaoLiteraria a = criaClassificacaoLiteraria();
-		a.setDescricao(criarStringDinamicaPorTamanho(51));
+		Idioma a = criaIdioma();
+		a.setDescricao(criarStringDinamicaPorTamanho(256));
+		dao.persist(a);
+		Assert.assertNull(a.getId());
+	}
+
+	@Test(expected = ConstraintViolationException.class)
+	public void descricao_menor_que_tamanho_minimo_permitido() {
+		Idioma a = criaIdioma();
+		a.setDescricao(criarStringDinamicaPorTamanho(2));
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
 	public void nao_deve_permitir_ativo_nulo() {
-		ClassificacaoLiteraria a = criaClassificacaoLiteraria();
+		Idioma a = criaIdioma();
 		a.setAtivo(null);
 		dao.persist(a);
 		Assert.assertNull(a.getId());
@@ -132,13 +140,13 @@ public class ClassificacaoLiterariaDAOTeste extends PersistenciaJUnit {
 
 	@Test(expected = ConstraintViolationException.class)
 	public void nao_deve_permitir_compartilhado_nulo() {
-		ClassificacaoLiteraria a = criaClassificacaoLiteraria();
+		Idioma a = criaIdioma();
 		a.setCompartilhado(null);
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
-	private ClassificacaoLiteraria criaClassificacaoLiteraria() {
-		return ClassificacaoLiterariaFabricaTest.getInstance().criaClassificacaoLiteraria();
+	private Idioma criaIdioma() {
+		return IdiomaFabricaTest.getInstance().criaIdioma();
 	}
 }
