@@ -10,13 +10,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.acesso.Permissao_Empresa;
+import br.com.cdan.model.biblioteca.Obra;
 import br.com.cdan.model.biblioteca.TipoDeObra;
 import br.com.cdan.model.estoque.Item_Empresa;
 import br.com.cdan.model.financeiro.Bolsa;
@@ -43,13 +46,20 @@ public class Empresa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "nome", length = 60, nullable = false, unique = true)
+	@NotNull
+	@NotEmpty
+	@Size(max = 100, min = 3)
+	@Column(name = "nome", length = 100, nullable = false, unique = true)
 	private String nome;
 
-	@Column(name = "sigla")
+	@Size(min = 3, max = 10)
+	@Column(name = "sigla", length = 10, unique = true, nullable = false)
 	private String sigla;
 
-	@Column(name = "razaoSocial")
+	@NotNull
+	@NotEmpty
+	@Size(max = 100, min = 3)
+	@Column(name = "razaoSocial", length = 100)
 	private String razaoSocial;
 
 	@Column(name = "cnpj", nullable = false, unique = true, length = 14)
@@ -85,9 +95,8 @@ public class Empresa implements Serializable {
 	@Column(name = "home")
 	private String homePage;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tipoDeObra")
-	private TipoDeObra tipoDeObra;
+	@ManyToMany(mappedBy = "empresas", fetch = FetchType.EAGER)
+	private Set<TipoDeObra> tiposDeObras;
 
 	@ManyToMany(mappedBy = "empresas", fetch = FetchType.LAZY)
 	private Set<Bolsa> bolsas;
@@ -116,6 +125,10 @@ public class Empresa implements Serializable {
 	@ManyToMany(mappedBy = "empresas", fetch = FetchType.LAZY)
 	private Set<ContaAPagar> contasAPagar;
 
+	@ManyToMany(mappedBy = "empresas", fetch = FetchType.LAZY)
+	private Set<Obra> obras;
+
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -239,12 +252,12 @@ public class Empresa implements Serializable {
 		this.homePage = homePage;
 	}
 
-	public TipoDeObra getTipoDeObra() {
-		return tipoDeObra;
+	public Set<TipoDeObra> getTiposDeObras() {
+		return tiposDeObras;
 	}
 
-	public void setTipoDeObra(TipoDeObra tipoDeObra) {
-		this.tipoDeObra = tipoDeObra;
+	public void setTiposDeObras(Set<TipoDeObra> tiposDeObras) {
+		this.tiposDeObras = tiposDeObras;
 	}
 
 	public Set<Bolsa> getBolsas() {
@@ -317,6 +330,14 @@ public class Empresa implements Serializable {
 
 	public void setContasAPagar(Set<ContaAPagar> contasAPagar) {
 		this.contasAPagar = contasAPagar;
+	}
+
+	public Set<Obra> getObras() {
+		return obras;
+	}
+
+	public void setObras(Set<Obra> obras) {
+		this.obras = obras;
 	}
 
 	public Boolean getAtivo() {

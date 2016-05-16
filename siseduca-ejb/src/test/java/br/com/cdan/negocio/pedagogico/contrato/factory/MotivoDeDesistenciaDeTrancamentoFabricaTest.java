@@ -30,5 +30,4 @@ public class MotivoDeDesistenciaDeTrancamentoFabricaTest {
 		dao.persist(m);
 		return m;
 	}
-
 }

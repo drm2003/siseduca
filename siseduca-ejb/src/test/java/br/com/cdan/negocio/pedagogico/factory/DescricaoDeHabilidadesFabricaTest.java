@@ -1,10 +1,9 @@
 package br.com.cdan.negocio.pedagogico.factory;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.DescricaoDeHabilidades;
-import br.com.cdan.model.pedagogico.GrupoDeHabilidades;
+import br.com.cdan.negocio.pedagogico.DescricaoDeHabilidadesDao;
 
 public class DescricaoDeHabilidadesFabricaTest {
 	private static DescricaoDeHabilidadesFabricaTest instance = null;
@@ -20,12 +19,13 @@ public class DescricaoDeHabilidadesFabricaTest {
 		DescricaoDeHabilidades d = new DescricaoDeHabilidades();
 		d.setAtivo(Boolean.TRUE);
 		d.setDescricao("descricao");
-		//
-		Set<GrupoDeHabilidades> grupoDeHabilidades = new LinkedHashSet<>();
-		grupoDeHabilidades.add(GrupoDeHabilidadesFabricaTest.getInstance().criaGrupoDeHabilidades());
-		grupoDeHabilidades.add(GrupoDeHabilidadesFabricaTest.getInstance().criaGrupoDeHabilidades());
-		d.setGrupoDeHabilidades(grupoDeHabilidades);
-		//
+		return d;
+	}
+
+	public DescricaoDeHabilidades criaDescricaoDeHabilidadesPersistido(EntityManager em) {
+		DescricaoDeHabilidades d = criaDescricaoDeHabilidades();
+		DescricaoDeHabilidadesDao dao = new DescricaoDeHabilidadesDao(em);
+		dao.persist(dao);
 		return d;
 	}
 

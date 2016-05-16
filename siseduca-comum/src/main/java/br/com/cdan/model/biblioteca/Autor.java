@@ -36,10 +36,11 @@ public class Autor implements Serializable {
 	private Set<Obra> obras;
 
 	@NotNull
-	@Column(name = "ativo")
+	@Column(name = "ativo", nullable = false)
 	private Boolean ativo;
 
-	@Column(name = "compartilhado")
+	@NotNull
+	@Column(name = "compartilhado", nullable = false)
 	private Boolean compartilhado;
 
 	public Long getId() {

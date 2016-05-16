@@ -3,9 +3,7 @@ package br.com.cdan.negocio.pedagogico.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.comum.EnumTipoMediaAposExameFinal;
-import br.com.cdan.model.pedagogico.ExameFinal;
 import br.com.cdan.model.pedagogico.MediaAposExameFinal;
-import br.com.cdan.negocio.pedagogico.ExameFinalDao;
 import br.com.cdan.negocio.pedagogico.MediaAposExameFinalDao;
 
 public class MediaAposExameFinalFabricaTest {
@@ -18,25 +16,19 @@ public class MediaAposExameFinalFabricaTest {
 		return instance;
 	}
 
-	public MediaAposExameFinal criaMediaAposExameFinal() {
+	public MediaAposExameFinal criaMediaAposExameFinal(EntityManager em) {
 		MediaAposExameFinal m = new MediaAposExameFinal();
 		m.setAtivo(Boolean.TRUE);
 		m.setConsiderarANotaDeExameFinal(Boolean.TRUE);
 		m.setDesconsiderarANotaDeExameFinal(Boolean.FALSE);
 		m.setEnumTipoMediaAposExameFinal(EnumTipoMediaAposExameFinal.CALCULARAMEDIA);
-		m.setExameFinal(ExameFinalFabricaTest.getInstance().criaExameFinal());
+		m.setExameFinal(ExameFinalFabricaTest.getInstance().criaExameFinalPersistido(em));
 		return m;
 	}
 
 	public MediaAposExameFinal criaMediaAposExameFinalPersistido(EntityManager em) {
-		MediaAposExameFinal m = criaMediaAposExameFinal();
+		MediaAposExameFinal m = criaMediaAposExameFinal(em);
 		MediaAposExameFinalDao dao = new MediaAposExameFinalDao(em);
-		//
-		ExameFinalDao exameFinalDao = new ExameFinalDao(em);
-		ExameFinal exameFinal = m.getExameFinal();
-		exameFinalDao.persist(exameFinal);
-		m.setExameFinal(exameFinal);
-		//
 		dao.persist(m);
 		return m;
 	}

@@ -1,28 +1,14 @@
 package br.com.cdan.negocio.pedagogico.contrato.factory;
 
 import java.util.Calendar;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.pedagogico.SituacaoDoAlunoNaTurma;
-import br.com.cdan.model.pedagogico.contrato.DisciplinaMatricula;
 import br.com.cdan.model.pedagogico.contrato.Matricula;
-import br.com.cdan.model.pedagogico.contrato.TipoDeContrato;
-import br.com.cdan.model.pedagogico.curso.Investimento;
-import br.com.cdan.model.pedagogico.geral.SituacaoDoContrato;
-import br.com.cdan.model.pessoa.Aluno;
-import br.com.cdan.negocio.pedagogico.SituacaoDoAlunoNaTurmaDao;
-import br.com.cdan.negocio.pedagogico.contrato.DisciplinaMatriculaDao;
 import br.com.cdan.negocio.pedagogico.contrato.MatriculaDao;
-import br.com.cdan.negocio.pedagogico.contrato.TipoDeContratoDao;
-import br.com.cdan.negocio.pedagogico.curso.InvestimentoDao;
 import br.com.cdan.negocio.pedagogico.curso.factory.InvestimentoFabricaTest;
 import br.com.cdan.negocio.pedagogico.factory.SituacaoDoAlunoNaTurmaFabricaTest;
-import br.com.cdan.negocio.pedagogico.geral.SituacaoDoContratoDao;
 import br.com.cdan.negocio.pedagogico.geral.factory.SituacaoDoContratoFabricaTest;
-import br.com.cdan.negocio.pedagogico.pessoa.AlunoDao;
 import br.com.cdan.negocio.pedagogico.pessoa.factory.AlunoFabricaTest;
 
 public class MatriculaFabricaTest {
@@ -35,65 +21,27 @@ public class MatriculaFabricaTest {
 		return instance;
 	}
 
-	public Matricula criaMatricula() {
+	public Matricula criaMatricula(EntityManager em) {
 		Matricula m = new Matricula();
-		m.setAluno(AlunoFabricaTest.getInstance().criaAluno());
+		m.setAluno(AlunoFabricaTest.getInstance().criaAlunoPersistido(em));
 		m.setAtivo(Boolean.TRUE);
 		m.setDataInicio(Calendar.getInstance());
 		m.setDataTermino(Calendar.getInstance());
-		// Disciplinas
-		Set<DisciplinaMatricula> disciplinaMatriculas = new LinkedHashSet<>();
-		disciplinaMatriculas.add(DisciplinaMatriculaFabricaTest.getInstance().criaDisciplinaMatricula());
-		disciplinaMatriculas.add(DisciplinaMatriculaFabricaTest.getInstance().criaDisciplinaMatricula());
-		m.setDisciplinas(disciplinaMatriculas);
 		//
-		m.setInvestimento(InvestimentoFabricaTest.getInstance().criaInvestimento());
+		m.setInvestimento(InvestimentoFabricaTest.getInstance().criaInvestimentoPersistido(em));
 		m.setMatrizCurricular(Long.valueOf("10"));
 		m.setNumeroContrato("numeroContrato");
-		m.setSituacaoDoAlunoNaTurma(SituacaoDoAlunoNaTurmaFabricaTest.getInstance().criaSituacaoDoAlunoNaTurma());
-		m.setSituacaoDoContrato(SituacaoDoContratoFabricaTest.getInstance().criaSituacaoDoContrato());
-		m.setTipoDeContrato(TipoDeContratoFabricaTest.getInstance().criaTipoDeContrato());
+		m.setSituacaoDoAlunoNaTurma(
+				SituacaoDoAlunoNaTurmaFabricaTest.getInstance().criaSituacaoDoAlunoNaTurmaPersistido(em));
+		m.setSituacaoDoContrato(SituacaoDoContratoFabricaTest.getInstance().criaSituacaoDoContratoPersistido(em));
+		m.setTipoDeContrato(TipoDeContratoFabricaTest.getInstance().criaTipoDeContratoPersistido(em));
 		m.setTurma(Long.valueOf("10"));
 		return m;
 	}
 
 	public Matricula criaMatriculaPersistido(EntityManager em) {
-		Matricula m = criaMatricula();
+		Matricula m = criaMatricula(em);
 		MatriculaDao dao = new MatriculaDao(em);
-		//
-		AlunoDao alunoDao = new AlunoDao(em);
-		Aluno aluno = m.getAluno();
-		alunoDao.persist(aluno);
-		m.setAluno(aluno);
-		// Disciplinas
-		Set<DisciplinaMatricula> disciplinasMatriculas = new LinkedHashSet<>();
-		DisciplinaMatriculaDao disciplinaMatriculaDao = new DisciplinaMatriculaDao(em);
-		m.getDisciplinas().forEach(disciplinaMatricula -> {
-			disciplinaMatriculaDao.persist(disciplinaMatricula);
-			disciplinasMatriculas.add(disciplinaMatricula);
-		});
-		m.setDisciplinas(disciplinasMatriculas);
-		//
-		InvestimentoDao investimentoDao = new InvestimentoDao(em);
-		Investimento investimento = m.getInvestimento();
-		investimentoDao.persist(investimento);
-		m.setInvestimento(investimento);
-		//
-		SituacaoDoAlunoNaTurmaDao situacaoDoAlunoNaTurmaDao = new SituacaoDoAlunoNaTurmaDao(em);
-		SituacaoDoAlunoNaTurma situacaoDoAlunoNaTurma = m.getSituacaoDoAlunoNaTurma();
-		situacaoDoAlunoNaTurmaDao.persist(situacaoDoAlunoNaTurma);
-		m.setSituacaoDoAlunoNaTurma(situacaoDoAlunoNaTurma);
-		//
-		SituacaoDoContratoDao situacaoDoContratoDao = new SituacaoDoContratoDao(em);
-		SituacaoDoContrato situacaoDoContrato = m.getSituacaoDoContrato();
-		situacaoDoContratoDao.persist(situacaoDoContrato);
-		m.setSituacaoDoContrato(situacaoDoContrato);
-		//
-		TipoDeContratoDao tipoDeContratoDao = new TipoDeContratoDao(em);
-		TipoDeContrato tipoDeContrato = m.getTipoDeContrato();
-		tipoDeContratoDao.persist(tipoDeContrato);
-		m.setTipoDeContrato(tipoDeContrato);
-		//
 		dao.persist(m);
 		return m;
 	}

@@ -2,9 +2,7 @@ package br.com.cdan.negocio.pedagogico.factory;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.pedagogico.DescricaoDeHabilidades;
 import br.com.cdan.model.pedagogico.GrupoDeHabilidades;
-import br.com.cdan.negocio.pedagogico.DescricaoDeHabilidadesDao;
 import br.com.cdan.negocio.pedagogico.GrupoDeHabilidadesDao;
 
 public class GrupoDeHabilidadesFabricaTest {
@@ -17,27 +15,23 @@ public class GrupoDeHabilidadesFabricaTest {
 		return instance;
 	}
 
-	public GrupoDeHabilidades criaGrupoDeHabilidades() {
+	public GrupoDeHabilidades criaGrupoDeHabilidades(EntityManager em) {
 		GrupoDeHabilidades g = new GrupoDeHabilidades();
 		g.setAtivo(Boolean.TRUE);
 		g.setDescricao("descricao");
 		g.setCompartilhado(Boolean.TRUE);
-		g.setDescricaoDeHabilidades(DescricaoDeHabilidadesFabricaTest.getInstance().criaDescricaoDeHabilidades());
+		g.setDescricaoDeHabilidades(
+				DescricaoDeHabilidadesFabricaTest.getInstance().criaDescricaoDeHabilidadesPersistido(em));
 		g.setOrdem(Long.valueOf(2));
 		g.setPeso(Long.valueOf(1));
 		return g;
 	}
 
 	public GrupoDeHabilidades criaGrupoDeHabilidadesPersistido(EntityManager em) {
-		GrupoDeHabilidades g = criaGrupoDeHabilidades();
+		GrupoDeHabilidades g = criaGrupoDeHabilidades(em);
 		GrupoDeHabilidadesDao dao = new GrupoDeHabilidadesDao(em);
 		//
-		DescricaoDeHabilidadesDao descricaoDeHabilidadesDao = new DescricaoDeHabilidadesDao(em);
-		DescricaoDeHabilidades descricaoDeHabilidades = g.getDescricaoDeHabilidades();
-		descricaoDeHabilidadesDao.persist(descricaoDeHabilidades);
-		g.setDescricaoDeHabilidades(descricaoDeHabilidades);
-		//
-		dao.persist(descricaoDeHabilidades);
+		dao.persist(g);
 		return g;
 	}
 }

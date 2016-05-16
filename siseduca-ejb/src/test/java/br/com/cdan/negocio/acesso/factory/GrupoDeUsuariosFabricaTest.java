@@ -17,6 +17,7 @@ public class GrupoDeUsuariosFabricaTest {
 
 	public GrupoDeUsuarios criaGrupoDeUsuarios() {
 		GrupoDeUsuarios g = new GrupoDeUsuarios();
+		g.setNome("nome" + Math.random() * 10000);
 		g.setAtivo(Boolean.TRUE);
 		g.setProfessor(Boolean.TRUE);
 		return g;

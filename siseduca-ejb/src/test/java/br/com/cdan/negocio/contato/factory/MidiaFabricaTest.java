@@ -5,12 +5,12 @@ import javax.persistence.EntityManager;
 import br.com.cdan.model.contato.Midia;
 import br.com.cdan.negocio.contato.MidiaDao;
 
-public class MidiaFabricaFabricaTest {
-	private static MidiaFabricaFabricaTest instance = null;
+public class MidiaFabricaTest {
+	private static MidiaFabricaTest instance = null;
 
-	public static synchronized MidiaFabricaFabricaTest getInstance() {
+	public static synchronized MidiaFabricaTest getInstance() {
 		if (instance == null) {
-			instance = new MidiaFabricaFabricaTest();
+			instance = new MidiaFabricaTest();
 		}
 		return instance;
 	}

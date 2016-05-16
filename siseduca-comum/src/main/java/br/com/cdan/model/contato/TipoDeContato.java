@@ -8,6 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "TipoDeContato")
@@ -18,9 +22,13 @@ public class TipoDeContato implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "descricao", length = 60, nullable = false, unique = true)
+	@NotNull
+	@NotEmpty
+	@Size(max = 100, min = 3)
+	@Column(name = "descricao", length = 100, nullable = false, unique = true)
 	private String descricao;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -52,8 +60,7 @@ public class TipoDeContato implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
@@ -82,7 +89,6 @@ public class TipoDeContato implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Tipos de Contato [descricao=" + descricao + ", ativo=" + ativo
-				+ "]";
+		return "Tipos de Contato [descricao=" + descricao + ", ativo=" + ativo + "]";
 	}
 }

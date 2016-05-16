@@ -1,12 +1,8 @@
 package br.com.cdan.negocio.pedagogico.factory;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.Escolaridade;
-import br.com.cdan.model.pedagogico.SeriePadrao;
 import br.com.cdan.negocio.pedagogico.EscolaridadeDao;
 
 public class EscolaridadeFabricaTest {
@@ -22,9 +18,6 @@ public class EscolaridadeFabricaTest {
 	public Escolaridade criaEscolaridade() {
 		Escolaridade e = new Escolaridade();
 		e.setDescricao("descricao");
-		//
-		Set<SeriePadrao> seriesPadrao = new LinkedHashSet<>();
-		e.setSeriesPadrao(seriesPadrao);
 		e.setAtivo(Boolean.TRUE);
 		return e;
 	}
@@ -32,12 +25,6 @@ public class EscolaridadeFabricaTest {
 	public Escolaridade criaEscolaridadePersistido(EntityManager em) {
 		Escolaridade e = criaEscolaridade();
 		EscolaridadeDao dao = new EscolaridadeDao(em);
-		//
-		e.setDescricao("descricao");
-		//
-		Set<SeriePadrao> seriesPadrao = new LinkedHashSet<>();
-		e.setSeriesPadrao(seriesPadrao);
-		//
 		dao.persist(e);
 		return e;
 	}

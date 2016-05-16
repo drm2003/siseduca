@@ -7,9 +7,7 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.comum.EnumTipoDePagamento;
 import br.com.cdan.model.pessoa.DadosProfissionais;
-import br.com.cdan.model.pessoa.Funcionario;
 import br.com.cdan.negocio.pedagogico.pessoa.DadosProfissionaisDao;
-import br.com.cdan.negocio.pedagogico.pessoa.FuncionarioDao;
 
 public class DadosProfissionaisFabricaTest {
 	private static DadosProfissionaisFabricaTest instance = null;
@@ -21,7 +19,7 @@ public class DadosProfissionaisFabricaTest {
 		return instance;
 	}
 
-	public DadosProfissionais criaDadosProfissionais() {
+	public DadosProfissionais criaDadosProfissionais(EntityManager em) {
 		DadosProfissionais d = new DadosProfissionais();
 		d.setAtivo(Boolean.TRUE);
 		d.setAulasNormais(BigDecimal.TEN);
@@ -29,7 +27,7 @@ public class DadosProfissionaisFabricaTest {
 		d.setCurriculo("curriculo");
 		d.setDataDeAdmissao(Calendar.getInstance());
 		d.setDataDeDemissao(null);
-		d.setFuncionario(FuncionarioFabricaTest.getInstance().criaFuncionario());
+		d.setFuncionario(FuncionarioFabricaTest.getInstance().criaFuncionarioPersistido(em));
 		d.setINSS(BigDecimal.TEN);
 		d.setSalario(BigDecimal.ONE);
 		d.setTipoDePagamento(EnumTipoDePagamento.HORISTA);
@@ -37,13 +35,8 @@ public class DadosProfissionaisFabricaTest {
 	}
 
 	public DadosProfissionais criaDadosProfissionaisPersistido(EntityManager em) {
-		DadosProfissionais d = criaDadosProfissionais();
+		DadosProfissionais d = criaDadosProfissionais(em);
 		DadosProfissionaisDao dao = new DadosProfissionaisDao(em);
-		//
-		FuncionarioDao funcionarioDao = new FuncionarioDao(em);
-		Funcionario funcionario = d.getFuncionario();
-		funcionarioDao.persist(funcionario);
-		d.setFuncionario(funcionario);
 		//
 		dao.persist(d);
 		return d;

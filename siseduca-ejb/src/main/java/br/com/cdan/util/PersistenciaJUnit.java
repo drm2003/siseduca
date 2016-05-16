@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 /**
- * Classe utilizada para permitir o acesso ? camada de persist?ncia para testes
+ * Classe utilizada para permitir o acesso à camada de persistência para testes
  * JUnit.fos
  * 
  * @author Daniel Monteiro
@@ -37,8 +37,8 @@ public class PersistenciaJUnit {
 	/**
 	 * Recupera uma inst?ncia <code>EntityManager</code>.
 	 * <p>
-	 * O <code>EntityManager</code> est? relacionado a um contexto de
-	 * persist?ncia.
+	 * O <code>EntityManager</code> está relacionado a um contexto de
+	 * persistência.
 	 */
 	protected EntityManager getEntityManager() {
 		if (em == null) {
@@ -50,10 +50,10 @@ public class PersistenciaJUnit {
 	/**
 	 * 
 	 * Classe utilizada para permitir que testes JUnit consigam acesso ao
-	 * contexto de persist?ncia fornecido pelo JPA.
+	 * contexto de persistência fornecido pelo JPA.
 	 * <p>
 	 * Permite o acesso ao banco de dados sem a necessidade de deploy em um
-	 * servidor de aplica??o.
+	 * servidor de aplicação.
 	 */
 	public PersistenciaJUnit() {
 		inicializa();
@@ -62,10 +62,10 @@ public class PersistenciaJUnit {
 	/**
 	 * Permite o acesso ao banco de dados:
 	 * <p>
-	 * 1. Estabelece a conex?o com o banco de dados.
+	 * 1. Estabelece a conexão com o banco de dados.
 	 * <p>
-	 * 2. Cria uma inst?ncia <code>EntityManager</code> para interagir com o
-	 * contexto de persist?ncia.
+	 * 2. Cria uma instância <code>EntityManager</code> para interagir com o
+	 * contexto de persistência.
 	 * <p>
 	 * 3. Inicializa uma transa??o <code>EntityTransaction</code>, que pode ser
 	 * usada ser utilizada em s?rie para come?ar e confirmar v?rias transa??es.
@@ -77,10 +77,10 @@ public class PersistenciaJUnit {
 	}
 
 	/**
-	 * Tenta estabelecer uma conex?o com o banco de dados.
+	 * Tenta estabelecer uma conexão com o banco de dados.
 	 * <p>
 	 * O <code>DriverManager</code> tenta selecionar o driver apropriado entre
-	 * os drivers JDBC dispon?veis.
+	 * os drivers JDBC disponíveis.
 	 */
 	private void estabeleceConexaoComBancoDeDados() {
 		try {
@@ -90,12 +90,11 @@ public class PersistenciaJUnit {
 				LOG.error(e.getMessage(), e);
 				fail("Não encontrou o driver para conectar ao banco de dados.");
 			}
-			connection = DriverManager.getConnection(URL_CONEXAO_BANCO,
-					USUARIO_CONEXAO, SENHA_CONEXAO);
+			connection = DriverManager.getConnection(URL_CONEXAO_BANCO, USUARIO_CONEXAO, SENHA_CONEXAO);
 			LOG.info("JUnit conectou-se ao banco de dados.");
 		} catch (SQLException e) {
 			LOG.error(e.getMessage(), e);
-			fail("Exce??o durante a conex?o com o banco de dados.");
+			fail("Exceção durante a conexão com o banco de dados.");
 		}
 	}
 
@@ -103,29 +102,27 @@ public class PersistenciaJUnit {
 	 * Cria uma inst?ncia <code>EntityManager</code> para interagir com o
 	 * contexto de persist?ncia.
 	 * <p>
-	 * A API <code>EntityManager</code> ? utilizada para criar e remover
-	 * inst?ncias de entidades, para consultar entidades por sua chave prim?ria,
+	 * A API <code>EntityManager</code> é utilizada para criar e remover
+	 * instâncias de entidades, para consultar entidades por sua chave prim?ria,
 	 * e para consultar outras entidades.
 	 */
 	private void criaEntityManagerDoJPA() {
 		try {
-			em = Persistence
-					.createEntityManagerFactory(PERSISTENCE_UNIT_TESTES)
-					.createEntityManager();
+			em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_TESTES).createEntityManager();
 			em.setFlushMode(FlushModeType.AUTO);
 			LOG.info("JUnit inicializou o EntityManager do JPA.");
 		} catch (Exception e) {
 			LOG.error(e.getMessage(), e);
-			fail("Exce??o durante a inicializa??o do EntityManager JPA.");
+			fail("Exceção durante a inicialização do EntityManager JPA.");
 		}
 	}
 
 	/**
-	 * Inicializa uma transa??o <code>EntityTransaction</code>, que pode ser
-	 * usada ser utilizada em s?rie para come?ar e confirmar v?rias transa??es.
+	 * Inicializa uma transação <code>EntityTransaction</code>, que pode ser
+	 * usada ser utilizada em série para começar e confirmar várias transações.
 	 * <p>
-	 * Ap?s a inicializa??o da transa??o esta ? colocada em modo de "roll back",
-	 * deste modo a transa??o ser? sempre desfeita.
+	 * Após a inicialização da transação esta é colocada em modo de "roll back",
+	 * deste modo a transação será sempre desfeita.
 	 */
 	private void inicializaTransacao() {
 		if (em != null) {
@@ -157,7 +154,7 @@ public class PersistenciaJUnit {
 	 * Reverte as altera??es efetuadas (roll back).
 	 */
 	private void encerraTransacaoComRollback() {
-		LOG.info("Desfaz transa??o com roll back.");
+		LOG.info("Desfaz transação com roll back.");
 		if (em.getTransaction() != null && em.getTransaction().isActive()) {
 			em.getTransaction().rollback();
 		}
@@ -174,14 +171,14 @@ public class PersistenciaJUnit {
 	}
 
 	/**
-	 * Fecha a conex?o com o banco de dados.
+	 * Fecha a conexão com o banco de dados.
 	 */
 	private void encerraConexaoComBancoDeDados() {
 		try {
 			connection.createStatement().execute("SHUTDOWN");
 		} catch (Exception ex) {
 		}
-		LOG.info("JUnit encerrou a conex?o com o banco de dados.");
+		LOG.info("JUnit encerrou a conexão com o banco de dados.");
 	}
 
 	/**
@@ -189,15 +186,14 @@ public class PersistenciaJUnit {
 	 * @param quantidade
 	 * @return
 	 * 
-	 *         CRIAR STRING A PARTIR DE UM DETERMINADO TAMANHO SERVE PARA TESTES
+	 * 		CRIAR STRING A PARTIR DE UM DETERMINADO TAMANHO SERVE PARA TESTES
 	 *         DE CAMPOS
 	 */
 	public String criarStringDinamicaPorTamanho(Integer quantidade) {
 		String s = "";
 		int x = 0;
 		for (int i = 0; i < quantidade; i++) {
-			s += x + "";
-			x++;
+			s += (int) (Math.random() * 10) + "";
 			if (x == 10)
 				x = 0;
 		}

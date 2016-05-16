@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.comum.EnumDiaDaSemana;
 import br.com.cdan.model.pedagogico.HorarioDeAula;
@@ -50,6 +51,7 @@ public class AcessoDiasDaSemana implements Serializable {
 	@Column(name = "horaSaida")
 	private Date horaSaida;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

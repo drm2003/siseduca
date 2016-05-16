@@ -3,8 +3,10 @@ package br.com.cdan.model.geral;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ import javax.persistence.Table;
 
 import br.com.cdan.model.acesso.Usuario;
 import br.com.cdan.model.biblioteca.Editora;
+import br.com.cdan.model.clientefornecedor.ClienteFornecedor;
 import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.pessoa.Pessoa;
 
@@ -51,6 +54,10 @@ public class Email implements Serializable {
 
 	@Column(name = "principal")
 	private Boolean principal;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "clienteFornecedor")
+	private ClienteFornecedor clienteFornecedor;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -117,6 +124,14 @@ public class Email implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public ClienteFornecedor getClienteFornecedor() {
+		return clienteFornecedor;
+	}
+
+	public void setClienteFornecedor(ClienteFornecedor clienteFornecedor) {
+		this.clienteFornecedor = clienteFornecedor;
 	}
 
 	@Override

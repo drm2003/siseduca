@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.contrato.Matricula;
 import br.com.cdan.model.pedagogico.contrato.TipoDeContrato;
-import br.com.cdan.negocio.pedagogico.contrato.MatriculaDao;
 import br.com.cdan.negocio.pedagogico.contrato.TipoDeContratoDao;
 
 public class TipoDeContratoFabricaTest {
@@ -20,28 +19,20 @@ public class TipoDeContratoFabricaTest {
 		return instance;
 	}
 
-	public TipoDeContrato criaTipoDeContrato() {
+	public TipoDeContrato criaTipoDeContrato(EntityManager em) {
 		TipoDeContrato t = new TipoDeContrato();
 		t.setAtivo(Boolean.TRUE);
 		t.setDescricao("descricao");
 		//
 		Set<Matricula> matriculas = new LinkedHashSet<>();
-		matriculas.add(MatriculaFabricaTest.getInstance().criaMatricula());
+		matriculas.add(MatriculaFabricaTest.getInstance().criaMatriculaPersistido(em));
 		t.setMatriculas(matriculas);
 		return t;
 	}
 
 	public TipoDeContrato criaTipoDeContratoPersistido(EntityManager em) {
-		TipoDeContrato t = criaTipoDeContrato();
+		TipoDeContrato t = criaTipoDeContrato(em);
 		TipoDeContratoDao dao = new TipoDeContratoDao(em);
-		//
-		Set<Matricula> matriculas = new LinkedHashSet<>();
-		MatriculaDao matriculaDao = new MatriculaDao(em);
-		t.getMatriculas().forEach(matricula -> {
-			matriculaDao.persist(matricula);
-			matriculas.add(matricula);
-		});
-		t.setMatriculas(matriculas);
 		//
 		dao.persist(t);
 		return t;

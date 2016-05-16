@@ -1,14 +1,8 @@
 package br.com.cdan.negocio.pedagogico.geral.factory;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.pedagogico.contrato.Matricula;
 import br.com.cdan.model.pedagogico.geral.SituacaoDoContrato;
-import br.com.cdan.negocio.pedagogico.contrato.MatriculaDao;
-import br.com.cdan.negocio.pedagogico.contrato.factory.MatriculaFabricaTest;
 
 public class SituacaoDoContratoFabricaTest {
 	private static SituacaoDoContratoFabricaTest instance = null;
@@ -24,11 +18,6 @@ public class SituacaoDoContratoFabricaTest {
 		SituacaoDoContrato s = new SituacaoDoContrato();
 		s.setAtivo(Boolean.TRUE);
 		s.setDescricao("descricao");
-		//
-		Set<Matricula> matriculas = new LinkedHashSet<>();
-		matriculas.add(MatriculaFabricaTest.getInstance().criaMatricula());
-		matriculas.add(MatriculaFabricaTest.getInstance().criaMatricula());
-		s.setMatriculas(matriculas);
 		return s;
 	}
 
@@ -36,14 +25,6 @@ public class SituacaoDoContratoFabricaTest {
 		SituacaoDoContrato s = new SituacaoDoContrato();
 		s.setAtivo(Boolean.TRUE);
 		s.setDescricao("descricao");
-		//
-		Set<Matricula> matriculas = new LinkedHashSet<>();
-		MatriculaDao matriculaDao = new MatriculaDao(em);
-		s.getMatriculas().forEach(matricula -> {
-			matriculaDao.persist(matricula);
-			matriculas.add(matricula);
-		});
-		s.setMatriculas(matriculas);
 		//
 		return s;
 	}

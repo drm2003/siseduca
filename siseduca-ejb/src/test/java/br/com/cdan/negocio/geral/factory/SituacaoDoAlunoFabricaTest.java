@@ -1,5 +1,7 @@
 package br.com.cdan.negocio.geral.factory;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.model.geral.SituacaoDoAluno;
 import br.com.cdan.negocio.geral.SituacaoDoAlunoDao;
 
@@ -20,8 +22,8 @@ public class SituacaoDoAlunoFabricaTest {
 		return s;
 	}
 
-	public SituacaoDoAluno criaSituacaoDoAlunoPersistido() {
-		SituacaoDoAlunoDao dao = new SituacaoDoAlunoDao();
+	public SituacaoDoAluno criaSituacaoDoAlunoPersistido(EntityManager em) {
+		SituacaoDoAlunoDao dao = new SituacaoDoAlunoDao(em);
 		SituacaoDoAluno s = criaSituacaoDoAluno();
 		dao.persist(s);
 		return s;

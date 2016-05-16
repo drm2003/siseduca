@@ -1,10 +1,7 @@
 package br.com.cdan.negocio.biblioteca.factory;
 
-import javax.persistence.EntityManager;
-
 import br.com.cdan.comum.EnumTipoAquisicao;
 import br.com.cdan.model.biblioteca.DadosDoExemplar;
-import br.com.cdan.negocio.biblioteca.DadosDoExemplarDao;
 
 public class DadosDoExemplarFabricaTest {
 	private static DadosDoExemplarFabricaTest instance = null;
@@ -30,13 +27,4 @@ public class DadosDoExemplarFabricaTest {
 		dadosDoExemplar.setTombo(Long.valueOf("1010"));
 		return dadosDoExemplar;
 	}
-
-	public DadosDoExemplar criaDadosDoExemplarPersistido(EntityManager em) {
-		DadosDoExemplar d = criaDadosDoExemplar();
-		DadosDoExemplarDao dao = new DadosDoExemplarDao(em);
-		//
-		dao.persist(d);
-		return d;
-	}
-
 }

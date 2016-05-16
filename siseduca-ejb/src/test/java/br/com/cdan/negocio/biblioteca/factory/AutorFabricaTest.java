@@ -24,8 +24,7 @@ public class AutorFabricaTest {
 	}
 
 	public Autor criaAutorPersistido(EntityManager em) {
-		AutorDao dao = new AutorDao();
-		dao.setEntityManager(em);
+		AutorDao dao = new AutorDao(em);
 		//
 		Autor a = criaAutor();
 		dao.persist(a);

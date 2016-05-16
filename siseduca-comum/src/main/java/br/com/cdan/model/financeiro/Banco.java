@@ -9,9 +9,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.cdan.model.clientefornecedor.ClienteFornecedor;
 import br.com.cdan.model.geral.Telefone;
 
 @Entity
@@ -34,6 +36,9 @@ public class Banco implements Serializable {
 
 	@OneToMany(mappedBy = "banco")
 	private Set<Telefone> telefones;
+
+	@ManyToMany(mappedBy = "bancos", fetch = FetchType.LAZY)
+	private Set<ClienteFornecedor> clientesFornecedors;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -76,6 +81,14 @@ public class Banco implements Serializable {
 
 	public void setTelefones(Set<Telefone> telefones) {
 		this.telefones = telefones;
+	}
+
+	public Set<ClienteFornecedor> getClientesFornecedors() {
+		return clientesFornecedors;
+	}
+
+	public void setClientesFornecedors(Set<ClienteFornecedor> clientesFornecedors) {
+		this.clientesFornecedors = clientesFornecedors;
 	}
 
 	public Boolean getAtivo() {

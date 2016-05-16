@@ -1,6 +1,9 @@
 package br.com.cdan.negocio.biblioteca.factory;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.model.biblioteca.TipoDeObra;
+import br.com.cdan.negocio.biblioteca.TipoDeObraDao;
 
 public class TipoDeObraFabricaTest {
 	private static TipoDeObraFabricaTest instance = null;
@@ -13,8 +16,17 @@ public class TipoDeObraFabricaTest {
 	}
 
 	public TipoDeObra criaTipoDeObra() {
-		// TODO Auto-generated method stub
-		return null;
+		TipoDeObra t = new TipoDeObra();
+		t.setAtivo(Boolean.TRUE);
+		t.setDescricao("descricao" + Math.random() * 10000);
+		return t;
+	}
+
+	public TipoDeObra criaTipoDeObraPersistido(EntityManager em) {
+		TipoDeObra t = criaTipoDeObra();
+		TipoDeObraDao dao = new TipoDeObraDao(em);
+		dao.persist(t);
+		return t;
 	}
 
 }

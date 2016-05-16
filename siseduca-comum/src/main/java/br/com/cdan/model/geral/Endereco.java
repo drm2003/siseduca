@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.cdan.model.biblioteca.Editora;
+import br.com.cdan.model.clientefornecedor.ClienteFornecedor;
 import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.geral.cep.CEP;
 import br.com.cdan.model.pedagogico.contrato.Aproveitamento;
@@ -82,6 +83,10 @@ public class Endereco implements Serializable {
 
 	@OneToOne(mappedBy = "enderecoEstabelecimento")
 	private Aproveitamento aproveitamento;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "clienteFornecedor")
+	private ClienteFornecedor clienteFornecedor;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -212,6 +217,14 @@ public class Endereco implements Serializable {
 
 	public void setAproveitamento(Aproveitamento aproveitamento) {
 		this.aproveitamento = aproveitamento;
+	}
+
+	public ClienteFornecedor getClienteFornecedor() {
+		return clienteFornecedor;
+	}
+
+	public void setClienteFornecedor(ClienteFornecedor clienteFornecedor) {
+		this.clienteFornecedor = clienteFornecedor;
 	}
 
 	@Override

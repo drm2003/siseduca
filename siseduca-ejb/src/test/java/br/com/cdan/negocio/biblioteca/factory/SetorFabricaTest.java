@@ -1,6 +1,9 @@
 package br.com.cdan.negocio.biblioteca.factory;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.model.biblioteca.Setor;
+import br.com.cdan.negocio.biblioteca.SetorDao;
 
 public class SetorFabricaTest {
 	private static SetorFabricaTest instance = null;
@@ -13,8 +16,18 @@ public class SetorFabricaTest {
 	}
 
 	public Setor criaSetor() {
-		// TODO Auto-generated method stub
-		return null;
+		Setor s = new Setor();
+		s.setAtivo(Boolean.TRUE);
+		s.setCompartilhado(Boolean.TRUE);
+		s.setDescricao("descricao" + Math.random() * 10000);
+		return s;
+	}
+
+	public Setor criaSetorPersistido(EntityManager em) {
+		Setor s = criaSetor();
+		SetorDao dao = new SetorDao(em);
+		dao.persist(s);
+		return s;
 	}
 
 }

@@ -21,7 +21,7 @@ public class AcessoDiasDaSemanaDao extends SiseducaDao {
 	@Override
 	public void remove(Object obj) {
 		AcessoDiasDaSemana acessoDiasDaSemana = (AcessoDiasDaSemana) obj;
-		acessoDiasDaSemana.setAtivo(false);
+		acessoDiasDaSemana.setAtivo(Boolean.FALSE);
 		getEntityManager().merge(acessoDiasDaSemana);
 	}
 }

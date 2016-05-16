@@ -33,8 +33,7 @@ public class AutorDAOTeste extends PersistenciaJUnit {
 	@Before
 	public void setUp() throws Exception {
 		LOG.info("Instanciando DAOTest.");
-		dao = new AutorDao();
-		dao.setEntityManager(getEntityManager());
+		dao = new AutorDao(getEntityManager());
 	}
 
 	@Test
@@ -124,11 +123,27 @@ public class AutorDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test(expected = ConstraintViolationException.class)
+	public void descricao_menor_que_tamanho_minimo_permitido() {
+		Autor a = criaAutor();
+		a.setNome(criarStringDinamicaPorTamanho(2));
+		dao.persist(a);
+		Assert.assertNull(a.getId());
+	}
+
+	@Test(expected = ConstraintViolationException.class)
 	public void nao_deve_permitir_ativo_nulo() {
 		Autor a = criaAutor();
 		a.setAtivo(null);
 		dao.persist(a);
-		Assert.assertNotNull(a.getId());
+		Assert.assertNull(a.getId());
+	}
+
+	@Test(expected = ConstraintViolationException.class)
+	public void nao_deve_permitir_compartilhado_nulo() {
+		Autor a = criaAutor();
+		a.setCompartilhado(null);
+		dao.persist(a);
+		Assert.assertNull(a.getId());
 	}
 
 	private Autor criaAutor() {

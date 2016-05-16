@@ -3,6 +3,7 @@ package br.com.cdan.model.geral;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.cdan.model.biblioteca.Editora;
+import br.com.cdan.model.clientefornecedor.ClienteFornecedor;
 import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.financeiro.Banco;
 import br.com.cdan.model.pedagogico.contrato.Aproveitamento;
@@ -62,6 +64,10 @@ public class Telefone implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "aproveitamento")
 	private Aproveitamento aproveitamento;
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "clienteFornecedor")
+	private ClienteFornecedor clienteFornecedor;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -144,6 +150,14 @@ public class Telefone implements Serializable {
 
 	public void setResponsavel(Responsavel responsavel) {
 		this.responsavel = responsavel;
+	}
+
+	public ClienteFornecedor getClienteFornecedor() {
+		return clienteFornecedor;
+	}
+
+	public void setClienteFornecedor(ClienteFornecedor clienteFornecedor) {
+		this.clienteFornecedor = clienteFornecedor;
 	}
 
 	@Override

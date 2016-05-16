@@ -4,9 +4,7 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.comum.EnumMediaNotasParciais;
 import br.com.cdan.model.pedagogico.NotasParciais;
-import br.com.cdan.model.pedagogico.SistemaDeAvaliacao;
 import br.com.cdan.negocio.pedagogico.NotasParciaisDao;
-import br.com.cdan.negocio.pedagogico.SistemaDeAvaliacaoDao;
 
 public class NotasParciaisFabricaTest {
 	private static NotasParciaisFabricaTest instance = null;
@@ -18,27 +16,21 @@ public class NotasParciaisFabricaTest {
 		return instance;
 	}
 
-	public NotasParciais criaNotasParciais() {
+	public NotasParciais criaNotasParciais(EntityManager em) {
 		NotasParciais n = new NotasParciais();
 		n.setAtivo(Boolean.TRUE);
 		n.setDesconsideraAvaliacao(Boolean.FALSE);
 		n.setEnumMediaNotasParciais(EnumMediaNotasParciais.MEDIAA);
-		n.setSistemaDeAvaliacao(SistemaDeAvaliacaoFabricaTest.getInstance().criaSistemaDeAvaliacao());
+		n.setSistemaDeAvaliacao(SistemaDeAvaliacaoFabricaTest.getInstance().criaSistemaDeAvaliacaoPersistido(em));
 		n.setUtilizaAgrupamentoDeAvaliacoes(Boolean.FALSE);
 		n.setUtilizaRecuperacaoParcial(Boolean.FALSE);
 		return n;
 	}
 
 	public NotasParciais criaNotasParciaisPersistido(EntityManager em) {
-		NotasParciais n = criaNotasParciais();
+		NotasParciais n = criaNotasParciais(em);
 		NotasParciaisDao dao = new NotasParciaisDao(em);
-		//
-		SistemaDeAvaliacaoDao sistemaDeAvaliacaoDao = new SistemaDeAvaliacaoDao(em);
-		SistemaDeAvaliacao sistemaDeAvaliacao = n.getSistemaDeAvaliacao();
-		sistemaDeAvaliacaoDao.persist(sistemaDeAvaliacao);
-		n.setSistemaDeAvaliacao(sistemaDeAvaliacao);
-		//
-		dao.persist(sistemaDeAvaliacao);
+		dao.persist(n);
 		return n;
 	}
 

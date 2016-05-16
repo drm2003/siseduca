@@ -1,8 +1,9 @@
-package br.com.cdan.negocio.teste.acesso;
+package br.com.cdan.negocio.teste.biblioteca;
 
 import java.util.List;
 
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 
 import org.apache.log4j.Logger;
@@ -10,14 +11,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.cdan.model.biblioteca.AreasDeConhecimento;
-import br.com.cdan.negocio.biblioteca.AreasDeConhecimentoDao;
-import br.com.cdan.negocio.biblioteca.factory.AreasDeConhecimentoFabricaTest;
+import br.com.cdan.model.biblioteca.Setor;
+import br.com.cdan.negocio.biblioteca.SetorDao;
+import br.com.cdan.negocio.biblioteca.factory.SetorFabricaTest;
 import br.com.cdan.util.PersistenciaJUnit;
 
-public class AreasDeConhecimentoDAOTeste extends PersistenciaJUnit {
-	private static final Logger LOG = Logger.getLogger(AreasDeConhecimentoDAOTeste.class);
-	AreasDeConhecimentoDao dao;
+public class SetorDAOTeste extends PersistenciaJUnit {
+	private static final Logger LOG = Logger.getLogger(SetorDAOTeste.class);
+	SetorDao dao;
 
 	/**
 	 * <c> Ao criar um teste da camada de persistï¿½ncia utilizando o JUnit ï¿½
@@ -32,55 +33,53 @@ public class AreasDeConhecimentoDAOTeste extends PersistenciaJUnit {
 	@Before
 	public void setUp() throws Exception {
 		LOG.info("Instanciando DAOTest.");
-		dao = new AreasDeConhecimentoDao();
-		dao.setEntityManager(getEntityManager());
+		dao = new SetorDao(getEntityManager());
 	}
 
 	@Test
 	public void inserir() {
-		AreasDeConhecimento a = criaAreasDeConhecimento();
+		Setor a = criaSetor();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
-		AreasDeConhecimento consulta = dao.find(AreasDeConhecimento.class, a.getId());// CONSULTA
-		Assert.assertSame(a, consulta);// VERIFICA INSERï¿½ï¿½O
+		Setor consulta = dao.find(Setor.class, a.getId());// CONSULTA
+		Assert.assertSame(a, consulta);// VERIFICA INSERÇÃO
 	}
 
 	@Test
 	public void alterar() {
-		AreasDeConhecimento a = criaAreasDeConhecimento();
+		Setor a = criaSetor();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
 		a.setAtivo(false);
-		a.setDescricao("alteraÃ§Ã£o");
-		a.setCompartilhado(false);
+		a.setDescricao("");
 		dao.merge(a);
-		AreasDeConhecimento consulta = dao.find(AreasDeConhecimento.class, a.getId());// CONSULTA
+		Setor consulta = dao.find(Setor.class, a.getId());// CONSULTA
 		Assert.assertSame(a, consulta);// VERIFICA INSERï¿½ï¿½O
 	}
 
 	@Test
 	public void excluir() {
-		AreasDeConhecimento a = criaAreasDeConhecimento();
+		Setor a = criaSetor();
 		dao.persist(a);// INSERE
 		Assert.assertNotNull(a.getId());
-		AreasDeConhecimento consulta = dao.find(AreasDeConhecimento.class, a.getId());// CONSULTA
+		Setor consulta = dao.find(Setor.class, a.getId());// CONSULTA
 		consulta.setAtivo(false);
 		dao.remove(a);
-		Assert.assertSame(consulta, dao.find(AreasDeConhecimento.class, a.getId()));
+		Assert.assertSame(consulta, dao.find(Setor.class, a.getId()));
 	}
 
 	@Test
 	public void consultar_todos() {
-		AreasDeConhecimento a1 = criaAreasDeConhecimento();
+		Setor a1 = criaSetor();
 		dao.persist(a1);
-		AreasDeConhecimento a2 = criaAreasDeConhecimento();
+		Setor a2 = criaSetor();
 		dao.persist(a2);
 		//
-		String sql = "SELECT a FROM AreasDeConhecimento a";
-		Query query = dao.getEntityManager().createQuery(sql, AreasDeConhecimento.class);
+		String sql = "SELECT a FROM Setor a";
+		Query query = dao.getEntityManager().createQuery(sql, Setor.class);
 		//
 		@SuppressWarnings("unchecked")
-		List<AreasDeConhecimento> lista = query.getResultList(); //
+		List<Setor> lista = query.getResultList(); //
 		//
 		Assert.assertTrue(lista.contains(a1));
 		Assert.assertTrue(lista.contains(a2));
@@ -88,27 +87,27 @@ public class AreasDeConhecimentoDAOTeste extends PersistenciaJUnit {
 
 	@Test
 	public void consultar_por_descricao() {
-		AreasDeConhecimento a = criaAreasDeConhecimento();
+		Setor a = criaSetor();
 		dao.persist(a);
 		Assert.assertNotNull(a);
-		String sql = "SELECT a FROM AreasDeConhecimento a WHERE a.descricao = :descricao";
-		Query query = dao.getEntityManager().createQuery(sql);
+		String sql = "FROM Setor a WHERE a.descricao = :descricao";
+		TypedQuery<Setor> query = dao.getEntityManager().createQuery(sql, Setor.class);
 		query.setParameter("descricao", a.getDescricao());
-		AreasDeConhecimento consulta = (AreasDeConhecimento) query.getSingleResult();
+		Setor consulta = query.getSingleResult();
 		Assert.assertSame(a, consulta);
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_descricao_nula() {
-		AreasDeConhecimento a = criaAreasDeConhecimento();
+	public void nao_deve_permitir_descricao_nulo() {
+		Setor a = criaSetor();
 		a.setDescricao(null);
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_descricao_vazia() {
-		AreasDeConhecimento a = criaAreasDeConhecimento();
+	public void nao_deve_permitir_descricao_vazio() {
+		Setor a = criaSetor();
 		a.setDescricao("");
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
@@ -116,21 +115,29 @@ public class AreasDeConhecimentoDAOTeste extends PersistenciaJUnit {
 
 	@Test(expected = ConstraintViolationException.class)
 	public void descricao_maior_que_tamanho_maximo_permitido() {
-		AreasDeConhecimento a = criaAreasDeConhecimento();
-		a.setDescricao(criarStringDinamicaPorTamanho(51));
+		Setor a = criaSetor();
+		a.setDescricao(criarStringDinamicaPorTamanho(356));
+		dao.persist(a);
+		Assert.assertNull(a.getId());
+	}
+
+	@Test(expected = ConstraintViolationException.class)
+	public void descricao_menor_que_tamanho_minimo_permitido() {
+		Setor a = criaSetor();
+		a.setDescricao(criarStringDinamicaPorTamanho(2));
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
 	public void nao_deve_permitir_ativo_nulo() {
-		AreasDeConhecimento a = criaAreasDeConhecimento();
+		Setor a = criaSetor();
 		a.setAtivo(null);
 		dao.persist(a);
 		Assert.assertNotNull(a.getId());
 	}
 
-	private AreasDeConhecimento criaAreasDeConhecimento() {
-		return AreasDeConhecimentoFabricaTest.getInstance().criaAreasDeConhecimento();
+	private Setor criaSetor() {
+		return SetorFabricaTest.getInstance().criaSetor();
 	}
 }

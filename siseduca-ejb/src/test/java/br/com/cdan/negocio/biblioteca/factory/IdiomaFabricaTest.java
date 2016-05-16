@@ -1,9 +1,12 @@
 package br.com.cdan.negocio.biblioteca.factory;
 
+import javax.persistence.EntityManager;
+
 import br.com.cdan.model.biblioteca.Idioma;
+import br.com.cdan.negocio.biblioteca.IdiomaDao;
 
 public class IdiomaFabricaTest {
-	private static IdiomaFabricaTest instance;
+	private static IdiomaFabricaTest instance = null;
 
 	public static synchronized IdiomaFabricaTest getInstance() {
 		if (instance == null) {
@@ -13,8 +16,18 @@ public class IdiomaFabricaTest {
 	}
 
 	public Idioma criaIdioma() {
-		// TODO Auto-generated method stub
-		return null;
+		Idioma i = new Idioma();
+		i.setAtivo(Boolean.TRUE);
+		i.setCompartilhado(Boolean.TRUE);
+		i.setDescricao("descricao " + Math.random() * 10000);
+		return i;
+	}
+
+	public Idioma criaIdiomaPersistido(EntityManager em) {
+		Idioma i = criaIdioma();
+		IdiomaDao dao = new IdiomaDao(em);
+		dao.persist(i);
+		return i;
 	}
 
 }

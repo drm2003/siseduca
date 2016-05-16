@@ -2,9 +2,7 @@ package br.com.cdan.negocio.geral.factory;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.geral.Equipamento;
 import br.com.cdan.model.geral.Utilizacao;
-import br.com.cdan.negocio.geral.EquipamentoDao;
 import br.com.cdan.negocio.geral.UtilizacaoDao;
 
 public class UtilizacaoFabricaTest {
@@ -17,22 +15,17 @@ public class UtilizacaoFabricaTest {
 		return instance;
 	}
 
-	public Utilizacao criaUtilizacao() {
+	public Utilizacao criaUtilizacao(EntityManager em) {
 		Utilizacao u = new Utilizacao();
 		u.setAtivo(Boolean.TRUE);
 		u.setDescricao("descricao");
-		u.setEquipamento(EquipamentoFabricaTest.getInstance().criaEquipamento());
+		u.setEquipamento(EquipamentoFabricaTest.getInstance().criaEquipamentoPersistido(em));
 		return u;
 	}
 
 	public Utilizacao criaUtilizacaoPersistido(EntityManager em) {
-		Utilizacao u = criaUtilizacao();
+		Utilizacao u = criaUtilizacao(em);
 		UtilizacaoDao dao = new UtilizacaoDao(em);
-		//
-		EquipamentoDao equipamentoDao = new EquipamentoDao(em);
-		Equipamento equipamento = u.getEquipamento();
-		equipamentoDao.persist(equipamento);
-		u.setEquipamento(equipamento);
 		//
 		dao.persist(u);
 		return u;

@@ -22,7 +22,7 @@ public class EmpresaDao extends SiseducaDao {
 	@Override
 	public void remove(Object obj) {
 		Empresa empresa = (Empresa) obj;
-		empresa.setAtivo(false);
+		empresa.setAtivo(Boolean.FALSE);
 		getEntityManager().merge(empresa);
 	}
 }

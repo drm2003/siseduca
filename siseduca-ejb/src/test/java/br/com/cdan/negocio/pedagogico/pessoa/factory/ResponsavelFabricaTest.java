@@ -1,30 +1,10 @@
 package br.com.cdan.negocio.pedagogico.pessoa.factory;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.empresa.Empresa;
-import br.com.cdan.model.geral.Endereco;
-import br.com.cdan.model.geral.Telefone;
-import br.com.cdan.model.geral.TipoDeResponsavel;
-import br.com.cdan.model.pessoa.Aluno;
-import br.com.cdan.model.pessoa.AlunoInteressado;
-import br.com.cdan.model.pessoa.Follow;
-import br.com.cdan.model.pessoa.Pessoa;
 import br.com.cdan.model.pessoa.Responsavel;
-import br.com.cdan.negocio.empresa.EmpresaDao;
 import br.com.cdan.negocio.empresa.factory.EmpresaFabricaTest;
-import br.com.cdan.negocio.geral.EnderecoDao;
-import br.com.cdan.negocio.geral.TelefoneDao;
-import br.com.cdan.negocio.geral.TipoDeResponsavelDao;
-import br.com.cdan.negocio.geral.factory.EnderecoFabricaTest;
-import br.com.cdan.negocio.geral.factory.TelefoneFabricaTest;
 import br.com.cdan.negocio.geral.factory.TipoDeResponsavelFabricaTest;
-import br.com.cdan.negocio.pedagogico.pessoa.AlunoDao;
-import br.com.cdan.negocio.pedagogico.pessoa.FollowDao;
-import br.com.cdan.negocio.pedagogico.pessoa.PessoaDao;
 import br.com.cdan.negocio.pedagogico.pessoa.ResponsavelDao;
 
 public class ResponsavelFabricaTest {
@@ -37,86 +17,25 @@ public class ResponsavelFabricaTest {
 		return instance;
 	}
 
-	public Responsavel criaResponsavel() {
+	public Responsavel criaResponsavel(EntityManager em) {
 		Responsavel r = new Responsavel();
-		r.setAluno(AlunoFabricaTest.getInstance().criaAluno());
-		r.setAlunoInteressado(AlunoInteressadoFabricaTest.getInstance().criaAlunoInteressado());
+		r.setAluno(AlunoFabricaTest.getInstance().criaAlunoPersistido(em));
+		r.setAlunoInteressado(AlunoInteressadoFabricaTest.getInstance().criaAlunoInteressadoPersistido(em));
 		r.setAtivo(Boolean.TRUE);
-		r.setEmpresa(EmpresaFabricaTest.getInstance().criaEmpresa());
-		// Endereços
-		Set<Endereco> enderecos = new LinkedHashSet<>();
-		enderecos.add(EnderecoFabricaTest.getInstance().criaEndereco());
-		r.setEnderecos(enderecos);
-		// Follows
-		Set<Follow> follows = new LinkedHashSet<>();
-		follows.add(FollowFabricaTest.getInstance().criaFollow());
-		r.setFollows(follows);
+		r.setEmpresa(EmpresaFabricaTest.getInstance().criaEmpresaPersistido(em));
 		//
 		r.setLoginPortal("loginPortal");
 		r.setObservacoes("observacoes");
-		r.setPessoa(PessoaFabricaTest.getInstance().criaPessoa());
+		r.setPessoa(PessoaFabricaTest.getInstance().criaPessoaPersistido(em));
 		r.setSenhaPortal("senhaPortal");
-		// Telefones
-		Set<Telefone> telefones = new LinkedHashSet<>();
-		telefones.add(TelefoneFabricaTest.getInstance().criaTelefone());
-		telefones.add(TelefoneFabricaTest.getInstance().criaTelefone());
-		r.setTelefones(telefones);
 		//
-		r.setTipoDeResponsavel(TipoDeResponsavelFabricaTest.getInstance().criaTipoDeResponsavel());
+		r.setTipoDeResponsavel(TipoDeResponsavelFabricaTest.getInstance().criaTipoDeResponsavelPersistido(em));
 		return r;
 	}
 
 	public Responsavel criaResponsavelPersistido(EntityManager em) {
-		Responsavel r = criaResponsavel();
+		Responsavel r = criaResponsavel(em);
 		ResponsavelDao dao = new ResponsavelDao(em);
-		//
-		AlunoDao alunoDao = new AlunoDao(em);
-		Aluno aluno = r.getAluno();
-		alunoDao.persist(aluno);
-		r.setAluno(aluno);
-		//
-		AlunoInteressado alunoInteressado = r.getAlunoInteressado();
-		alunoDao.persist(alunoInteressado);
-		r.setAlunoInteressado(alunoInteressado);
-		//
-		EmpresaDao empresaDao = new EmpresaDao(em);
-		Empresa empresa = r.getEmpresa();
-		empresaDao.persist(empresa);
-		r.setEmpresa(empresa);
-		// Endereços
-		Set<Endereco> enderecos = new LinkedHashSet<>();
-		EnderecoDao enderecoDao = new EnderecoDao(em);
-		r.getEnderecos().forEach(endereco -> {
-			enderecoDao.persist(endereco);
-			enderecos.add(endereco);
-		});
-		r.setEnderecos(enderecos);
-		// Follows
-		FollowDao followDao = new FollowDao(em);
-		Set<Follow> follows = new LinkedHashSet<>();
-		r.getFollows().forEach(follow -> {
-			followDao.persist(follow);
-			follows.add(follow);
-		});
-		r.setFollows(follows);
-		//
-		PessoaDao pessoaDao = new PessoaDao(em);
-		Pessoa pessoa = r.getPessoa();
-		pessoaDao.persist(pessoa);
-		r.setPessoa(pessoa);
-		// Telefones
-		Set<Telefone> telefones = new LinkedHashSet<>();
-		TelefoneDao telefoneDao = new TelefoneDao(em);
-		r.getTelefones().forEach(telefone -> {
-			telefoneDao.persist(telefone);
-			telefones.add(telefone);
-		});
-		r.setTelefones(telefones);
-		//
-		TipoDeResponsavelDao tipoDeResponsavelDao = new TipoDeResponsavelDao(em);
-		TipoDeResponsavel tipoDeResponsavel = r.getTipoDeResponsavel();
-		tipoDeResponsavelDao.persist(tipoDeResponsavel);
-		r.setTipoDeResponsavel(tipoDeResponsavel);
 		//
 		dao.persist(r);
 		return r;

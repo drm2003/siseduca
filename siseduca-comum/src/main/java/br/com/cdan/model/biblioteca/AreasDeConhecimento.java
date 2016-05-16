@@ -1,12 +1,15 @@
 package br.com.cdan.model.biblioteca;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -31,6 +34,10 @@ public class AreasDeConhecimento implements Serializable {
 	@Column(name = "descricao", length = 50, nullable = false, unique = true)
 	private String descricao;
 
+	@ManyToMany(mappedBy = "empresas", fetch = FetchType.LAZY)
+	private Set<Obra> obras;
+
+	@NotNull
 	@Column(name = "compartilhado")
 	private Boolean compartilhado;
 
@@ -52,6 +59,14 @@ public class AreasDeConhecimento implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Set<Obra> getObras() {
+		return obras;
+	}
+
+	public void setObras(Set<Obra> obras) {
+		this.obras = obras;
 	}
 
 	public Boolean getCompartilhado() {
