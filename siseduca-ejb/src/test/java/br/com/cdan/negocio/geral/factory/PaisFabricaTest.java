@@ -24,8 +24,7 @@ public class PaisFabricaTest {
 
 	public Pais criaPaisPersistido(EntityManager em) {
 		Pais pais = criaPais();
-		PaisDao dao = new PaisDao();
-		dao.setEntityManager(em);
+		PaisDao dao = new PaisDao(em);
 		dao.persist(pais);
 		return pais;
 	}

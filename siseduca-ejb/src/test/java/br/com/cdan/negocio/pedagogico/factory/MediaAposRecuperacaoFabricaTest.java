@@ -4,9 +4,7 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.comum.EnumMediaAposRecuperacao;
 import br.com.cdan.model.pedagogico.MediaAposRecuperacao;
-import br.com.cdan.model.pedagogico.Recuperacao;
 import br.com.cdan.negocio.pedagogico.MediaAposRecuperacaoDao;
-import br.com.cdan.negocio.pedagogico.RecuperacaoDao;
 
 public class MediaAposRecuperacaoFabricaTest {
 	private static MediaAposRecuperacaoFabricaTest instance = null;
@@ -18,26 +16,20 @@ public class MediaAposRecuperacaoFabricaTest {
 		return instance;
 	}
 
-	public MediaAposRecuperacao criaMediaAposRecuperacao() {
+	public MediaAposRecuperacao criaMediaAposRecuperacao(EntityManager em) {
 		MediaAposRecuperacao m = new MediaAposRecuperacao();
 		m.setAtivo(Boolean.TRUE);
 		m.setDesconsiderarNotaMenorQueSete(Boolean.FALSE);
 		m.setDesconsiderarNotaRecuperacaoAposAMedia(Boolean.FALSE);
 		m.setDesconsiderarNotaRecuperacaoMenor(Boolean.FALSE);
 		m.setEnumMediaAposRecuperacao(EnumMediaAposRecuperacao.MEDIAENTREANOTAEARECUPERACAO);
-		m.setRecuperacao(RecuperacaoFabricaTest.getInstance().criaRecuperacao());
+		m.setRecuperacao(RecuperacaoFabricaTest.getInstance().criaRecuperacaoPersisito(em));
 		return m;
 	}
 
 	public MediaAposRecuperacao criaMediaAposRecuperacaoPersistido(EntityManager em) {
-		MediaAposRecuperacao m = criaMediaAposRecuperacao();
+		MediaAposRecuperacao m = criaMediaAposRecuperacao(em);
 		MediaAposRecuperacaoDao dao = new MediaAposRecuperacaoDao(em);
-		//
-		RecuperacaoDao recuperacaoDao = new RecuperacaoDao(em);
-		Recuperacao recuperacao = m.getRecuperacao();
-		recuperacaoDao.persist(recuperacao);
-		m.setRecuperacao(recuperacao);
-		//
 		dao.persist(m);
 		return m;
 	}

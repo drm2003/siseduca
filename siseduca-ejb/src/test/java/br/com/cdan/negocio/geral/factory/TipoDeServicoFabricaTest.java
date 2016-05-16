@@ -1,21 +1,11 @@
 package br.com.cdan.negocio.geral.factory;
 
 import java.math.BigDecimal;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.empresa.Empresa;
-import br.com.cdan.model.geral.Categoria;
 import br.com.cdan.model.geral.TipoDeServico;
-import br.com.cdan.model.pedagogico.TipoDeCurso;
-import br.com.cdan.negocio.empresa.EmpresaDao;
-import br.com.cdan.negocio.empresa.factory.EmpresaFabricaTest;
-import br.com.cdan.negocio.geral.CategoriaDao;
 import br.com.cdan.negocio.geral.TipoDeServicoDao;
-import br.com.cdan.negocio.pedagogico.TipoDeCursoDao;
-import br.com.cdan.negocio.pedagogico.factory.TipoDeCursoFabricaTest;
 
 public class TipoDeServicoFabricaTest {
 	private static TipoDeServicoFabricaTest instance = null;
@@ -27,25 +17,13 @@ public class TipoDeServicoFabricaTest {
 		return instance;
 	}
 
-	public TipoDeServico criaTipoDeServico() {
+	public TipoDeServico criaTipoDeServico(EntityManager em) {
 		TipoDeServico t = new TipoDeServico();
 		t.setAtivo(Boolean.TRUE);
-		t.setCategoria(CategoriaFabricaTest.getInstance().criaCategoria());
+		t.setCategoria(CategoriaFabricaTest.getInstance().criaCategoriaPersistido(em));
 		t.setDescricao("descricao");
 		t.setDias(Long.valueOf("10"));
-		// Empresas
-		Set<Empresa> empresas = new LinkedHashSet<>();
-		empresas.add(EmpresaFabricaTest.getInstance().criaEmpresa());
-		empresas.add(EmpresaFabricaTest.getInstance().criaEmpresa());
-		t.setEmpresas(empresas);
-		//
 		t.setPrimeiraSolicitacaoGratuita(Boolean.TRUE);
-		// Tipos de curso
-		Set<TipoDeCurso> tiposDeCurso = new LinkedHashSet<>();
-		tiposDeCurso.add(TipoDeCursoFabricaTest.getInstance().criaTipoDeCurso());
-		tiposDeCurso.add(TipoDeCursoFabricaTest.getInstance().criaTipoDeCurso());
-		t.setTipoDeCurso(tiposDeCurso);
-		//
 		t.setValor(BigDecimal.TEN);
 		//
 		return t;
@@ -53,28 +31,7 @@ public class TipoDeServicoFabricaTest {
 
 	public TipoDeServico criaTipoDeServicoPersistido(EntityManager em) {
 		TipoDeServicoDao dao = new TipoDeServicoDao(em);
-		TipoDeServico t = criaTipoDeServico();
-		//
-		CategoriaDao categoriaDao = new CategoriaDao(em);
-		Categoria categoria = t.getCategoria();
-		categoriaDao.persist(categoria);
-		t.setCategoria(categoria);
-		//
-		EmpresaDao empresaDao = new EmpresaDao(em);
-		Set<Empresa> empresas = new LinkedHashSet<>();
-		t.getEmpresas().forEach(empresa -> {
-			empresaDao.persist(empresa);
-			empresas.add(empresa);
-		});
-		t.setEmpresas(empresas);
-		//
-		TipoDeCursoDao tipoDeCursoDao = new TipoDeCursoDao(em);
-		Set<TipoDeCurso> tiposDeCurso = new LinkedHashSet<TipoDeCurso>();
-		t.getTipoDeCurso().forEach(tipoDeCurso -> {
-			tipoDeCursoDao.persist(tipoDeCurso);
-			tiposDeCurso.add(tipoDeCurso);
-		});
-		t.setTipoDeCurso(tiposDeCurso);
+		TipoDeServico t = criaTipoDeServico(em);
 		//
 		dao.persist(t);
 		return t;

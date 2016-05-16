@@ -2,9 +2,7 @@ package br.com.cdan.negocio.pedagogico.curso.factory;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.pedagogico.curso.Disciplina_MatrizCurricular;
 import br.com.cdan.model.pedagogico.curso.PlanoDeEnsino;
-import br.com.cdan.negocio.pedagogico.curso.Disciplina_MatrizCurricularDao;
 import br.com.cdan.negocio.pedagogico.curso.PlanoDeEnsinoDao;
 
 public class PlanoDeEnsinoFabricaTest {
@@ -17,13 +15,13 @@ public class PlanoDeEnsinoFabricaTest {
 		return instance;
 	}
 
-	public PlanoDeEnsino criaPlanoDeEnsino() {
+	public PlanoDeEnsino criaPlanoDeEnsino(EntityManager em) {
 		PlanoDeEnsino p = new PlanoDeEnsino();
 		p.setAtivo(Boolean.TRUE);
 		p.setContribuicaoParaAInstituicao("contribuicaoParaAInstituicao");
 		p.setContribuicaoParaOEgresso("contribuicaoParaOEgresso");
 		p.setDisciplina_MatrizCurricular(
-				Disciplina_MatrizCurricularFabricaTest.getInstance().criaDisciplina_MatrizCurricular());
+				Disciplina_MatrizCurricularFabricaTest.getInstance().criaDisciplina_MatrizCurricularPersistido(em));
 		p.setEmenta("ementa");
 		p.setInterdisciplinariedade("interdisciplinariedade");
 		p.setObjetivosEspecificos("objetivosEspecificos");
@@ -32,13 +30,8 @@ public class PlanoDeEnsinoFabricaTest {
 	}
 
 	public PlanoDeEnsino criaPlanoDeEnsinoPersistido(EntityManager em) {
-		PlanoDeEnsino p = criaPlanoDeEnsino();
+		PlanoDeEnsino p = criaPlanoDeEnsino(em);
 		PlanoDeEnsinoDao dao = new PlanoDeEnsinoDao(em);
-		//
-		Disciplina_MatrizCurricularDao disciplina_MatrizCurricularDao = new Disciplina_MatrizCurricularDao(em);
-		Disciplina_MatrizCurricular disciplina_MatrizCurricular = p.getDisciplina_MatrizCurricular();
-		disciplina_MatrizCurricularDao.persist(disciplina_MatrizCurricular);
-		p.setDisciplina_MatrizCurricular(disciplina_MatrizCurricular);
 		//
 		dao.persist(p);
 		return p;

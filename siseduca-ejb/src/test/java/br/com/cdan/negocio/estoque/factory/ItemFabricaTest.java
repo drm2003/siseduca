@@ -1,10 +1,9 @@
 package br.com.cdan.negocio.estoque.factory;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import javax.persistence.EntityManager;
 
 import br.com.cdan.model.estoque.Item;
-import br.com.cdan.model.estoque.Item_Empresa;
+import br.com.cdan.negocio.estoque.ItemDao;
 
 public class ItemFabricaTest {
 	private static ItemFabricaTest instance = null;
@@ -16,22 +15,23 @@ public class ItemFabricaTest {
 		return instance;
 	}
 
-	public Item criaItem() {
+	public Item criaItem(EntityManager em) {
 		Item i = new Item();
 		i.setAtivo(Boolean.TRUE);
-		i.setClassificacaoDeItens(ClassificacaoDeItensFabricaTest.getInstance().criaClassificacaoDeItens());
+		i.setClassificacaoDeItens(ClassificacaoDeItensFabricaTest.getInstance().criaClassificacaoDeItensPersistido(em));
 		i.setCodigoBarra("codigoBarra");
 		i.setDescricao("descricao");
-		i.setFinalidade(FinalidadeFabricaTest.getInstance().criaFinalidade());
-		//
-		Set<Item_Empresa> itens_empresa = new LinkedHashSet<>();
-		itens_empresa.add(Item_EmpresaFabricaTest.getInstance().criaItem_Empresa());
-		itens_empresa.add(Item_EmpresaFabricaTest.getInstance().criaItem_Empresa());
-		i.setItens_Empresa(itens_empresa);
-		//
-		i.setNcm(NCMFabricaTest.getInstance().criaNCM());
+		i.setFinalidade(FinalidadeFabricaTest.getInstance().criaFinalidadePersistido(em));
+		i.setNcm(NCMFabricaTest.getInstance().criaNCMPersistido(em));
 		i.setObservacoes("observacoes");
-		i.setUnidadeDeMedida(UnidadeDeMedidaFabricaTest.getInstance().criaUnidadeDeMedida());
+		i.setUnidadeDeMedida(UnidadeDeMedidaFabricaTest.getInstance().criaUnidadeDeMedidaPersistido(em));
+		return i;
+	}
+
+	public Item criaItemPersistido(EntityManager em) {
+		Item i = criaItem(em);
+		ItemDao dao = new ItemDao(em);
+		dao.persist(i);
 		return i;
 	}
 

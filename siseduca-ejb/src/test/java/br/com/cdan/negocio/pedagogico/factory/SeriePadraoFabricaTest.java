@@ -2,12 +2,8 @@ package br.com.cdan.negocio.pedagogico.factory;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.pedagogico.Escolaridade;
 import br.com.cdan.model.pedagogico.SeriePadrao;
-import br.com.cdan.model.pedagogico.TipoDeCurso;
-import br.com.cdan.negocio.pedagogico.EscolaridadeDao;
 import br.com.cdan.negocio.pedagogico.SeriePadraoDao;
-import br.com.cdan.negocio.pedagogico.TipoDeCursoDao;
 
 public class SeriePadraoFabricaTest {
 	private static SeriePadraoFabricaTest instance = null;
@@ -19,29 +15,19 @@ public class SeriePadraoFabricaTest {
 		return instance;
 	}
 
-	public SeriePadrao criaSeriePadrao() {
+	public SeriePadrao criaSeriePadrao(EntityManager em) {
 		SeriePadrao s = new SeriePadrao();
 		s.setAtivo(Boolean.TRUE);
 		s.setCodigo("codigo");
 		s.setDescricao("descricao");
-		s.setEscolaridade(EscolaridadeFabricaTest.getInstance().criaEscolaridade());
-		s.setTipoDeCurso(TipoDeCursoFabricaTest.getInstance().criaTipoDeCurso());
+		s.setEscolaridade(EscolaridadeFabricaTest.getInstance().criaEscolaridadePersistido(em));
+		s.setTipoDeCurso(TipoDeCursoFabricaTest.getInstance().criaTipoDeCursoPersistido(em));
 		return s;
 	}
 
 	public SeriePadrao criaSeriePadraoPersistido(EntityManager em) {
-		SeriePadrao s = criaSeriePadrao();
+		SeriePadrao s = criaSeriePadrao(em);
 		SeriePadraoDao dao = new SeriePadraoDao(em);
-		//
-		EscolaridadeDao escolaridadeDao = new EscolaridadeDao(em);
-		Escolaridade escolaridade = s.getEscolaridade();
-		escolaridadeDao.persist(escolaridade);
-		s.setEscolaridade(escolaridade);
-		//
-		TipoDeCursoDao tipoDeCursoDao = new TipoDeCursoDao(em);
-		TipoDeCurso tipoDeCurso = s.getTipoDeCurso();
-		tipoDeCursoDao.persist(tipoDeCurso);
-		s.setTipoDeCurso(tipoDeCurso);
 		//
 		dao.persist(s);
 		return s;

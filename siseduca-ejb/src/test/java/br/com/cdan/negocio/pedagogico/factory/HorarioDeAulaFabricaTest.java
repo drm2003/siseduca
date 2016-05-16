@@ -1,15 +1,9 @@
 package br.com.cdan.negocio.pedagogico.factory;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import javax.persistence.EntityManager;
 
-import br.com.cdan.model.acesso.AcessoDiasDaSemana;
-import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.pedagogico.HorarioDeAula;
-import br.com.cdan.model.pedagogico.curso.Turma;
-import br.com.cdan.negocio.acesso.factory.AcessoDiasDaSemanaFabricaTest;
-import br.com.cdan.negocio.empresa.factory.EmpresaFabricaTest;
-import br.com.cdan.negocio.pedagogico.curso.factory.TurmaFabricaTest;
+import br.com.cdan.negocio.pedagogico.HorarioDeAulaDao;
 
 public class HorarioDeAulaFabricaTest {
 	private static HorarioDeAulaFabricaTest instance = null;
@@ -23,27 +17,18 @@ public class HorarioDeAulaFabricaTest {
 
 	public HorarioDeAula criaHorarioDeAula() {
 		HorarioDeAula h = new HorarioDeAula();
-		// Acessos Dias da semana
-		Set<AcessoDiasDaSemana> acessosDiasDaSemana = new LinkedHashSet<>();
-		acessosDiasDaSemana.add(AcessoDiasDaSemanaFabricaTest.getInstance().criaAcessoDiasDaSemana());
-		acessosDiasDaSemana.add(AcessoDiasDaSemanaFabricaTest.getInstance().criaAcessoDiasDaSemana());
-		h.setAcessoDiasDaSemana(acessosDiasDaSemana);
-		//
 		h.setAtivo(Boolean.TRUE);
-		h.setDescricao("descricao");
-		// Empresas
-		Set<Empresa> empresas = new LinkedHashSet<>();
-		empresas.add(EmpresaFabricaTest.getInstance().criaEmpresa());
-		empresas.add(EmpresaFabricaTest.getInstance().criaEmpresa());
-		h.setEmpresas(empresas);
+		h.setDescricao("descricao" + Math.random() * 10000);
 		//
 		h.setQuantidadeDeAula(Long.valueOf("10"));
-		// Turmas
-		Set<Turma> turmas = new LinkedHashSet<>();
-		turmas.add(TurmaFabricaTest.getInstance().criaTurma());
-		turmas.add(TurmaFabricaTest.getInstance().criaTurma());
-		h.setTurmas(turmas);
-		//
+
+		return h;
+	}
+
+	public HorarioDeAula criaHorarioDeAulaPersistido(EntityManager em) {
+		HorarioDeAula h = criaHorarioDeAula();
+		HorarioDeAulaDao dao = new HorarioDeAulaDao(em);
+		dao.persist(h);
 		return h;
 	}
 

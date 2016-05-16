@@ -193,8 +193,7 @@ public class PersistenciaJUnit {
 		String s = "";
 		int x = 0;
 		for (int i = 0; i < quantidade; i++) {
-			s += x + "";
-			x++;
+			s += (int) (Math.random() * 10) + "";
 			if (x == 10)
 				x = 0;
 		}

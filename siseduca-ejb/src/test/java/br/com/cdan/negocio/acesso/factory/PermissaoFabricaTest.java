@@ -1,16 +1,9 @@
 package br.com.cdan.negocio.acesso.factory;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.acesso.Permissao;
-import br.com.cdan.model.acesso.Permissao_Empresa;
-import br.com.cdan.model.acesso.Usuario;
 import br.com.cdan.negocio.acesso.PermissaoDao;
-import br.com.cdan.negocio.acesso.PermissaoEmpresaDao;
-import br.com.cdan.negocio.acesso.UsuarioDao;
 
 public class PermissaoFabricaTest {
 	private static PermissaoFabricaTest instance = null;
@@ -22,34 +15,17 @@ public class PermissaoFabricaTest {
 		return instance;
 	}
 
-	public Permissao criaPermissao() {
+	public Permissao criaPermissao(EntityManager em) {
 		Permissao p = new Permissao();
 		//
-		Set<Permissao_Empresa> permissoesEmpresas = new LinkedHashSet<>();
-		permissoesEmpresas.add(Permissao_EmpresaFabricaTest.getInstance().criaPermissao_Empresa());
-		permissoesEmpresas.add(Permissao_EmpresaFabricaTest.getInstance().criaPermissao_Empresa());
-		p.setPermissoesEmpresas(permissoesEmpresas);
-		p.setUsuario(UsuarioFabricaTest.getInstance().criaUsuario());
-		//
+		p.setUsuario(UsuarioFabricaTest.getInstance().criaUsuarioPersistido(em));
+
 		return p;
 	}
 
 	public Permissao criaPermissaoPersistido(EntityManager em) {
-		Permissao p = criaPermissao();
+		Permissao p = criaPermissao(em);
 		PermissaoDao dao = new PermissaoDao(em);
-		//
-		PermissaoEmpresaDao permissaoEmpresaDao = new PermissaoEmpresaDao(em);
-		Set<Permissao_Empresa> permissoesEmpresas = new LinkedHashSet<>();
-		p.getPermissoesEmpresas().forEach(permissaoEmpresa -> {
-			permissaoEmpresaDao.persist(permissaoEmpresa);
-			permissoesEmpresas.add(permissaoEmpresa);
-		});
-		p.setPermissoesEmpresas(permissoesEmpresas);
-		//
-		UsuarioDao usuarioDao = new UsuarioDao(em);
-		Usuario usuario = p.getUsuario();
-		usuarioDao.persist(usuario);
-		p.setUsuario(usuario);
 		//
 		dao.persist(p);
 		return p;

@@ -4,9 +4,7 @@ import java.util.Calendar;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.geral.cep.CEP;
 import br.com.cdan.model.pedagogico.contrato.Aproveitamento;
-import br.com.cdan.negocio.geral.cep.CEPDao;
 import br.com.cdan.negocio.geral.cep.factory.CEPFabricaTest;
 import br.com.cdan.negocio.pedagogico.contrato.AproveitamentoDao;
 
@@ -20,23 +18,17 @@ public class AproveitamentoFabricaTest {
 		return instance;
 	}
 
-	public Aproveitamento criaAproveitamento() {
+	public Aproveitamento criaAproveitamento(EntityManager em) {
 		Aproveitamento aproveitamento = new Aproveitamento();
 		aproveitamento.setAtivo(Boolean.TRUE);
 		aproveitamento.setCargaHoraria(Calendar.getInstance().getTime());
-		aproveitamento.setCepEstabelecimento(CEPFabricaTest.getInstance().criaCEP());
+		aproveitamento.setCepEstabelecimento(CEPFabricaTest.getInstance().criaCepPersistido(em));
 		return aproveitamento;
 	}
 
-	public Aproveitamento criaAproveitamento(EntityManager em) {
-		Aproveitamento aproveitamento = criaAproveitamento();
+	public Aproveitamento criaAproveitamentoPersistido(EntityManager em) {
+		Aproveitamento aproveitamento = criaAproveitamento(em);
 		AproveitamentoDao aproveitamentoDao = new AproveitamentoDao(em);
-		// Cep
-		CEPDao cepDao = new CEPDao(em);
-		CEP cepEstabelecimento = aproveitamento.getCepEstabelecimento();
-		cepDao.persist(cepEstabelecimento);
-		aproveitamento.setCepEstabelecimento(cepEstabelecimento);
-		//
 		aproveitamentoDao.persist(aproveitamento);
 		return aproveitamento;
 	}

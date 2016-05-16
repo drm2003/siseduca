@@ -2,9 +2,7 @@ package br.com.cdan.negocio.pedagogico.contrato.factory;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.pedagogico.contrato.DadosEmpresaConcedente;
-import br.com.cdan.negocio.empresa.EmpresaDao;
 import br.com.cdan.negocio.empresa.factory.EmpresaFabricaTest;
 import br.com.cdan.negocio.pedagogico.contrato.DadosEmpresaConcedenteDao;
 
@@ -18,11 +16,11 @@ public class DadosEmpresaConcedenteFabricaTest {
 		return instance;
 	}
 
-	public DadosEmpresaConcedente criaDadosEmpresaConcedente() {
+	public DadosEmpresaConcedente criaDadosEmpresaConcedente(EntityManager em) {
 		DadosEmpresaConcedente d = new DadosEmpresaConcedente();
 		d.setAtivo(Boolean.TRUE);
 		d.setAreaEstagioMonografia("areaEstagioMonografia");
-		d.setEmpresa(EmpresaFabricaTest.getInstance().criaEmpresa());
+		d.setEmpresa(EmpresaFabricaTest.getInstance().criaEmpresaPersistido(em));
 		d.setFormacaoAcademica("formacaoAcademica");
 		d.setNumeroRegistroConselho("numeroRegistroConselho");
 		d.setObservacaoDoResponsavel("observacaoDoResponsavel");
@@ -32,14 +30,8 @@ public class DadosEmpresaConcedenteFabricaTest {
 	}
 
 	public DadosEmpresaConcedente criaDadosEmpresaConcedentePersistido(EntityManager em) {
-		DadosEmpresaConcedente d = criaDadosEmpresaConcedente();
+		DadosEmpresaConcedente d = criaDadosEmpresaConcedente(em);
 		DadosEmpresaConcedenteDao dao = new DadosEmpresaConcedenteDao(em);
-		//
-		Empresa empresa = d.getEmpresa();
-		EmpresaDao empresaDao = new EmpresaDao(em);
-		empresaDao.persist(empresa);
-		d.setEmpresa(empresa);
-		//
 		dao.persist(d);
 		return d;
 	}

@@ -1,14 +1,8 @@
 package br.com.cdan.negocio.pedagogico.pessoa.factory;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.financeiro.Bolsa;
 import br.com.cdan.model.pessoa.DadoBancario;
-import br.com.cdan.negocio.financeiro.BolsaDao;
-import br.com.cdan.negocio.financeiro.factory.BolsaFabricaTest;
 import br.com.cdan.negocio.pedagogico.pessoa.DadoBancarioDao;
 
 public class DadoBancarioFabricaTest {
@@ -21,14 +15,9 @@ public class DadoBancarioFabricaTest {
 		return instance;
 	}
 
-	public DadoBancario criaDadoBancario() {
+	public DadoBancario criaDadoBancario(EntityManager em) {
 		DadoBancario d = new DadoBancario();
-		d.setAluno(AlunoFabricaTest.getInstance().criaAluno());
-		// Bolsas
-		Set<Bolsa> bolsas = new LinkedHashSet<>();
-		bolsas.add(BolsaFabricaTest.getInstance().criaBolsa());
-		bolsas.add(BolsaFabricaTest.getInstance().criaBolsa());
-		d.setBolsa(bolsas);
+		d.setAluno(AlunoFabricaTest.getInstance().criaAlunoPersistido(em));
 		//
 		d.setDiaDoVencimento(Long.valueOf("1"));
 		d.setInadimplente(Boolean.TRUE);
@@ -36,16 +25,8 @@ public class DadoBancarioFabricaTest {
 	}
 
 	public DadoBancario criaDadoBancarioPersistido(EntityManager em) {
-		DadoBancario d = criaDadoBancario();
+		DadoBancario d = criaDadoBancario(em);
 		DadoBancarioDao dao = new DadoBancarioDao(em);
-		//
-		BolsaDao bolsaDao = new BolsaDao(em);
-		Set<Bolsa> bolsas = new LinkedHashSet<>();
-		d.getBolsas().forEach(b -> {
-			bolsaDao.persist(b);
-			bolsas.add(b);
-		});
-		d.setBolsa(bolsas);
 		//
 		dao.persist(d);
 		return d;

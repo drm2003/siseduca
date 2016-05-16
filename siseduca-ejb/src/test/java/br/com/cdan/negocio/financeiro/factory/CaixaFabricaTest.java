@@ -7,11 +7,7 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.comum.EnumTipoDePlanoDeContas;
 import br.com.cdan.model.financeiro.Caixa;
-import br.com.cdan.model.financeiro.TipoDeCobrancaRecebimento;
-import br.com.cdan.model.geral.Categoria;
 import br.com.cdan.negocio.financeiro.CaixaDao;
-import br.com.cdan.negocio.financeiro.TipoDeCobrancaRecebimentoDao;
-import br.com.cdan.negocio.geral.CategoriaDao;
 import br.com.cdan.negocio.geral.factory.CategoriaFabricaTest;
 
 public class CaixaFabricaTest {
@@ -24,11 +20,11 @@ public class CaixaFabricaTest {
 		return instance;
 	}
 
-	public Caixa criaCaixa() {
+	public Caixa criaCaixa(EntityManager em) {
 		Caixa c = new Caixa();
-		c.setCategoria(CategoriaFabricaTest.getInstance().criaCategoria());
+		c.setCategoria(CategoriaFabricaTest.getInstance().criaCategoriaPersistido(em));
 		c.setComplementoPlanoDeContas("complementoPlanoDeContas");
-		c.setConta(ContaFabricaTest.getInstance().criaConta());
+		c.setConta(ContaFabricaTest.getInstance().criaContaPersistido(em));
 		c.setDataDeLancamento(Calendar.getInstance());
 		c.setDocumento("documento");
 		c.setObservacoes("observacoes");
@@ -39,17 +35,7 @@ public class CaixaFabricaTest {
 
 	public Caixa criaCaixaPersistido(EntityManager em) {
 		CaixaDao caixaDao = new CaixaDao(em);
-		Caixa c = criaCaixa();
-		//
-		CategoriaDao categoriaDao = new CategoriaDao(em);
-		Categoria categoria = c.getCategoria();
-		categoriaDao.persist(categoria);
-		c.setCategoria(categoria);
-		//
-		TipoDeCobrancaRecebimentoDao tipoDeCobrancaRecebimentoDao = new TipoDeCobrancaRecebimentoDao(em);
-		TipoDeCobrancaRecebimento tipoDeMovimentacao = c.getTipoDeMovimentacao();
-		tipoDeCobrancaRecebimentoDao.persist(tipoDeMovimentacao);
-		c.setTipoDeMovimentacao(tipoDeMovimentacao);
+		Caixa c = criaCaixa(em);
 		//
 		caixaDao.persist(c);
 		return c;

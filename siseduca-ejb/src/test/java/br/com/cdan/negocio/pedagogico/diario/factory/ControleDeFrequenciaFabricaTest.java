@@ -4,16 +4,10 @@ import java.util.Calendar;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.pedagogico.CalendarioLetivo;
-import br.com.cdan.model.pedagogico.HorarioDeAula;
 import br.com.cdan.model.pedagogico.diario.ControleDeFrequencia;
-import br.com.cdan.model.pessoa.Aluno;
-import br.com.cdan.negocio.pedagogico.CalendarioLetivoDao;
-import br.com.cdan.negocio.pedagogico.HorarioDeAulaDao;
 import br.com.cdan.negocio.pedagogico.diario.ControleDeFrequenciaDao;
 import br.com.cdan.negocio.pedagogico.factory.CalendarioLetivoFabricaTest;
 import br.com.cdan.negocio.pedagogico.factory.HorarioDeAulaFabricaTest;
-import br.com.cdan.negocio.pedagogico.pessoa.AlunoDao;
 import br.com.cdan.negocio.pedagogico.pessoa.factory.AlunoFabricaTest;
 
 public class ControleDeFrequenciaFabricaTest {
@@ -26,40 +20,20 @@ public class ControleDeFrequenciaFabricaTest {
 		return instance;
 	}
 
-	public ControleDeFrequencia criaControleDeFrequencia() {
+	public ControleDeFrequencia criaControleDeFrequencia(EntityManager em) {
 		ControleDeFrequencia c = new ControleDeFrequencia();
-		c.setAluno(AlunoFabricaTest.getInstance().criaAluno());
+		c.setAluno(AlunoFabricaTest.getInstance().criaAlunoPersistido(em));
 		c.setAtivo(Boolean.TRUE);
-		c.setCalendarioLetivo(CalendarioLetivoFabricaTest.getInstance().criaCalendarioLetivo());
+		c.setCalendarioLetivo(CalendarioLetivoFabricaTest.getInstance().criaCalendarioLetivoPersistido(em));
 		c.setData(Calendar.getInstance());
-		c.setHorarioDeAula(HorarioDeAulaFabricaTest.getInstance().criaHorarioDeAula());
+		c.setHorarioDeAula(HorarioDeAulaFabricaTest.getInstance().criaHorarioDeAulaPersistido(em));
 		c.setPresenca(Boolean.TRUE);
 		return c;
 	}
 
 	public ControleDeFrequencia criaControleDeFrequenciaPersistido(EntityManager em) {
-		ControleDeFrequencia c = criaControleDeFrequencia();
-		ControleDeFrequenciaDao controleDeFrequenciaDao = new ControleDeFrequenciaDao();
-		controleDeFrequenciaDao.setEntityManager(em);
-		// Aluno
-		AlunoDao alunoDao = new AlunoDao();
-		alunoDao.setEntityManager(em);
-		Aluno aluno = c.getAluno();
-		alunoDao.persist(aluno);
-		c.setAluno(aluno);
-		// Calendário Letivo
-		CalendarioLetivoDao calendarioLetivoDao = new CalendarioLetivoDao();
-		calendarioLetivoDao.setEntityManager(em);
-		CalendarioLetivo calendarioLetivo = c.getCalendarioLetivo();
-		calendarioLetivoDao.persist(calendarioLetivo);
-		c.setCalendarioLetivo(calendarioLetivo);
-		// Horario de Aula
-		HorarioDeAulaDao horarioDeAulaDao = new HorarioDeAulaDao();
-		horarioDeAulaDao.setEntityManager(em);
-		HorarioDeAula horarioDeAula = c.getHorarioDeAula();
-		horarioDeAulaDao.persist(horarioDeAula);
-		c.setHorarioDeAula(horarioDeAula);
-		//
+		ControleDeFrequencia c = criaControleDeFrequencia(em);
+		ControleDeFrequenciaDao controleDeFrequenciaDao = new ControleDeFrequenciaDao(em);
 		controleDeFrequenciaDao.persist(c);
 		return c;
 	}

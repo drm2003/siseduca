@@ -1,12 +1,9 @@
 package br.com.cdan.negocio.estoque.factory;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.estoque.Item;
 import br.com.cdan.model.estoque.UnidadeDeMedida;
+import br.com.cdan.negocio.estoque.UnidadeDeMedidaDao;
 
 public class UnidadeDeMedidaFabricaTest {
 	private static UnidadeDeMedidaFabricaTest instance = null;
@@ -23,24 +20,14 @@ public class UnidadeDeMedidaFabricaTest {
 		u.setAtivo(Boolean.TRUE);
 		u.setDescricao("descricao");
 		//
-		Set<Item> itens = new LinkedHashSet<>();
-		itens.add(ItemFabricaTest.getInstance().criaItem());
-		itens.add(ItemFabricaTest.getInstance().criaItem());
-		u.setItens(itens);
-		//
 		return u;
 	}
 
 	public UnidadeDeMedida criaUnidadeDeMedidaPersistido(EntityManager em) {
-		UnidadeDeMedida u = new UnidadeDeMedida();
-		u.setAtivo(Boolean.TRUE);
-		u.setDescricao("descricao");
+		UnidadeDeMedida u = criaUnidadeDeMedida();
+		UnidadeDeMedidaDao dao = new UnidadeDeMedidaDao(em);
 		//
-		Set<Item> itens = new LinkedHashSet<>();
-		itens.add(ItemFabricaTest.getInstance().criaItem());
-		itens.add(ItemFabricaTest.getInstance().criaItem());
-		u.setItens(itens);
-		//
+		dao.persist(u);
 		return u;
 	}
 }

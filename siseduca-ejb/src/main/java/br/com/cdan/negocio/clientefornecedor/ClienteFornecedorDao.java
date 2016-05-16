@@ -3,7 +3,7 @@ package br.com.cdan.negocio.clientefornecedor;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.dao.SiseducaDao;
-import br.com.cdan.model.estoque.ClassificacaoDeItens;
+import br.com.cdan.model.clientefornecedor.ClienteFornecedor;
 
 public class ClienteFornecedorDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
@@ -21,8 +21,8 @@ public class ClienteFornecedorDao extends SiseducaDao {
 	 */
 	@Override
 	public void remove(Object obj) {
-		ClassificacaoDeItens classificacaoDeItens = (ClassificacaoDeItens) obj;
-		classificacaoDeItens.setAtivo(false);
-		getEntityManager().merge(classificacaoDeItens);
+		ClienteFornecedor c = (ClienteFornecedor) obj;
+		c.setAtivo(Boolean.FALSE);
+		getEntityManager().merge(c);
 	}
 }

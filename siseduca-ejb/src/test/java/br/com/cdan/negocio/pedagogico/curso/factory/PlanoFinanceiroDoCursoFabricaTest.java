@@ -1,15 +1,8 @@
 package br.com.cdan.negocio.pedagogico.curso.factory;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.pedagogico.curso.Curso;
-import br.com.cdan.model.pedagogico.curso.Investimento;
 import br.com.cdan.model.pedagogico.curso.PlanoFinanceiroDoCurso;
-import br.com.cdan.negocio.pedagogico.curso.CursoDao;
-import br.com.cdan.negocio.pedagogico.curso.InvestimentoDao;
 import br.com.cdan.negocio.pedagogico.curso.PlanoFinanceiroDoCursoDao;
 
 public class PlanoFinanceiroDoCursoFabricaTest {
@@ -22,16 +15,11 @@ public class PlanoFinanceiroDoCursoFabricaTest {
 		return instance;
 	}
 
-	public PlanoFinanceiroDoCurso criaPlanoFinanceiroDoCurso() {
+	public PlanoFinanceiroDoCurso criaPlanoFinanceiroDoCurso(EntityManager em) {
 		PlanoFinanceiroDoCurso p = new PlanoFinanceiroDoCurso();
 		p.setAtivo(Boolean.TRUE);
-		p.setCurso(CursoFabricaTest.getInstance().criaCurso());
+		p.setCurso(CursoFabricaTest.getInstance().criaCursoPersistido(em));
 		p.setDescricao("descricao");
-		//
-		Set<Investimento> investimentos = new LinkedHashSet<>();
-		investimentos.add(InvestimentoFabricaTest.getInstance().criaInvestimento());
-		investimentos.add(InvestimentoFabricaTest.getInstance().criaInvestimento());
-		p.setInvestimentos(investimentos);
 		//
 		p.setModulo(Long.valueOf("100"));
 		p.setPlanoPadrao(Boolean.TRUE);
@@ -39,22 +27,8 @@ public class PlanoFinanceiroDoCursoFabricaTest {
 	}
 
 	public PlanoFinanceiroDoCurso criaPlanoFinanceiroDoCursoPersistido(EntityManager em) {
-		PlanoFinanceiroDoCurso p = criaPlanoFinanceiroDoCurso();
+		PlanoFinanceiroDoCurso p = criaPlanoFinanceiroDoCurso(em);
 		PlanoFinanceiroDoCursoDao dao = new PlanoFinanceiroDoCursoDao(em);
-		//
-		CursoDao cursoDao = new CursoDao(em);
-		Curso curso = p.getCurso();
-		cursoDao.persist(curso);
-		p.setCurso(curso);
-		//
-		Set<Investimento> investimentos = new LinkedHashSet<>();
-		InvestimentoDao investimentoDao = new InvestimentoDao(em);
-		p.getInvestimentos().forEach(investimento -> {
-			investimentoDao.persist(investimento);
-			investimentos.add(investimento);
-		});
-		p.setInvestimentos(investimentos);
-		//
 		dao.persist(p);
 		return p;
 	}

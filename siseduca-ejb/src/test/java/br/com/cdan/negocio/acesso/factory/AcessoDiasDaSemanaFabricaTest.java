@@ -6,9 +6,7 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.comum.EnumDiaDaSemana;
 import br.com.cdan.model.acesso.AcessoDiasDaSemana;
-import br.com.cdan.model.pedagogico.HorarioDeAula;
 import br.com.cdan.negocio.acesso.AcessoDiasDaSemanaDao;
-import br.com.cdan.negocio.pedagogico.HorarioDeAulaDao;
 import br.com.cdan.negocio.pedagogico.factory.HorarioDeAulaFabricaTest;
 
 public class AcessoDiasDaSemanaFabricaTest {
@@ -21,24 +19,19 @@ public class AcessoDiasDaSemanaFabricaTest {
 		return instance;
 	}
 
-	public AcessoDiasDaSemana criaAcessoDiasDaSemana() {
+	public AcessoDiasDaSemana criaAcessoDiasDaSemana(EntityManager em) {
 		AcessoDiasDaSemana a = new AcessoDiasDaSemana();
 		a.setAtivo(Boolean.TRUE);
 		a.setDiaDaSemana(EnumDiaDaSemana.QUARTA);
 		a.setHoraEntrada(Calendar.getInstance().getTime());
-		a.setHorarioDeAula(HorarioDeAulaFabricaTest.getInstance().criaHorarioDeAula());
+		a.setHorarioDeAula(HorarioDeAulaFabricaTest.getInstance().criaHorarioDeAulaPersistido(em));
 		a.setHoraSaida(Calendar.getInstance().getTime());
 		return a;
 	}
 
 	public AcessoDiasDaSemana criaAcessoDiasDaSemanaPersisitdo(EntityManager em) {
-		AcessoDiasDaSemana a = criaAcessoDiasDaSemana();
+		AcessoDiasDaSemana a = criaAcessoDiasDaSemana(em);
 		AcessoDiasDaSemanaDao dao = new AcessoDiasDaSemanaDao(em);
-		//
-		HorarioDeAulaDao horarioDeAulaDao = new HorarioDeAulaDao(em);
-		HorarioDeAula horarioDeAula = a.getHorarioDeAula();
-		horarioDeAulaDao.persist(horarioDeAula);
-		a.setHorarioDeAula(horarioDeAula);
 		//
 		dao.persist(a);
 		return a;

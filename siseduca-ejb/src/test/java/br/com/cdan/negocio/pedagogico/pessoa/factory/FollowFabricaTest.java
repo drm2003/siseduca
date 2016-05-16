@@ -2,16 +2,8 @@ package br.com.cdan.negocio.pedagogico.pessoa.factory;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.pessoa.AlunoInteressado;
 import br.com.cdan.model.pessoa.Follow;
-import br.com.cdan.model.pessoa.Funcionario;
-import br.com.cdan.model.pessoa.Interessado;
-import br.com.cdan.model.pessoa.Responsavel;
-import br.com.cdan.negocio.pedagogico.pessoa.AlunoInteressadoDao;
 import br.com.cdan.negocio.pedagogico.pessoa.FollowDao;
-import br.com.cdan.negocio.pedagogico.pessoa.FuncionarioDao;
-import br.com.cdan.negocio.pedagogico.pessoa.InteressadoDao;
-import br.com.cdan.negocio.pedagogico.pessoa.ResponsavelDao;
 
 public class FollowFabricaTest {
 	private static FollowFabricaTest instance = null;
@@ -23,39 +15,19 @@ public class FollowFabricaTest {
 		return instance;
 	}
 
-	public Follow criaFollow() {
+	public Follow criaFollow(EntityManager em) {
 		Follow f = new Follow();
 		f.setAtivo(Boolean.TRUE);
-		f.setAlunoInteressado(AlunoInteressadoFabricaTest.getInstance().criaAlunoInteressado());
-		f.setFuncionario(FuncionarioFabricaTest.getInstance().criaFuncionario());
-		f.setInteressado(InteressadoFabricaTest.getInstance().criaInteressado());
-		f.setResponsavel(ResponsavelFabricaTest.getInstance().criaResponsavel());
+		f.setAlunoInteressado(AlunoInteressadoFabricaTest.getInstance().criaAlunoInteressadoPersistido(em));
+		f.setFuncionario(FuncionarioFabricaTest.getInstance().criaFuncionarioPersistido(em));
+		f.setInteressado(InteressadoFabricaTest.getInstance().criaInteressadoPersistido(em));
+		f.setResponsavel(ResponsavelFabricaTest.getInstance().criaResponsavelPersistido(em));
 		return f;
 	}
 
 	public Follow criaFollowPersistido(EntityManager em) {
-		Follow f = criaFollow();
+		Follow f = criaFollow(em);
 		FollowDao dao = new FollowDao(em);
-		//
-		AlunoInteressadoDao alunoInteressadoDao = new AlunoInteressadoDao(em);
-		AlunoInteressado alunoInteressado = f.getAlunoInteressado();
-		alunoInteressadoDao.persist(alunoInteressado);
-		f.setAlunoInteressado(alunoInteressado);
-		//
-		FuncionarioDao funcionarioDao = new FuncionarioDao(em);
-		Funcionario funcionario = f.getFuncionario();
-		funcionarioDao.persist(funcionario);
-		f.setFuncionario(funcionario);
-		//
-		InteressadoDao interessadoDao = new InteressadoDao(em);
-		Interessado interessado = f.getInteressado();
-		interessadoDao.persist(interessado);
-		f.setInteressado(interessado);
-		//
-		ResponsavelDao responsavelDao = new ResponsavelDao(em);
-		Responsavel responsavel = f.getResponsavel();
-		responsavelDao.persist(responsavel);
-		f.setResponsavel(responsavel);
 		//
 		dao.persist(f);
 		return f;

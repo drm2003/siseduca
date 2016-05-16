@@ -1,7 +1,7 @@
 package br.com.cdan.comum;
 
 public enum EnumTipoDePessoa {
-	F("FÃ­sica"), J("JurÃ­dica");
+	F("Física"), J("Jurídica");
 
 	private final String valor;
 

@@ -46,7 +46,7 @@ public class Obra implements Serializable {
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_tipoDeObra")
+	@JoinColumn(name = "tipoDeObra")
 	private TipoDeObra tipoDeObra;
 
 	@ManyToOne(fetch = FetchType.EAGER)
