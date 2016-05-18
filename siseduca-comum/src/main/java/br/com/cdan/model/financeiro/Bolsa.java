@@ -17,6 +17,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.comum.EnumEspecieDesconto;
 import br.com.cdan.comum.EnumTipoDeDesconto;
@@ -32,6 +36,9 @@ public class Bolsa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 60)
 	@Column(name = "descricao", length = 60, nullable = false, unique = true)
 	private String descricao;
 
@@ -60,6 +67,7 @@ public class Bolsa implements Serializable {
 	@OneToMany(mappedBy = "bolsa", fetch = FetchType.LAZY)
 	private Set<ContaAReceber_Bolsa> contasAReceber_Bolsa;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

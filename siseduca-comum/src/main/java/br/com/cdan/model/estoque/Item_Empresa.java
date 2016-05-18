@@ -33,7 +33,7 @@ public class Item_Empresa implements Serializable {
 	private Empresa empresa;
 
 	@NotNull
-	@Column(name = "utiliza")
+	@Column(name = "utiliza", nullable = false)
 	private Boolean utiliza;
 
 	@Column(name = "valorCusto")
@@ -49,7 +49,7 @@ public class Item_Empresa implements Serializable {
 	private BigDecimal estMinimo;
 
 	@NotNull
-	@Column(name = "ativo")
+	@Column(name = "ativo", nullable = false)
 	private Boolean ativo;
 
 	public Item_Empresa() {

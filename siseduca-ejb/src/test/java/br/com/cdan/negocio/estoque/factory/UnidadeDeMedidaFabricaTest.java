@@ -18,7 +18,7 @@ public class UnidadeDeMedidaFabricaTest {
 	public UnidadeDeMedida criaUnidadeDeMedida() {
 		UnidadeDeMedida u = new UnidadeDeMedida();
 		u.setAtivo(Boolean.TRUE);
-		u.setDescricao("descricao");
+		u.setDescricao("descricao" + Math.random() * 10000);
 		//
 		return u;
 	}

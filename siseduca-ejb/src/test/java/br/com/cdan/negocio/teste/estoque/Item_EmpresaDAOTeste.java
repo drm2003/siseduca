@@ -3,7 +3,6 @@ package br.com.cdan.negocio.teste.estoque;
 import java.util.List;
 
 import javax.persistence.Query;
-import javax.validation.ConstraintViolationException;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -82,20 +81,23 @@ public class Item_EmpresaDAOTeste extends PersistenciaJUnit {
 		Assert.assertTrue(lista.contains(a2));
 	}
 
-	@Test(expected = ConstraintViolationException.class)
+	/**
+	 * 
+	 */
+	@Test(expected = AssertionError.class)
 	public void nao_deve_permitir_utiliza_nulo() {
 		Item_Empresa a = criaItem_Empresa();
 		a.setUtiliza(null);
 		dao.persist(a);
-		Assert.assertNotNull(a.getId());
+		Assert.assertNull(a.getId());
 	}
 
-	@Test(expected = ConstraintViolationException.class)
+	@Test(expected = AssertionError.class)
 	public void nao_deve_permitir_ativo_nulo() {
 		Item_Empresa a = criaItem_Empresa();
 		a.setAtivo(null);
 		dao.persist(a);
-		Assert.assertNotNull(a.getId());
+		Assert.assertNull(a.getId());
 	}
 
 	private Item_Empresa criaItem_Empresa() {

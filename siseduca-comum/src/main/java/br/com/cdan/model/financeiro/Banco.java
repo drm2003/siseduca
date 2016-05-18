@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.clientefornecedor.ClienteFornecedor;
 import br.com.cdan.model.geral.Telefone;
@@ -25,6 +29,9 @@ public class Banco implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 60)
 	@Column(name = "nome", length = 60, nullable = false, unique = true)
 	private String nome;
 
@@ -40,6 +47,7 @@ public class Banco implements Serializable {
 	@ManyToMany(mappedBy = "bancos", fetch = FetchType.LAZY)
 	private Set<ClienteFornecedor> clientesFornecedors;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
