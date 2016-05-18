@@ -105,10 +105,10 @@ public class AcessoDiasDaSemanaDAOTeste extends PersistenciaJUnit {
 		AcessoDiasDaSemana a = criaAcessoDiasDaSemana();
 		a.setAtivo(null);
 		dao.persist(a);
-		Assert.assertNotNull(a.getId());
+		Assert.assertNull(a.getId());
 	}
 
 	private AcessoDiasDaSemana criaAcessoDiasDaSemana() {
-		return AcessoDiasDaSemanaFabricaTest.getInstance().criaAcessoDiasDaSemanaPersisitdo(getEntityManager());
+		return AcessoDiasDaSemanaFabricaTest.getInstance().criaAcessoDiasDaSemana(getEntityManager());
 	}
 }

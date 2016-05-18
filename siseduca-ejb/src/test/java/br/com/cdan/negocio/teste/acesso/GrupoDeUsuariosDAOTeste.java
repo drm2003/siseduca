@@ -145,6 +145,6 @@ public class GrupoDeUsuariosDAOTeste extends PersistenciaJUnit {
 	}
 
 	private GrupoDeUsuarios criaGrupoDeUsuarios() {
-		return GrupoDeUsuariosFabricaTest.getInstance().criaGrupoDeUsuariosPersistido(getEntityManager());
+		return GrupoDeUsuariosFabricaTest.getInstance().criaGrupoDeUsuarios();
 	}
 }
