@@ -27,7 +27,7 @@ public class PersistenciaJUnit {
 	private static final String DRIVER_CONEXAO = "com.mysql.jdbc.Driver";
 	// private static final String URL_CONEXAO_BANCO =
 	// "jdbc:oracle:thin:@tjsu690v:1521:ORADES";
-	private static final String URL_CONEXAO_BANCO = "jdbc:mysql://localhost/siseduca";
+	private static final String URL_CONEXAO_BANCO = "jdbc:mysql://localhost:3306/siseduca?useSSL=false";
 	private static final String USUARIO_CONEXAO = "root";
 	private static final String SENHA_CONEXAO = "admin";
 	private static final Logger LOG = Logger.getLogger(PersistenciaJUnit.class);
@@ -147,7 +147,7 @@ public class PersistenciaJUnit {
 	public void finaliza() throws Exception {
 		encerraTransacaoComRollback();
 		finalizaEntityManagerJPA();
-		encerraConexaoComBancoDeDados();
+		// encerraConexaoComBancoDeDados();
 	}
 
 	/**
@@ -173,7 +173,7 @@ public class PersistenciaJUnit {
 	/**
 	 * Fecha a conexão com o banco de dados.
 	 */
-	private void encerraConexaoComBancoDeDados() {
+	protected void encerraConexaoComBancoDeDados() {
 		try {
 			connection.createStatement().execute("SHUTDOWN");
 		} catch (Exception ex) {

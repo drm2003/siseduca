@@ -18,7 +18,7 @@ public class MelhorHorarioParaContatoFabricaTest {
 	public MelhorHorarioParaContato criaMelhorHorarioParaContato() {
 		MelhorHorarioParaContato m = new MelhorHorarioParaContato();
 		m.setAtivo(Boolean.TRUE);
-		m.setDescricao("descricao");
+		m.setDescricao("descricao" + Math.random() * 10000);
 		return m;
 	}
 

@@ -66,7 +66,7 @@ public class Interessado implements Serializable {
 	private Set<Curso> cursosTumasDeInteresse;
 
 	@OneToMany(fetch = FetchType.LAZY)
-	private Set<Follow> followsDoInteressado;
+	private Set<Follow> follows;
 
 	@OneToOne
 	@JoinColumn(name = "observacaoDoAluno")
@@ -163,12 +163,12 @@ public class Interessado implements Serializable {
 		this.cursosTumasDeInteresse = cursosTumasDeInteresse;
 	}
 
-	public Set<Follow> getFollowsDoInteressado() {
-		return followsDoInteressado;
+	public Set<Follow> getFollows() {
+		return follows;
 	}
 
-	public void setFollowsDoInteressado(Set<Follow> followsDoInteressado) {
-		this.followsDoInteressado = followsDoInteressado;
+	public void setFollows(Set<Follow> follows) {
+		this.follows = follows;
 	}
 
 	public ObservacaoDoAluno getObservacaoDoAluno() {
@@ -191,9 +191,11 @@ public class Interessado implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((aluno == null) ? 0 : aluno.hashCode());
 		result = prime * result + ((atendente == null) ? 0 : atendente.hashCode());
+		result = prime * result + ((ativo == null) ? 0 : ativo.hashCode());
 		result = prime * result + ((cursosTumasDeInteresse == null) ? 0 : cursosTumasDeInteresse.hashCode());
-		result = prime * result + ((followsDoInteressado == null) ? 0 : followsDoInteressado.hashCode());
+		result = prime * result + ((follows == null) ? 0 : follows.hashCode());
 		result = prime * result + ((melhorHorarioParaContato == null) ? 0 : melhorHorarioParaContato.hashCode());
 		result = prime * result + ((midia == null) ? 0 : midia.hashCode());
 		result = prime * result
@@ -215,20 +217,30 @@ public class Interessado implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Interessado other = (Interessado) obj;
+		if (aluno == null) {
+			if (other.aluno != null)
+				return false;
+		} else if (!aluno.equals(other.aluno))
+			return false;
 		if (atendente == null) {
 			if (other.atendente != null)
 				return false;
 		} else if (!atendente.equals(other.atendente))
+			return false;
+		if (ativo == null) {
+			if (other.ativo != null)
+				return false;
+		} else if (!ativo.equals(other.ativo))
 			return false;
 		if (cursosTumasDeInteresse == null) {
 			if (other.cursosTumasDeInteresse != null)
 				return false;
 		} else if (!cursosTumasDeInteresse.equals(other.cursosTumasDeInteresse))
 			return false;
-		if (followsDoInteressado == null) {
-			if (other.followsDoInteressado != null)
+		if (follows == null) {
+			if (other.follows != null)
 				return false;
-		} else if (!followsDoInteressado.equals(other.followsDoInteressado))
+		} else if (!follows.equals(other.follows))
 			return false;
 		if (melhorHorarioParaContato == null) {
 			if (other.melhorHorarioParaContato != null)
@@ -275,12 +287,11 @@ public class Interessado implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Interessado [promotorDeVendas=" + promotorDeVendas + ", atendente=" + atendente
-				+ ", melhorHorarioParaContato=" + melhorHorarioParaContato + ", motivosDeNaoFechamentoDeContrato="
-				+ motivoDeNaoFechamentoDeContrato + ", tipoDeContato=" + tipoDeContato + ", origem=" + origem
-				+ ", midia=" + midia + ", outraEscolaDoAluno=" + outraEscolaDoAluno + ", cursosTumasDeInteresse="
-				+ cursosTumasDeInteresse + ", followsDoInteressado=" + followsDoInteressado + ", observacaoDoAluno="
-				+ observacaoDoAluno;
+		return "Interessado [id=" + id + ", aluno=" + aluno + ", promotorDeVendas=" + promotorDeVendas + ", atendente="
+				+ atendente + ", melhorHorarioParaContato=" + melhorHorarioParaContato
+				+ ", motivoDeNaoFechamentoDeContrato=" + motivoDeNaoFechamentoDeContrato + ", tipoDeContato="
+				+ tipoDeContato + ", origem=" + origem + ", midia=" + midia + ", outraEscolaDoAluno="
+				+ outraEscolaDoAluno + ", cursosTumasDeInteresse=" + cursosTumasDeInteresse + ", follows=" + follows
+				+ ", observacaoDoAluno=" + observacaoDoAluno + ", ativo=" + ativo + "]";
 	}
-
 }

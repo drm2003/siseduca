@@ -31,7 +31,6 @@ public class GrupoDeUsuarios implements Serializable {
 	private String nome;
 
 	@NotNull
-	@NotEmpty
 	@Column(name = "professor")
 	private Boolean professor;
 

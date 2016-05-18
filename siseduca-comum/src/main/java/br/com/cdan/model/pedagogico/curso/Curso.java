@@ -303,6 +303,14 @@ public class Curso implements Serializable {
 		this.compartilhado = compartilhado;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public Boolean getAtivo() {
 		return ativo;
 	}

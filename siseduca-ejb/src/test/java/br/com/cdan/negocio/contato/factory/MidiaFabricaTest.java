@@ -18,7 +18,7 @@ public class MidiaFabricaTest {
 	public Midia criaMidia() {
 		Midia m = new Midia();
 		m.setAtivo(Boolean.TRUE);
-		m.setDescricao("descricao");
+		m.setDescricao("descricao" + Math.random() * 10000);
 		return m;
 	}
 

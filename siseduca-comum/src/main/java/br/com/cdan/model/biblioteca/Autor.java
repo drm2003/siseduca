@@ -28,8 +28,8 @@ public class Autor implements Serializable {
 	@NotBlank
 	@NotEmpty
 	@NotNull
-	@Size(max = 255, min = 3)
-	@Column(name = "nome", length = 255, nullable = false, unique = true)
+	@Size(max = 250, min = 3)
+	@Column(name = "nome", length = 250, nullable = false, unique = true)
 	private String nome;
 
 	@ManyToMany(mappedBy = "autores")
