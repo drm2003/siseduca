@@ -46,8 +46,6 @@ public class CursoFabricaTest {
 		//
 		return c;
 	}
-<<<<<<< HEAD
-=======
 
 	public Curso criaCursoPersistido(EntityManager em) {
 		Curso c = criaCurso(em);
@@ -56,6 +54,4 @@ public class CursoFabricaTest {
 		dao.persist(c);
 		return c;
 	}
-
->>>>>>> origin/desenvcomputador
 }
