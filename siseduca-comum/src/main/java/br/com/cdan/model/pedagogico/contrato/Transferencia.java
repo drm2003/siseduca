@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.cdan.comum.EnumTipoDeTransferencia;
-import br.com.cdan.model.geral.Cidade;
+import br.com.cdan.model.geral.cep.Cidade;
 import br.com.cdan.model.pedagogico.curso.Turma;
 import br.com.cdan.model.pessoa.Aluno;
 

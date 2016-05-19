@@ -1,8 +1,8 @@
-package br.com.cdan.negocio.geral.factory;
+package br.com.cdan.negocio.geral.cep.factory;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.geral.Cidade;
+import br.com.cdan.model.geral.cep.Cidade;
 import br.com.cdan.negocio.geral.CidadeDao;
 
 public class CidadeFabricaTest {

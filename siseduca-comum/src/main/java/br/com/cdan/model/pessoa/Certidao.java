@@ -16,7 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.cdan.comum.EnumTipoCertidao;
-import br.com.cdan.model.geral.Cidade;
+import br.com.cdan.model.geral.cep.Cidade;
 
 @Entity
 @Table(name = "Certidao")

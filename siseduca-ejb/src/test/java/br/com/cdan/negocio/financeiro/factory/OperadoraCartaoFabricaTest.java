@@ -18,7 +18,7 @@ public class OperadoraCartaoFabricaTest {
 	public OperadoraCartao criaOperadoraCartao() {
 		OperadoraCartao o = new OperadoraCartao();
 		o.setAtivo(Boolean.TRUE);
-		o.setNome("nome");
+		o.setNome("nome" + Math.random() * 10000);
 		return o;
 	}
 

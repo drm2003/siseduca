@@ -18,7 +18,7 @@ public class TipoDeInvestimentoFabricaTest {
 	public TipoDeInvestimento criaTipoDeInvestimento() {
 		TipoDeInvestimento t = new TipoDeInvestimento();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
+		t.setDescricao("descricao" + Math.random() * 10000);
 		return t;
 	}
 

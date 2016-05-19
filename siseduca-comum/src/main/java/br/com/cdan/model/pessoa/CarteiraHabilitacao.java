@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.cdan.model.geral.EstadoUF;
+import br.com.cdan.model.geral.cep.EstadoUF;
 
 @Entity
 @Table(name = "CarteiraHabilitacao")

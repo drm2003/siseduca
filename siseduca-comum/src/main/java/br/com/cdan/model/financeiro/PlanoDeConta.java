@@ -15,8 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.comum.EnumTipoDePlanoDeContas;
@@ -30,15 +30,13 @@ public class PlanoDeConta implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
-	@NotEmpty
 	@NotNull
 	@Column(name = "codigo", nullable = false, unique = true)
 	private Long codigo;
 
-	@NotBlank
 	@NotEmpty
 	@NotNull
+	@Size(min = 3, max = 60)
 	@Column(name = "nome", length = 60, nullable = false, unique = true)
 	private String nome;
 
@@ -70,6 +68,7 @@ public class PlanoDeConta implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<ContaAReceber> ContasAReceber;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import br.com.cdan.model.pessoa.Funcionario;
 
 @Entity
 @Table(name = "Cargo")
@@ -20,8 +23,11 @@ public class Cargo implements Serializable {
 
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
-	
-	@Column(name="ativo")
+
+	@OneToOne(mappedBy = "cargo")
+	private Funcionario funcionario;
+
+	@Column(name = "ativo")
 	private Boolean ativo;
 
 	public Long getId() {
@@ -38,7 +44,15 @@ public class Cargo implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}	
+	}
+
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
 
 	public Boolean getAtivo() {
 		return ativo;
@@ -53,8 +67,7 @@ public class Cargo implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((ativo == null) ? 0 : ativo.hashCode());
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 

@@ -18,7 +18,7 @@ public class ClassificacaoFabricaTest {
 	public Classificacao criaClassificacao(EntityManager em) {
 		Classificacao c = new Classificacao();
 		c.setAtivo(Boolean.TRUE);
-		c.setDescricao("descricao");
+		c.setDescricao("descricao" + Math.random() * 10000);
 		return c;
 	}
 

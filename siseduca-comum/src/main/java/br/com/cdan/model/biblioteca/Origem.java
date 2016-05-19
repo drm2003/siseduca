@@ -27,7 +27,6 @@ public class Origem implements Serializable {
 
 	@NotNull
 	@NotEmpty
-	@NotBlank
 	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;

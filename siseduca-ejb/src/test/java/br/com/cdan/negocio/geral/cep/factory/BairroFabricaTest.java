@@ -1,8 +1,8 @@
-package br.com.cdan.negocio.geral.factory;
+package br.com.cdan.negocio.geral.cep.factory;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.geral.Bairro;
+import br.com.cdan.model.geral.cep.Bairro;
 import br.com.cdan.negocio.geral.BairroDao;
 
 public class BairroFabricaTest {

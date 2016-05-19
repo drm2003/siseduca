@@ -19,7 +19,7 @@ public class BancoFabricaTest {
 		Banco b = new Banco();
 		b.setAgencia("agencia");
 		b.setAtivo(Boolean.TRUE);
-		b.setNome("nome");
+		b.setNome("nome" + Math.random() * 10000);
 		return b;
 	}
 

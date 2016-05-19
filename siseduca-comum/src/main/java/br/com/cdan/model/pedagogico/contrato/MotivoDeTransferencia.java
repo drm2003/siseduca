@@ -26,7 +26,6 @@ public class MotivoDeTransferencia implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
 	@NotNull
 	@NotEmpty
 	@Column(name = "descricao", nullable = false, unique = true)

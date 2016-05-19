@@ -19,7 +19,7 @@ public class CentroDeCustosFabricaTest {
 		CentroDeCustos c = new CentroDeCustos();
 		c.setAtivo(Boolean.TRUE);
 		c.setCompartilhado(Boolean.TRUE);
-		c.setNome("nome");
+		c.setNome("nome " + Math.random() * 10000);
 		//
 		return c;
 	}

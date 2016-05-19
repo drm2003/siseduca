@@ -1,4 +1,4 @@
-package br.com.cdan.model.geral;
+package br.com.cdan.model.geral.cep;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -12,9 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.cdan.model.geral.Endereco;
 import br.com.cdan.model.pedagogico.contrato.Transferencia;
+import br.com.cdan.model.pessoa.Pessoa;
 
 @Entity
 @Table(name = "Cidade")
@@ -40,6 +43,9 @@ public class Cidade implements Serializable {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cidade")
 	private Set<Transferencia> transferencias;
+
+	@OneToOne(mappedBy = "cidadeNatal")
+	private Pessoa pessoa;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -90,6 +96,14 @@ public class Cidade implements Serializable {
 
 	public void setTransferencias(Set<Transferencia> transferencias) {
 		this.transferencias = transferencias;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
 
 	public Boolean getAtivo() {

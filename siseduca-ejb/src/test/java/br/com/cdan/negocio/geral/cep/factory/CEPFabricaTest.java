@@ -5,11 +5,10 @@ import javax.persistence.EntityManager;
 import br.com.cdan.model.geral.cep.CEP;
 import br.com.cdan.model.geral.cep.EnumChaveCidade;
 import br.com.cdan.model.geral.cep.EnumTipoCidade;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.cep.CEPDao;
-import br.com.cdan.negocio.geral.factory.EstadoUFFabricaTest;
-import br.com.cdan.negocio.pedagogico.contrato.factory.AproveitamentoFabricaTest;
 
-public class CEPFabricaTest {
+public class CEPFabricaTest extends FabricaTest {
 	private static CEPFabricaTest instance = null;
 
 	public static synchronized CEPFabricaTest getInstance() {
@@ -21,7 +20,6 @@ public class CEPFabricaTest {
 
 	public CEP criaCEP(EntityManager em) {
 		CEP cep = new CEP();
-		cep.setAproveitamento(AproveitamentoFabricaTest.getInstance().criaAproveitamento(em));
 		cep.setAtivo(Boolean.TRUE);
 		cep.setCepMax("teste");
 		cep.setCepmin("teste");
@@ -31,6 +29,7 @@ public class CEPFabricaTest {
 		cep.setCodMunicicio("teste");
 		cep.setTipoCidade(EnumTipoCidade.D);
 		cep.setEstadoUF(EstadoUFFabricaTest.getInstance().criaEstadoUFPersistido(em));
+		cep.setCodigo(criarStringDinamicaPorTamanho(10));
 		return cep;
 	}
 

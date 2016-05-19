@@ -29,7 +29,6 @@ public class ClassificacaoLiteraria implements Serializable {
 
 	@NotNull
 	@NotEmpty
-	@NotBlank
 	@Size(max = 50, min = 3)
 	@Column(name = "descricao", length = 50, nullable = false, unique = true)
 	private String descricao;

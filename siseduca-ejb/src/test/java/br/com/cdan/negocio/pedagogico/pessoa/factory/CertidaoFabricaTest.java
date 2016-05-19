@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.comum.EnumTipoCertidao;
 import br.com.cdan.model.pessoa.Certidao;
-import br.com.cdan.negocio.geral.factory.CidadeFabricaTest;
+import br.com.cdan.negocio.geral.cep.factory.CidadeFabricaTest;
 import br.com.cdan.negocio.pedagogico.pessoa.CertidaoDao;
 
 public class CertidaoFabricaTest {

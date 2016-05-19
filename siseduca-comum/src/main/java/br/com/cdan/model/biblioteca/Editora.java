@@ -31,7 +31,6 @@ public class Editora implements Serializable {
 
 	@NotNull
 	@NotEmpty
-	@NotBlank
 	@Size(max = 60, min = 3)
 	@Column(name = "nome", length = 60, nullable = false, unique = true)
 	private String nome;

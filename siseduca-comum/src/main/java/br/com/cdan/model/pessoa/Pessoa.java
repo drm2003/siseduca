@@ -21,10 +21,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.cdan.comum.EnumSexo;
-import br.com.cdan.model.geral.Cidade;
 import br.com.cdan.model.geral.Email;
 import br.com.cdan.model.geral.Endereco;
 import br.com.cdan.model.geral.EstadoCivil;
+import br.com.cdan.model.geral.cep.Cidade;
 
 @Entity
 @Table(name = "Pessoa")
@@ -50,10 +50,12 @@ public class Pessoa implements Serializable {
 	@Column(name = "empresaLocalDeTrabalho")
 	private String empresaLocalDeTrabalho;
 
-	@Column(name = "estadoCivil")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "estadoCivil")
 	private EstadoCivil estadoCivil;
 
-	@Column(name = "cidadeNatal")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "cidadeNatal")
 	private Cidade cidadeNatal;
 
 	@Enumerated(EnumType.STRING)

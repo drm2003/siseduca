@@ -29,7 +29,6 @@ public class SerieColecaoLiteral implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
 	@NotEmpty
 	@NotNull
 	@Size(min = 3, max = 250)

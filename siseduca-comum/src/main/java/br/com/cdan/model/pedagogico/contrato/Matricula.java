@@ -45,7 +45,6 @@ public class Matricula implements Serializable {
 	private Set<DisciplinaMatricula> disciplinas;
 
 	@NotNull
-	@NotBlank
 	@NotEmpty
 	@Column(name = "numeroContrato", nullable = false, unique = true)
 	private String numeroContrato;

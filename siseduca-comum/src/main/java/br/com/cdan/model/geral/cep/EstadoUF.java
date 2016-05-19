@@ -1,4 +1,4 @@
-package br.com.cdan.model.geral;
+package br.com.cdan.model.geral.cep;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import br.com.cdan.model.geral.Endereco;
 
 @Entity
 @Table(name = "EstadoUF")

@@ -45,7 +45,6 @@ public class Exemplar implements Serializable {
 
 	@NotNull
 	@NotEmpty
-	@NotBlank
 	@Size(max = 250, min = 3)
 	@Column(name = "descricao", unique = true, nullable = false)
 	private String descricao;

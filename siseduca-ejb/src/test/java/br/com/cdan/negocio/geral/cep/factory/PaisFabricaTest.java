@@ -1,8 +1,8 @@
-package br.com.cdan.negocio.geral.factory;
+package br.com.cdan.negocio.geral.cep.factory;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.geral.Pais;
+import br.com.cdan.model.geral.cep.Pais;
 import br.com.cdan.negocio.geral.PaisDao;
 
 public class PaisFabricaTest {
@@ -18,7 +18,7 @@ public class PaisFabricaTest {
 	public Pais criaPais() {
 		Pais pais = new Pais();
 		pais.setAtivo(Boolean.TRUE);
-		pais.setDescricao("teste");
+		pais.setDescricao("teste" + Math.random() * 10000);
 		return pais;
 	}
 

@@ -18,8 +18,7 @@ public class ModalidadeBaseICMSFabricaTest {
 	public ModalidadeBaseICMS criaModalidadeBaseICMS(EntityManager em) {
 		ModalidadeBaseICMS m = new ModalidadeBaseICMS();
 		m.setAtivo(Boolean.TRUE);
-		m.setDescricao("descricao");
-		m.setNfeLayout(NfeLayoutFabricaTest.getInstance().criaNfeLayoutPersistido(em));
+		m.setDescricao("descricao " + Math.random() * 10000);
 		return m;
 	}
 

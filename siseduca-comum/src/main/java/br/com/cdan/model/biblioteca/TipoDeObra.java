@@ -32,7 +32,6 @@ public class TipoDeObra implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
 	@NotEmpty
 	@NotNull
 	@Size(max = 60, min = 3)

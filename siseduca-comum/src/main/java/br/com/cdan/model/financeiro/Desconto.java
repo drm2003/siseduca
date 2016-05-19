@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Desconto")
@@ -34,6 +35,7 @@ public class Desconto implements Serializable {
 	@JoinColumn(name = "id_bolsa")
 	private Bolsa bolsa;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

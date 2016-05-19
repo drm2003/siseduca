@@ -15,17 +15,16 @@ public class OrigemMercadoriaFabricaTest {
 		return instance;
 	}
 
-	public OrigemMercadoria criaOrigemMercadoria(EntityManager em) {
+	public OrigemMercadoria criaOrigemMercadoria() {
 		OrigemMercadoria o = new OrigemMercadoria();
 		o.setAtivo(Boolean.TRUE);
 		//
-		o.setDescricao("descricao");
-		o.setNfeLayout(NfeLayoutFabricaTest.getInstance().criaNfeLayoutPersistido(em));
+		o.setDescricao("descricao" + Math.random() * 10000);
 		return o;
 	}
 
 	public OrigemMercadoria criaOrigemMercadoriaPersistido(EntityManager em) {
-		OrigemMercadoria o = criaOrigemMercadoria(em);
+		OrigemMercadoria o = criaOrigemMercadoria();
 		OrigemMercadoriaDao dao = new OrigemMercadoriaDao(em);
 		//
 		dao.persist(o);

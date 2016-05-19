@@ -15,6 +15,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.empresa.Empresa;
 
@@ -27,10 +31,16 @@ public class Conta implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "titular", length = 60, nullable = false, unique = true)
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 60)
+	@Column(name = "titular", length = 60, nullable = false)
 	private String titular;
 
-	@Column(name = "numero", nullable = false)
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 60)
+	@Column(name = "numero", length = 60, nullable = false)
 	private String numero;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)

@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import br.com.cdan.comum.EnumTipoDeSituacaoInvestimento;
 import br.com.cdan.model.pedagogico.curso.Investimento;
 import br.com.cdan.negocio.estoque.factory.ItemFabricaTest;
-import br.com.cdan.negocio.financeiro.factory.ContaAReceberFabricaTest;
 import br.com.cdan.negocio.geral.factory.CategoriaFabricaTest;
 import br.com.cdan.negocio.pedagogico.curso.InvestimentoDao;
 
@@ -27,13 +26,9 @@ public class InvestimentoFabricaTest {
 		i.setAtivo(Boolean.TRUE);
 		i.setCategoria(CategoriaFabricaTest.getInstance().criaCategoriaPersistido(em));
 		i.setConsiderarMesAtual(Boolean.TRUE);
-		// Contas a receber
-		i.setContaAReceber(ContaAReceberFabricaTest.getInstance().criaContaAReceberPersistido(em));
-		// Contas a receber primeira parcela
-		i.setContaAReceberPrimeiraParcela(ContaAReceberFabricaTest.getInstance().criaContaAReceberPersistido(em));
 		i.setDataDiferenciadaPrimeiraParcela(Calendar.getInstance());
 		i.setDataInicial(Calendar.getInstance());
-		i.setDescricaoPlano("descricaoPlano");
+		i.setDescricaoPlano("descricaoPlano" + Math.random() * 10000);
 		i.setItem(ItemFabricaTest.getInstance().criaItemPersistido(em));
 		//
 		i.setNumeroDeParcelas(Long.valueOf("1"));
