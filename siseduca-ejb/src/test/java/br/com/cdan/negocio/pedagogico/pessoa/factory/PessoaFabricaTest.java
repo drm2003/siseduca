@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.comum.EnumSexo;
 import br.com.cdan.model.pessoa.Pessoa;
-import br.com.cdan.negocio.geral.factory.CidadeFabricaTest;
+import br.com.cdan.negocio.geral.cep.factory.CidadeFabricaTest;
 import br.com.cdan.negocio.geral.factory.EstadoCivilFabricaTest;
 import br.com.cdan.negocio.pedagogico.pessoa.PessoaDao;
 
@@ -27,6 +27,7 @@ public class PessoaFabricaTest {
 				CarteiraHabilitacaoFabricaTest.getInstance().criaCarteiraHabilitacaoPersistido(em));
 		pessoa.setCertidao(CertidaoFabricaTest.getInstance().criaCertidaoPersistido(em));
 		pessoa.setCidadeNatal(CidadeFabricaTest.getInstance().criaCidadePersistido(em));
+		pessoa.setEstadoCivil(EstadoCivilFabricaTest.getInstance().criaEstadoCivilPersistido(em));
 		pessoa.setClassificacao(ClassificacaoFabricaTest.getInstance().criaClassificacaoPersistido(em));
 		pessoa.setCpf("teste " + Math.random() * 10000);
 		pessoa.setDataEmissaoTituloEleitor(Calendar.getInstance());
@@ -35,7 +36,6 @@ public class PessoaFabricaTest {
 		pessoa.setDocumentoMilitar("teste " + Math.random() * 10000);
 		pessoa.setEmpresaLocalDeTrabalho("teste");
 		//
-		pessoa.setEstadoCivil(EstadoCivilFabricaTest.getInstance().criaEstadoCivilPersistido(em));
 		pessoa.setNome("teste" + Math.random() * 10000);
 		pessoa.setNumeroDocumentoMilitar("teste");
 		pessoa.setNumeroPassaporte("teste");

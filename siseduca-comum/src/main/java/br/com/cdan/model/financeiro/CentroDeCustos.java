@@ -10,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "CentroDeCustos")
@@ -21,6 +25,23 @@ public class CentroDeCustos implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 160)
+	@Column(name = "nome", length = 160, nullable = false, unique = true)
+	private String nome;
+
+	@OneToMany(mappedBy = "centroDeCustos")
+	private Set<PlanoDeContas_CentroDeCustos> planoDeContas_CentroDeCustos;
+
+	@NotNull
+	@Column(name = "compartilhado")
+	private Boolean compartilhado;
+
+	@NotNull
+	@Column(name = "ativo")
+	private Boolean ativo;
 
 	public Set<PlanoDeContas_CentroDeCustos> getPlanoDeContas_CentroDeCustos() {
 		return planoDeContas_CentroDeCustos;
@@ -61,18 +82,6 @@ public class CentroDeCustos implements Serializable {
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-
-	@OneToMany(mappedBy = "centroDeCustos")
-	private Set<PlanoDeContas_CentroDeCustos> planoDeContas_CentroDeCustos;
-
-	@Column(name = "nome", length = 160, nullable = false, unique = true)
-	private String nome;
-
-	@Column(name = "compartilhado")
-	private Boolean compartilhado;
-
-	@Column(name = "ativo")
-	private Boolean ativo;
 
 	@Override
 	public int hashCode() {

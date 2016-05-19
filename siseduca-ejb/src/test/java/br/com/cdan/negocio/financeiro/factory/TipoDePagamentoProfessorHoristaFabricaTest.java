@@ -20,7 +20,7 @@ public class TipoDePagamentoProfessorHoristaFabricaTest {
 	public TipoDePagamentoProfessorHorista criaTipoDePagamentoProfessorHorista() {
 		TipoDePagamentoProfessorHorista t = new TipoDePagamentoProfessorHorista();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
+		t.setDescricao("descricao" + Math.random() * 10000);
 		t.setValor(BigDecimal.valueOf(100));
 		return t;
 	}

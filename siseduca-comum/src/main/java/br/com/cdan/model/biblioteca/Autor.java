@@ -13,7 +13,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -25,11 +24,10 @@ public class Autor implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
 	@NotEmpty
 	@NotNull
-	@Size(max = 255, min = 3)
-	@Column(name = "nome", length = 255, nullable = false, unique = true)
+	@Size(max = 250, min = 3)
+	@Column(name = "nome", length = 250, nullable = false, unique = true)
 	private String nome;
 
 	@ManyToMany(mappedBy = "autores")

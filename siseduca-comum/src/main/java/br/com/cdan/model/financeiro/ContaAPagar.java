@@ -22,6 +22,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.pedagogico.curso.Investimento;
@@ -94,6 +95,7 @@ public class ContaAPagar implements Serializable {
 	@Column(name = "mora")
 	private BigDecimal mora;
 
+	@NotNull
 	private Boolean ativo;
 
 	public Long getId() {

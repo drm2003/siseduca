@@ -20,6 +20,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.pedagogico.curso.Investimento;
@@ -95,6 +96,8 @@ public class ContaAReceber implements Serializable {
 	@Column(name = "observacao")
 	private String observacao;
 
+	@NotNull
+	@Column(name = "ativo")
 	private Boolean ativo;
 
 	public Long getId() {

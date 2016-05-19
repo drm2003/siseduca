@@ -18,7 +18,7 @@ public class TipoDeSaidaFabricaTest {
 	public TipoDeSaida criaTipoDeSaida() {
 		TipoDeSaida t = new TipoDeSaida();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
+		t.setDescricao("descricao" + Math.random() * 10000);
 		return t;
 	}
 

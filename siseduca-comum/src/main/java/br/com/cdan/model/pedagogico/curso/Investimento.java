@@ -80,7 +80,7 @@ public class Investimento implements Serializable {
 	private Item item;
 
 	@Enumerated(EnumType.STRING)
-	@JoinColumn(name = "tipoDeSituacao")
+	@Column(name = "tipoDeSituacao")
 	private EnumTipoDeSituacaoInvestimento tipoDeSituacao;
 
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "primeiraParcela")

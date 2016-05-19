@@ -13,6 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.empresa.Empresa;
 
@@ -25,6 +29,9 @@ public class OperadoraCartao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 60)
 	@Column(name = "nome", length = 60, nullable = false, unique = true)
 	private String nome;
 
@@ -32,6 +39,7 @@ public class OperadoraCartao implements Serializable {
 	@JoinTable(name = "operadoraCartao_empresa", joinColumns = @JoinColumn(name = "id_operadoraCartao"), inverseJoinColumns = @JoinColumn(name = "id_empresa"))
 	private Set<Empresa> empresas;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

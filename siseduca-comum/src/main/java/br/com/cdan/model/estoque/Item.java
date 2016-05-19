@@ -13,6 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Item")
@@ -25,6 +29,9 @@ public class Item implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 250)
 	@Column(name = "descricao", length = 250, nullable = false, unique = true)
 	private String descricao;
 
@@ -53,6 +60,7 @@ public class Item implements Serializable {
 	@Column(name = "observacoes")
 	private String observacoes;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

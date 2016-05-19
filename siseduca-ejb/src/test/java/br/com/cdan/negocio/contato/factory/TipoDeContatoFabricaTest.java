@@ -18,7 +18,7 @@ public class TipoDeContatoFabricaTest {
 	public TipoDeContato criaTipoDeContato() {
 		TipoDeContato t = new TipoDeContato();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
+		t.setDescricao("descricao" + Math.random() * 10000);
 		return t;
 	}
 

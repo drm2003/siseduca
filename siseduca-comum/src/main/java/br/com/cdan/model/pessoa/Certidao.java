@@ -7,16 +7,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.cdan.comum.EnumTipoCertidao;
-import br.com.cdan.model.geral.Cidade;
+import br.com.cdan.model.geral.cep.Cidade;
 
 @Entity
 @Table(name = "Certidao")
@@ -55,7 +57,8 @@ public class Certidao implements Serializable {
 	@Column(name = "cartorio")
 	private String cartorio;
 
-	@Column(name = "municipioCartorio")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "municipioCartorio")
 	private Cidade municipioCartorio;
 
 	@Column(name = "ativo")
@@ -155,10 +158,8 @@ public class Certidao implements Serializable {
 		int result = 1;
 		result = prime * result + ((folha == null) ? 0 : folha.hashCode());
 		result = prime * result + ((livro == null) ? 0 : livro.hashCode());
-		result = prime * result
-				+ ((numeroMatricula == null) ? 0 : numeroMatricula.hashCode());
-		result = prime * result
-				+ ((numeroTermo == null) ? 0 : numeroTermo.hashCode());
+		result = prime * result + ((numeroMatricula == null) ? 0 : numeroMatricula.hashCode());
+		result = prime * result + ((numeroTermo == null) ? 0 : numeroTermo.hashCode());
 		return result;
 	}
 
@@ -196,10 +197,8 @@ public class Certidao implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Certidao [pessoa=" + pessoa + ", tipoCertidao=" + tipoCertidao
-				+ ", numeroMatricula=" + numeroMatricula + ", numeroTermo="
-				+ numeroTermo + ", folha=" + folha + ", livro=" + livro
-				+ ", dataEmissao=" + dataEmissao + ", cartorio=" + cartorio
-				+ ", municipioCartorio=" + municipioCartorio + "]";
+		return "Certidao [pessoa=" + pessoa + ", tipoCertidao=" + tipoCertidao + ", numeroMatricula=" + numeroMatricula
+				+ ", numeroTermo=" + numeroTermo + ", folha=" + folha + ", livro=" + livro + ", dataEmissao="
+				+ dataEmissao + ", cartorio=" + cartorio + ", municipioCartorio=" + municipioCartorio + "]";
 	}
 }

@@ -10,12 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.cdan.model.geral.EstadoUF;
+import br.com.cdan.model.geral.cep.EstadoUF;
 
 @Entity
 @Table(name = "CarteiraHabilitacao")
@@ -31,7 +32,8 @@ public class CarteiraHabilitacao implements Serializable {
 	@Column(name = "orgaoEmissor")
 	private String orgaoEmissor;
 
-	@Column(name = "estado")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "estado")
 	private EstadoUF estado;
 
 	@Column(name = "validade")

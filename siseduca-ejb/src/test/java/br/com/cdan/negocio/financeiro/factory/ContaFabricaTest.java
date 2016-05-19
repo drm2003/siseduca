@@ -15,21 +15,21 @@ public class ContaFabricaTest {
 		return instance;
 	}
 
-	public Conta criaConta() {
+	public Conta criaConta(EntityManager em) {
 		Conta c = new Conta();
 		c.setAtivo(Boolean.TRUE);
-		c.setBanco(BancoFabricaTest.getInstance().criaBanco());
+		c.setBanco(BancoFabricaTest.getInstance().criaBancoPersistido(em));
 		//
 		c.setEncerrada(Boolean.FALSE);
 		c.setNumero("numero");
-		c.setTitular("titular");
+		c.setTitular("titular" + Math.random() * 10000);
 		//
 		return c;
 	}
 
 	public Conta criaContaPersistido(EntityManager em) {
 		ContaDao dao = new ContaDao(em);
-		Conta c = criaConta();
+		Conta c = criaConta(em);
 		//
 		dao.persist(c);
 		return c;

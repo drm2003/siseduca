@@ -85,19 +85,19 @@ public class TipoDeAgendamentoDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test
-	public void consultar_por_nome() {
+	public void consultar_por_descricao() {
 		TipoDeAgendamento a = criaTipoDeAgendamento();
 		dao.persist(a);
 		Assert.assertNotNull(a);
-		String sql = "FROM TipoDeAgendamento a WHERE a.nome = :nome";
+		String sql = "FROM TipoDeAgendamento a WHERE a.descricao = :descricao";
 		TypedQuery<TipoDeAgendamento> query = dao.getEntityManager().createQuery(sql, TipoDeAgendamento.class);
-		query.setParameter("nome", a.getDescricao());
+		query.setParameter("descricao", a.getDescricao());
 		TipoDeAgendamento consulta = query.getSingleResult();
 		Assert.assertSame(a, consulta);
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_nome_nulo() {
+	public void nao_deve_permitir_descricao_nulo() {
 		TipoDeAgendamento a = criaTipoDeAgendamento();
 		a.setDescricao(null);
 		dao.persist(a);
@@ -105,7 +105,7 @@ public class TipoDeAgendamentoDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_nome_vazio() {
+	public void nao_deve_permitir_descricao_vazio() {
 		TipoDeAgendamento a = criaTipoDeAgendamento();
 		a.setDescricao("");
 		dao.persist(a);
@@ -113,7 +113,7 @@ public class TipoDeAgendamentoDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nome_maior_que_tamanho_maximo_permitido() {
+	public void descricao_maior_que_tamanho_maximo_permitido() {
 		TipoDeAgendamento a = criaTipoDeAgendamento();
 		a.setDescricao(criarStringDinamicaPorTamanho(101));
 		dao.persist(a);
@@ -121,7 +121,7 @@ public class TipoDeAgendamentoDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nome_menor_que_tamanho_minimo_permitido() {
+	public void descricao_menor_que_tamanho_minimo_permitido() {
 		TipoDeAgendamento a = criaTipoDeAgendamento();
 		a.setDescricao(criarStringDinamicaPorTamanho(2));
 		dao.persist(a);
@@ -137,6 +137,6 @@ public class TipoDeAgendamentoDAOTeste extends PersistenciaJUnit {
 	}
 
 	private TipoDeAgendamento criaTipoDeAgendamento() {
-		return TipoDeAgendamentoFabricaTest.getInstance().criaTipoDeAgendamentoPersistido(getEntityManager());
+		return TipoDeAgendamentoFabricaTest.getInstance().criaTipoDeAgendamento();
 	}
 }

@@ -29,11 +29,10 @@ public class SerieColecaoLiteral implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
 	@NotEmpty
 	@NotNull
-	@Size(min = 3, max = 350)
-	@Column(name = "descricao", length = 350, nullable = false, unique = true)
+	@Size(min = 3, max = 250)
+	@Column(name = "descricao", length = 250, nullable = false, unique = true)
 	private String descricao;
 
 	@NotNull

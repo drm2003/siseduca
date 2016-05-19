@@ -115,7 +115,7 @@ public class GrupoDeUsuariosDAOTeste extends PersistenciaJUnit {
 	@Test(expected = ConstraintViolationException.class)
 	public void nome_maior_que_tamanho_maximo_permitido() {
 		GrupoDeUsuarios a = criaGrupoDeUsuarios();
-		a.setNome(criarStringDinamicaPorTamanho(101));
+		a.setNome(criarStringDinamicaPorTamanho(151));
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
@@ -145,6 +145,6 @@ public class GrupoDeUsuariosDAOTeste extends PersistenciaJUnit {
 	}
 
 	private GrupoDeUsuarios criaGrupoDeUsuarios() {
-		return GrupoDeUsuariosFabricaTest.getInstance().criaGrupoDeUsuariosPersistido(getEntityManager());
+		return GrupoDeUsuariosFabricaTest.getInstance().criaGrupoDeUsuarios();
 	}
 }

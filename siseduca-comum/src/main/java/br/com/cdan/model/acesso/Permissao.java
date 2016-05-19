@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Permissao")
@@ -30,6 +31,7 @@ public class Permissao implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "permissao")
 	private Set<Permissao_Empresa> permissoesEmpresas;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

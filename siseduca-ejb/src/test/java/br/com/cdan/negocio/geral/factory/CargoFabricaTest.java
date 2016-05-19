@@ -18,12 +18,12 @@ public class CargoFabricaTest {
 	public Cargo criaCargo() {
 		Cargo c = new Cargo();
 		c.setAtivo(Boolean.TRUE);
-		c.setDescricao("descricao");
+		c.setDescricao("descricao" + Math.random() * 10000);
 		return c;
 	}
 
 	public Cargo criaCargoPersistido(EntityManager em) {
-		Cargo c = new Cargo();
+		Cargo c = criaCargo();
 		CargoDao dao = new CargoDao(em);
 		dao.persist(c);
 		return c;

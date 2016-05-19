@@ -18,7 +18,7 @@ public class FinalidadeFabricaTest {
 	public Finalidade criaFinalidade() {
 		Finalidade f = new Finalidade();
 		f.setAtivo(Boolean.TRUE);
-		f.setDescricao("descricao");
+		f.setDescricao("descricao" + Math.random() * 10000);
 		//
 		return f;
 	}

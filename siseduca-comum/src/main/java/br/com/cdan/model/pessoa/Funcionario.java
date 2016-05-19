@@ -53,7 +53,8 @@ public class Funcionario implements Serializable {
 	@JoinColumn(name = "usuario")
 	private Usuario usuario;
 
-	@Column(name = "cargo")
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "cargo")
 	private Cargo cargo;
 
 	@Column(name = "numeroDependentes")

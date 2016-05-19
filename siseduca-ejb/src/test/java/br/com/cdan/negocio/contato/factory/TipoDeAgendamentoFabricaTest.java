@@ -18,7 +18,7 @@ public class TipoDeAgendamentoFabricaTest {
 	public TipoDeAgendamento criaTipoDeAgendamento() {
 		TipoDeAgendamento t = new TipoDeAgendamento();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
+		t.setDescricao("descricao" + Math.random() * 10000);
 		t.setCor("cor");
 		return t;
 	}

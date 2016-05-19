@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.model.empresa.Empresa;
 
@@ -31,7 +32,8 @@ public class Item_Empresa implements Serializable {
 	@JoinColumn(name = "id_empresa", nullable = false)
 	private Empresa empresa;
 
-	@Column(name = "utiliza")
+	@NotNull
+	@Column(name = "utiliza", nullable = false)
 	private Boolean utiliza;
 
 	@Column(name = "valorCusto")
@@ -46,7 +48,8 @@ public class Item_Empresa implements Serializable {
 	@Column(name = "estMinimo")
 	private BigDecimal estMinimo;
 
-	@Column(name = "ativo")
+	@NotNull
+	@Column(name = "ativo", nullable = false)
 	private Boolean ativo;
 
 	public Item_Empresa() {

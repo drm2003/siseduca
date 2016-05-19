@@ -18,8 +18,7 @@ public class PermissaoFabricaTest {
 	public Permissao criaPermissao(EntityManager em) {
 		Permissao p = new Permissao();
 		//
-		p.setUsuario(UsuarioFabricaTest.getInstance().criaUsuarioPersistido(em));
-
+		p.setAtivo(Boolean.TRUE);
 		return p;
 	}
 

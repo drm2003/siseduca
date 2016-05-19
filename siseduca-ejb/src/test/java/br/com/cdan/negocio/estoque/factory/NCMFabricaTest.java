@@ -18,7 +18,7 @@ public class NCMFabricaTest {
 	public NCM criaNCM() {
 		NCM ncm = new NCM();
 		ncm.setAtivo(Boolean.TRUE);
-		ncm.setDescricao("descricao");
+		ncm.setDescricao("descricao" + Math.random() * 10000);
 		//
 		return ncm;
 	}

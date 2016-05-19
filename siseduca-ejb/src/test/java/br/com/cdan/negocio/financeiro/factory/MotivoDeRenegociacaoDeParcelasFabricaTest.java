@@ -18,7 +18,7 @@ public class MotivoDeRenegociacaoDeParcelasFabricaTest {
 	public MotivoDeRenegociacaoDeParcelas criaMotivoDeRenegociacaoDeParcelas() {
 		MotivoDeRenegociacaoDeParcelas m = new MotivoDeRenegociacaoDeParcelas();
 		m.setAtivo(Boolean.TRUE);
-		m.setDescricao("descricao");
+		m.setDescricao("descricao" + Math.random()*10000);
 		m.setCompartilhado(Boolean.TRUE);
 		return m;
 	}

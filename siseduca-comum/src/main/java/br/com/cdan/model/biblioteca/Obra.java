@@ -33,15 +33,14 @@ public class Obra implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
 	@NotEmpty
 	@NotNull
-	@Size(max = 350, min = 3)
-	@Column(name = "nome", length = 350, nullable = false, unique = true)
+	@Size(max = 250, min = 3)
+	@Column(name = "nome", length = 250, nullable = false, unique = true)
 	private String nome;
 
-	@Size(max = 350, min = 3)
-	@Column(name = "subtitulo", length = 350)
+	@Size(max = 250, min = 3)
+	@Column(name = "subtitulo", length = 250)
 	private String subtitulo;
 
 	@NotNull

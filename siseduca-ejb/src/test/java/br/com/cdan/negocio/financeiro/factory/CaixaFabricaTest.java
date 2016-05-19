@@ -26,10 +26,13 @@ public class CaixaFabricaTest {
 		c.setComplementoPlanoDeContas("complementoPlanoDeContas");
 		c.setConta(ContaFabricaTest.getInstance().criaContaPersistido(em));
 		c.setDataDeLancamento(Calendar.getInstance());
-		c.setDocumento("documento");
+		c.setDocumento("documento " + Math.random() * 10000);
 		c.setObservacoes("observacoes");
 		c.setTipo(EnumTipoDePlanoDeContas.ENTRADA);
 		c.setValor(BigDecimal.TEN);
+		c.setTipoDeMovimentacao(
+				TipoDeCobrancaRecebimentoFabricaTest.getInstance().criaTipoDeCobrancaRecebimentoPersistido(em));
+		c.setAtivo(Boolean.TRUE);
 		return c;
 	}
 

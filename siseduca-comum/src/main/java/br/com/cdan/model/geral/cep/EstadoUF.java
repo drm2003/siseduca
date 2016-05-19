@@ -1,4 +1,4 @@
-package br.com.cdan.model.geral;
+package br.com.cdan.model.geral.cep;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -12,7 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import br.com.cdan.model.geral.Endereco;
+import br.com.cdan.model.pessoa.CarteiraHabilitacao;
 
 @Entity
 @Table(name = "EstadoUF")
@@ -25,6 +33,9 @@ public class EstadoUF implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", nullable = false, unique = true)
 	private String descricao;
 
@@ -38,6 +49,10 @@ public class EstadoUF implements Serializable {
 	@OneToMany(mappedBy = "estado")
 	private Set<Endereco> enderecos;
 
+	@OneToOne(mappedBy = "estado")
+	private CarteiraHabilitacao carteiraHabilitacao;
+
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -79,6 +94,14 @@ public class EstadoUF implements Serializable {
 
 	public void setEnderecos(Set<Endereco> enderecos) {
 		this.enderecos = enderecos;
+	}
+
+	public CarteiraHabilitacao getCarteiraHabilitacao() {
+		return carteiraHabilitacao;
+	}
+
+	public void setCarteiraHabilitacao(CarteiraHabilitacao carteiraHabilitacao) {
+		this.carteiraHabilitacao = carteiraHabilitacao;
 	}
 
 	public Boolean getAtivo() {

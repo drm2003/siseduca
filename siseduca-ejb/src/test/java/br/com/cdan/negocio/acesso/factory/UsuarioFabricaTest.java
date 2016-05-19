@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.model.acesso.Usuario;
 import br.com.cdan.negocio.acesso.UsuarioDao;
-import br.com.cdan.negocio.pedagogico.pessoa.factory.FuncionarioFabricaTest;
 
 public class UsuarioFabricaTest {
 	private static UsuarioFabricaTest instance = null;
@@ -21,7 +20,6 @@ public class UsuarioFabricaTest {
 		u.setAtivo(Boolean.TRUE);
 		u.setCoordenadorDoCurso(Boolean.TRUE);
 		//
-		u.setFuncionario(FuncionarioFabricaTest.getInstance().criaFuncionarioPersistido(em));
 		u.setHorarioDeAcesso(HorarioDeAcessoFabricaTest.getInstance().criaHorarioDeAcessoPersistido(em));
 		u.setLogin("teste" + Math.random() * 100000);
 		u.setNomeUsuario("teste" + Math.random() * 10000);

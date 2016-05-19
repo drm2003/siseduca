@@ -25,7 +25,6 @@ public class ControleDeConteudo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
 	@NotNull
 	@NotEmpty
 	@Column(name = "conteudo")

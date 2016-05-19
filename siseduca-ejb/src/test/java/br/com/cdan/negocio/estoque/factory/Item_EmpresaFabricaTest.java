@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.estoque.Item_Empresa;
+import br.com.cdan.model.estoque.Item_EmpresaPK;
 import br.com.cdan.negocio.empresa.factory.EmpresaFabricaTest;
 import br.com.cdan.negocio.estoque.Item_EmpresaDao;
 
@@ -28,6 +29,7 @@ public class Item_EmpresaFabricaTest {
 		i.setUtiliza(Boolean.TRUE);
 		i.setValorCusto(BigDecimal.TEN);
 		i.setValorVenda(BigDecimal.TEN);
+		i.setId(new Item_EmpresaPK(i.getItem().getId(), i.getEmpresa().getId()));
 		return i;
 	}
 
