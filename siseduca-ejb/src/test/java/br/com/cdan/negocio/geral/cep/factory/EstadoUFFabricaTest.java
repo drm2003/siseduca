@@ -3,9 +3,10 @@ package br.com.cdan.negocio.geral.cep.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.geral.cep.EstadoUF;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.EstadoUFDao;
 
-public class EstadoUFFabricaTest {
+public class EstadoUFFabricaTest extends FabricaTest {
 	private static EstadoUFFabricaTest instance = null;
 
 	public static EstadoUFFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class EstadoUFFabricaTest {
 	public EstadoUF criaEstadoUF(EntityManager em) {
 		EstadoUF estadoUF = new EstadoUF();
 		estadoUF.setAtivo(Boolean.TRUE);
-		estadoUF.setDescricao("teste" + Math.random() * 10000);
+		estadoUF.setDescricao(criarStringDinamicaPorTamanho(100));
 		//
 		estadoUF.setPais(PaisFabricaTest.getInstance().criaPaisPersistido(em));
 		return estadoUF;

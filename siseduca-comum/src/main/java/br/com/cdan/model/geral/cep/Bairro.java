@@ -12,6 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.geral.Endereco;
 
@@ -24,6 +28,9 @@ public class Bairro implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 
@@ -34,6 +41,7 @@ public class Bairro implements Serializable {
 	@OneToMany(mappedBy = "bairro")
 	private Set<Endereco> enderecos;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -82,8 +90,7 @@ public class Bairro implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 

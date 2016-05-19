@@ -3,9 +3,10 @@ package br.com.cdan.negocio.geral.cep.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.geral.cep.Bairro;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.BairroDao;
 
-public class BairroFabricaTest {
+public class BairroFabricaTest extends FabricaTest {
 	private static BairroFabricaTest instance = null;
 
 	public static BairroFabricaTest getInstance() {
@@ -19,7 +20,7 @@ public class BairroFabricaTest {
 		Bairro bairro = new Bairro();
 		bairro.setAtivo(Boolean.TRUE);
 		bairro.setCidade(CidadeFabricaTest.getInstance().criaCidadePersistido(em));
-		bairro.setDescricao("teste");
+		bairro.setDescricao(criarStringDinamicaPorTamanho(100));
 		return bairro;
 	}
 

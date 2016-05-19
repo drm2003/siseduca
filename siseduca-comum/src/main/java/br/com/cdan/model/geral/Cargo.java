@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.pessoa.Funcionario;
 
@@ -21,12 +25,16 @@ public class Cargo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 
 	@OneToOne(mappedBy = "cargo")
 	private Funcionario funcionario;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

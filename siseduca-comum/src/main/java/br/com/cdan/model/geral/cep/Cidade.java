@@ -14,9 +14,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.geral.Endereco;
 import br.com.cdan.model.pedagogico.contrato.Transferencia;
+import br.com.cdan.model.pessoa.Certidao;
 import br.com.cdan.model.pessoa.Pessoa;
 
 @Entity
@@ -28,6 +33,9 @@ public class Cidade implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 
@@ -47,6 +55,10 @@ public class Cidade implements Serializable {
 	@OneToOne(mappedBy = "cidadeNatal")
 	private Pessoa pessoa;
 
+	@OneToOne(mappedBy = "municipioCartorio")
+	private Certidao certidao;
+
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -104,6 +116,14 @@ public class Cidade implements Serializable {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+
+	public Certidao getCertidao() {
+		return certidao;
+	}
+
+	public void setCertidao(Certidao certidao) {
+		this.certidao = certidao;
 	}
 
 	public Boolean getAtivo() {

@@ -100,7 +100,7 @@ public class Pessoa implements Serializable {
 	@Column(name = "numeroPassaporte")
 	private String numeroPassaporte;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "certidaoNascimentoCasamento")
 	private Certidao certidao;
 
@@ -362,6 +362,14 @@ public class Pessoa implements Serializable {
 
 	public void setCarteiraHabilitacao(CarteiraHabilitacao carteiraHabilitacao) {
 		this.carteiraHabilitacao = carteiraHabilitacao;
+	}
+
+	public Set<Responsavel> getResponsaveis() {
+		return responsaveis;
+	}
+
+	public void setResponsaveis(Set<Responsavel> responsaveis) {
+		this.responsaveis = responsaveis;
 	}
 
 	public Boolean getAtivo() {

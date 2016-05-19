@@ -1,10 +1,13 @@
-package br.com.cdan.negocio.geral.cep.factory;
+package br.com.cdan.negocio.geral.factory;
 
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.geral.Endereco;
 import br.com.cdan.negocio.biblioteca.factory.EditoraFabricaTest;
 import br.com.cdan.negocio.geral.EnderecoDao;
+import br.com.cdan.negocio.geral.cep.factory.BairroFabricaTest;
+import br.com.cdan.negocio.geral.cep.factory.CEPFabricaTest;
+import br.com.cdan.negocio.geral.cep.factory.CidadeFabricaTest;
 import br.com.cdan.negocio.pedagogico.contrato.factory.AproveitamentoFabricaTest;
 
 public class EnderecoFabricaTest {
