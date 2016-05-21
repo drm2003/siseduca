@@ -32,7 +32,8 @@ public class TelefoneDAOTeste extends PersistenciaJUnit {
 	@Before
 	public void setUp() throws Exception {
 		LOG.info("Instanciando DAOTest.");
-		dao = new TelefoneDao(getEntityManager());
+		dao = new T
+			elefoneDao(getEntityManager());
 	}
 
 	@Test
