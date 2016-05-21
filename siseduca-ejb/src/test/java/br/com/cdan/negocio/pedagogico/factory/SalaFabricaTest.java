@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.Sala;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.SalaDao;
 
-public class SalaFabricaTest {
+public class SalaFabricaTest extends FabricaTest {
 	private static SalaFabricaTest instance = null;
 
 	public static synchronized SalaFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class SalaFabricaTest {
 	public Sala criaSala(EntityManager em) {
 		Sala s = new Sala();
 		s.setAtivo(Boolean.TRUE);
-		s.setDescricao("descricao");
+		s.setDescricao(criarStringDinamicaPorTamanho(100));
 		//
 		s.setLocacao(Boolean.TRUE);
 		s.setSigla("sigla");

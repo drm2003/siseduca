@@ -19,7 +19,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.empresa.Empresa;
@@ -65,11 +64,11 @@ public class Obra implements Serializable {
 	private Nivel nivel;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_serieColecaoLiteral", insertable = false, updatable = false)
+	@JoinColumn(name = "id_serieColecaoLiteral")
 	private SerieColecaoLiteral serieColecaoLiteral;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_serieColecaoLiteral")
+	@JoinColumn(name = "setor")
 	private Setor setor;
 
 	@Column(name = "classificacaoCutter")

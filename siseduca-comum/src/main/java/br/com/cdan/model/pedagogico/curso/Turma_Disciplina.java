@@ -17,9 +17,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.cdan.model.pedagogico.contrato.EstagioMonografia;
 import br.com.cdan.model.pedagogico.contrato.Matricula;
 import br.com.cdan.model.pedagogico.diario.DiarioDeAula;
+import br.com.cdan.model.pessoa.Aluno;
 import br.com.cdan.model.pessoa.Funcionario;
 
 @Entity
@@ -65,16 +65,19 @@ public class Turma_Disciplina implements Serializable {
 	@JoinColumn(name = "professor")
 	private Funcionario professor;
 
+	@OneToOne
+	@JoinColumn(name = "funcionario")
+	private Funcionario funcionario;
+
+	@OneToMany(mappedBy = "turma_Disciplina")
+	private Set<Aluno> aluno;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_tipoDeInvestimento")
 	private TipoDeInvestimento tipoDeInvestimento;
 
 	@OneToOne(mappedBy = "turma_Disciplina")
 	private DiarioDeAula diarioDeAula;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_estagioMonografia")
-	private EstagioMonografia estagioMonografia;
 
 	@Column(name = "ativo")
 	private Boolean ativo;
@@ -175,12 +178,20 @@ public class Turma_Disciplina implements Serializable {
 		this.diarioDeAula = diarioDeAula;
 	}
 
-	public EstagioMonografia getEstagioMonografia() {
-		return estagioMonografia;
+	public Funcionario getFuncionario() {
+		return funcionario;
 	}
 
-	public void setEstagioMonografia(EstagioMonografia estagioMonografia) {
-		this.estagioMonografia = estagioMonografia;
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public Set<Aluno> getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(Set<Aluno> aluno) {
+		this.aluno = aluno;
 	}
 
 	public Boolean getAtivo() {

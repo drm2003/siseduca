@@ -28,6 +28,9 @@ public class ResponsavelFabricaTest {
 		r.setObservacoes("observacoes");
 		r.setPessoa(PessoaFabricaTest.getInstance().criaPessoaPersistido(em));
 		r.setSenhaPortal("senhaPortal");
+		r.setResponsavelDidatico(AlunoFabricaTest.getInstance().criaAlunoPersistido(em));
+		r.setResponsavelEmpresa(AlunoFabricaTest.getInstance().criaAlunoPersistido(em));
+		r.setResponsavelFinanceiro(AlunoFabricaTest.getInstance().criaAlunoPersistido(em));
 		//
 		r.setTipoDeResponsavel(TipoDeResponsavelFabricaTest.getInstance().criaTipoDeResponsavelPersistido(em));
 		return r;

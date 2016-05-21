@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.pedagogico.SituacaoDoAlunoNaTurma;
@@ -78,8 +77,8 @@ public class Matricula implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumns(value = {
-			@JoinColumn(name = "MATRICULA_id_turma", referencedColumnName = "id_turma", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "MATRICULA_id_disciplina", referencedColumnName = "id_disciplina", nullable = false, insertable = false, updatable = false) })
+			@JoinColumn(name = "MATRICULA_id_turma", referencedColumnName = "id_turma", nullable = false),
+			@JoinColumn(name = "MATRICULA_id_disciplina", referencedColumnName = "id_disciplina", nullable = false) })
 	private Turma_Disciplina turma_disciplina;
 
 	@Column(name = "ativo")

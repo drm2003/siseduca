@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.SeriePadrao;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.SeriePadraoDao;
 
-public class SeriePadraoFabricaTest {
+public class SeriePadraoFabricaTest extends FabricaTest {
 	private static SeriePadraoFabricaTest instance = null;
 
 	public static synchronized SeriePadraoFabricaTest getInstance() {
@@ -19,7 +20,7 @@ public class SeriePadraoFabricaTest {
 		SeriePadrao s = new SeriePadrao();
 		s.setAtivo(Boolean.TRUE);
 		s.setCodigo("codigo");
-		s.setDescricao("descricao");
+		s.setDescricao(criarStringDinamicaPorTamanho(100));
 		s.setEscolaridade(EscolaridadeFabricaTest.getInstance().criaEscolaridadePersistido(em));
 		s.setTipoDeCurso(TipoDeCursoFabricaTest.getInstance().criaTipoDeCursoPersistido(em));
 		return s;

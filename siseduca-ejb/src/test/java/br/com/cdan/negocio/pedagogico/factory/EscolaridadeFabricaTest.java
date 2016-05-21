@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.Escolaridade;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.EscolaridadeDao;
 
-public class EscolaridadeFabricaTest {
+public class EscolaridadeFabricaTest extends FabricaTest {
 	private static EscolaridadeFabricaTest instance = null;
 
 	public static synchronized EscolaridadeFabricaTest getInstance() {
@@ -17,7 +18,7 @@ public class EscolaridadeFabricaTest {
 
 	public Escolaridade criaEscolaridade() {
 		Escolaridade e = new Escolaridade();
-		e.setDescricao("descricao");
+		e.setDescricao(criarStringDinamicaPorTamanho(100));
 		e.setAtivo(Boolean.TRUE);
 		return e;
 	}

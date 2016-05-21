@@ -46,10 +46,10 @@ public class DiaDaSemanaAula implements Serializable {
 	@Column(name = "horaTermino")
 	private Date horaTermino;
 
-	@OneToOne
+	@OneToOne(mappedBy = "diaDaSemanaAula")
 	@JoinColumns(value = {
-			@JoinColumn(name = "DIADASEMANA_ID_TURMA", referencedColumnName = "id_turma", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "DIADASEMANA_ID_DISCIPLINA", referencedColumnName = "id_disciplina", nullable = false, insertable = false, updatable = false) })
+			@JoinColumn(name = "DIADASEMANA_ID_TURMA", referencedColumnName = "id_turma", nullable = false),
+			@JoinColumn(name = "DIADASEMANA_ID_DISCIPLINA", referencedColumnName = "id_disciplina", nullable = false) })
 	private Turma_Disciplina turma_Disciplina;
 
 	@ManyToMany(mappedBy = "diasDaSemanaAula", fetch = FetchType.LAZY)

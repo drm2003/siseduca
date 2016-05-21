@@ -13,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.biblioteca.Editora;
 import br.com.cdan.model.clientefornecedor.ClienteFornecedor;
@@ -41,6 +44,8 @@ public class Endereco implements Serializable {
 	@JoinColumn(name = "id_cep")
 	private CEP cep;
 
+	@NotNull
+	@NotEmpty
 	@Column(name = "logradouro", nullable = false)
 	private String logradouro;
 
@@ -92,6 +97,7 @@ public class Endereco implements Serializable {
 	@JoinColumn(name = "clienteFornecedor")
 	private ClienteFornecedor clienteFornecedor;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

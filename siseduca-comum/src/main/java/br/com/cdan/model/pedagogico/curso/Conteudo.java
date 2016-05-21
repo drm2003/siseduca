@@ -26,8 +26,8 @@ public class Conteudo implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumns(value = {
-			@JoinColumn(name = "CONTEUDO_id_disciplina", referencedColumnName = "id_disciplina", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "CONTEUDO_id_matrizCurricular", referencedColumnName = "id_matrizCurricular", nullable = false, insertable = false, updatable = false) })
+			@JoinColumn(name = "CONTEUDO_id_disciplina", referencedColumnName = "id_disciplina", nullable = false),
+			@JoinColumn(name = "CONTEUDO_id_matrizCurricular", referencedColumnName = "id_matrizCurricular", nullable = false) })
 	private Disciplina_MatrizCurricular disciplina_MatrizCurricular;
 
 	@Column(name = "descricao")

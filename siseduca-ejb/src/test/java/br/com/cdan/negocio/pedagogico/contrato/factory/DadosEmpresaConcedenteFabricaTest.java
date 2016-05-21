@@ -18,7 +18,6 @@ public class DadosEmpresaConcedenteFabricaTest {
 
 	public DadosEmpresaConcedente criaDadosEmpresaConcedente(EntityManager em) {
 		DadosEmpresaConcedente d = new DadosEmpresaConcedente();
-		d.setAtivo(Boolean.TRUE);
 		d.setAreaEstagioMonografia("areaEstagioMonografia");
 		d.setEmpresa(EmpresaFabricaTest.getInstance().criaEmpresaPersistido(em));
 		d.setFormacaoAcademica("formacaoAcademica");

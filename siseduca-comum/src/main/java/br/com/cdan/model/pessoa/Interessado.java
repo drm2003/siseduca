@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.model.biblioteca.Origem;
 import br.com.cdan.model.contato.MelhorHorarioParaContato;
@@ -44,19 +45,24 @@ public class Interessado implements Serializable {
 	@JoinColumn(name = "atendente")
 	private Funcionario atendente;
 
-	@Column(name = "melhorHorarioParaContato")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "melhorHorarioParaContato")
 	private MelhorHorarioParaContato melhorHorarioParaContato;
 
-	@Column(name = "motivoDeNaoFechamentoDeContrato")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "motivoDeNaoFechamentoDeContrato")
 	private MotivoDeNaoFechamentoDeContrato motivoDeNaoFechamentoDeContrato;
 
-	@Column(name = "tipoDeContato")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "tipoDeContato")
 	private TipoDeContato tipoDeContato;
 
-	@Column(name = "origem")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "origem")
 	private Origem origem;
 
-	@Column(name = "midia")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "midia")
 	private Midia midia;
 
 	@Column(name = "outraEscolaDoAluno")
@@ -72,6 +78,7 @@ public class Interessado implements Serializable {
 	@JoinColumn(name = "observacaoDoAluno")
 	private ObservacaoDoAluno observacaoDoAluno;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

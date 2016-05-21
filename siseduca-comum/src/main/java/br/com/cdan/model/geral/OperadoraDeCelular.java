@@ -8,6 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "OperadoraDeCelular")
@@ -18,10 +22,14 @@ public class OperadoraDeCelular implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
-	
-	@Column(name="ativo")
+
+	@NotNull
+	@Column(name = "ativo")
 	private Boolean ativo;
 
 	public Long getId() {
@@ -38,7 +46,7 @@ public class OperadoraDeCelular implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}	
+	}
 
 	public Boolean getAtivo() {
 		return ativo;
@@ -53,8 +61,7 @@ public class OperadoraDeCelular implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((ativo == null) ? 0 : ativo.hashCode());
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 
