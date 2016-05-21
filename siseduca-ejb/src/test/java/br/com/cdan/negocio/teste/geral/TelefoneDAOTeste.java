@@ -2,7 +2,7 @@ package br.com.cdan.negocio.teste.geral;
 
 import java.util.List;
 
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 
 import org.apache.log4j.Logger;
@@ -74,9 +74,8 @@ public class TelefoneDAOTeste extends PersistenciaJUnit {
 		dao.persist(a2);
 		//
 		String sql = "SELECT a FROM Telefone a";
-		Query query = dao.getEntityManager().createQuery(sql, Telefone.class);
+		TypedQuery<Telefone> query = dao.getEntityManager().createQuery(sql, Telefone.class);
 		//
-		@SuppressWarnings("unchecked")
 		List<Telefone> lista = query.getResultList(); //
 		//
 		Assert.assertTrue(lista.contains(a1));
