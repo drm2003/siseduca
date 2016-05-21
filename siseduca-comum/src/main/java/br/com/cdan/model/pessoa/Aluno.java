@@ -17,6 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.financeiro.ContaAPagar;
 import br.com.cdan.model.financeiro.ContaAReceber;
@@ -39,6 +42,8 @@ public class Aluno implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
 	@Column(name = "numeroMatricula")
 	private String numeroMatricula;
 
@@ -78,16 +83,13 @@ public class Aluno implements Serializable {
 	@JoinColumn(name = "dadoBancario")
 	private DadoBancario dadoBancario;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "responsavelFinanceiro")
+	@OneToOne(mappedBy = "responsavelFinanceiro", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Responsavel responsavelFinanceiro;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "responsavelDidatico")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "responsavelDidatico")
 	private Responsavel responsavelDidatico;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "responsavelEmpresa")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "responsavelEmpresa")
 	private Responsavel responsavelEmpresa;
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -102,9 +104,8 @@ public class Aluno implements Serializable {
 	private DiarioDeAula diarioDeAula;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumns(value = {
-			@JoinColumn(name = "ALUNO_id_turma", referencedColumnName = "id_turma", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "ALUNO_id_disciplina", referencedColumnName = "id_disciplina", nullable = false, insertable = false, updatable = false) })
+	@JoinColumns(value = { @JoinColumn(name = "ALUNO_id_turma", referencedColumnName = "id_turma", nullable = false),
+			@JoinColumn(name = "ALUNO_id_disciplina", referencedColumnName = "id_disciplina", nullable = false) })
 	private Turma_Disciplina turma_Disciplina;
 
 	@OneToMany(mappedBy = "aluno")
@@ -116,6 +117,7 @@ public class Aluno implements Serializable {
 	@ManyToMany(mappedBy = "alunos", fetch = FetchType.LAZY)
 	private Set<ContaAPagar> contasAPagar;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

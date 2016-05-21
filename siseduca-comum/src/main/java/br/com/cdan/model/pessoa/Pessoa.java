@@ -19,6 +19,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.comum.EnumSexo;
 import br.com.cdan.model.geral.Email;
@@ -37,6 +40,8 @@ public class Pessoa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
 	@Column(name = "nome")
 	private String nome;
 
@@ -129,6 +134,7 @@ public class Pessoa implements Serializable {
 	@Column(name = "permitirEmprestimoBiblioteca")
 	private Boolean permitirEmprestimoBiblioteca;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

@@ -4,13 +4,13 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.model.geral.Endereco;
 import br.com.cdan.negocio.biblioteca.factory.EditoraFabricaTest;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.EnderecoDao;
 import br.com.cdan.negocio.geral.cep.factory.BairroFabricaTest;
 import br.com.cdan.negocio.geral.cep.factory.CEPFabricaTest;
 import br.com.cdan.negocio.geral.cep.factory.CidadeFabricaTest;
-import br.com.cdan.negocio.pedagogico.contrato.factory.AproveitamentoFabricaTest;
 
-public class EnderecoFabricaTest {
+public class EnderecoFabricaTest extends FabricaTest {
 	private static EnderecoFabricaTest instance = null;
 
 	public static synchronized EnderecoFabricaTest getInstance() {
@@ -22,13 +22,13 @@ public class EnderecoFabricaTest {
 
 	public Endereco criaEndereco(EntityManager em) {
 		Endereco e = new Endereco();
-		e.setAproveitamento(AproveitamentoFabricaTest.getInstance().criaAproveitamento(em));
 		e.setAtivo(Boolean.TRUE);
 		e.setBairro(BairroFabricaTest.getInstance().criaBairroPersistido(em));
 		e.setCep(CEPFabricaTest.getInstance().criaCepPersistido(em));
 		e.setCidade(CidadeFabricaTest.getInstance().criaCidadePersistido(em));
 		e.setComplemento("teste");
 		e.setEditora(EditoraFabricaTest.getInstance().criaEditoraPersistido(em));
+		e.setLogradouro(criarStringDinamicaPorTamanho(100));
 		return e;
 	}
 

@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,9 +18,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.comum.EnumTipoEstagioMonografia;
-import br.com.cdan.model.pedagogico.curso.Turma_Disciplina;
 import br.com.cdan.model.pessoa.Aluno;
 import br.com.cdan.model.pessoa.AnexoDocumentos;
 import br.com.cdan.model.pessoa.Funcionario;
@@ -35,7 +36,7 @@ public class EstagioMonografia implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	@Column(name = "tipoEstagioMonografia")
 	private EnumTipoEstagioMonografia tipoEstagioMonografia;
 
@@ -45,9 +46,6 @@ public class EstagioMonografia implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "aluno")
 	private Aluno aluno;
-
-	@OneToMany(mappedBy = "estagioMonografia")
-	private Set<Turma_Disciplina> turma_Disciplina;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "orientadorSupervisor")
@@ -83,7 +81,8 @@ public class EstagioMonografia implements Serializable {
 	@OneToMany(mappedBy = "estagioMonografia")
 	private Set<AnexoDocumentos> anexos;
 
-	@Column(name = "ativo", insertable = false, updatable = false)
+	@NotNull
+	@Column(name = "ativo", nullable = false)
 	private Boolean ativo;
 
 	public Long getId() {
@@ -116,14 +115,6 @@ public class EstagioMonografia implements Serializable {
 
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
-	}
-
-	public Set<Turma_Disciplina> getTurma_Disciplina() {
-		return turma_Disciplina;
-	}
-
-	public void setTurma_Disciplina(Set<Turma_Disciplina> turma_Disciplina) {
-		this.turma_Disciplina = turma_Disciplina;
 	}
 
 	public Funcionario getOrientadorSupervisor() {
@@ -277,10 +268,10 @@ public class EstagioMonografia implements Serializable {
 	@Override
 	public String toString() {
 		return "EstagioMonografia [id=" + id + ", tipoEstagioMonografia=" + tipoEstagioMonografia + ", concluido="
-				+ concluido + ", aluno=" + aluno + ", turma_Disciplina=" + turma_Disciplina + ", orientadorSupervisor="
-				+ orientadorSupervisor + ", tituloTema=" + tituloTema + ", dataInicio=" + dataInicio + ", dataTermino="
-				+ dataTermino + ", horaInicio=" + horaInicio + ", horaTermino=" + horaTermino + ", nota=" + nota
-				+ ", resultado=" + resultado + ", observacao=" + observacao + ", dadosEmpresaConcedente="
-				+ dadosEmpresaConcedente + ", anexos=" + anexos + ", ativo=" + ativo + "]";
+				+ concluido + ", aluno=" + aluno + ", orientadorSupervisor=" + orientadorSupervisor + ", tituloTema="
+				+ tituloTema + ", dataInicio=" + dataInicio + ", dataTermino=" + dataTermino + ", horaInicio="
+				+ horaInicio + ", horaTermino=" + horaTermino + ", nota=" + nota + ", resultado=" + resultado
+				+ ", observacao=" + observacao + ", dadosEmpresaConcedente=" + dadosEmpresaConcedente + ", anexos="
+				+ anexos + ", ativo=" + ativo + "]";
 	}
 }

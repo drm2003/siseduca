@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.TipoDeDisciplina;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.TipoDeDisciplinaDao;
 
-public class TipoDeDisciplinaFabricaTest {
+public class TipoDeDisciplinaFabricaTest extends FabricaTest {
 	private static TipoDeDisciplinaFabricaTest instance = null;
 
 	public static synchronized TipoDeDisciplinaFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class TipoDeDisciplinaFabricaTest {
 	public TipoDeDisciplina criaTipoDeDisciplina() {
 		TipoDeDisciplina t = new TipoDeDisciplina();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
+		t.setDescricao(criarStringDinamicaPorTamanho(100));
 		//
 		return t;
 	}

@@ -3,10 +3,10 @@ package br.com.cdan.negocio.pedagogico.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.TipoDeCurso;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.TipoDeCursoDao;
-import br.com.cdan.negocio.pedagogico.curso.factory.CursoFabricaTest;
 
-public class TipoDeCursoFabricaTest {
+public class TipoDeCursoFabricaTest extends FabricaTest {
 	private static TipoDeCursoFabricaTest instance = null;
 
 	public static synchronized TipoDeCursoFabricaTest getInstance() {
@@ -20,8 +20,7 @@ public class TipoDeCursoFabricaTest {
 		TipoDeCurso t = new TipoDeCurso();
 		t.setAtivo(Boolean.TRUE);
 		t.setCompartilhado(Boolean.TRUE);
-		t.setCurso(CursoFabricaTest.getInstance().criaCursoPersistido(em));
-		t.setDescricao("descricao");
+		t.setDescricao(criarStringDinamicaPorTamanho(100));
 		//
 		t.setReconhecidoPeloMec(Boolean.TRUE);
 		t.setTemMatrizCurricular(Boolean.TRUE);

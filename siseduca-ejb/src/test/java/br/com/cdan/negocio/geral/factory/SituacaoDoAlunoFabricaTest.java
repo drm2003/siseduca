@@ -3,9 +3,10 @@ package br.com.cdan.negocio.geral.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.geral.SituacaoDoAluno;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.SituacaoDoAlunoDao;
 
-public class SituacaoDoAlunoFabricaTest {
+public class SituacaoDoAlunoFabricaTest extends FabricaTest {
 	private static SituacaoDoAlunoFabricaTest instance = null;
 
 	public static synchronized SituacaoDoAlunoFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class SituacaoDoAlunoFabricaTest {
 	public SituacaoDoAluno criaSituacaoDoAluno() {
 		SituacaoDoAluno s = new SituacaoDoAluno();
 		s.setAtivo(Boolean.TRUE);
-		s.setDescricao("descricao");
+		s.setDescricao(criarStringDinamicaPorTamanho(100));
 		return s;
 	}
 

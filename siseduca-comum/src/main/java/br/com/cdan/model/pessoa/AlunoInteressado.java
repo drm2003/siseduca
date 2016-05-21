@@ -16,12 +16,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.comum.EnumTurnoPretendido;
 import br.com.cdan.model.geral.SituacaoDoAluno;
 
 @Entity
-@Table(name = "Aluno")
+@Table(name = "AlunoInteressado")
 public class AlunoInteressado implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
@@ -62,6 +63,7 @@ public class AlunoInteressado implements Serializable {
 	@Column(name = "observacoes")
 	private String observacoes;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -180,11 +182,8 @@ public class AlunoInteressado implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AlunoInteressado [situacaoDoAluno=" + situacaoDoAluno
-				+ ", pessoa=" + pessoa + ", turnoPretendido=" + turnoPretendido
-				+ ", receberEmail=" + receberEmail + ", receberSMS="
-				+ receberSMS + ", responsaveis=" + responsaveis
-				+ ", interessado=" + interessado + ", observacoes="
-				+ observacoes + "]";
+		return "AlunoInteressado [situacaoDoAluno=" + situacaoDoAluno + ", pessoa=" + pessoa + ", turnoPretendido="
+				+ turnoPretendido + ", receberEmail=" + receberEmail + ", receberSMS=" + receberSMS + ", responsaveis="
+				+ responsaveis + ", interessado=" + interessado + ", observacoes=" + observacoes + "]";
 	}
 }

@@ -13,7 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.geral.Endereco;
@@ -41,7 +43,8 @@ public class Responsavel implements Serializable {
 	@JoinColumn(name = "id_pessoa")
 	private Pessoa pessoa;
 
-	@Column(name = "tipoDeResponsavel")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "tipoDeResponsavel")
 	private TipoDeResponsavel tipoDeResponsavel;
 
 	@OneToMany(mappedBy = "responsavel", targetEntity = Follow.class, fetch = FetchType.LAZY)
@@ -53,6 +56,18 @@ public class Responsavel implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_aluno")
 	private Aluno aluno;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "responsavelFinanceiro")
+	private Aluno responsavelFinanceiro;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "responsavelDidatico")
+	private Aluno responsavelDidatico;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "responsavelEmpresa")
+	private Aluno responsavelEmpresa;
 
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_empresa")
@@ -68,6 +83,7 @@ public class Responsavel implements Serializable {
 	@JoinColumn(name = "id_alunoInteressado")
 	private AlunoInteressado alunoInteressado;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -165,6 +181,30 @@ public class Responsavel implements Serializable {
 
 	public void setAlunoInteressado(AlunoInteressado alunoInteressado) {
 		this.alunoInteressado = alunoInteressado;
+	}
+
+	public Aluno getResponsavelFinanceiro() {
+		return responsavelFinanceiro;
+	}
+
+	public void setResponsavelFinanceiro(Aluno responsavelFinanceiro) {
+		this.responsavelFinanceiro = responsavelFinanceiro;
+	}
+
+	public Aluno getResponsavelDidatico() {
+		return responsavelDidatico;
+	}
+
+	public void setResponsavelDidatico(Aluno responsavelDidatico) {
+		this.responsavelDidatico = responsavelDidatico;
+	}
+
+	public Aluno getResponsavelEmpresa() {
+		return responsavelEmpresa;
+	}
+
+	public void setResponsavelEmpresa(Aluno responsavelEmpresa) {
+		this.responsavelEmpresa = responsavelEmpresa;
 	}
 
 	public Boolean getAtivo() {

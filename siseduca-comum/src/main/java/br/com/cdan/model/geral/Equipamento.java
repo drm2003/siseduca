@@ -16,6 +16,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.pedagogico.Sala;
 
@@ -28,9 +32,15 @@ public class Equipamento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "nome", length = 150, nullable = false, unique = true)
 	private String nome;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150)
 	private String descricao;
 
@@ -45,6 +55,7 @@ public class Equipamento implements Serializable {
 	@JoinColumn(name = "id_sala")
 	private Sala sala;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

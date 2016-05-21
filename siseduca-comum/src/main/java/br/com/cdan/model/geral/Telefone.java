@@ -15,6 +15,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.biblioteca.Editora;
 import br.com.cdan.model.clientefornecedor.ClienteFornecedor;
@@ -35,6 +38,8 @@ public class Telefone implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
 	@Column(name = "numero", nullable = false)
 	private String numero;
 
@@ -69,6 +74,7 @@ public class Telefone implements Serializable {
 	@JoinColumn(name = "clienteFornecedor")
 	private ClienteFornecedor clienteFornecedor;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

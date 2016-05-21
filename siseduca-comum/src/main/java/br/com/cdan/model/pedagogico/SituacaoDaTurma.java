@@ -10,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.pedagogico.curso.Turma;
 
@@ -24,15 +28,20 @@ public class SituacaoDaTurma implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 
 	@OneToMany(mappedBy = "situacaoDaTurma")
 	private Set<Turma> turmas;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
+	@NotNull
 	@Column(name = "compartilhado")
 	private Boolean compartilhado;
 
@@ -80,8 +89,7 @@ public class SituacaoDaTurma implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 

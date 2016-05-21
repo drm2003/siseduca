@@ -5,10 +5,11 @@ import java.util.Calendar;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.geral.Equipamento;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.EquipamentoDao;
 import br.com.cdan.negocio.pedagogico.factory.SalaFabricaTest;
 
-public class EquipamentoFabricaTest {
+public class EquipamentoFabricaTest extends FabricaTest {
 	private static EquipamentoFabricaTest instance = null;
 
 	public static synchronized EquipamentoFabricaTest getInstance() {
@@ -22,8 +23,8 @@ public class EquipamentoFabricaTest {
 		Equipamento e = new Equipamento();
 		e.setAtivo(Boolean.TRUE);
 		e.setDataAquisicao(Calendar.getInstance());
-		e.setDescricao("descricao");
-		e.setNome("nome");
+		e.setDescricao(criarStringDinamicaPorTamanho(100));
+		e.setNome(criarStringDinamicaPorTamanho(100));
 		e.setSala(SalaFabricaTest.getInstance().criaSalaPersistido(em));
 		return e;
 	}

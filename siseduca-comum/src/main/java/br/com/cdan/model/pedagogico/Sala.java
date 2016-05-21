@@ -12,6 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.geral.Equipamento;
 
@@ -26,9 +30,15 @@ public class Sala implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 2, max = 10)
 	@Column(name = "sigla", length = 10, nullable = false, unique = true)
 	private String sigla;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 2, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 
@@ -45,6 +55,7 @@ public class Sala implements Serializable {
 	@Column(name = "locacao")
 	private Boolean locacao;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -116,8 +127,7 @@ public class Sala implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((sigla == null) ? 0 : sigla.hashCode());
 		return result;
 	}
@@ -146,8 +156,7 @@ public class Sala implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Sala [sigla=" + sigla + ", descricao=" + descricao + ", vagas="
-				+ vagas + ", equipamentos=" + equipamentos + ", TipoDeSala="
-				+ tipoDeSala + ", locacao=" + locacao + "]";
+		return "Sala [sigla=" + sigla + ", descricao=" + descricao + ", vagas=" + vagas + ", equipamentos="
+				+ equipamentos + ", TipoDeSala=" + tipoDeSala + ", locacao=" + locacao + "]";
 	}
 }
