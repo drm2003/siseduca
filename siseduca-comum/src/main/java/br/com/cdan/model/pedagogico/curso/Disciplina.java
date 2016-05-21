@@ -18,6 +18,7 @@ import javax.persistence.Table;
 
 import br.com.cdan.model.pedagogico.TipoDeCurso;
 import br.com.cdan.model.pedagogico.TipoDeDisciplina;
+import br.com.cdan.model.pedagogico.contrato.Dependencia;
 
 @Entity
 @Table(name = "Disciplina")
@@ -57,6 +58,9 @@ public class Disciplina implements Serializable {
 
 	@OneToMany(mappedBy = "disciplina", fetch = FetchType.LAZY, targetEntity = Turma_Disciplina.class)
 	private Set<Turma_Disciplina> turma_Disciplina;
+
+	@OneToMany(mappedBy = "disciplina", fetch = FetchType.LAZY, targetEntity = Turma_Disciplina.class)
+	private Set<Dependencia> dependencias;
 
 	@Column(name = "codigoINEP")
 	private String codigoINEP;
@@ -156,6 +160,14 @@ public class Disciplina implements Serializable {
 
 	public void setDisciplinas_MatrizCurricular(Set<Disciplina_MatrizCurricular> disciplinas_MatrizCurricular) {
 		this.disciplinas_MatrizCurricular = disciplinas_MatrizCurricular;
+	}
+
+	public Set<Dependencia> getDependencias() {
+		return dependencias;
+	}
+
+	public void setDependencias(Set<Dependencia> dependencias) {
+		this.dependencias = dependencias;
 	}
 
 	public Set<Turma_Disciplina> getTurma_Disciplina() {

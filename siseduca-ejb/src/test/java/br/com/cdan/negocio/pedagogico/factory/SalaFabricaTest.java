@@ -22,7 +22,7 @@ public class SalaFabricaTest extends FabricaTest {
 		s.setDescricao(criarStringDinamicaPorTamanho(100));
 		//
 		s.setLocacao(Boolean.TRUE);
-		s.setSigla("sigla");
+		s.setSigla(criarStringDinamicaPorTamanho(10));
 		//
 		s.setTipoDeSala(TipoDeSalaFabricaTest.getInstance().criaTipoDeSalaPersistido(em));
 		s.setVagas(Long.valueOf(100));

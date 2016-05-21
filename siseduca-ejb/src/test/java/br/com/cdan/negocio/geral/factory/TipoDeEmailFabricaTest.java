@@ -3,9 +3,10 @@ package br.com.cdan.negocio.geral.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.geral.TipoDeEmail;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.TipoDeEmailDao;
 
-public class TipoDeEmailFabricaTest {
+public class TipoDeEmailFabricaTest extends FabricaTest {
 	private static TipoDeEmailFabricaTest instance = null;
 
 	public static synchronized TipoDeEmailFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class TipoDeEmailFabricaTest {
 	public TipoDeEmail criaTipoDeEmail() {
 		TipoDeEmail t = new TipoDeEmail();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
+		t.setDescricao(criarStringDinamicaPorTamanho(100));
 		return t;
 	}
 

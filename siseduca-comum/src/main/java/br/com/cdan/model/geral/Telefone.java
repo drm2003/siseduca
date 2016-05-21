@@ -62,11 +62,11 @@ public class Telefone implements Serializable {
 	@JoinColumn(name = "id_banco")
 	private Banco banco;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_responsavel")
 	private Responsavel responsavel;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "aproveitamento")
 	private Aproveitamento aproveitamento;
 

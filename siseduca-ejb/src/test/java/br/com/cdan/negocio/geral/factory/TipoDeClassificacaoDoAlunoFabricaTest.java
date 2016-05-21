@@ -3,9 +3,10 @@ package br.com.cdan.negocio.geral.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.geral.TipoDeClassificacaoDoAluno;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.TipoDeClassificacaoDoAlunoDao;
 
-public class TipoDeClassificacaoDoAlunoFabricaTest {
+public class TipoDeClassificacaoDoAlunoFabricaTest extends FabricaTest {
 	private static TipoDeClassificacaoDoAlunoFabricaTest instance = null;
 
 	public static synchronized TipoDeClassificacaoDoAlunoFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class TipoDeClassificacaoDoAlunoFabricaTest {
 	public TipoDeClassificacaoDoAluno criaTipoDeClassificacaoDoAluno() {
 		TipoDeClassificacaoDoAluno t = new TipoDeClassificacaoDoAluno();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
+		t.setDescricao(criarStringDinamicaPorTamanho(30));
 		t.setCompartilhado(Boolean.TRUE);
 		t.setCor("cor");
 		return t;

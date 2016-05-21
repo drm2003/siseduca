@@ -3,9 +3,10 @@ package br.com.cdan.negocio.geral.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.geral.TipoDeCelular;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.TipoDeCelularDao;
 
-public class TipoDeCelularFabricaTest {
+public class TipoDeCelularFabricaTest extends FabricaTest {
 	private static TipoDeCelularFabricaTest instance = null;
 
 	public static TipoDeCelularFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class TipoDeCelularFabricaTest {
 	public TipoDeCelular criaTipoDeCelular() {
 		TipoDeCelular t = new TipoDeCelular();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
+		t.setDescricao(criarStringDinamicaPorTamanho(100));
 		//
 		return t;
 	}

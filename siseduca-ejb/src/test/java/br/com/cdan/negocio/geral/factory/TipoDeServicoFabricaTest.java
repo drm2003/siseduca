@@ -5,9 +5,10 @@ import java.math.BigDecimal;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.geral.TipoDeServico;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.TipoDeServicoDao;
 
-public class TipoDeServicoFabricaTest {
+public class TipoDeServicoFabricaTest extends FabricaTest {
 	private static TipoDeServicoFabricaTest instance = null;
 
 	public static synchronized TipoDeServicoFabricaTest getInstance() {
@@ -21,11 +22,10 @@ public class TipoDeServicoFabricaTest {
 		TipoDeServico t = new TipoDeServico();
 		t.setAtivo(Boolean.TRUE);
 		t.setCategoria(CategoriaFabricaTest.getInstance().criaCategoriaPersistido(em));
-		t.setDescricao("descricao");
+		t.setDescricao(criarStringDinamicaPorTamanho(100));
 		t.setDias(Long.valueOf("10"));
 		t.setPrimeiraSolicitacaoGratuita(Boolean.TRUE);
 		t.setValor(BigDecimal.TEN);
-		//
 		return t;
 	}
 

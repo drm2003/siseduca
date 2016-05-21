@@ -95,7 +95,7 @@ public class Funcionario implements Serializable {
 	 */
 	private Turma_Disciplina Turma_Disciplina;
 
-	@OneToOne(mappedBy = "coordenador")
+	@OneToOne(mappedBy = "coordenador", cascade = CascadeType.ALL)
 	private Aproveitamento aproveitamento;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orientadorSupervisor")

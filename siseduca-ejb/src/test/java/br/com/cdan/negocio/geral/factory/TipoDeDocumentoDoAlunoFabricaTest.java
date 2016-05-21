@@ -3,9 +3,10 @@ package br.com.cdan.negocio.geral.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.geral.TipoDeDocumentoDoAluno;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.TipoDeDocumentoDoAlunoDao;
 
-public class TipoDeDocumentoDoAlunoFabricaTest {
+public class TipoDeDocumentoDoAlunoFabricaTest extends FabricaTest {
 	private static TipoDeDocumentoDoAlunoFabricaTest instance = null;
 
 	public static synchronized TipoDeDocumentoDoAlunoFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class TipoDeDocumentoDoAlunoFabricaTest {
 	public TipoDeDocumentoDoAluno criaTipoDeDocumentoDoAluno() {
 		TipoDeDocumentoDoAluno t = new TipoDeDocumentoDoAluno();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
+		t.setDescricao(criarStringDinamicaPorTamanho(100));
 		return t;
 	}
 

@@ -8,6 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "TipoDeClassificacaoDoAluno")
@@ -18,16 +22,21 @@ public class TipoDeClassificacaoDoAluno implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 60)
 	@Column(name = "descricao", length = 60, nullable = false, unique = true)
 	private String descricao;
 
 	@Column(name = "cor")
 	private String cor;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
-	
-	@Column(name="compartilhado")
+
+	@NotNull
+	@Column(name = "compartilhado")
 	private Boolean compartilhado;
 
 	public Long getId() {
@@ -74,8 +83,7 @@ public class TipoDeClassificacaoDoAluno implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 
@@ -98,7 +106,6 @@ public class TipoDeClassificacaoDoAluno implements Serializable {
 
 	@Override
 	public String toString() {
-		return "TipoDeClassificacaoDoAluno [descricao=" + descricao + ", cor="
-				+ cor + "]";
-	}	
+		return "TipoDeClassificacaoDoAluno [descricao=" + descricao + ", cor=" + cor + "]";
+	}
 }

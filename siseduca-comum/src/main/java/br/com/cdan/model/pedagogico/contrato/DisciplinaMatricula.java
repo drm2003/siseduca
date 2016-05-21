@@ -17,6 +17,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "DisciplinaMatricula")
@@ -29,9 +33,15 @@ public class DisciplinaMatricula implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 120)
 	@Column(name = "nome", nullable = false, length = 120)
 	private String nome;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 2, max = 10)
 	@Column(name = "sigla", nullable = false, length = 10)
 	private String sigla;
 
@@ -65,9 +75,11 @@ public class DisciplinaMatricula implements Serializable {
 	@Column(name = "opcional")
 	private Boolean opcional;
 
+	@NotNull
 	@Column(name = "compartilhado")
 	private Boolean compartilhado;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

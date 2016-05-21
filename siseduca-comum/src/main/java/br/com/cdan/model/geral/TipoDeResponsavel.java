@@ -24,7 +24,7 @@ public class TipoDeResponsavel implements Serializable {
 
 	@NotNull
 	@NotEmpty
-	@Size(min = 2, max = 150)
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 

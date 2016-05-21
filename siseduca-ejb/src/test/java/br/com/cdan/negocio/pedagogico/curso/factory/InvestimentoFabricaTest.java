@@ -7,11 +7,12 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.comum.EnumTipoDeSituacaoInvestimento;
 import br.com.cdan.model.pedagogico.curso.Investimento;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.estoque.factory.ItemFabricaTest;
 import br.com.cdan.negocio.geral.factory.CategoriaFabricaTest;
 import br.com.cdan.negocio.pedagogico.curso.InvestimentoDao;
 
-public class InvestimentoFabricaTest {
+public class InvestimentoFabricaTest extends FabricaTest {
 	private static InvestimentoFabricaTest instance = null;
 
 	public static synchronized InvestimentoFabricaTest getInstance() {
@@ -28,7 +29,7 @@ public class InvestimentoFabricaTest {
 		i.setConsiderarMesAtual(Boolean.TRUE);
 		i.setDataDiferenciadaPrimeiraParcela(Calendar.getInstance());
 		i.setDataInicial(Calendar.getInstance());
-		i.setDescricaoPlano("descricaoPlano" + Math.random() * 10000);
+		i.setDescricaoPlano(criarStringDinamicaPorTamanho(100));
 		i.setItem(ItemFabricaTest.getInstance().criaItemPersistido(em));
 		//
 		i.setNumeroDeParcelas(Long.valueOf("1"));

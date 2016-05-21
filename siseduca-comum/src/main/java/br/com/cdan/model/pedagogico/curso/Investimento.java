@@ -20,6 +20,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.comum.EnumTipoDeSituacaoInvestimento;
 import br.com.cdan.model.estoque.Item;
@@ -42,6 +46,9 @@ public class Investimento implements Serializable {
 	@JoinColumn(name = "id_tipoDeInvestimento")
 	private TipoDeInvestimento tipoDeInvestimento;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3)
 	@Column(name = "descricaoPlano", unique = true, nullable = false)
 	private String descricaoPlano;
 
