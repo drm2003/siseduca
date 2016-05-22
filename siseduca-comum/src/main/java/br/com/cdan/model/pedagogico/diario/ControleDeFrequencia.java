@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.model.pedagogico.CalendarioLetivo;
 import br.com.cdan.model.pedagogico.HorarioDeAula;
@@ -32,6 +33,7 @@ public class ControleDeFrequencia implements Serializable {
 	@JoinColumn(name = "aluno")
 	private Aluno aluno;
 
+	@NotNull
 	@Column(name = "data")
 	private Calendar data;
 
@@ -45,6 +47,7 @@ public class ControleDeFrequencia implements Serializable {
 	@JoinColumn(name = "id_calendarioLetivo")
 	private CalendarioLetivo calendarioLetivo;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

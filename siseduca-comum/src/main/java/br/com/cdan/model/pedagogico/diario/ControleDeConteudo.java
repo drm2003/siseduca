@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -26,9 +27,11 @@ public class ControleDeConteudo implements Serializable {
 
 	@NotNull
 	@NotEmpty
-	@Column(name = "conteudo")
+	@Size(min = 3, max = 1000)
+	@Column(name = "conteudo", length = 1000, nullable = false)
 	private String conteudo;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
