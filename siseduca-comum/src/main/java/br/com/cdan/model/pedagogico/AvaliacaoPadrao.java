@@ -11,6 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "AvaliacaoPadrao")
@@ -23,6 +27,9 @@ public class AvaliacaoPadrao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 
@@ -36,6 +43,7 @@ public class AvaliacaoPadrao implements Serializable {
 	@JoinColumn(name = "id_Grupo")
 	private Grupo grupo;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -91,8 +99,7 @@ public class AvaliacaoPadrao implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 
@@ -115,7 +122,7 @@ public class AvaliacaoPadrao implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AvaliacaoPadrao [descricao=" + descricao + ", peso=" + peso
-				+ ", ordem=" + ordem + ", grupos=" + grupo + "]";
+		return "AvaliacaoPadrao [descricao=" + descricao + ", peso=" + peso + ", ordem=" + ordem + ", grupos=" + grupo
+				+ "]";
 	}
 }

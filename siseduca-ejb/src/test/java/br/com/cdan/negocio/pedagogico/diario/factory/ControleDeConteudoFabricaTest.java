@@ -24,7 +24,7 @@ public class ControleDeConteudoFabricaTest extends FabricaTest {
 	}
 
 	public ControleDeConteudo criaControleDeConteudoPersistido(EntityManager em) {
-		ControleDeConteudo c = new ControleDeConteudo();
+		ControleDeConteudo c = criaControleDeConteudo();
 		ControleDeConteudoDao controleDeConteudoDao = new ControleDeConteudoDao(em);
 		controleDeConteudoDao.persist(c);
 		return c;

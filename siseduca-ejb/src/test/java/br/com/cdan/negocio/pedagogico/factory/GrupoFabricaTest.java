@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.Grupo;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.GrupoDao;
 
-public class GrupoFabricaTest {
+public class GrupoFabricaTest extends FabricaTest {
 	private static GrupoFabricaTest instance = null;
 
 	public static synchronized GrupoFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class GrupoFabricaTest {
 	public Grupo criaGrupo() {
 		Grupo g = new Grupo();
 		g.setAtivo(Boolean.TRUE);
-		g.setDescricao("descricao");
+		g.setDescricao(criarStringDinamicaPorTamanho(100));
 		//
 		g.setPeso(Long.valueOf(1));
 		return g;

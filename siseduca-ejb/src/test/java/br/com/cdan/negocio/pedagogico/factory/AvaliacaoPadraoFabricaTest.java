@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.AvaliacaoPadrao;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.AvaliacaoPadraoDao;
 
-public class AvaliacaoPadraoFabricaTest {
+public class AvaliacaoPadraoFabricaTest extends FabricaTest {
 	private static AvaliacaoPadraoFabricaTest instance = null;
 
 	public static synchronized AvaliacaoPadraoFabricaTest getInstance() {
@@ -19,7 +20,7 @@ public class AvaliacaoPadraoFabricaTest {
 		AvaliacaoPadrao a = new AvaliacaoPadrao();
 		//
 		a.setAtivo(Boolean.TRUE);
-		a.setDescricao("descricao");
+		a.setDescricao(criarStringDinamicaPorTamanho(100));
 		a.setGrupo(GrupoFabricaTest.getInstance().criaGrupoPersistido(em));
 		a.setOrdem(Long.valueOf(10));
 		a.setPeso(Long.valueOf(1));

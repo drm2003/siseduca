@@ -11,6 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.acesso.HorarioDeAcesso;
 import br.com.cdan.model.pedagogico.curso.Turma;
@@ -28,7 +32,10 @@ public class CalendarioLetivo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "nome")
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
+	@Column(name = "nome", length = 150, nullable = false)
 	private String nome;
 
 	@Column(name = "calendarioPadrao")
@@ -55,6 +62,7 @@ public class CalendarioLetivo implements Serializable {
 	@OneToMany(mappedBy = "calendarioLetivo")
 	private Set<ControleDeFrequencia> controleDeFrequencia;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
