@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.HorarioDeAula;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.HorarioDeAulaDao;
 
-public class HorarioDeAulaFabricaTest {
+public class HorarioDeAulaFabricaTest extends FabricaTest {
 	private static HorarioDeAulaFabricaTest instance = null;
 
 	public static synchronized HorarioDeAulaFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class HorarioDeAulaFabricaTest {
 	public HorarioDeAula criaHorarioDeAula() {
 		HorarioDeAula h = new HorarioDeAula();
 		h.setAtivo(Boolean.TRUE);
-		h.setDescricao("descricao" + Math.random() * 10000);
+		h.setDescricao(criarStringDinamicaPorTamanho(100));
 		//
 		h.setQuantidadeDeAula(Long.valueOf("10"));
 

@@ -4,12 +4,13 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.curso.Curso;
 import br.com.cdan.negocio.acesso.factory.UsuarioFabricaTest;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.curso.CursoDao;
 import br.com.cdan.negocio.pedagogico.factory.SeriePadraoFabricaTest;
 import br.com.cdan.negocio.pedagogico.factory.TipoDeCursoFabricaTest;
 import br.com.cdan.negocio.pedagogico.pessoa.factory.InteressadoFabricaTest;
 
-public class CursoFabricaTest {
+public class CursoFabricaTest extends FabricaTest {
 	private static CursoFabricaTest instance = null;
 
 	public static synchronized CursoFabricaTest getInstance() {
@@ -29,7 +30,7 @@ public class CursoFabricaTest {
 		c.setIdadeMinima(Long.valueOf("10"));
 		c.setInteressado(InteressadoFabricaTest.getInstance().criaInteressadoPersistido(em));
 		c.setModular(Boolean.TRUE);
-		c.setNome("nome");
+		c.setNome(criarStringDinamicaPorTamanho(100));
 		c.setNomeInstituicao("nomeInstituicao");
 		c.setNumeroDeModulos("numeroDeModulos");
 		c.setNumeroDeVagas("numeroDeVagas");
@@ -40,7 +41,7 @@ public class CursoFabricaTest {
 		c.setReconhecimentoDoCurso("reconhecimentoDoCurso");
 		//
 		c.setSerieEquivalente(SeriePadraoFabricaTest.getInstance().criaSeriePadraoPersistido(em));
-		c.setSigla("sigla");
+		c.setSigla(criarStringDinamicaPorTamanho(10));
 		c.setTempoMaximoParaConclusaoDoCurso(Long.valueOf("10"));
 		c.setTipoDeCurso(TipoDeCursoFabricaTest.getInstance().criaTipoDeCursoPersistido(em));
 		//

@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -37,7 +38,8 @@ public class ControleDeFrequencia implements Serializable {
 	@Column(name = "data")
 	private Calendar data;
 
-	@Column(name = "horarioDeAula")
+	@OneToOne
+	@JoinColumn(name = "horarioDeAula")
 	private HorarioDeAula horarioDeAula;
 
 	@Column(name = "presenca")

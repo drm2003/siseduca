@@ -12,11 +12,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.acesso.AcessoDiasDaSemana;
 import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.pedagogico.curso.Turma;
+import br.com.cdan.model.pedagogico.diario.ControleDeFrequencia;
 
 @Entity
 @Table(name = "HorarioDeAula")
@@ -29,7 +35,10 @@ public class HorarioDeAula implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "descricao", length = 150, nullable = false, unique = true)
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
+	@Column(name = "descricao", length = 150, nullable = false)
 	private String descricao;
 
 	@Column(name = "quantidadeDeAula")
@@ -45,6 +54,10 @@ public class HorarioDeAula implements Serializable {
 	@OneToMany(mappedBy = "horarioDeAula")
 	private Set<Turma> turmas;
 
+	@OneToOne(mappedBy = "horarioDeAula")
+	private ControleDeFrequencia controleDeFrequencia;
+
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -96,6 +109,14 @@ public class HorarioDeAula implements Serializable {
 		this.turmas = turmas;
 	}
 
+	public ControleDeFrequencia getControleDeFrequencia() {
+		return controleDeFrequencia;
+	}
+
+	public void setControleDeFrequencia(ControleDeFrequencia controleDeFrequencia) {
+		this.controleDeFrequencia = controleDeFrequencia;
+	}
+
 	public Boolean getAtivo() {
 		return ativo;
 	}
@@ -108,8 +129,7 @@ public class HorarioDeAula implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 
@@ -132,7 +152,7 @@ public class HorarioDeAula implements Serializable {
 
 	@Override
 	public String toString() {
-		return "HorarioDeAula [descricao=" + descricao + ", quantidadeDeAula="
-				+ quantidadeDeAula + ", empresas=" + empresas + "]";
+		return "HorarioDeAula [descricao=" + descricao + ", quantidadeDeAula=" + quantidadeDeAula + ", empresas="
+				+ empresas + "]";
 	}
 }
