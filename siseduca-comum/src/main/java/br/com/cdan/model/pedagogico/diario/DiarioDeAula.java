@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.model.pedagogico.contrato.DisciplinaMatricula;
 import br.com.cdan.model.pedagogico.curso.DiaDaSemanaAula;
@@ -64,6 +65,7 @@ public class DiarioDeAula implements Serializable {
 	@JoinColumn(name = "professor")
 	private Funcionario professor;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

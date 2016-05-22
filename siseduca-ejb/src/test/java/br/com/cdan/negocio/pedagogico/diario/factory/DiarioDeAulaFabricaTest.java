@@ -3,6 +3,7 @@ package br.com.cdan.negocio.pedagogico.diario.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.diario.DiarioDeAula;
+import br.com.cdan.negocio.pedagogico.curso.factory.Turma_DisciplinaFabricaTest;
 import br.com.cdan.negocio.pedagogico.diario.DiarioDeAulaDao;
 import br.com.cdan.negocio.pedagogico.pessoa.factory.FuncionarioFabricaTest;
 
@@ -24,7 +25,7 @@ public class DiarioDeAulaFabricaTest {
 		d.setControleDeFrequencia(ControleDeFrequenciaFabricaTest.getInstance().criaControleDeFrequenciaPersistido(em));
 		//
 		d.setProfessor(FuncionarioFabricaTest.getInstance().criaFuncionarioPersistido(em));
-		// d.setTurma_Disciplina(Turma_DisciplinaFabricaTest.getInstance().criaTurma_DisciplinaPersistido(em));
+		d.setTurma_Disciplina(Turma_DisciplinaFabricaTest.getInstance().criaTurma_DisciplinaPersistido(em));
 		return d;
 	}
 
