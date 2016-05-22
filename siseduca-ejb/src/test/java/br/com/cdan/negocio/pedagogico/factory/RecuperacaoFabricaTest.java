@@ -24,7 +24,6 @@ public class RecuperacaoFabricaTest {
 		r.setEnumTipoDeRecuperacao(EnumTipoDeRecuperacao.RECUPERACAOACADAPERIODO);
 		r.setMediaAposRecuperacao(MediaAposRecuperacaoFabricaTest.getInstance().criaMediaAposRecuperacaoPersistido(em));
 		r.setPesoDaRecuperacao(Long.valueOf(1));
-		r.setSistemaDeAvaliacao(SistemaDeAvaliacaoFabricaTest.getInstance().criaSistemaDeAvaliacaoPersistido(em));
 		r.setValorMediaAposRecuperacao(BigDecimal.valueOf(7.0));
 		return r;
 	}

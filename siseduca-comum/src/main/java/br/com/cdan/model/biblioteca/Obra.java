@@ -19,7 +19,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.empresa.Empresa;
@@ -33,15 +32,14 @@ public class Obra implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
 	@NotEmpty
 	@NotNull
-	@Size(max = 350, min = 3)
-	@Column(name = "nome", length = 350, nullable = false, unique = true)
+	@Size(max = 250, min = 3)
+	@Column(name = "nome", length = 250, nullable = false, unique = true)
 	private String nome;
 
-	@Size(max = 350, min = 3)
-	@Column(name = "subtitulo", length = 350)
+	@Size(max = 250, min = 3)
+	@Column(name = "subtitulo", length = 250)
 	private String subtitulo;
 
 	@NotNull
@@ -66,11 +64,11 @@ public class Obra implements Serializable {
 	private Nivel nivel;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_serieColecaoLiteral", insertable = false, updatable = false)
+	@JoinColumn(name = "id_serieColecaoLiteral")
 	private SerieColecaoLiteral serieColecaoLiteral;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_serieColecaoLiteral")
+	@JoinColumn(name = "setor")
 	private Setor setor;
 
 	@Column(name = "classificacaoCutter")

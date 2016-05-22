@@ -3,9 +3,10 @@ package br.com.cdan.negocio.empresa.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.empresa.Empresa;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.empresa.EmpresaDao;
 
-public class EmpresaFabricaTest {
+public class EmpresaFabricaTest extends FabricaTest {
 	private static EmpresaFabricaTest instance = null;
 
 	public static synchronized EmpresaFabricaTest getInstance() {
@@ -37,16 +38,5 @@ public class EmpresaFabricaTest {
 
 		dao.persist(empresa);
 		return empresa;
-	}
-
-	public String criarStringDinamicaPorTamanho(Integer quantidade) {
-		String s = "";
-		int x = 0;
-		for (int i = 0; i < quantidade; i++) {
-			s += (int) (Math.random() * 10) + "";
-			if (x == 10)
-				x = 0;
-		}
-		return s;
 	}
 }

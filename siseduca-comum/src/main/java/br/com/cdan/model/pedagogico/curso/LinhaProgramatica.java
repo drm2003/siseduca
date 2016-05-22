@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "LinhaProgramatica")
@@ -25,8 +26,8 @@ public class LinhaProgramatica implements Serializable {
 
 	@ManyToOne
 	@JoinColumns(/* foreignKey = @ForeignKey(name = "FK_linhaProgramatica"), */value = {
-			@JoinColumn(name = "LINHAPROGRAMATICA_id_disciplina", referencedColumnName = "id_disciplina", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "LINHAPROGRAMATICA_id_matrizCurricular", referencedColumnName = "id_matrizCurricular", nullable = false, insertable = false, updatable = false) })
+			@JoinColumn(name = "LINHAPROGRAMATICA_id_disciplina", referencedColumnName = "id_disciplina", nullable = false),
+			@JoinColumn(name = "LINHAPROGRAMATICA_id_matrizCurricular", referencedColumnName = "id_matrizCurricular", nullable = false) })
 	private Disciplina_MatrizCurricular disciplina_MatrizCurricular;
 
 	@Column(name = "aula")
@@ -41,6 +42,7 @@ public class LinhaProgramatica implements Serializable {
 	@Column(name = "assunto")
 	private String assunto;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

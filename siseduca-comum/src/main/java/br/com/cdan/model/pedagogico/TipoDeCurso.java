@@ -13,6 +13,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.geral.TipoDeServico;
 import br.com.cdan.model.pedagogico.curso.Curso;
@@ -29,6 +33,9 @@ public class TipoDeCurso implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 
@@ -50,9 +57,11 @@ public class TipoDeCurso implements Serializable {
 	@OneToOne(mappedBy = "tipoDeCurso")
 	private Curso curso;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
+	@NotNull
 	@Column(name = "compartilhado")
 	private Boolean compartilhado;
 

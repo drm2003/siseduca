@@ -12,6 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.pedagogico.curso.Curso;
 
@@ -29,6 +33,9 @@ public class SeriePadrao implements Serializable {
 	@Column(name = "codigo")
 	private String codigo;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 
@@ -43,6 +50,7 @@ public class SeriePadrao implements Serializable {
 	@OneToOne(mappedBy = "serieEquivalente", fetch = FetchType.EAGER)
 	private Curso curso;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -99,8 +107,7 @@ public class SeriePadrao implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 
@@ -128,8 +135,7 @@ public class SeriePadrao implements Serializable {
 
 	@Override
 	public String toString() {
-		return "SeriePadrao [codigo=" + codigo + ", descricao=" + descricao
-				+ ", tipoDeCurso=" + tipoDeCurso + ", escolaridade="
-				+ escolaridade + "]";
+		return "SeriePadrao [codigo=" + codigo + ", descricao=" + descricao + ", tipoDeCurso=" + tipoDeCurso
+				+ ", escolaridade=" + escolaridade + "]";
 	}
 }

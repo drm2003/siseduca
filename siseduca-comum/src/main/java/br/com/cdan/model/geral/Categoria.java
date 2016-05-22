@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.financeiro.Caixa;
 import br.com.cdan.model.pedagogico.curso.Investimento;
@@ -27,6 +31,9 @@ public class Categoria implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 
@@ -39,6 +46,7 @@ public class Categoria implements Serializable {
 	@OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
 	private Set<Caixa> caixas;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

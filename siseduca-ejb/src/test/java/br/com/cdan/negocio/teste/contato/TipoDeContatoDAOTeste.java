@@ -85,19 +85,19 @@ public class TipoDeContatoDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test
-	public void consultar_por_nome() {
+	public void consultar_por_descricao() {
 		TipoDeContato a = criaTipoDeContato();
 		dao.persist(a);
 		Assert.assertNotNull(a);
-		String sql = "FROM TipoDeContato a WHERE a.nome = :nome";
+		String sql = "FROM TipoDeContato a WHERE a.descricao = :descricao";
 		TypedQuery<TipoDeContato> query = dao.getEntityManager().createQuery(sql, TipoDeContato.class);
-		query.setParameter("nome", a.getDescricao());
+		query.setParameter("descricao", a.getDescricao());
 		TipoDeContato consulta = query.getSingleResult();
 		Assert.assertSame(a, consulta);
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_nome_nulo() {
+	public void nao_deve_permitir_descricao_nulo() {
 		TipoDeContato a = criaTipoDeContato();
 		a.setDescricao(null);
 		dao.persist(a);
@@ -105,7 +105,7 @@ public class TipoDeContatoDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_nome_vazio() {
+	public void nao_deve_permitir_descricao_vazio() {
 		TipoDeContato a = criaTipoDeContato();
 		a.setDescricao("");
 		dao.persist(a);
@@ -113,7 +113,7 @@ public class TipoDeContatoDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nome_maior_que_tamanho_maximo_permitido() {
+	public void descricao_maior_que_tamanho_maximo_permitido() {
 		TipoDeContato a = criaTipoDeContato();
 		a.setDescricao(criarStringDinamicaPorTamanho(101));
 		dao.persist(a);
@@ -121,7 +121,7 @@ public class TipoDeContatoDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nome_menor_que_tamanho_minimo_permitido() {
+	public void descricao_menor_que_tamanho_minimo_permitido() {
 		TipoDeContato a = criaTipoDeContato();
 		a.setDescricao(criarStringDinamicaPorTamanho(2));
 		dao.persist(a);
@@ -137,6 +137,6 @@ public class TipoDeContatoDAOTeste extends PersistenciaJUnit {
 	}
 
 	private TipoDeContato criaTipoDeContato() {
-		return TipoDeContatoFabricaTest.getInstance().criaTipoDeContatoPersistido(getEntityManager());
+		return TipoDeContatoFabricaTest.getInstance().criaTipoDeContato();
 	}
 }

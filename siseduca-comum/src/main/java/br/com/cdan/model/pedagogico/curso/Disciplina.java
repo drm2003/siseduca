@@ -15,9 +15,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.pedagogico.TipoDeCurso;
 import br.com.cdan.model.pedagogico.TipoDeDisciplina;
+import br.com.cdan.model.pedagogico.contrato.Dependencia;
 
 @Entity
 @Table(name = "Disciplina")
@@ -30,9 +35,15 @@ public class Disciplina implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 120)
 	@Column(name = "nome", nullable = false, length = 120)
 	private String nome;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 2, max = 10)
 	@Column(name = "sigla", nullable = false, length = 10)
 	private String sigla;
 
@@ -58,15 +69,20 @@ public class Disciplina implements Serializable {
 	@OneToMany(mappedBy = "disciplina", fetch = FetchType.LAZY, targetEntity = Turma_Disciplina.class)
 	private Set<Turma_Disciplina> turma_Disciplina;
 
+	@OneToMany(mappedBy = "disciplina", fetch = FetchType.LAZY, targetEntity = Turma_Disciplina.class)
+	private Set<Dependencia> dependencias;
+
 	@Column(name = "codigoINEP")
 	private String codigoINEP;
 
 	@Column(name = "valorHoraAula")
 	private BigDecimal valorHoraAula;
 
+	@NotNull
 	@Column(name = "compartilhado")
 	private Boolean compartilhado;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -156,6 +172,14 @@ public class Disciplina implements Serializable {
 
 	public void setDisciplinas_MatrizCurricular(Set<Disciplina_MatrizCurricular> disciplinas_MatrizCurricular) {
 		this.disciplinas_MatrizCurricular = disciplinas_MatrizCurricular;
+	}
+
+	public Set<Dependencia> getDependencias() {
+		return dependencias;
+	}
+
+	public void setDependencias(Set<Dependencia> dependencias) {
+		this.dependencias = dependencias;
 	}
 
 	public Set<Turma_Disciplina> getTurma_Disciplina() {

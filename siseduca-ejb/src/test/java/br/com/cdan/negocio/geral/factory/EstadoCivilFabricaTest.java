@@ -3,9 +3,10 @@ package br.com.cdan.negocio.geral.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.geral.EstadoCivil;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.EstadoCivilDao;
 
-public class EstadoCivilFabricaTest {
+public class EstadoCivilFabricaTest extends FabricaTest {
 	private static EstadoCivilFabricaTest instance = null;
 
 	public static synchronized EstadoCivilFabricaTest getInstance() {
@@ -19,14 +20,14 @@ public class EstadoCivilFabricaTest {
 		EstadoCivil e = new EstadoCivil();
 		//
 		e.setAtivo(Boolean.TRUE);
-		e.setDescricao("descricao");
+		e.setDescricao(criarStringDinamicaPorTamanho(30));
 		//
 		return e;
 	}
 
 	public EstadoCivil criaEstadoCivilPersistido(EntityManager em) {
 		EstadoCivil e = criaEstadoCivil();
-		EstadoCivilDao dao = new EstadoCivilDao();
+		EstadoCivilDao dao = new EstadoCivilDao(em);
 		//
 
 		dao.persist(e);

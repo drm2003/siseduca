@@ -23,7 +23,6 @@ public class FinanceiroFuncionarioFabricaTest {
 		f.setBanco(BancoFabricaTest.getInstance().criaBancoPersistido(em));
 		f.setCodigoDoCliente("codigoDoCliente");
 		f.setConta("conta");
-		f.setFuncionario(FuncionarioFabricaTest.getInstance().criaFuncionarioPersistido(em));
 		return f;
 	}
 

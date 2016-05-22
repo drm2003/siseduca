@@ -3,11 +3,12 @@ package br.com.cdan.negocio.pedagogico.pessoa.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pessoa.Aluno;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.factory.SituacaoDoAlunoFabricaTest;
 import br.com.cdan.negocio.pedagogico.curso.factory.Turma_DisciplinaFabricaTest;
 import br.com.cdan.negocio.pedagogico.pessoa.AlunoDao;
 
-public class AlunoFabricaTest {
+public class AlunoFabricaTest extends FabricaTest {
 	private static AlunoFabricaTest instance = null;
 
 	public static synchronized AlunoFabricaTest getInstance() {
@@ -21,7 +22,8 @@ public class AlunoFabricaTest {
 		Aluno aluno = new Aluno();
 		aluno.setAtivo(Boolean.TRUE);
 		aluno.setCodigoDeBarras("codigoDeBarras");
-		// //
+		aluno.setNumeroMatricula(criarStringDinamicaPorTamanho(10));
+		//
 		aluno.setInteressado(InteressadoFabricaTest.getInstance().criaInteressadoPersistido(em));
 		aluno.setLoginPortal("loginPortal");
 		aluno.setPessoa(PessoaFabricaTest.getInstance().criaPessoaPersistido(em));
@@ -29,9 +31,6 @@ public class AlunoFabricaTest {
 		aluno.setReceberEmail(Boolean.TRUE);
 		aluno.setReceberSMS(Boolean.TRUE);
 		//
-		aluno.setResponsavelDidatico(ResponsavelFabricaTest.getInstance().criaResponsavelPersistido(em));
-		aluno.setResponsavelEmpresa(ResponsavelFabricaTest.getInstance().criaResponsavelPersistido(em));
-		aluno.setResponsavelFinanceiro(ResponsavelFabricaTest.getInstance().criaResponsavelPersistido(em));
 		aluno.setSenha("senha");
 		aluno.setSituacaoDoAluno(SituacaoDoAlunoFabricaTest.getInstance().criaSituacaoDoAlunoPersistido(em));
 		aluno.setTurma_Disciplina(Turma_DisciplinaFabricaTest.getInstance().criaTurma_DisciplinaPersistido(em));

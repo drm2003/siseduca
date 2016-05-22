@@ -1,15 +1,12 @@
 package br.com.cdan.negocio.pedagogico.contrato.factory;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.pedagogico.contrato.Matricula;
 import br.com.cdan.model.pedagogico.contrato.TipoDeContrato;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.contrato.TipoDeContratoDao;
 
-public class TipoDeContratoFabricaTest {
+public class TipoDeContratoFabricaTest extends FabricaTest {
 	private static TipoDeContratoFabricaTest instance = null;
 
 	public static synchronized TipoDeContratoFabricaTest getInstance() {
@@ -22,11 +19,7 @@ public class TipoDeContratoFabricaTest {
 	public TipoDeContrato criaTipoDeContrato(EntityManager em) {
 		TipoDeContrato t = new TipoDeContrato();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
-		//
-		Set<Matricula> matriculas = new LinkedHashSet<>();
-		matriculas.add(MatriculaFabricaTest.getInstance().criaMatriculaPersistido(em));
-		t.setMatriculas(matriculas);
+		t.setDescricao(criarStringDinamicaPorTamanho(100));
 		return t;
 	}
 

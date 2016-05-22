@@ -12,6 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Conteudo")
@@ -26,11 +30,14 @@ public class Conteudo implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumns(value = {
-			@JoinColumn(name = "CONTEUDO_id_disciplina", referencedColumnName = "id_disciplina", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "CONTEUDO_id_matrizCurricular", referencedColumnName = "id_matrizCurricular", nullable = false, insertable = false, updatable = false) })
+			@JoinColumn(name = "CONTEUDO_id_disciplina", referencedColumnName = "id_disciplina", nullable = false),
+			@JoinColumn(name = "CONTEUDO_id_matrizCurricular", referencedColumnName = "id_matrizCurricular", nullable = false) })
 	private Disciplina_MatrizCurricular disciplina_MatrizCurricular;
 
-	@Column(name = "descricao")
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 1000)
+	@Column(name = "descricao", length = 1000, nullable = false)
 	private String descricao;
 
 	@Column(name = "cargaHoraria")
@@ -39,6 +46,7 @@ public class Conteudo implements Serializable {
 	@Column(name = "cargaHorariaEstagio")
 	private Long cargaHorariaEstagio;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

@@ -18,7 +18,7 @@ public class TelefoneDao extends SiseducaDao {
 	@Override
 	public void remove(Object obj) {
 		Telefone telefone = (Telefone) obj;
-		telefone.setAtivo(false);
+		telefone.setAtivo(Boolean.FALSE);
 		getEntityManager().merge(telefone);
 	}
 }

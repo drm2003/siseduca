@@ -18,7 +18,7 @@ public class GrausDeInteresseFabricaTest {
 	public GrausDeInteresse criaGrausDeInteresse() {
 		GrausDeInteresse g = new GrausDeInteresse();
 		g.setAtivo(Boolean.TRUE);
-		g.setDescricao("descricao");
+		g.setDescricao("descricao" + Math.random() * 10000);
 		//
 		return g;
 	}

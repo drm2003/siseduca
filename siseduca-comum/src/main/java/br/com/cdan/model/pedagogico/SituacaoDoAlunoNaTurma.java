@@ -10,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.pedagogico.contrato.Matricula;
 
@@ -24,18 +28,26 @@ public class SituacaoDoAlunoNaTurma implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "abreviatura", nullable = false, unique = true, length = 10)
 	private String abreviatura;
 
 	@OneToMany(mappedBy = "situacaoDoAlunoNaTurma")
 	private Set<Matricula> matriculas;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
+	@NotNull
 	@Column(name = "compartilhado")
 	private Boolean compartilhado;
 
@@ -91,10 +103,8 @@ public class SituacaoDoAlunoNaTurma implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((abreviatura == null) ? 0 : abreviatura.hashCode());
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((abreviatura == null) ? 0 : abreviatura.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 
@@ -122,7 +132,6 @@ public class SituacaoDoAlunoNaTurma implements Serializable {
 
 	@Override
 	public String toString() {
-		return "SituacaoDoAlunoNaTurma [descricao=" + descricao
-				+ ", abreviatura=" + abreviatura + "]";
+		return "SituacaoDoAlunoNaTurma [descricao=" + descricao + ", abreviatura=" + abreviatura + "]";
 	}
 }

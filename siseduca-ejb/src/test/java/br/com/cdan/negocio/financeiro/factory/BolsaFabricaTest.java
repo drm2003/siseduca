@@ -22,7 +22,7 @@ public class BolsaFabricaTest {
 		Bolsa b = new Bolsa();
 		b.setAtivo(Boolean.TRUE);
 		b.setDadoBancario(DadoBancarioFabricaTest.getInstance().criaDadoBancarioPersistido(em));
-		b.setDescricao("descricao");
+		b.setDescricao("descricao" + Math.random() * 10000);
 		b.setEspecieDesconto(EnumEspecieDesconto.PERCENTUAL);
 		b.setPadraoFranquia("padraoFranquia");
 		b.setTipoDeDesconto(EnumTipoDeDesconto.BOLSA);

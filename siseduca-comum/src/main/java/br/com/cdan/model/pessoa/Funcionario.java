@@ -11,12 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.model.acesso.Usuario;
 import br.com.cdan.model.financeiro.ContaAPagar;
@@ -53,7 +53,8 @@ public class Funcionario implements Serializable {
 	@JoinColumn(name = "usuario")
 	private Usuario usuario;
 
-	@Column(name = "cargo")
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "cargo")
 	private Cargo cargo;
 
 	@Column(name = "numeroDependentes")
@@ -82,13 +83,19 @@ public class Funcionario implements Serializable {
 	@OneToMany(mappedBy = "professor")
 	private Set<Turma> turmas;
 
-	@OneToOne
-	@JoinColumns(value = {
-			@JoinColumn(name = "FUNCIONARIO_id_turma", referencedColumnName = "id_turma", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "FUNCIONARIO_id_disciplina", referencedColumnName = "id_disciplina", nullable = false, insertable = false, updatable = false) })
+	@OneToOne(mappedBy = "funcionario")
+	/*
+	 * @JoinColumns(value = {
+	 * 
+	 * @JoinColumn(name = "FUNCIONARIO_id_turma", referencedColumnName =
+	 * "id_turma", nullable = false),
+	 * 
+	 * @JoinColumn(name = "FUNCIONARIO_id_disciplina", referencedColumnName =
+	 * "id_disciplina", nullable = false) })
+	 */
 	private Turma_Disciplina Turma_Disciplina;
 
-	@OneToOne(mappedBy = "coordenador")
+	@OneToOne(mappedBy = "coordenador", cascade = CascadeType.ALL)
 	private Aproveitamento aproveitamento;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orientadorSupervisor")
@@ -103,6 +110,7 @@ public class Funcionario implements Serializable {
 	@ManyToMany(mappedBy = "funcionarios", fetch = FetchType.LAZY)
 	private Set<ContaAPagar> contasAPagar;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

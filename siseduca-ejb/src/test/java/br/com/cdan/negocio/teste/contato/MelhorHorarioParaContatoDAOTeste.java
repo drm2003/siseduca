@@ -85,19 +85,19 @@ public class MelhorHorarioParaContatoDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test
-	public void consultar_por_nome() {
+	public void consultar_por_descricao() {
 		MelhorHorarioParaContato a = criaMelhorHorarioParaContato();
 		dao.persist(a);
 		Assert.assertNotNull(a);
-		String sql = "FROM MelhorHorarioParaContato a WHERE a.nome = :nome";
+		String sql = "FROM MelhorHorarioParaContato a WHERE a.descricao = :descricao";
 		TypedQuery<MelhorHorarioParaContato> query = dao.getEntityManager().createQuery(sql, MelhorHorarioParaContato.class);
-		query.setParameter("nome", a.getDescricao());
+		query.setParameter("descricao", a.getDescricao());
 		MelhorHorarioParaContato consulta = query.getSingleResult();
 		Assert.assertSame(a, consulta);
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_nome_nulo() {
+	public void nao_deve_permitir_descricao_nulo() {
 		MelhorHorarioParaContato a = criaMelhorHorarioParaContato();
 		a.setDescricao(null);
 		dao.persist(a);
@@ -105,7 +105,7 @@ public class MelhorHorarioParaContatoDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_nome_vazio() {
+	public void nao_deve_permitir_descricao_vazio() {
 		MelhorHorarioParaContato a = criaMelhorHorarioParaContato();
 		a.setDescricao("");
 		dao.persist(a);
@@ -113,7 +113,7 @@ public class MelhorHorarioParaContatoDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nome_maior_que_tamanho_maximo_permitido() {
+	public void descricao_maior_que_tamanho_maximo_permitido() {
 		MelhorHorarioParaContato a = criaMelhorHorarioParaContato();
 		a.setDescricao(criarStringDinamicaPorTamanho(101));
 		dao.persist(a);
@@ -121,7 +121,7 @@ public class MelhorHorarioParaContatoDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nome_menor_que_tamanho_minimo_permitido() {
+	public void descricao_menor_que_tamanho_minimo_permitido() {
 		MelhorHorarioParaContato a = criaMelhorHorarioParaContato();
 		a.setDescricao(criarStringDinamicaPorTamanho(2));
 		dao.persist(a);
@@ -138,6 +138,6 @@ public class MelhorHorarioParaContatoDAOTeste extends PersistenciaJUnit {
 
 	private MelhorHorarioParaContato criaMelhorHorarioParaContato() {
 		return MelhorHorarioParaContatoFabricaTest.getInstance()
-				.criaMelhorHorarioParaContatoPersistido(getEntityManager());
+				.criaMelhorHorarioParaContato();
 	}
 }

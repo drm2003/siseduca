@@ -18,7 +18,7 @@ public class ClassificacaoDeItensFabricaTest {
 	public ClassificacaoDeItens criaClassificacaoDeItens() {
 		ClassificacaoDeItens c = new ClassificacaoDeItens();
 		c.setAtivo(Boolean.TRUE);
-		c.setDescricao("descricao");
+		c.setDescricao("descricao" + Math.random() * 10000);
 		return c;
 	}
 

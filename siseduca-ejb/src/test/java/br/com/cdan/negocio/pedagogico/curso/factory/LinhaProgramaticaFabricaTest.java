@@ -17,6 +17,7 @@ public class LinhaProgramaticaFabricaTest {
 
 	public LinhaProgramatica criaLinhaProgramatica(EntityManager em) {
 		LinhaProgramatica l = new LinhaProgramatica();
+		l.setAtivo(Boolean.TRUE);
 		l.setAssunto("assunto");
 		l.setAtivo(Boolean.TRUE);
 		l.setAula(Long.valueOf("10"));

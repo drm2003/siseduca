@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "PlanoDeEnsino")
@@ -24,6 +28,9 @@ public class PlanoDeEnsino implements Serializable {
 	@OneToOne(mappedBy = "planoDeEnsino")
 	private Disciplina_MatrizCurricular disciplina_MatrizCurricular;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3)
 	@Column(name = "ementa")
 	private String ementa;
 
@@ -42,6 +49,7 @@ public class PlanoDeEnsino implements Serializable {
 	@Column(name = "contribuicaoParaAInstituicao")
 	private String contribuicaoParaAInstituicao;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -57,8 +65,7 @@ public class PlanoDeEnsino implements Serializable {
 		return disciplina_MatrizCurricular;
 	}
 
-	public void setDisciplina_MatrizCurricular(
-			Disciplina_MatrizCurricular disciplina_MatrizCurricular) {
+	public void setDisciplina_MatrizCurricular(Disciplina_MatrizCurricular disciplina_MatrizCurricular) {
 		this.disciplina_MatrizCurricular = disciplina_MatrizCurricular;
 	}
 
@@ -106,8 +113,7 @@ public class PlanoDeEnsino implements Serializable {
 		return contribuicaoParaAInstituicao;
 	}
 
-	public void setContribuicaoParaAInstituicao(
-			String contribuicaoParaAInstituicao) {
+	public void setContribuicaoParaAInstituicao(String contribuicaoParaAInstituicao) {
 		this.contribuicaoParaAInstituicao = contribuicaoParaAInstituicao;
 	}
 
@@ -123,10 +129,7 @@ public class PlanoDeEnsino implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((disciplina_MatrizCurricular == null) ? 0
-						: disciplina_MatrizCurricular.hashCode());
+		result = prime * result + ((disciplina_MatrizCurricular == null) ? 0 : disciplina_MatrizCurricular.hashCode());
 		result = prime * result + ((ementa == null) ? 0 : ementa.hashCode());
 		return result;
 	}
@@ -143,8 +146,7 @@ public class PlanoDeEnsino implements Serializable {
 		if (disciplina_MatrizCurricular == null) {
 			if (other.disciplina_MatrizCurricular != null)
 				return false;
-		} else if (!disciplina_MatrizCurricular
-				.equals(other.disciplina_MatrizCurricular))
+		} else if (!disciplina_MatrizCurricular.equals(other.disciplina_MatrizCurricular))
 			return false;
 		if (ementa == null) {
 			if (other.ementa != null)
@@ -156,13 +158,9 @@ public class PlanoDeEnsino implements Serializable {
 
 	@Override
 	public String toString() {
-		return "PlanoDeEnsino [disciplina_MatrizCurricular="
-				+ disciplina_MatrizCurricular + ", ementa=" + ementa
-				+ ", objetivosGerais=" + objetivosGerais
-				+ ", objetivosEspecificos=" + objetivosEspecificos
-				+ ", interdisciplinariedade=" + interdisciplinariedade
-				+ ", contribuicaoParaOEgresso=" + contribuicaoParaOEgresso
-				+ ", contribuicaoParaAInstituicao="
-				+ contribuicaoParaAInstituicao + "]";
+		return "PlanoDeEnsino [disciplina_MatrizCurricular=" + disciplina_MatrizCurricular + ", ementa=" + ementa
+				+ ", objetivosGerais=" + objetivosGerais + ", objetivosEspecificos=" + objetivosEspecificos
+				+ ", interdisciplinariedade=" + interdisciplinariedade + ", contribuicaoParaOEgresso="
+				+ contribuicaoParaOEgresso + ", contribuicaoParaAInstituicao=" + contribuicaoParaAInstituicao + "]";
 	}
 }

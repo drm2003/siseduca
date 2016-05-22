@@ -15,6 +15,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.acesso.Usuario;
 import br.com.cdan.model.biblioteca.Editora;
@@ -33,6 +37,9 @@ public class Email implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", nullable = false)
 	private String descricao;
 
@@ -59,6 +66,7 @@ public class Email implements Serializable {
 	@JoinColumn(name = "clienteFornecedor")
 	private ClienteFornecedor clienteFornecedor;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

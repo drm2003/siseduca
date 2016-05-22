@@ -14,7 +14,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -29,11 +28,10 @@ public class SerieColecaoLiteral implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
 	@NotEmpty
 	@NotNull
-	@Size(min = 3, max = 350)
-	@Column(name = "descricao", length = 350, nullable = false, unique = true)
+	@Size(min = 3, max = 250)
+	@Column(name = "descricao", length = 250, nullable = false, unique = true)
 	private String descricao;
 
 	@NotNull

@@ -13,7 +13,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -29,7 +28,6 @@ public class Idioma implements Serializable {
 
 	@NotNull
 	@NotEmpty
-	@NotBlank
 	@Size(max = 50, min = 3)
 	@Column(name = "descricao", length = 50, nullable = false, unique = true)
 	private String descricao;

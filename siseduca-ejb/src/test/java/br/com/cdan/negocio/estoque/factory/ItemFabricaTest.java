@@ -20,7 +20,7 @@ public class ItemFabricaTest {
 		i.setAtivo(Boolean.TRUE);
 		i.setClassificacaoDeItens(ClassificacaoDeItensFabricaTest.getInstance().criaClassificacaoDeItensPersistido(em));
 		i.setCodigoBarra("codigoBarra");
-		i.setDescricao("descricao");
+		i.setDescricao("descricao" + Math.random() * 10000);
 		i.setFinalidade(FinalidadeFabricaTest.getInstance().criaFinalidadePersistido(em));
 		i.setNcm(NCMFabricaTest.getInstance().criaNCMPersistido(em));
 		i.setObservacoes("observacoes");

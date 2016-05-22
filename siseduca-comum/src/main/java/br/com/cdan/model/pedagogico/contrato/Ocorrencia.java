@@ -14,6 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.comum.EnumOcorrenciaAlunoTurma;
 import br.com.cdan.model.pedagogico.TipoDeOcorrencia;
@@ -47,6 +51,7 @@ public class Ocorrencia implements Serializable {
 	@JoinColumn(name = "id_aluno")
 	private Aluno aluno;
 
+	@NotNull
 	@Column(name = "data")
 	private Calendar data;
 
@@ -61,6 +66,13 @@ public class Ocorrencia implements Serializable {
 	@Column(name = "periodo")
 	private String periodo;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3)
+	@Column(name = "descricao", nullable = false)
+	private String descricao;
+
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -134,6 +146,14 @@ public class Ocorrencia implements Serializable {
 
 	public void setPeriodo(String periodo) {
 		this.periodo = periodo;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public Boolean getAtivo() {

@@ -3,9 +3,10 @@ package br.com.cdan.negocio.geral.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.geral.TipoDeResponsavel;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.TipoDeResponsavelDao;
 
-public class TipoDeResponsavelFabricaTest {
+public class TipoDeResponsavelFabricaTest extends FabricaTest {
 	private static TipoDeResponsavelFabricaTest instance = null;
 
 	public static synchronized TipoDeResponsavelFabricaTest getInstance() {
@@ -18,7 +19,8 @@ public class TipoDeResponsavelFabricaTest {
 	public TipoDeResponsavel criaTipoDeResponsavel() {
 		TipoDeResponsavel t = new TipoDeResponsavel();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
+		t.setDescricao(criarStringDinamicaPorTamanho(30));
+
 		return t;
 	}
 

@@ -10,6 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Logradouro")
@@ -22,25 +26,36 @@ public class Logradouro implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
 	@Column(name = "CEP", nullable = false)
 	private String cep;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "Chave", length = 5, nullable = false, unique = true)
+	@Column(name = "Chave", length = 5, nullable = false)
 	private EnumChaveCidade chave;
 
-	@Column(name = "UF", length = 2, nullable = false, unique = true)
+	@NotNull
+	@NotEmpty
+	@Column(name = "UF", length = 2, nullable = false)
 	private String UF;
 
-	@Column(name = "Tipo", length = 15, nullable = false)
+	@NotNull
+	@NotEmpty
+	@Column(name = "TipoLogradouro", length = 15, nullable = false)
 	private String tipoLogradouro;
 
-	@Column(name = "Titulo", length = 15, nullable = false)
+	@NotNull
+	@NotEmpty
+	@Column(name = "TituloLogradouro", length = 15, nullable = false)
 	private String tituloLogradouro;
 
 	@Column(name = "Preposicao", length = 15, nullable = false)
 	private String preposicaoInicialLogradouro;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 60)
 	@Column(name = "Nome", length = 60, nullable = false)
 	private String nome;
 
@@ -63,13 +78,14 @@ public class Logradouro implements Serializable {
 	private String limiteSuperiorLadoImpar;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "Flag", length = 1, nullable = false)
+	@Column(name = "Flag", length = 30, nullable = false)
 	private EnumFlagTipoDeCep flagTipoDeCep;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "Lados", length = 1, nullable = false)
+	@Column(name = "Lados", length = 30, nullable = false)
 	private EnumLadoDaRua ladoDaRua;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

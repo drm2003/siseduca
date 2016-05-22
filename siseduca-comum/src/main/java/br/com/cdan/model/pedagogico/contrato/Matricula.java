@@ -11,18 +11,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.pedagogico.SituacaoDoAlunoNaTurma;
 import br.com.cdan.model.pedagogico.curso.Investimento;
-import br.com.cdan.model.pedagogico.curso.Turma_Disciplina;
 import br.com.cdan.model.pedagogico.geral.SituacaoDoContrato;
 import br.com.cdan.model.pessoa.Aluno;
 
@@ -45,7 +42,6 @@ public class Matricula implements Serializable {
 	private Set<DisciplinaMatricula> disciplinas;
 
 	@NotNull
-	@NotBlank
 	@NotEmpty
 	@Column(name = "numeroContrato", nullable = false, unique = true)
 	private String numeroContrato;
@@ -77,12 +73,20 @@ public class Matricula implements Serializable {
 	@Column(name = "matrizCurricular")
 	private Long matrizCurricular;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumns(value = {
-			@JoinColumn(name = "MATRICULA_id_turma", referencedColumnName = "id_turma", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "MATRICULA_id_disciplina", referencedColumnName = "id_disciplina", nullable = false, insertable = false, updatable = false) })
-	private Turma_Disciplina turma_disciplina;
+	/*
+	 * @ManyToOne(fetch = FetchType.LAZY)
+	 * 
+	 * @JoinColumns(value = {
+	 * 
+	 * @JoinColumn(name = "MATRICULA_id_turma", referencedColumnName =
+	 * "id_turma", nullable = false),
+	 * 
+	 * @JoinColumn(name = "MATRICULA_id_disciplina", referencedColumnName =
+	 * "id_disciplina", nullable = false) }) private Turma_Disciplina
+	 * turma_disciplina;
+	 */
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -233,7 +237,6 @@ public class Matricula implements Serializable {
 				+ numeroContrato + ", dataInicio=" + dataInicio + ", dataTermino=" + dataTermino
 				+ ", situacaoDoContrato=" + situacaoDoContrato + ", tipoDeContrato=" + tipoDeContrato
 				+ ", situacaoDoAlunoNaTurma=" + situacaoDoAlunoNaTurma + ", investimento=" + investimento + ", turma="
-				+ turma + ", matrizCurricular=" + matrizCurricular + ", turma_disciplina=" + turma_disciplina
-				+ ", ativo=" + ativo + "]";
+				+ turma + ", matrizCurricular=" + matrizCurricular + ", ativo=" + ativo + "]";
 	}
 }

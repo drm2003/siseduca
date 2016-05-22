@@ -13,7 +13,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.geral.Email;
@@ -31,7 +30,6 @@ public class Editora implements Serializable {
 
 	@NotNull
 	@NotEmpty
-	@NotBlank
 	@Size(max = 60, min = 3)
 	@Column(name = "nome", length = 60, nullable = false, unique = true)
 	private String nome;

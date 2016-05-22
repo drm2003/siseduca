@@ -22,7 +22,6 @@ public class InteressadoFabricaTest {
 
 	public Interessado criaInteressado(EntityManager em) {
 		Interessado i = new Interessado();
-		i.setAluno(AlunoFabricaTest.getInstance().criaAlunoPersistido(em));
 		i.setAtendente(FuncionarioFabricaTest.getInstance().criaFuncionarioPersistido(em));
 		i.setAtivo(Boolean.TRUE);
 		//

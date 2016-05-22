@@ -5,10 +5,12 @@ import java.util.Calendar;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.curso.Disciplina_MatrizCurricular;
+import br.com.cdan.model.pedagogico.curso.Disciplina_MatrizCurricularPK;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.curso.Disciplina_MatrizCurricularDao;
 import br.com.cdan.negocio.pedagogico.factory.SistemaDeAvaliacaoFabricaTest;
 
-public class Disciplina_MatrizCurricularFabricaTest {
+public class Disciplina_MatrizCurricularFabricaTest extends FabricaTest {
 	private static Disciplina_MatrizCurricularFabricaTest instance = null;
 
 	public static synchronized Disciplina_MatrizCurricularFabricaTest getInstance() {
@@ -20,11 +22,13 @@ public class Disciplina_MatrizCurricularFabricaTest {
 
 	public Disciplina_MatrizCurricular criaDisciplina_MatrizCurricular(EntityManager em) {
 		Disciplina_MatrizCurricular d = new Disciplina_MatrizCurricular();
+		d.setAtivo(Boolean.TRUE);
+		d.setDescricao(criarStringDinamicaPorTamanho(100));
 		d.setCartaHorariaPratica(Calendar.getInstance().getTime());
 		d.setCartaHorariaSemanal(Calendar.getInstance().getTime());
 		d.setCartaHorariaTotal(Calendar.getInstance().getTime());
 		d.setCodigo(Long.valueOf("10"));
-		d.setDescricao("descricao");
+		d.setDescricao(criarStringDinamicaPorTamanho(100));
 		d.setDisciplina(DisciplinaFabricaTest.getInstance().criaDisciplinaPersistido(em));
 		d.setDisciplinaOptativa(Boolean.FALSE);
 		d.setEquivalencia("equivalencia");
@@ -37,6 +41,7 @@ public class Disciplina_MatrizCurricularFabricaTest {
 		d.setPlanoDeEnsino(PlanoDeEnsinoFabricaTest.getInstance().criaPlanoDeEnsinoPersistido(em));
 		d.setRequisitos("requisitos");
 		d.setSistemaDeAvaliacao(SistemaDeAvaliacaoFabricaTest.getInstance().criaSistemaDeAvaliacaoPersistido(em));
+		d.setId(new Disciplina_MatrizCurricularPK(d.getDisciplina().getId(), d.getMatrizCurricular().getId()));
 		return d;
 	}
 

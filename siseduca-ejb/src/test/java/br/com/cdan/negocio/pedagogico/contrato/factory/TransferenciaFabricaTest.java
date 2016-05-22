@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.comum.EnumTipoDeTransferencia;
 import br.com.cdan.model.pedagogico.contrato.Transferencia;
-import br.com.cdan.negocio.geral.factory.CidadeFabricaTest;
+import br.com.cdan.negocio.geral.cep.factory.CidadeFabricaTest;
 import br.com.cdan.negocio.pedagogico.contrato.TransferenciaDao;
 import br.com.cdan.negocio.pedagogico.curso.factory.TurmaFabricaTest;
 import br.com.cdan.negocio.pedagogico.pessoa.factory.AlunoFabricaTest;
@@ -23,6 +23,7 @@ public class TransferenciaFabricaTest {
 
 	public Transferencia criaTransferencia(EntityManager em) {
 		Transferencia t = new Transferencia();
+		t.setAtivo(Boolean.TRUE);
 		t.setAluno(AlunoFabricaTest.getInstance().criaAlunoPersistido(em));
 		t.setCidade(CidadeFabricaTest.getInstance().criaCidadePersistido(em));
 		t.setCurso("curso");

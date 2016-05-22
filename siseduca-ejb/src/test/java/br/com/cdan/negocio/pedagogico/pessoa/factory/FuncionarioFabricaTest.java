@@ -5,8 +5,6 @@ import javax.persistence.EntityManager;
 import br.com.cdan.model.pessoa.Funcionario;
 import br.com.cdan.negocio.acesso.factory.UsuarioFabricaTest;
 import br.com.cdan.negocio.geral.factory.CargoFabricaTest;
-import br.com.cdan.negocio.pedagogico.contrato.factory.AproveitamentoFabricaTest;
-import br.com.cdan.negocio.pedagogico.curso.factory.Turma_DisciplinaFabricaTest;
 import br.com.cdan.negocio.pedagogico.pessoa.FuncionarioDao;
 
 public class FuncionarioFabricaTest {
@@ -21,7 +19,6 @@ public class FuncionarioFabricaTest {
 
 	public Funcionario criaFuncionario(EntityManager em) {
 		Funcionario f = new Funcionario();
-		f.setAproveitamento(AproveitamentoFabricaTest.getInstance().criaAproveitamentoPersistido(em));
 		f.setAtendente(Boolean.TRUE);
 		f.setAtivo(Boolean.TRUE);
 		f.setCargo(CargoFabricaTest.getInstance().criaCargoPersistido(em));
@@ -34,7 +31,6 @@ public class FuncionarioFabricaTest {
 		f.setObservacoes("observacoes");
 		f.setPessoa(PessoaFabricaTest.getInstance().criaPessoaPersistido(em));
 		f.setProfessor(Boolean.FALSE);
-		f.setTurma_Disciplina(Turma_DisciplinaFabricaTest.getInstance().criaTurma_DisciplinaPersistido(em));
 		//
 		f.setUsuario(UsuarioFabricaTest.getInstance().criaUsuarioPersistido(em));
 		//

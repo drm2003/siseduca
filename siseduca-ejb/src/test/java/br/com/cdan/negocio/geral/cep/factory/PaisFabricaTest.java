@@ -1,11 +1,12 @@
-package br.com.cdan.negocio.geral.factory;
+package br.com.cdan.negocio.geral.cep.factory;
 
 import javax.persistence.EntityManager;
 
-import br.com.cdan.model.geral.Pais;
+import br.com.cdan.model.geral.cep.Pais;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.PaisDao;
 
-public class PaisFabricaTest {
+public class PaisFabricaTest extends FabricaTest {
 	private static PaisFabricaTest instance = null;
 
 	public static synchronized PaisFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class PaisFabricaTest {
 	public Pais criaPais() {
 		Pais pais = new Pais();
 		pais.setAtivo(Boolean.TRUE);
-		pais.setDescricao("teste");
+		pais.setDescricao(criarStringDinamicaPorTamanho(100));
 		return pais;
 	}
 

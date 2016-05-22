@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.diario.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.diario.ControleDeConteudo;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.diario.ControleDeConteudoDao;
 
-public class ControleDeConteudoFabricaTest {
+public class ControleDeConteudoFabricaTest extends FabricaTest {
 	private static ControleDeConteudoFabricaTest instance = null;
 
 	public static synchronized ControleDeConteudoFabricaTest getInstance() {
@@ -17,7 +18,7 @@ public class ControleDeConteudoFabricaTest {
 
 	public ControleDeConteudo criaControleDeConteudo() {
 		ControleDeConteudo c = new ControleDeConteudo();
-		c.setConteudo("conteudo");
+		c.setConteudo(criarStringDinamicaPorTamanho(100));
 		c.setAtivo(Boolean.TRUE);
 		return c;
 	}

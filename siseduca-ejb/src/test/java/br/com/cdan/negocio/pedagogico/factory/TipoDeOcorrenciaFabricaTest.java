@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.TipoDeOcorrencia;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.TipoDeOcorrenciaDao;
 
-public class TipoDeOcorrenciaFabricaTest {
+public class TipoDeOcorrenciaFabricaTest extends FabricaTest {
 	private static TipoDeOcorrenciaFabricaTest instance = null;
 
 	public static synchronized TipoDeOcorrenciaFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class TipoDeOcorrenciaFabricaTest {
 	public TipoDeOcorrencia criaTipoDeOcorrencia() {
 		TipoDeOcorrencia t = new TipoDeOcorrencia();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
+		t.setDescricao(criarStringDinamicaPorTamanho(50));
 		return t;
 	}
 

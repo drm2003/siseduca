@@ -5,7 +5,7 @@ import java.util.Calendar;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pessoa.CarteiraHabilitacao;
-import br.com.cdan.negocio.geral.factory.EstadoUFFabricaTest;
+import br.com.cdan.negocio.geral.cep.factory.EstadoUFFabricaTest;
 import br.com.cdan.negocio.pedagogico.pessoa.CarteiraHabilitacaoDao;
 
 public class CarteiraHabilitacaoFabricaTest {

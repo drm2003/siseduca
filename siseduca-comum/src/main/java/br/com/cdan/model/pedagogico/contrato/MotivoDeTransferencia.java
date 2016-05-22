@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -26,15 +26,16 @@ public class MotivoDeTransferencia implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
 	@NotNull
 	@NotEmpty
+	@Size(min = 3)
 	@Column(name = "descricao", nullable = false, unique = true)
 	private String descricao;
 
 	@OneToMany(mappedBy = "motivoDeTransferencia")
 	private Set<Transferencia> transferencias;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

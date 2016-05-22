@@ -16,6 +16,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.pedagogico.SistemaDeAvaliacao;
 
@@ -43,6 +47,9 @@ public class Disciplina_MatrizCurricular implements Serializable {
 	@Column(name = "numeroModulo", nullable = false)
 	private Long numeroModulo;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3)
 	@Column(name = "descricao")
 	private String descricao;
 
@@ -91,6 +98,7 @@ public class Disciplina_MatrizCurricular implements Serializable {
 	@Column(name = "equivalencias")
 	private String equivalencias;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

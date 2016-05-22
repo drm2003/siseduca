@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.contrato.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.contrato.MotivoDeCancelamentoDeContrato;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.contrato.MotivoDeCancelamentoDeContratoDao;
 
-public class MotivoDeCancelamentoDeContratoFabricaTest {
+public class MotivoDeCancelamentoDeContratoFabricaTest extends FabricaTest {
 	private static MotivoDeCancelamentoDeContratoFabricaTest instance = null;
 
 	public static synchronized MotivoDeCancelamentoDeContratoFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class MotivoDeCancelamentoDeContratoFabricaTest {
 	public MotivoDeCancelamentoDeContrato criaMotivoDeCancelamentoDeContrato() {
 		MotivoDeCancelamentoDeContrato m = new MotivoDeCancelamentoDeContrato();
 		m.setAtivo(Boolean.TRUE);
-		m.setNome("nome");
+		m.setNome(criarStringDinamicaPorTamanho(50));
 		//
 		return m;
 	}

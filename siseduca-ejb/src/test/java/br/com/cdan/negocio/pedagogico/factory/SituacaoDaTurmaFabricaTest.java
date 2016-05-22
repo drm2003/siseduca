@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.SituacaoDaTurma;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.SituacaoDaTurmaDao;
 
-public class SituacaoDaTurmaFabricaTest {
+public class SituacaoDaTurmaFabricaTest extends FabricaTest{
 	private static SituacaoDaTurmaFabricaTest instance = null;
 
 	public static synchronized SituacaoDaTurmaFabricaTest getInstance() {
@@ -19,7 +20,7 @@ public class SituacaoDaTurmaFabricaTest {
 		SituacaoDaTurma s = new SituacaoDaTurma();
 		s.setAtivo(Boolean.TRUE);
 		s.setCompartilhado(Boolean.TRUE);
-		s.setDescricao("descricao");
+		s.setDescricao(criarStringDinamicaPorTamanho(100));
 		return s;
 	}
 

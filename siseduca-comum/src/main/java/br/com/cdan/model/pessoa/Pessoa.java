@@ -19,12 +19,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.comum.EnumSexo;
-import br.com.cdan.model.geral.Cidade;
 import br.com.cdan.model.geral.Email;
 import br.com.cdan.model.geral.Endereco;
 import br.com.cdan.model.geral.EstadoCivil;
+import br.com.cdan.model.geral.cep.Cidade;
 
 @Entity
 @Table(name = "Pessoa")
@@ -37,6 +40,8 @@ public class Pessoa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
 	@Column(name = "nome")
 	private String nome;
 
@@ -50,10 +55,12 @@ public class Pessoa implements Serializable {
 	@Column(name = "empresaLocalDeTrabalho")
 	private String empresaLocalDeTrabalho;
 
-	@Column(name = "estadoCivil")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "estadoCivil")
 	private EstadoCivil estadoCivil;
 
-	@Column(name = "cidadeNatal")
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "cidadeNatal")
 	private Cidade cidadeNatal;
 
 	@Enumerated(EnumType.STRING)
@@ -98,7 +105,7 @@ public class Pessoa implements Serializable {
 	@Column(name = "numeroPassaporte")
 	private String numeroPassaporte;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "certidaoNascimentoCasamento")
 	private Certidao certidao;
 
@@ -127,6 +134,7 @@ public class Pessoa implements Serializable {
 	@Column(name = "permitirEmprestimoBiblioteca")
 	private Boolean permitirEmprestimoBiblioteca;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -360,6 +368,14 @@ public class Pessoa implements Serializable {
 
 	public void setCarteiraHabilitacao(CarteiraHabilitacao carteiraHabilitacao) {
 		this.carteiraHabilitacao = carteiraHabilitacao;
+	}
+
+	public Set<Responsavel> getResponsaveis() {
+		return responsaveis;
+	}
+
+	public void setResponsaveis(Set<Responsavel> responsaveis) {
+		this.responsaveis = responsaveis;
 	}
 
 	public Boolean getAtivo() {

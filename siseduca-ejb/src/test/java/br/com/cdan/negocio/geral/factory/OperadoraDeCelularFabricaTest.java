@@ -3,9 +3,10 @@ package br.com.cdan.negocio.geral.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.geral.OperadoraDeCelular;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.OperadoraDeCelularDao;
 
-public class OperadoraDeCelularFabricaTest {
+public class OperadoraDeCelularFabricaTest extends FabricaTest {
 	private static OperadoraDeCelularFabricaTest instance = null;
 
 	public static synchronized OperadoraDeCelularFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class OperadoraDeCelularFabricaTest {
 	public OperadoraDeCelular criaOperadoraDeCelular() {
 		OperadoraDeCelular o = new OperadoraDeCelular();
 		o.setAtivo(Boolean.TRUE);
-		o.setDescricao("descricao");
+		o.setDescricao(criarStringDinamicaPorTamanho(100));
 		return o;
 	}
 

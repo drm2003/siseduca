@@ -22,7 +22,6 @@ public class MediaAposExameFinalFabricaTest {
 		m.setConsiderarANotaDeExameFinal(Boolean.TRUE);
 		m.setDesconsiderarANotaDeExameFinal(Boolean.FALSE);
 		m.setEnumTipoMediaAposExameFinal(EnumTipoMediaAposExameFinal.CALCULARAMEDIA);
-		m.setExameFinal(ExameFinalFabricaTest.getInstance().criaExameFinalPersistido(em));
 		return m;
 	}
 

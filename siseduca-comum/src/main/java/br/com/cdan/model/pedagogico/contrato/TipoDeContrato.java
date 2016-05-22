@@ -10,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "TipoDeContrato")
@@ -22,12 +26,16 @@ public class TipoDeContrato implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3)
 	@Column(name = "descricao", nullable = false, unique = true)
 	private String descricao;
 
 	@OneToMany
 	private Set<Matricula> matriculas;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

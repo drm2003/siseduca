@@ -37,8 +37,8 @@ public class DiarioDeAula implements Serializable {
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumns(value = {
-			@JoinColumn(name = "DIARIODEAULA_id_turma", referencedColumnName = "id_turma", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "DIARIODEAULA_id_disciplina", referencedColumnName = "id_disciplina", nullable = false, insertable = false, updatable = false) })
+			@JoinColumn(name = "DIARIODEAULA_id_turma", referencedColumnName = "id_turma", nullable = false),
+			@JoinColumn(name = "DIARIODEAULA_id_disciplina", referencedColumnName = "id_disciplina", nullable = false) })
 	private Turma_Disciplina turma_Disciplina;
 
 	@OneToMany(mappedBy = "diarioDeAula")

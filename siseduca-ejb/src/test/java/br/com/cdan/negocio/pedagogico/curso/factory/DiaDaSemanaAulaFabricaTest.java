@@ -20,6 +20,7 @@ public class DiaDaSemanaAulaFabricaTest {
 
 	public DiaDaSemanaAula criaDiaDaSemanaAula(EntityManager em) {
 		DiaDaSemanaAula d = new DiaDaSemanaAula();
+		d.setAtivo(Boolean.TRUE);
 		d.setDiaDaSemana(EnumDiaDaSemana.SEGUNDA);
 		d.setHoraInicio(Calendar.getInstance().getTime());
 		d.setHoraTermino(Calendar.getInstance().getTime());

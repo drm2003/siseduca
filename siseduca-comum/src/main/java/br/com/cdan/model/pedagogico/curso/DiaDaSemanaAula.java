@@ -19,6 +19,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.comum.EnumDiaDaSemana;
 import br.com.cdan.model.pedagogico.diario.DiarioDeAula;
@@ -46,15 +47,16 @@ public class DiaDaSemanaAula implements Serializable {
 	@Column(name = "horaTermino")
 	private Date horaTermino;
 
-	@OneToOne
+	@OneToOne(mappedBy = "diaDaSemanaAula")
 	@JoinColumns(value = {
-			@JoinColumn(name = "DIADASEMANA_ID_TURMA", referencedColumnName = "id_turma", nullable = false, insertable = false, updatable = false),
-			@JoinColumn(name = "DIADASEMANA_ID_DISCIPLINA", referencedColumnName = "id_disciplina", nullable = false, insertable = false, updatable = false) })
+			@JoinColumn(name = "DIADASEMANA_ID_TURMA", referencedColumnName = "id_turma", nullable = false),
+			@JoinColumn(name = "DIADASEMANA_ID_DISCIPLINA", referencedColumnName = "id_disciplina", nullable = false) })
 	private Turma_Disciplina turma_Disciplina;
 
 	@ManyToMany(mappedBy = "diasDaSemanaAula", fetch = FetchType.LAZY)
 	private Set<DiarioDeAula> diariosDeAula;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

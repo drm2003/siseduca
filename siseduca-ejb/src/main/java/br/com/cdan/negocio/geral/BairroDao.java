@@ -3,7 +3,7 @@ package br.com.cdan.negocio.geral;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.dao.SiseducaDao;
-import br.com.cdan.model.geral.Bairro;
+import br.com.cdan.model.geral.cep.Bairro;
 
 public class BairroDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;

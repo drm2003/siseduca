@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "NfeLayout")
@@ -22,6 +26,9 @@ public class NfeLayout implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 60)
 	@Column(name = "descricao", length = 60, nullable = false, unique = true)
 	private String descricao;
 
@@ -51,6 +58,7 @@ public class NfeLayout implements Serializable {
 	@Column(name = "icmsST")
 	private BigDecimal icmsST;
 
+	@NotNull
 	@Column(name = "ativo", nullable = false)
 	private Boolean ativo;
 

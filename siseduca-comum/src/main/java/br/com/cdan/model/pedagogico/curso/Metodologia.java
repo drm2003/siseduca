@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Metodologia")
@@ -42,6 +43,7 @@ public class Metodologia implements Serializable {
 	@Column(name = "bibliografiaComplementar")
 	private String bibliografiaComplementar;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -57,8 +59,7 @@ public class Metodologia implements Serializable {
 		return disciplina_MatrizCurricular;
 	}
 
-	public void setDisciplina_MatrizCurricular(
-			Disciplina_MatrizCurricular disciplina_MatrizCurricular) {
+	public void setDisciplina_MatrizCurricular(Disciplina_MatrizCurricular disciplina_MatrizCurricular) {
 		this.disciplina_MatrizCurricular = disciplina_MatrizCurricular;
 	}
 
@@ -122,10 +123,7 @@ public class Metodologia implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((disciplina_MatrizCurricular == null) ? 0
-						: disciplina_MatrizCurricular.hashCode());
+		result = prime * result + ((disciplina_MatrizCurricular == null) ? 0 : disciplina_MatrizCurricular.hashCode());
 		return result;
 	}
 
@@ -141,21 +139,16 @@ public class Metodologia implements Serializable {
 		if (disciplina_MatrizCurricular == null) {
 			if (other.disciplina_MatrizCurricular != null)
 				return false;
-		} else if (!disciplina_MatrizCurricular
-				.equals(other.disciplina_MatrizCurricular))
+		} else if (!disciplina_MatrizCurricular.equals(other.disciplina_MatrizCurricular))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Metodologia [disciplina_MatrizCurricular="
-				+ disciplina_MatrizCurricular + ", tecnicasDeEnsino="
-				+ tecnicasDeEnsino + ", recursosDidaticos=" + recursosDidaticos
-				+ ", criteriosDeAvaliacao=" + criteriosDeAvaliacao
-				+ ", atividadesPraticas=" + atividadesPraticas
-				+ ", bibliografiaBasica=" + bibliografiaBasica
-				+ ", bibliografiaComplementar=" + bibliografiaComplementar
-				+ "]";
+		return "Metodologia [disciplina_MatrizCurricular=" + disciplina_MatrizCurricular + ", tecnicasDeEnsino="
+				+ tecnicasDeEnsino + ", recursosDidaticos=" + recursosDidaticos + ", criteriosDeAvaliacao="
+				+ criteriosDeAvaliacao + ", atividadesPraticas=" + atividadesPraticas + ", bibliografiaBasica="
+				+ bibliografiaBasica + ", bibliografiaComplementar=" + bibliografiaComplementar + "]";
 	}
 }

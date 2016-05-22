@@ -18,7 +18,7 @@ public class CategoriaFabricaTest {
 	public Categoria criaCategoria() {
 		Categoria c = new Categoria();
 		c.setAtivo(Boolean.TRUE);
-		c.setDescricao("descricao");
+		c.setDescricao("descricao" + Math.random() * 1000);
 		return c;
 	}
 

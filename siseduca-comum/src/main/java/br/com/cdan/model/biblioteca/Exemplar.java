@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -45,7 +44,6 @@ public class Exemplar implements Serializable {
 
 	@NotNull
 	@NotEmpty
-	@NotBlank
 	@Size(max = 250, min = 3)
 	@Column(name = "descricao", unique = true, nullable = false)
 	private String descricao;

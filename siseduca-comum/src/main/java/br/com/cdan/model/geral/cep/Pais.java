@@ -1,4 +1,4 @@
-package br.com.cdan.model.geral;
+package br.com.cdan.model.geral.cep;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -9,38 +9,37 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import br.com.cdan.model.pedagogico.contrato.Transferencia;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import br.com.cdan.model.geral.Endereco;
 
 @Entity
-@Table(name = "Cidade")
-public class Cidade implements Serializable {
+@Table(name = "Pais")
+public class Pais implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 
-	@OneToMany(mappedBy = "cidade", fetch = FetchType.LAZY)
-	private Set<Bairro> bairros;
+	@OneToMany(mappedBy = "pais", fetch = FetchType.LAZY)
+	private Set<EstadoUF> estadosUF;
 
-	@OneToMany(mappedBy = "cidade", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "pais")
 	private Set<Endereco> enderecos;
 
-	@ManyToOne
-	@JoinColumn(name = "id_estadoUF")
-	private EstadoUF estadoUF;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cidade")
-	private Set<Transferencia> transferencias;
-
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -60,38 +59,6 @@ public class Cidade implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public Set<Bairro> getBairros() {
-		return bairros;
-	}
-
-	public void setBairros(Set<Bairro> bairros) {
-		this.bairros = bairros;
-	}
-
-	public EstadoUF getEstadoUF() {
-		return estadoUF;
-	}
-
-	public void setEstadoUF(EstadoUF estadoUF) {
-		this.estadoUF = estadoUF;
-	}
-
-	public Set<Endereco> getEnderecos() {
-		return enderecos;
-	}
-
-	public void setEnderecos(Set<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
-
-	public Set<Transferencia> getTransferencias() {
-		return transferencias;
-	}
-
-	public void setTransferencias(Set<Transferencia> transferencias) {
-		this.transferencias = transferencias;
-	}
-
 	public Boolean getAtivo() {
 		return ativo;
 	}
@@ -105,7 +72,6 @@ public class Cidade implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((estadoUF == null) ? 0 : estadoUF.hashCode());
 		return result;
 	}
 
@@ -117,22 +83,18 @@ public class Cidade implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cidade other = (Cidade) obj;
+		Pais other = (Pais) obj;
 		if (descricao == null) {
 			if (other.descricao != null)
 				return false;
 		} else if (!descricao.equals(other.descricao))
-			return false;
-		if (estadoUF == null) {
-			if (other.estadoUF != null)
-				return false;
-		} else if (!estadoUF.equals(other.estadoUF))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Cidade [descricao=" + descricao + ", bairros=" + bairros + ", estadoUF=" + estadoUF + "]";
+		return "Pais [descricao=" + descricao + "]";
 	}
+
 }

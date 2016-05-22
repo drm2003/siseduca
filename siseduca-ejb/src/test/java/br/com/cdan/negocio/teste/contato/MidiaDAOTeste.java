@@ -85,19 +85,19 @@ public class MidiaDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test
-	public void consultar_por_nome() {
+	public void consultar_por_descricao() {
 		Midia a = criaMidia();
 		dao.persist(a);
 		Assert.assertNotNull(a);
-		String sql = "FROM Midia a WHERE a.nome = :nome";
+		String sql = "FROM Midia a WHERE a.descricao = :descricao";
 		TypedQuery<Midia> query = dao.getEntityManager().createQuery(sql, Midia.class);
-		query.setParameter("nome", a.getDescricao());
+		query.setParameter("descricao", a.getDescricao());
 		Midia consulta = query.getSingleResult();
 		Assert.assertSame(a, consulta);
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_nome_nulo() {
+	public void nao_deve_permitir_descricao_nulo() {
 		Midia a = criaMidia();
 		a.setDescricao(null);
 		dao.persist(a);
@@ -105,7 +105,7 @@ public class MidiaDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_nome_vazio() {
+	public void nao_deve_permitir_descricao_vazio() {
 		Midia a = criaMidia();
 		a.setDescricao("");
 		dao.persist(a);
@@ -113,7 +113,7 @@ public class MidiaDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nome_maior_que_tamanho_maximo_permitido() {
+	public void descricao_maior_que_tamanho_maximo_permitido() {
 		Midia a = criaMidia();
 		a.setDescricao(criarStringDinamicaPorTamanho(101));
 		dao.persist(a);
@@ -121,7 +121,7 @@ public class MidiaDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nome_menor_que_tamanho_minimo_permitido() {
+	public void descricao_menor_que_tamanho_minimo_permitido() {
 		Midia a = criaMidia();
 		a.setDescricao(criarStringDinamicaPorTamanho(2));
 		dao.persist(a);
@@ -137,6 +137,6 @@ public class MidiaDAOTeste extends PersistenciaJUnit {
 	}
 
 	private Midia criaMidia() {
-		return MidiaFabricaTest.getInstance().criaMidiaPersistido(getEntityManager());
+		return MidiaFabricaTest.getInstance().criaMidia();
 	}
 }

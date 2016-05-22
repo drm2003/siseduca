@@ -19,7 +19,7 @@ public class ContaAPagarFabricaTest {
 		return instance;
 	}
 
-	public ContaAPagar criaContasAPagar(EntityManager em) {
+	public ContaAPagar criaContaAPagar(EntityManager em) {
 		ContaAPagar c = new ContaAPagar();
 
 		c.setAtivo(Boolean.TRUE);
@@ -41,7 +41,7 @@ public class ContaAPagarFabricaTest {
 	}
 
 	public ContaAPagar criaContasAPagarPersistido(EntityManager em) {
-		ContaAPagar c = criaContasAPagar(em);
+		ContaAPagar c = criaContaAPagar(em);
 		ContaAPagarDao dao = new ContaAPagarDao(em);
 		dao.setEntityManager(em);
 		//

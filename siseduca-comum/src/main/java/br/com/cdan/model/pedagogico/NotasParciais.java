@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import br.com.cdan.comum.EnumMediaNotasParciais;
 
 @Entity
-@Table(name = "SistemaDeAvaliacao")
+@Table(name = "NotasParciais")
 public class NotasParciais implements Serializable {
 	private static final long serialVersionUID = 1L;
 	/**
@@ -56,8 +56,7 @@ public class NotasParciais implements Serializable {
 		return enumMediaNotasParciais;
 	}
 
-	public void setEnumMediaNotasParciais(
-			EnumMediaNotasParciais enumMediaNotasParciais) {
+	public void setEnumMediaNotasParciais(EnumMediaNotasParciais enumMediaNotasParciais) {
 		this.enumMediaNotasParciais = enumMediaNotasParciais;
 	}
 
@@ -81,8 +80,7 @@ public class NotasParciais implements Serializable {
 		return utilizaAgrupamentoDeAvaliacoes;
 	}
 
-	public void setUtilizaAgrupamentoDeAvaliacoes(
-			Boolean utilizaAgrupamentoDeAvaliacoes) {
+	public void setUtilizaAgrupamentoDeAvaliacoes(Boolean utilizaAgrupamentoDeAvaliacoes) {
 		this.utilizaAgrupamentoDeAvaliacoes = utilizaAgrupamentoDeAvaliacoes;
 	}
 
@@ -106,10 +104,7 @@ public class NotasParciais implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((enumMediaNotasParciais == null) ? 0
-						: enumMediaNotasParciais.hashCode());
+		result = prime * result + ((enumMediaNotasParciais == null) ? 0 : enumMediaNotasParciais.hashCode());
 		return result;
 	}
 
@@ -129,12 +124,9 @@ public class NotasParciais implements Serializable {
 
 	@Override
 	public String toString() {
-		return "NotasParciais [enumMediaNotasParciais="
-				+ enumMediaNotasParciais + ", desconsideraAvaliacao="
-				+ desconsideraAvaliacao + ", utilizaRecuperacaoParcial="
-				+ utilizaRecuperacaoParcial
-				+ ", utilizaAgrupamentoDeAvaliacoes="
-				+ utilizaAgrupamentoDeAvaliacoes + ", sistemaDeAvaliacao="
+		return "NotasParciais [enumMediaNotasParciais=" + enumMediaNotasParciais + ", desconsideraAvaliacao="
+				+ desconsideraAvaliacao + ", utilizaRecuperacaoParcial=" + utilizaRecuperacaoParcial
+				+ ", utilizaAgrupamentoDeAvaliacoes=" + utilizaAgrupamentoDeAvaliacoes + ", sistemaDeAvaliacao="
 				+ sistemaDeAvaliacao + "]";
 	}
 }

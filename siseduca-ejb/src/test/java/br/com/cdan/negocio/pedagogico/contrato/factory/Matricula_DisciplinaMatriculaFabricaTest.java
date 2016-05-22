@@ -4,7 +4,10 @@ import java.math.BigDecimal;
 
 import javax.persistence.EntityManager;
 
+import br.com.cdan.model.pedagogico.contrato.DisciplinaMatricula;
+import br.com.cdan.model.pedagogico.contrato.Matricula;
 import br.com.cdan.model.pedagogico.contrato.Matricula_DisciplinaMatricula;
+import br.com.cdan.model.pedagogico.contrato.Matricula_DisciplinaMatriculaPK;
 import br.com.cdan.negocio.pedagogico.contrato.Matricula_DisciplinaMatriculaDao;
 
 public class Matricula_DisciplinaMatriculaFabricaTest {
@@ -17,7 +20,7 @@ public class Matricula_DisciplinaMatriculaFabricaTest {
 		return instance;
 	}
 
-	public Matricula_DisciplinaMatricula criaMatricula_DisciplinaMatricula() {
+	public Matricula_DisciplinaMatricula criaMatricula_DisciplinaMatricula(EntityManager em) {
 		Matricula_DisciplinaMatricula m = new Matricula_DisciplinaMatricula();
 		m.setAtivo(Boolean.TRUE);
 		//
@@ -36,12 +39,16 @@ public class Matricula_DisciplinaMatriculaFabricaTest {
 			recuperacao[i] = BigDecimal.valueOf(Math.random() * 1000);
 		}
 		m.setRecuperacao(recuperacao);
+		Matricula matricula = MatriculaFabricaTest.getInstance().criaMatriculaPersistido(em);
+		DisciplinaMatricula disciplinaMatricula = DisciplinaMatriculaFabricaTest.getInstance()
+				.criaDisciplinaMatriculaPersistido(em);
+		m.setId(new Matricula_DisciplinaMatriculaPK(matricula.getId(), disciplinaMatricula.getId()));
 		//
 		return m;
 	}
 
 	public Matricula_DisciplinaMatricula criaMatricula_DisciplinaMatriculaPersistido(EntityManager em) {
-		Matricula_DisciplinaMatricula m = criaMatricula_DisciplinaMatricula();
+		Matricula_DisciplinaMatricula m = criaMatricula_DisciplinaMatricula(em);
 		Matricula_DisciplinaMatriculaDao dao = new Matricula_DisciplinaMatriculaDao(em);
 		//
 		dao.persist(m);

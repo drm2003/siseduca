@@ -8,9 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "MotivoDeDesistenciaDeTranamento")
+@Table(name = "MotivoDeDesistenciaDeTrancamento")
 public class MotivoDeDesistenciaDeTrancamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -18,9 +22,13 @@ public class MotivoDeDesistenciaDeTrancamento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "descricao", length = 60, nullable = false, unique = true)
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 100)
+	@Column(name = "descricao", length = 100, nullable = false, unique = true)
 	private String descricao;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

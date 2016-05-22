@@ -18,7 +18,7 @@ public class TipoDeCobrancaRecebimentoFabricaTest {
 	public TipoDeCobrancaRecebimento criaTipoDeCobrancaRecebimento() {
 		TipoDeCobrancaRecebimento t = new TipoDeCobrancaRecebimento();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
+		t.setDescricao("descricao" + Math.random() * 10000);
 		return t;
 	}
 

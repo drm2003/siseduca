@@ -16,10 +16,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.model.empresa.Empresa;
 import br.com.cdan.model.geral.Endereco;
-import br.com.cdan.model.geral.EstadoUF;
 import br.com.cdan.model.pedagogico.contrato.Aproveitamento;
 
 @Entity
@@ -33,6 +33,10 @@ public class CEP implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@Column(name = "codigo", nullable = false, unique = true)
+	private String codigo;
+
 	@OneToMany(mappedBy = "cep", fetch = FetchType.LAZY)
 	private Set<Endereco> enderecos;
 
@@ -41,35 +45,36 @@ public class CEP implements Serializable {
 	private EstadoUF UF;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "Chave", length = 5, nullable = false, unique = true)
+	@Column(name = "Chave", length = 5, nullable = false)
 	private EnumChaveCidade chave;
 
-	@Column(name = "Cepmin", length = 8, nullable = false, unique = true)
+	@Column(name = "Cepmin", length = 8, nullable = false)
 	private String cepmin;
 
-	@Column(name = "CepMax", length = 8, nullable = false, unique = true)
+	@Column(name = "CepMax", length = 8, nullable = false)
 	private String cepMax;
 
-	@Column(name = "Cod_cidade", length = 5, nullable = false, unique = true)
+	@Column(name = "Cod_cidade", length = 5, nullable = false)
 	private String cod_cidade;
 
 	@Enumerated(EnumType.STRING)
-	@Column(name = "Tipo_Cidade", length = 1, nullable = false, unique = true)
+	@Column(name = "Tipo_Cidade", length = 1, nullable = false)
 	private EnumTipoCidade tipoCidade;
 
-	@Column(name = "Cod_Cidade_Sub", length = 5, nullable = false, unique = true)
+	@Column(name = "Cod_Cidade_Sub", length = 5, nullable = false)
 	private String codCidadeSub;
 
-	@Column(name = "Cod_Mun", length = 7, nullable = false, unique = true)
+	@Column(name = "Cod_Mun", length = 7, nullable = false)
 	private String codMunicicio;
 
 	@OneToOne(mappedBy = "cepEstabelecimento")
 	private Aproveitamento aproveitamento;
-	
+
 	@ManyToOne
-	@JoinColumn(name="empresa")
+	@JoinColumn(name = "empresa")
 	private Empresa empresa;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -159,6 +164,30 @@ public class CEP implements Serializable {
 
 	public void setAproveitamento(Aproveitamento aproveitamento) {
 		this.aproveitamento = aproveitamento;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public EstadoUF getUF() {
+		return UF;
+	}
+
+	public void setUF(EstadoUF uF) {
+		UF = uF;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 
 	public Boolean getAtivo() {

@@ -3,9 +3,10 @@ package br.com.cdan.negocio.financeiro.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.financeiro.Banco;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.financeiro.BancoDao;
 
-public class BancoFabricaTest {
+public class BancoFabricaTest extends FabricaTest {
 	private static BancoFabricaTest instance = null;
 
 	public static synchronized BancoFabricaTest getInstance() {
@@ -19,7 +20,7 @@ public class BancoFabricaTest {
 		Banco b = new Banco();
 		b.setAgencia("agencia");
 		b.setAtivo(Boolean.TRUE);
-		b.setNome("nome");
+		b.setNome(criarStringDinamicaPorTamanho(50));
 		return b;
 	}
 

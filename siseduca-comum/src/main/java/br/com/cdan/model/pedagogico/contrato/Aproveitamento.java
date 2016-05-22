@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,6 +20,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.geral.Endereco;
 import br.com.cdan.model.geral.Telefone;
@@ -53,10 +58,16 @@ public class Aproveitamento implements Serializable {
 	@JoinColumn(name = "enderecoEstabelecimento")
 	private Endereco enderecoEstabelecimento;
 
-	@Column(name = "nomeCurso")
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
+	@Column(name = "nomeCurso", length = 150, nullable = false)
 	private String nomeCurso;
 
-	@Column(name = "nomeDisciplina")
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
+	@Column(name = "nomeDisciplina", length = 150, nullable = false)
 	private String nomeDisciplina;
 
 	@Temporal(TemporalType.TIME)
@@ -74,16 +85,21 @@ public class Aproveitamento implements Serializable {
 	@Column(name = "nota")
 	private BigDecimal nota;
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "coordenador")
 	private Funcionario coordenador;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3)
 	@Column(name = "parecerCoordenador")
 	private String parecerCoordenador;
 
+	@NotNull
 	@Column(name = "confirmaCredito")
 	private Boolean confirmaCredito;
 
+	@NotNull
 	@Column(name = "necessarioExameProficiencia")
 	private Boolean necessarioExameProficiencia;
 
@@ -95,6 +111,7 @@ public class Aproveitamento implements Serializable {
 	@Column(name = "observacao")
 	private String observacao;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

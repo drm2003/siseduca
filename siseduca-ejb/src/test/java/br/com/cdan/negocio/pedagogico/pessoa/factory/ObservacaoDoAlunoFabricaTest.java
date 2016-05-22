@@ -22,7 +22,6 @@ public class ObservacaoDoAlunoFabricaTest {
 		o.setAtivo(Boolean.TRUE);
 		o.setCursouOutrasInstituicoesDeEnsino(Boolean.FALSE);
 		o.setDoencas("doencas");
-		o.setInteressado(InteressadoFabricaTest.getInstance().criaInteressadoPersistido(em));
 		o.setObservacao("observacao");
 		o.setPrimeirosSocorros("primeirosSocorros");
 		//

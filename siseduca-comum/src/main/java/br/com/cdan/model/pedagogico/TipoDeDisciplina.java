@@ -10,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.pedagogico.curso.Disciplina;
 
@@ -24,12 +28,16 @@ public class TipoDeDisciplina implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 
 	@OneToMany(mappedBy = "tipoDeDisciplina")
 	private Set<Disciplina> disciplinas;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

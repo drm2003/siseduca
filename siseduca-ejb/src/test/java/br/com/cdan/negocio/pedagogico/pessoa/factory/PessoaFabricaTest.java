@@ -6,11 +6,12 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.comum.EnumSexo;
 import br.com.cdan.model.pessoa.Pessoa;
-import br.com.cdan.negocio.geral.factory.CidadeFabricaTest;
+import br.com.cdan.negocio.comum.FabricaTest;
+import br.com.cdan.negocio.geral.cep.factory.CidadeFabricaTest;
 import br.com.cdan.negocio.geral.factory.EstadoCivilFabricaTest;
 import br.com.cdan.negocio.pedagogico.pessoa.PessoaDao;
 
-public class PessoaFabricaTest {
+public class PessoaFabricaTest extends FabricaTest {
 	private static PessoaFabricaTest instance = null;
 
 	public static synchronized PessoaFabricaTest getInstance() {
@@ -27,26 +28,27 @@ public class PessoaFabricaTest {
 				CarteiraHabilitacaoFabricaTest.getInstance().criaCarteiraHabilitacaoPersistido(em));
 		pessoa.setCertidao(CertidaoFabricaTest.getInstance().criaCertidaoPersistido(em));
 		pessoa.setCidadeNatal(CidadeFabricaTest.getInstance().criaCidadePersistido(em));
+		pessoa.setEstadoCivil(EstadoCivilFabricaTest.getInstance().criaEstadoCivilPersistido(em));
 		pessoa.setClassificacao(ClassificacaoFabricaTest.getInstance().criaClassificacaoPersistido(em));
-		pessoa.setCpf("teste " + Math.random() * 10000);
+		//
+		pessoa.setCpf(criarStringDinamicaPorTamanho(10));
 		pessoa.setDataEmissaoTituloEleitor(Calendar.getInstance());
 		pessoa.setDataExpedicaoRg(Calendar.getInstance());
 		pessoa.setDataNascimento(Calendar.getInstance());
-		pessoa.setDocumentoMilitar("teste " + Math.random() * 10000);
-		pessoa.setEmpresaLocalDeTrabalho("teste");
+		pessoa.setDocumentoMilitar(criarStringDinamicaPorTamanho(10));
+		pessoa.setEmpresaLocalDeTrabalho(criarStringDinamicaPorTamanho(5));
 		//
-		pessoa.setEstadoCivil(EstadoCivilFabricaTest.getInstance().criaEstadoCivilPersistido(em));
-		pessoa.setNome("teste" + Math.random() * 10000);
-		pessoa.setNumeroDocumentoMilitar("teste");
-		pessoa.setNumeroPassaporte("teste");
-		pessoa.setOrgaoExpedidorRg("teste");
+		pessoa.setNome(criarStringDinamicaPorTamanho(100));
+		pessoa.setNumeroDocumentoMilitar(criarStringDinamicaPorTamanho(5));
+		pessoa.setNumeroPassaporte(criarStringDinamicaPorTamanho(5));
+		pessoa.setOrgaoExpedidorRg(criarStringDinamicaPorTamanho(5));
 		pessoa.setPermitirEmprestimoBiblioteca(Boolean.TRUE);
-		pessoa.setProfissaoFormacao("teste");
-		pessoa.setRg("teste" + Math.random() * 10000);
-		pessoa.setSecaoTituloEleitor("teste");
+		pessoa.setProfissaoFormacao(criarStringDinamicaPorTamanho(5));
+		pessoa.setRg(criarStringDinamicaPorTamanho(10));
+		pessoa.setSecaoTituloEleitor(criarStringDinamicaPorTamanho(5));
 		pessoa.setSexo(EnumSexo.M);
-		pessoa.setTituloEleitor("teste");
-		pessoa.setZonaTituloEleitor("teste");
+		pessoa.setTituloEleitor(criarStringDinamicaPorTamanho(5));
+		pessoa.setZonaTituloEleitor(criarStringDinamicaPorTamanho(5));
 		return pessoa;
 	}
 

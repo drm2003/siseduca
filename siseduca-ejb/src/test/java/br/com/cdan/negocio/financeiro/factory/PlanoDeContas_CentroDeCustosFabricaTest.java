@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.financeiro.PlanoDeContas_CentroDeCustos;
+import br.com.cdan.model.financeiro.PlanoDeContas_CentroDeCustosPK;
 import br.com.cdan.negocio.financeiro.PlanoDeContas_CentroDeCustosDao;
 
 public class PlanoDeContas_CentroDeCustosFabricaTest {
@@ -21,8 +22,9 @@ public class PlanoDeContas_CentroDeCustosFabricaTest {
 		PlanoDeContas_CentroDeCustos p = new PlanoDeContas_CentroDeCustos();
 		p.setAtivo(Boolean.TRUE);
 		p.setCentroDeCustos(CentroDeCustosFabricaTest.getInstance().criaCentroDeCustosPersistido(em));
-		p.setPercentual(BigDecimal.valueOf(50.0));
 		p.setPlanoDeContas(PlanoDeContaFabricaTest.getInstance().criaPlanoDeContasPersistido(em));
+		p.setPercentual(BigDecimal.valueOf(50.0));
+		p.setId(new PlanoDeContas_CentroDeCustosPK(p.getCentroDeCustos().getId(), p.getPlanoDeContas().getId()));
 		return p;
 	}
 

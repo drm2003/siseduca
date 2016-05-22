@@ -11,6 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "UnidadeDeMedida")
@@ -23,9 +27,13 @@ public class UnidadeDeMedida implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "descricao", nullable = false, unique = true)
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 100)
+	@Column(name = "descricao", length = 100, nullable = false, unique = true)
 	private String descricao;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

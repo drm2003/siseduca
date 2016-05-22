@@ -15,6 +15,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.comum.EnumTipoDePlanoDeContas;
 import br.com.cdan.model.geral.Categoria;
@@ -46,7 +50,10 @@ public class Caixa implements Serializable {
 	@Column(name = "valor")
 	private BigDecimal valor;
 
-	@Column(name = "documento")
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 100)
+	@Column(name = "documento", length = 100, nullable = false)
 	private String documento;
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -59,6 +66,7 @@ public class Caixa implements Serializable {
 	@Column(name = "observacoes")
 	private String observacoes;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
