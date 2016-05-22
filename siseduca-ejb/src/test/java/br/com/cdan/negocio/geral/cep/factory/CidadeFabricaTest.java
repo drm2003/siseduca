@@ -17,18 +17,18 @@ public class CidadeFabricaTest extends FabricaTest {
 	}
 
 	public Cidade criaCidade(EntityManager em) {
-		Cidade cidade = new Cidade();
-		cidade.setAtivo(Boolean.TRUE);
-		cidade.setDescricao(criarStringDinamicaPorTamanho(100));
-		cidade.setEstadoUF(EstadoUFFabricaTest.getInstance().criaEstadoUFPersistido(em));
-		return cidade;
+		Cidade c = new Cidade();
+		c.setAtivo(Boolean.TRUE);
+		c.setDescricao(criarStringDinamicaPorTamanho(100));
+		c.setEstadoUF(EstadoUFFabricaTest.getInstance().criaEstadoUFPersistido(em));
+		return c;
 	}
 
 	public Cidade criaCidadePersistido(EntityManager em) {
 		CidadeDao dao = new CidadeDao(em);
-		Cidade cidade = criaCidade(em);
-		dao.persist(cidade);
-		return cidade;
+		Cidade c = criaCidade(em);
+		dao.persist(c);
+		return c;
 	}
 
 }

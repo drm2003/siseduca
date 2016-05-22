@@ -5,13 +5,15 @@ import java.util.Calendar;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.contrato.Matricula;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.contrato.MatriculaDao;
 import br.com.cdan.negocio.pedagogico.curso.factory.InvestimentoFabricaTest;
+import br.com.cdan.negocio.pedagogico.curso.factory.TurmaFabricaTest;
 import br.com.cdan.negocio.pedagogico.factory.SituacaoDoAlunoNaTurmaFabricaTest;
 import br.com.cdan.negocio.pedagogico.geral.factory.SituacaoDoContratoFabricaTest;
 import br.com.cdan.negocio.pedagogico.pessoa.factory.AlunoFabricaTest;
 
-public class MatriculaFabricaTest {
+public class MatriculaFabricaTest extends FabricaTest {
 	private static MatriculaFabricaTest instance = null;
 
 	public static synchronized MatriculaFabricaTest getInstance() {
@@ -30,12 +32,12 @@ public class MatriculaFabricaTest {
 		//
 		m.setInvestimento(InvestimentoFabricaTest.getInstance().criaInvestimentoPersistido(em));
 		m.setMatrizCurricular(Long.valueOf("10"));
-		m.setNumeroContrato("numeroContrato");
+		m.setNumeroContrato(criarStringDinamicaPorTamanho(10));
 		m.setSituacaoDoAlunoNaTurma(
 				SituacaoDoAlunoNaTurmaFabricaTest.getInstance().criaSituacaoDoAlunoNaTurmaPersistido(em));
 		m.setSituacaoDoContrato(SituacaoDoContratoFabricaTest.getInstance().criaSituacaoDoContratoPersistido(em));
 		m.setTipoDeContrato(TipoDeContratoFabricaTest.getInstance().criaTipoDeContratoPersistido(em));
-		m.setTurma(Long.valueOf("10"));
+		m.setTurma(TurmaFabricaTest.getInstance().criaTurma(em).getId());
 		return m;
 	}
 

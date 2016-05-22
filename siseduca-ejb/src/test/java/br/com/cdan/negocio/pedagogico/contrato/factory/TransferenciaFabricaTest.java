@@ -23,6 +23,7 @@ public class TransferenciaFabricaTest {
 
 	public Transferencia criaTransferencia(EntityManager em) {
 		Transferencia t = new Transferencia();
+		t.setAtivo(Boolean.TRUE);
 		t.setAluno(AlunoFabricaTest.getInstance().criaAlunoPersistido(em));
 		t.setCidade(CidadeFabricaTest.getInstance().criaCidadePersistido(em));
 		t.setCurso("curso");

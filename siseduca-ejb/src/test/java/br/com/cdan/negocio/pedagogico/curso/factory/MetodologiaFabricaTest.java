@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.curso.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.curso.Metodologia;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.curso.MetodologiaDao;
 
-public class MetodologiaFabricaTest {
+public class MetodologiaFabricaTest extends FabricaTest {
 	private static MetodologiaFabricaTest instance = null;
 
 	public static synchronized MetodologiaFabricaTest getInstance() {
@@ -17,15 +18,13 @@ public class MetodologiaFabricaTest {
 
 	public Metodologia criaMetodologia(EntityManager em) {
 		Metodologia m = new Metodologia();
-		m.setAtividadesPraticas("atividadesPraticas");
+		m.setAtividadesPraticas(criarStringDinamicaPorTamanho(10));
 		m.setAtivo(Boolean.TRUE);
-		m.setBibliografiaBasica("bibliografiaBasica");
-		m.setBibliografiaComplementar("bibliografiaComplementar");
-		m.setCriteriosDeAvaliacao("criteriosDeAvaliacao");
-		m.setDisciplina_MatrizCurricular(
-				Disciplina_MatrizCurricularFabricaTest.getInstance().criaDisciplina_MatrizCurricularPersistido(em));
-		m.setRecursosDidaticos("recursosDidaticos");
-		m.setTecnicasDeEnsino("tecnicasDeEnsino");
+		m.setBibliografiaBasica(criarStringDinamicaPorTamanho(10));
+		m.setBibliografiaComplementar(criarStringDinamicaPorTamanho(10));
+		m.setCriteriosDeAvaliacao(criarStringDinamicaPorTamanho(10));
+		m.setRecursosDidaticos(criarStringDinamicaPorTamanho(10));
+		m.setTecnicasDeEnsino(criarStringDinamicaPorTamanho(10));
 		return m;
 	}
 

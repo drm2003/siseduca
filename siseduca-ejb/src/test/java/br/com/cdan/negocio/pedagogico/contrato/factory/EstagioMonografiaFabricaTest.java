@@ -27,8 +27,7 @@ public class EstagioMonografiaFabricaTest {
 		//
 		e.setAtivo(Boolean.TRUE);
 		e.setConcluido(Boolean.FALSE);
-		e.setDadosEmpresaConcedente(
-				DadosEmpresaConcedenteFabricaTest.getInstance().criaDadosEmpresaConcedentePersistido(em));
+		e.setDadosEmpresaConcedente(DadosEmpresaConcedenteFabricaTest.getInstance().criaDadosEmpresaConcedente(em));
 		e.setDataInicio(Calendar.getInstance());
 		e.setDataTermino(Calendar.getInstance());
 		e.setHoraInicio(Calendar.getInstance().getTime().getTime());

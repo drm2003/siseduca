@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Curso_MatrizCurricular")
@@ -35,6 +36,7 @@ public class Curso_MatrizCurricular implements Serializable {
 	@Column(name = "dataValidade", nullable = false)
 	private Calendar dataValidade;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

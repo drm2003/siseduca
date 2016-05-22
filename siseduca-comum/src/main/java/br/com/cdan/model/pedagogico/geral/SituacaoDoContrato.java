@@ -11,6 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.pedagogico.contrato.Matricula;
 
@@ -25,12 +29,16 @@ public class SituacaoDoContrato implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3)
 	@Column(name = "descricao", nullable = false, unique = true)
 	private String descricao;
 
 	@OneToMany(mappedBy = "situacaoDoContrato", fetch = FetchType.EAGER)
 	private Set<Matricula> matriculas;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

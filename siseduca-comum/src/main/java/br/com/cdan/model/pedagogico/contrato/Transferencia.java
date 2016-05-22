@@ -14,6 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.comum.EnumTipoDeTransferencia;
 import br.com.cdan.model.geral.cep.Cidade;
@@ -35,7 +39,10 @@ public class Transferencia implements Serializable {
 	@Column(name = "tipoDeTransferencia")
 	private EnumTipoDeTransferencia tipoDeTransferencia;
 
-	@Column(name = "curso")
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
+	@Column(name = "curso", length = 150, nullable = false)
 	private String curso;
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -46,6 +53,7 @@ public class Transferencia implements Serializable {
 	@JoinColumn(name = "id_aluno")
 	private Aluno aluno;
 
+	@NotNull
 	@Column(name = "data")
 	private Calendar data;
 
@@ -57,9 +65,13 @@ public class Transferencia implements Serializable {
 	@JoinColumn(name = "cidade")
 	private Cidade cidade;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "estabelecimentoProcedencia")
 	private String estabelecimentoProcedencia;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

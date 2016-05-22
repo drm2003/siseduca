@@ -3,9 +3,10 @@ package br.com.cdan.negocio.geral.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.geral.Cargo;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.geral.CargoDao;
 
-public class CargoFabricaTest {
+public class CargoFabricaTest extends FabricaTest {
 	private static CargoFabricaTest instance = null;
 
 	public static synchronized CargoFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class CargoFabricaTest {
 	public Cargo criaCargo() {
 		Cargo c = new Cargo();
 		c.setAtivo(Boolean.TRUE);
-		c.setDescricao("descricao" + Math.random() * 10000);
+		c.setDescricao(criarStringDinamicaPorTamanho(100));
 		return c;
 	}
 

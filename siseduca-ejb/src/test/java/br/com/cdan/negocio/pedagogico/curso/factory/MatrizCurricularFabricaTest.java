@@ -3,10 +3,11 @@ package br.com.cdan.negocio.pedagogico.curso.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.curso.MatrizCurricular;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.curso.MatrizCurricularDao;
 import br.com.cdan.negocio.pedagogico.factory.TipoDeCursoFabricaTest;
 
-public class MatrizCurricularFabricaTest {
+public class MatrizCurricularFabricaTest extends FabricaTest {
 	private static MatrizCurricularFabricaTest instance = null;
 
 	public static synchronized MatrizCurricularFabricaTest getInstance() {
@@ -20,7 +21,7 @@ public class MatrizCurricularFabricaTest {
 		MatrizCurricular m = new MatrizCurricular();
 		m.setAtivo(Boolean.TRUE);
 		//
-		m.setNome("nome");
+		m.setNome(criarStringDinamicaPorTamanho(150));
 		m.setQuantidadeModulo(Long.valueOf("3"));
 		m.setTipoDeCurso(TipoDeCursoFabricaTest.getInstance().criaTipoDeCursoPersistido(em));
 		//

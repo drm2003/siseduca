@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.contrato.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.contrato.MotivoDeTransferencia;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.contrato.MotivoDeTransferenciaDao;
 
-public class MotivoDeTransferenciaFabricaTest {
+public class MotivoDeTransferenciaFabricaTest extends FabricaTest {
 	private static MotivoDeTransferenciaFabricaTest instance = null;
 
 	public static synchronized MotivoDeTransferenciaFabricaTest getInstance() {
@@ -19,7 +20,7 @@ public class MotivoDeTransferenciaFabricaTest {
 		MotivoDeTransferencia m = new MotivoDeTransferencia();
 		//
 		m.setAtivo(Boolean.TRUE);
-		m.setDescricao("descricao");
+		m.setDescricao(criarStringDinamicaPorTamanho(50));
 		//
 		return m;
 	}

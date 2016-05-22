@@ -15,6 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.pedagogico.TipoDeCurso;
 import br.com.cdan.model.pedagogico.TipoDeDisciplina;
@@ -31,9 +35,15 @@ public class Disciplina implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 120)
 	@Column(name = "nome", nullable = false, length = 120)
 	private String nome;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 2, max = 10)
 	@Column(name = "sigla", nullable = false, length = 10)
 	private String sigla;
 
@@ -68,9 +78,11 @@ public class Disciplina implements Serializable {
 	@Column(name = "valorHoraAula")
 	private BigDecimal valorHoraAula;
 
+	@NotNull
 	@Column(name = "compartilhado")
 	private Boolean compartilhado;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

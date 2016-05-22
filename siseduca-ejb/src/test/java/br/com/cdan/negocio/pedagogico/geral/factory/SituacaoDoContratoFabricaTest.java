@@ -3,8 +3,10 @@ package br.com.cdan.negocio.pedagogico.geral.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.geral.SituacaoDoContrato;
+import br.com.cdan.negocio.comum.FabricaTest;
+import br.com.cdan.negocio.pedagogico.geral.SituacaoDoContratoDao;
 
-public class SituacaoDoContratoFabricaTest {
+public class SituacaoDoContratoFabricaTest extends FabricaTest {
 	private static SituacaoDoContratoFabricaTest instance = null;
 
 	public static synchronized SituacaoDoContratoFabricaTest getInstance() {
@@ -17,15 +19,14 @@ public class SituacaoDoContratoFabricaTest {
 	public SituacaoDoContrato criaSituacaoDoContrato() {
 		SituacaoDoContrato s = new SituacaoDoContrato();
 		s.setAtivo(Boolean.TRUE);
-		s.setDescricao("descricao");
+		s.setDescricao(criarStringDinamicaPorTamanho(100));
 		return s;
 	}
 
 	public SituacaoDoContrato criaSituacaoDoContratoPersistido(EntityManager em) {
-		SituacaoDoContrato s = new SituacaoDoContrato();
-		s.setAtivo(Boolean.TRUE);
-		s.setDescricao("descricao");
-		//
+		SituacaoDoContrato s = criaSituacaoDoContrato();
+		SituacaoDoContratoDao dao = new SituacaoDoContratoDao(em);
+		dao.persist(s);
 		return s;
 	}
 }

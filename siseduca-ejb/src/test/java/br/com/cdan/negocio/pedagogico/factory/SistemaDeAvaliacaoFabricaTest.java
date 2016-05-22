@@ -9,9 +9,10 @@ import br.com.cdan.comum.EnumPeriodoAvaliacao;
 import br.com.cdan.comum.EnumTipoDeAvaliacao;
 import br.com.cdan.comum.EnumValorAvaliacao;
 import br.com.cdan.model.pedagogico.SistemaDeAvaliacao;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.SistemaDeAvaliacaoDao;
 
-public class SistemaDeAvaliacaoFabricaTest {
+public class SistemaDeAvaliacaoFabricaTest extends FabricaTest {
 	private static SistemaDeAvaliacaoFabricaTest instance = null;
 
 	public static synchronized SistemaDeAvaliacaoFabricaTest getInstance() {
@@ -24,6 +25,7 @@ public class SistemaDeAvaliacaoFabricaTest {
 	public SistemaDeAvaliacao criaSistemaDeAvaliacao(EntityManager em) {
 		SistemaDeAvaliacao s = new SistemaDeAvaliacao();
 		s.setAtivo(Boolean.TRUE);
+		s.setNome(criarStringDinamicaPorTamanho(100));
 		s.setEnumCalculoMediaFinal(EnumCalculoMediaFinal.MEDIAAUTOMATICA);
 		s.setEnumPeriodoAvaliacao(EnumPeriodoAvaliacao.BIMESTRE);
 		s.setEnumTipoDeAvaliacao(EnumTipoDeAvaliacao.CONCEITOS);
@@ -31,13 +33,13 @@ public class SistemaDeAvaliacaoFabricaTest {
 		s.setExameFinal(ExameFinalFabricaTest.getInstance().criaExameFinalPersistido(em));
 		s.setFrequenciaMinima(BigDecimal.ZERO);
 		s.setMediaMinima(BigDecimal.ONE);
-		s.setNome("nome");
+		s.setNome(criarStringDinamicaPorTamanho(100));
 		s.setNotasParciais(NotasParciaisFabricaTest.getInstance().criaNotasParciaisPersistido(em));
 		s.setPadrao(Boolean.TRUE);
 		s.setPesoDaMedia(BigDecimal.TEN);
 		s.setPesoPontos(BigDecimal.TEN);
 		s.setRecuperacao(RecuperacaoFabricaTest.getInstance().criaRecuperacaoPersisito(em));
-		s.setSintese("sintese");
+		s.setSintese(criarStringDinamicaPorTamanho(100));
 		return s;
 	}
 

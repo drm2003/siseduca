@@ -14,6 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.pedagogico.TipoDeCurso;
 
@@ -28,6 +32,9 @@ public class MatrizCurricular implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "nome", nullable = false, length = 150)
 	private String nome;
 
@@ -56,6 +63,7 @@ public class MatrizCurricular implements Serializable {
 	@OneToMany(mappedBy = "matrizCurricular")
 	private Set<Turma> turmas;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -87,8 +95,7 @@ public class MatrizCurricular implements Serializable {
 		return utilizaDisciplinasSequenciais;
 	}
 
-	public void setUtilizaDisciplinasSequenciais(
-			Boolean utilizaDisciplinasSequenciais) {
+	public void setUtilizaDisciplinasSequenciais(Boolean utilizaDisciplinasSequenciais) {
 		this.utilizaDisciplinasSequenciais = utilizaDisciplinasSequenciais;
 	}
 
@@ -96,8 +103,7 @@ public class MatrizCurricular implements Serializable {
 		return utilizarSimuladoParaComporMedia;
 	}
 
-	public void setUtilizarSimuladoParaComporMedia(
-			Boolean utilizarSimuladoParaComporMedia) {
+	public void setUtilizarSimuladoParaComporMedia(Boolean utilizarSimuladoParaComporMedia) {
 		this.utilizarSimuladoParaComporMedia = utilizarSimuladoParaComporMedia;
 	}
 
@@ -113,8 +119,7 @@ public class MatrizCurricular implements Serializable {
 		return disciplina_MatrizCurricular;
 	}
 
-	public void setDisciplina_MatrizCurricular(
-			Set<Disciplina_MatrizCurricular> disciplina_MatrizCurricular) {
+	public void setDisciplina_MatrizCurricular(Set<Disciplina_MatrizCurricular> disciplina_MatrizCurricular) {
 		this.disciplina_MatrizCurricular = disciplina_MatrizCurricular;
 	}
 
@@ -122,8 +127,7 @@ public class MatrizCurricular implements Serializable {
 		return curso_MatrizCurricular;
 	}
 
-	public void setCurso_MatrizCurricular(
-			Set<Curso_MatrizCurricular> curso_MatrizCurricular) {
+	public void setCurso_MatrizCurricular(Set<Curso_MatrizCurricular> curso_MatrizCurricular) {
 		this.curso_MatrizCurricular = curso_MatrizCurricular;
 	}
 
@@ -148,11 +152,8 @@ public class MatrizCurricular implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime
-				* result
-				+ ((quantidadeModulo == null) ? 0 : quantidadeModulo.hashCode());
-		result = prime * result
-				+ ((tipoDeCurso == null) ? 0 : tipoDeCurso.hashCode());
+		result = prime * result + ((quantidadeModulo == null) ? 0 : quantidadeModulo.hashCode());
+		result = prime * result + ((tipoDeCurso == null) ? 0 : tipoDeCurso.hashCode());
 		return result;
 	}
 
@@ -185,12 +186,9 @@ public class MatrizCurricular implements Serializable {
 
 	@Override
 	public String toString() {
-		return "MatrizCurricular [nome=" + nome + ", quantidadeModulo="
-				+ quantidadeModulo + ", utilizaDisciplinasSequenciais="
-				+ utilizaDisciplinasSequenciais
-				+ ", utilizarSimuladoParaComporMedia="
-				+ utilizarSimuladoParaComporMedia + ", tipoDeCurso="
-				+ tipoDeCurso + ", disciplina_matrizCurricular="
-				+ disciplina_MatrizCurricular + "]";
+		return "MatrizCurricular [nome=" + nome + ", quantidadeModulo=" + quantidadeModulo
+				+ ", utilizaDisciplinasSequenciais=" + utilizaDisciplinasSequenciais
+				+ ", utilizarSimuladoParaComporMedia=" + utilizarSimuladoParaComporMedia + ", tipoDeCurso="
+				+ tipoDeCurso + ", disciplina_matrizCurricular=" + disciplina_MatrizCurricular + "]";
 	}
 }

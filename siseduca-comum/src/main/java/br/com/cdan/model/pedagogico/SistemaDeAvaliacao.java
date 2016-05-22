@@ -13,6 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.comum.EnumCalculoMediaFinal;
 import br.com.cdan.comum.EnumPeriodoAvaliacao;
@@ -30,6 +34,9 @@ public class SistemaDeAvaliacao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "nome", length = 150, nullable = false, unique = true)
 	private String nome;
 
@@ -64,6 +71,7 @@ public class SistemaDeAvaliacao implements Serializable {
 	@Column(name = "pesoPontos")
 	private BigDecimal pesoPontos;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

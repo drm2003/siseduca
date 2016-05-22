@@ -14,6 +14,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.acesso.Usuario;
 import br.com.cdan.model.pedagogico.SeriePadrao;
@@ -35,7 +39,10 @@ public class Curso implements Serializable {
 	@JoinColumn(name = "id_interessado")
 	private Interessado interessado;
 
-	@Column(name = "nome")
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 250)
+	@Column(name = "nome", length = 250, nullable = false, unique = true)
 	private String nome;
 
 	@OneToOne
@@ -50,7 +57,10 @@ public class Curso implements Serializable {
 	@JoinColumn(name = "coordenador")
 	private Usuario coordenador;
 
-	@Column(name = "sigla")
+	@NotNull
+	@NotEmpty
+	@Size(min = 2, max = 10)
+	@Column(name = "sigla", length = 10, nullable = false, unique = true)
 	private String sigla;
 
 	@Column(name = "numeroDeModulos")
@@ -105,9 +115,11 @@ public class Curso implements Serializable {
 	@JoinColumn(name = "curso")
 	private Usuario usuario;
 
+	@NotNull
 	@Column(name = "compartilhado")
 	private Boolean compartilhado;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

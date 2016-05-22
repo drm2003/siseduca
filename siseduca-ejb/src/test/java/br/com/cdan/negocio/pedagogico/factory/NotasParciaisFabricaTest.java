@@ -21,7 +21,6 @@ public class NotasParciaisFabricaTest {
 		n.setAtivo(Boolean.TRUE);
 		n.setDesconsideraAvaliacao(Boolean.FALSE);
 		n.setEnumMediaNotasParciais(EnumMediaNotasParciais.MEDIAA);
-		n.setSistemaDeAvaliacao(SistemaDeAvaliacaoFabricaTest.getInstance().criaSistemaDeAvaliacaoPersistido(em));
 		n.setUtilizaAgrupamentoDeAvaliacoes(Boolean.FALSE);
 		n.setUtilizaRecuperacaoParcial(Boolean.FALSE);
 		return n;

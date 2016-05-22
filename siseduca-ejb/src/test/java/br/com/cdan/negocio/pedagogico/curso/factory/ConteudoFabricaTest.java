@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.curso.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.curso.Conteudo;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.curso.ConteudoDao;
 
-public class ConteudoFabricaTest {
+public class ConteudoFabricaTest extends FabricaTest {
 	private static ConteudoFabricaTest instance = null;
 
 	public static synchronized ConteudoFabricaTest getInstance() {
@@ -20,7 +21,7 @@ public class ConteudoFabricaTest {
 		c.setAtivo(Boolean.TRUE);
 		c.setCargaHoraria(Long.valueOf("20"));
 		c.setCargaHorariaEstagio(Long.valueOf("4"));
-		c.setDescricao("descricao");
+		c.setDescricao(criarStringDinamicaPorTamanho(250));
 		c.setDisciplina_MatrizCurricular(
 				Disciplina_MatrizCurricularFabricaTest.getInstance().criaDisciplina_MatrizCurricularPersistido(em));
 		return c;

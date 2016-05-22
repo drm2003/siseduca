@@ -23,7 +23,6 @@ public class ExameFinalFabricaTest {
 		e.setMediaAposExameFinal(MediaAposExameFinalFabricaTest.getInstance().criaMediaAposExameFinalPersistido(em));
 		e.setMediaExameFinal(BigDecimal.valueOf(7.0));
 		e.setPesoExameFinal(Long.valueOf(7));
-		e.setSistemaDeAvaliacao(SistemaDeAvaliacaoFabricaTest.getInstance().criaSistemaDeAvaliacaoPersistido(em));
 		e.setUsarConselhoDeClasse(Boolean.FALSE);
 		e.setValorMediaAposExameFinal(BigDecimal.valueOf(7.0));
 		return e;

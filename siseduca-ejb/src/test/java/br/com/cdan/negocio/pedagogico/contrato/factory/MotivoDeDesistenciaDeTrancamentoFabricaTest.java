@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.contrato.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.contrato.MotivoDeDesistenciaDeTrancamento;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.contrato.MotivoDeDesistenciaDeTrancamentoDao;
 
-public class MotivoDeDesistenciaDeTrancamentoFabricaTest {
+public class MotivoDeDesistenciaDeTrancamentoFabricaTest extends FabricaTest {
 	private static MotivoDeDesistenciaDeTrancamentoFabricaTest instance = null;
 
 	public static synchronized MotivoDeDesistenciaDeTrancamentoFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class MotivoDeDesistenciaDeTrancamentoFabricaTest {
 	public MotivoDeDesistenciaDeTrancamento criaMotivoDeDesistenciaDeTrancamento() {
 		MotivoDeDesistenciaDeTrancamento m = new MotivoDeDesistenciaDeTrancamento();
 		m.setAtivo(Boolean.TRUE);
-		m.setDescricao("descricao");
+		m.setDescricao(criarStringDinamicaPorTamanho(50));
 		//
 		return m;
 	}

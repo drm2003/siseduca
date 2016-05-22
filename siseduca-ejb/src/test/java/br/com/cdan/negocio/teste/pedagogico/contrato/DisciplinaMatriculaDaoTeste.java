@@ -160,7 +160,7 @@ public class DisciplinaMatriculaDaoTeste extends PersistenciaJUnit {
 		dao.persist(a);
 		String sql = "SELECT a FROM DisciplinaMatricula a WHERE a.sigla = :sigla";
 		TypedQuery<DisciplinaMatricula> query = dao.getEntityManager().createQuery(sql, DisciplinaMatricula.class);
-		query.setParameter("sigla", a.getNome());
+		query.setParameter("sigla", a.getSigla());
 		List<DisciplinaMatricula> lista = query.getResultList();
 		Assert.assertTrue(lista.contains(a));
 	}
@@ -168,7 +168,7 @@ public class DisciplinaMatriculaDaoTeste extends PersistenciaJUnit {
 	@Test(expected = ConstraintViolationException.class)
 	public void sigla_menor_que_tamanho_minimo_permitido() {
 		DisciplinaMatricula a = criaDisciplinaMatricula();
-		a.setSigla(criarStringDinamicaPorTamanho(2));
+		a.setSigla(criarStringDinamicaPorTamanho(1));
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}

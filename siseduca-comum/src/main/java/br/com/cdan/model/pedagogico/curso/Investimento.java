@@ -96,6 +96,7 @@ public class Investimento implements Serializable {
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "investimento")
 	private ContaAReceber contaAReceber;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

@@ -5,6 +5,7 @@ import java.util.Calendar;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.curso.Curso_MatrizCurricular;
+import br.com.cdan.model.pedagogico.curso.Curso_MatrizCurricularPK;
 import br.com.cdan.negocio.pedagogico.curso.Curso_MatrizCurricularDao;
 
 public class Curso_MatrizCurricularFabricaTest {
@@ -19,9 +20,11 @@ public class Curso_MatrizCurricularFabricaTest {
 
 	public Curso_MatrizCurricular criaCurso_MatrizCurricular(EntityManager em) {
 		Curso_MatrizCurricular c = new Curso_MatrizCurricular();
+		c.setAtivo(Boolean.TRUE);
 		c.setCurso(CursoFabricaTest.getInstance().criaCursoPersistido(em));
 		c.setDataValidade(Calendar.getInstance());
 		c.setMatrizCurricular(MatrizCurricularFabricaTest.getInstance().criaMatrizCurricularPersistido(em));
+		c.setId(new Curso_MatrizCurricularPK(c.getCurso().getId(), c.getMatrizCurricular().getId()));
 		return c;
 	}
 

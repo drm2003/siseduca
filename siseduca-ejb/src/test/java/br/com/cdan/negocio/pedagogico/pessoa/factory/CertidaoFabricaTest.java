@@ -21,12 +21,12 @@ public class CertidaoFabricaTest {
 
 	public Certidao criaCertidao(EntityManager em) {
 		Certidao c = new Certidao();
+		c.setMunicipioCartorio(CidadeFabricaTest.getInstance().criaCidadePersistido(em));
 		c.setAtivo(Boolean.TRUE);
 		c.setCartorio("cartorio");
 		c.setDataEmissao(Calendar.getInstance());
 		c.setFolha("folha");
 		c.setLivro("livro");
-		c.setMunicipioCartorio(CidadeFabricaTest.getInstance().criaCidadePersistido(em));
 		c.setNumeroMatricula("numeroMatricula");
 		c.setNumeroTermo("numeroTermo");
 		c.setTipoCertidao(EnumTipoCertidao.CASAMENTO);

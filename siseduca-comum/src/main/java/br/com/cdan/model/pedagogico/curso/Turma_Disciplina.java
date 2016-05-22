@@ -17,7 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.cdan.model.pedagogico.contrato.Matricula;
 import br.com.cdan.model.pedagogico.diario.DiarioDeAula;
 import br.com.cdan.model.pessoa.Aluno;
 import br.com.cdan.model.pessoa.Funcionario;
@@ -40,8 +39,10 @@ public class Turma_Disciplina implements Serializable {
 	@JoinColumn(name = "id_disciplina", nullable = false)
 	private Disciplina disciplina;
 
-	@OneToMany(mappedBy = "turma_disciplina")
-	private Set<Matricula> matriculas;
+	/*
+	 * @OneToMany(mappedBy = "turma_disciplina") private Set<Matricula>
+	 * matriculas;
+	 */
 
 	@OneToOne
 	@JoinColumn(name = "diaDaSemanaAula")
@@ -160,14 +161,6 @@ public class Turma_Disciplina implements Serializable {
 
 	public void setTipoDeInvestimento(TipoDeInvestimento tipoDeInvestimento) {
 		this.tipoDeInvestimento = tipoDeInvestimento;
-	}
-
-	public Set<Matricula> getMatriculas() {
-		return matriculas;
-	}
-
-	public void setMatriculas(Set<Matricula> matriculas) {
-		this.matriculas = matriculas;
 	}
 
 	public DiarioDeAula getDiarioDeAula() {

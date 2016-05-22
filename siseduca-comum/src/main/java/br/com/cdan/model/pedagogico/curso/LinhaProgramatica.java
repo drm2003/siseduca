@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "LinhaProgramatica")
@@ -41,6 +42,7 @@ public class LinhaProgramatica implements Serializable {
 	@Column(name = "assunto")
 	private String assunto;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

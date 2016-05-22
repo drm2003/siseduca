@@ -23,7 +23,6 @@ public class MediaAposRecuperacaoFabricaTest {
 		m.setDesconsiderarNotaRecuperacaoAposAMedia(Boolean.FALSE);
 		m.setDesconsiderarNotaRecuperacaoMenor(Boolean.FALSE);
 		m.setEnumMediaAposRecuperacao(EnumMediaAposRecuperacao.MEDIAENTREANOTAEARECUPERACAO);
-		m.setRecuperacao(RecuperacaoFabricaTest.getInstance().criaRecuperacaoPersisito(em));
 		return m;
 	}
 
