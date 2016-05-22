@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.model.pedagogico.diario.DiarioDeAula;
 import br.com.cdan.model.pessoa.Aluno;
@@ -80,6 +81,7 @@ public class Turma_Disciplina implements Serializable {
 	@OneToOne(mappedBy = "turma_Disciplina")
 	private DiarioDeAula diarioDeAula;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.curso.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.curso.RequisitoParaOCurso;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.curso.RequisitoParaOCursoDao;
 
-public class RequisitoParaOCursoFabricaTest {
+public class RequisitoParaOCursoFabricaTest extends FabricaTest {
 	private static RequisitoParaOCursoFabricaTest instance = null;
 
 	public static synchronized RequisitoParaOCursoFabricaTest getInstance() {
@@ -19,7 +20,7 @@ public class RequisitoParaOCursoFabricaTest {
 		RequisitoParaOCurso r = new RequisitoParaOCurso();
 		r.setAtivo(Boolean.TRUE);
 		r.setCurso(CursoFabricaTest.getInstance().criaCursoPersistido(em));
-		r.setDescricao("descricao");
+		r.setDescricao(criarStringDinamicaPorTamanho(100));
 		//
 		return r;
 	}

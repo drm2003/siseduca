@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.curso.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.curso.TipoDeInvestimento;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.curso.TipoDeInvestimentoDao;
 
-public class TipoDeInvestimentoFabricaTest {
+public class TipoDeInvestimentoFabricaTest extends FabricaTest {
 	private static TipoDeInvestimentoFabricaTest instance = null;
 
 	public static synchronized TipoDeInvestimentoFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class TipoDeInvestimentoFabricaTest {
 	public TipoDeInvestimento criaTipoDeInvestimento() {
 		TipoDeInvestimento t = new TipoDeInvestimento();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao" + Math.random() * 10000);
+		t.setDescricao(criarStringDinamicaPorTamanho(100));
 		return t;
 	}
 

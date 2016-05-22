@@ -13,6 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "PlanoFinanceiroDoCurso")
@@ -32,12 +36,16 @@ public class PlanoFinanceiroDoCurso implements Serializable {
 	@Column(name = "modulo")
 	private Long modulo;
 
-	@Column(name = "descricao")
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
+	@Column(name = "descricao", length = 150, nullable = false)
 	private String descricao;
 
 	@Column(name = "planoPadrao")
 	private Boolean planoPadrao;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

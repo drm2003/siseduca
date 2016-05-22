@@ -17,6 +17,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.cdan.model.financeiro.ContaAReceber;
 import br.com.cdan.model.pedagogico.CalendarioLetivo;
@@ -39,13 +43,20 @@ public class Turma implements Serializable {
 	@OneToMany(mappedBy = "turma", fetch = FetchType.LAZY, targetEntity = Turma_Disciplina.class)
 	private Set<Turma_Disciplina> turmas_Disciplinas;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 200)
 	@Column(name = "nome", nullable = false, length = 200)
 	private String nome;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 2, max = 20)
 	@Column(name = "sigla", nullable = false, length = 20)
 	private String sigla;
 
-	@Column(name = "codigo")
+	@NotNull
+	@Column(name = "codigo", nullable = false)
 	private Long codigo;
 
 	@ManyToOne
@@ -89,6 +100,7 @@ public class Turma implements Serializable {
 	@ManyToMany(mappedBy = "turmas", fetch = FetchType.LAZY)
 	private Set<ContaAReceber> contasAReceber;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
