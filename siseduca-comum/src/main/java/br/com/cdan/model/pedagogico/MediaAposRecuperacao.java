@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.comum.EnumMediaAposRecuperacao;
 
@@ -44,6 +45,7 @@ public class MediaAposRecuperacao implements Serializable {
 	@OneToOne(mappedBy = "mediaAposRecuperacao", fetch = FetchType.EAGER)
 	private Recuperacao recuperacao;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 
@@ -59,8 +61,7 @@ public class MediaAposRecuperacao implements Serializable {
 		return EnumMediaAposRecuperacao;
 	}
 
-	public void setEnumMediaAposRecuperacao(
-			EnumMediaAposRecuperacao enumMediaAposRecuperacao) {
+	public void setEnumMediaAposRecuperacao(EnumMediaAposRecuperacao enumMediaAposRecuperacao) {
 		EnumMediaAposRecuperacao = enumMediaAposRecuperacao;
 	}
 
@@ -68,8 +69,7 @@ public class MediaAposRecuperacao implements Serializable {
 		return desconsiderarNotaRecuperacaoMenor;
 	}
 
-	public void setDesconsiderarNotaRecuperacaoMenor(
-			Boolean desconsiderarNotaRecuperacaoMenor) {
+	public void setDesconsiderarNotaRecuperacaoMenor(Boolean desconsiderarNotaRecuperacaoMenor) {
 		this.desconsiderarNotaRecuperacaoMenor = desconsiderarNotaRecuperacaoMenor;
 	}
 
@@ -77,8 +77,7 @@ public class MediaAposRecuperacao implements Serializable {
 		return desconsiderarNotaRecuperacaoAposAMedia;
 	}
 
-	public void setDesconsiderarNotaRecuperacaoAposAMedia(
-			Boolean desconsiderarNotaRecuperacaoAposAMedia) {
+	public void setDesconsiderarNotaRecuperacaoAposAMedia(Boolean desconsiderarNotaRecuperacaoAposAMedia) {
 		this.desconsiderarNotaRecuperacaoAposAMedia = desconsiderarNotaRecuperacaoAposAMedia;
 	}
 
@@ -86,8 +85,7 @@ public class MediaAposRecuperacao implements Serializable {
 		return desconsiderarNotaMenorQueSete;
 	}
 
-	public void setDesconsiderarNotaMenorQueSete(
-			Boolean desconsiderarNotaMenorQueSete) {
+	public void setDesconsiderarNotaMenorQueSete(Boolean desconsiderarNotaMenorQueSete) {
 		this.desconsiderarNotaMenorQueSete = desconsiderarNotaMenorQueSete;
 	}
 
@@ -111,10 +109,7 @@ public class MediaAposRecuperacao implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((EnumMediaAposRecuperacao == null) ? 0
-						: EnumMediaAposRecuperacao.hashCode());
+		result = prime * result + ((EnumMediaAposRecuperacao == null) ? 0 : EnumMediaAposRecuperacao.hashCode());
 		return result;
 	}
 
@@ -134,14 +129,10 @@ public class MediaAposRecuperacao implements Serializable {
 
 	@Override
 	public String toString() {
-		return "MediaAposRecuperacao [EnumMediaAposRecuperacao="
-				+ EnumMediaAposRecuperacao
-				+ ", desconsiderarNotaRecuperacaoMenor="
-				+ desconsiderarNotaRecuperacaoMenor
-				+ ", desconsiderarNotaRecuperacaoAposAMedia="
-				+ desconsiderarNotaRecuperacaoAposAMedia
-				+ ", desconsiderarNotaMenorQueSete="
-				+ desconsiderarNotaMenorQueSete + ", recuperacao="
-				+ recuperacao + "]";
+		return "MediaAposRecuperacao [EnumMediaAposRecuperacao=" + EnumMediaAposRecuperacao
+				+ ", desconsiderarNotaRecuperacaoMenor=" + desconsiderarNotaRecuperacaoMenor
+				+ ", desconsiderarNotaRecuperacaoAposAMedia=" + desconsiderarNotaRecuperacaoAposAMedia
+				+ ", desconsiderarNotaMenorQueSete=" + desconsiderarNotaMenorQueSete + ", recuperacao=" + recuperacao
+				+ "]";
 	}
 }

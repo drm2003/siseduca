@@ -30,7 +30,10 @@ public class SeriePadrao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "codigo")
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
+	@Column(name = "codigo", length = 150, nullable = false, unique = true)
 	private String codigo;
 
 	@NotNull

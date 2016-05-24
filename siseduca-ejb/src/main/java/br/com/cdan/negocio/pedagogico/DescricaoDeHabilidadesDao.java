@@ -9,7 +9,6 @@ public class DescricaoDeHabilidadesDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
 
 	public DescricaoDeHabilidadesDao() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public DescricaoDeHabilidadesDao(EntityManager em) {

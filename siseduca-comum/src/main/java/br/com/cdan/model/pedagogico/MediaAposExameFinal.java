@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.comum.EnumTipoMediaAposExameFinal;
 
@@ -38,6 +39,7 @@ public class MediaAposExameFinal implements Serializable {
 	@OneToOne(mappedBy = "mediaAposExameFinal")
 	private ExameFinal exameFinal;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

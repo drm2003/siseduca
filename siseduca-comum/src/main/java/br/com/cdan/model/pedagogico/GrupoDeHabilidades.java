@@ -2,6 +2,7 @@ package br.com.cdan.model.pedagogico;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "GrupoDeHabilidades")
@@ -23,6 +28,9 @@ public class GrupoDeHabilidades implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
+	@NotEmpty
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 
@@ -32,15 +40,17 @@ public class GrupoDeHabilidades implements Serializable {
 	@Column(name = "ordem")
 	private Long ordem;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_DescricaoDeHabilidades")
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "descricaoDeHabilidades")
 	private DescricaoDeHabilidades descricaoDeHabilidades;
 
-	@Column(name = "ativo")
-	private Boolean ativo;
-
+	@NotNull
 	@Column(name = "compartilhado")
 	private Boolean compartilhado;
+
+	@NotNull
+	@Column(name = "ativo")
+	private Boolean ativo;
 
 	public Long getId() {
 		return id;
@@ -78,8 +88,7 @@ public class GrupoDeHabilidades implements Serializable {
 		return descricaoDeHabilidades;
 	}
 
-	public void setDescricaoDeHabilidades(
-			DescricaoDeHabilidades descricaoDeHabilidades) {
+	public void setDescricaoDeHabilidades(DescricaoDeHabilidades descricaoDeHabilidades) {
 		this.descricaoDeHabilidades = descricaoDeHabilidades;
 	}
 
@@ -103,8 +112,7 @@ public class GrupoDeHabilidades implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		return result;
 	}
 
@@ -127,8 +135,7 @@ public class GrupoDeHabilidades implements Serializable {
 
 	@Override
 	public String toString() {
-		return "GrupoDeHabilidades [descricao=" + descricao + ", peso=" + peso
-				+ ", ordem=" + ordem + ", descricaoDeHabilidades="
-				+ descricaoDeHabilidades + "]";
+		return "GrupoDeHabilidades [descricao=" + descricao + ", peso=" + peso + ", ordem=" + ordem
+				+ ", descricaoDeHabilidades=" + descricaoDeHabilidades + "]";
 	}
 }

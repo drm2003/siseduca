@@ -38,7 +38,7 @@ public class Sala implements Serializable {
 
 	@NotNull
 	@NotEmpty
-	@Size(min = 2, max = 150)
+	@Size(min = 3, max = 150)
 	@Column(name = "descricao", length = 150, nullable = false, unique = true)
 	private String descricao;
 
@@ -52,6 +52,7 @@ public class Sala implements Serializable {
 	@JoinColumn(name = "id_tipoDeSala")
 	private TipoDeSala tipoDeSala;
 
+	@NotNull
 	@Column(name = "locacao")
 	private Boolean locacao;
 

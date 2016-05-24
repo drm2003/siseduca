@@ -3,9 +3,10 @@ package br.com.cdan.negocio.pedagogico.factory;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.model.pedagogico.Turno;
+import br.com.cdan.negocio.comum.FabricaTest;
 import br.com.cdan.negocio.pedagogico.TurnoDao;
 
-public class TurnoFabricaTest {
+public class TurnoFabricaTest extends FabricaTest {
 	private static TurnoFabricaTest instance = null;
 
 	public static synchronized TurnoFabricaTest getInstance() {
@@ -18,7 +19,7 @@ public class TurnoFabricaTest {
 	public Turno criaTurno() {
 		Turno t = new Turno();
 		t.setAtivo(Boolean.TRUE);
-		t.setDescricao("descricao");
+		t.setDescricao(criarStringDinamicaPorTamanho(100));
 		t.setCompartilhado(Boolean.TRUE);
 		//
 		return t;

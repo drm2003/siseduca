@@ -11,12 +11,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.cdan.model.pedagogico.DescricaoDeHabilidades;
+import br.com.cdan.negocio.pedagogico.DescricaoDeHabilidadesDao;
 import br.com.cdan.negocio.pedagogico.factory.DescricaoDeHabilidadesFabricaTest;
 import br.com.cdan.util.PersistenciaJUnit;
 
 public class DescricaoDeHabilidadesDAOTeste extends PersistenciaJUnit {
 	private static final Logger LOG = Logger.getLogger(DescricaoDeHabilidadesDAOTeste.class);
-	DescricaoDeHabilidadessDao dao;
+	DescricaoDeHabilidadesDao dao;
 
 	/**
 	 * <c> Ao criar um teste da camada de persistência utilizando o JUnit é
@@ -31,7 +32,7 @@ public class DescricaoDeHabilidadesDAOTeste extends PersistenciaJUnit {
 	@Before
 	public void setUp() throws Exception {
 		LOG.info("Instanciando DAOTest.");
-		dao = new DescricaoDeHabilidadessDao(getEntityManager());
+		dao = new DescricaoDeHabilidadesDao(getEntityManager());
 	}
 
 	@Test
@@ -72,7 +73,8 @@ public class DescricaoDeHabilidadesDAOTeste extends PersistenciaJUnit {
 		dao.persist(a2);
 		//
 		String sql = "SELECT a FROM DescricaoDeHabilidades a";
-		TypedQuery<DescricaoDeHabilidades> query = dao.getEntityManager().createQuery(sql, DescricaoDeHabilidades.class);
+		TypedQuery<DescricaoDeHabilidades> query = dao.getEntityManager().createQuery(sql,
+				DescricaoDeHabilidades.class);
 		//
 		List<DescricaoDeHabilidades> lista = query.getResultList(); //
 		//
@@ -81,45 +83,46 @@ public class DescricaoDeHabilidadesDAOTeste extends PersistenciaJUnit {
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_nome_nulo() {
+	public void nao_deve_permitir_descricao_nulo() {
 		DescricaoDeHabilidades a = criaDescricaoDeHabilidades();
-		a.setNome(null);
+		a.setDescricao(null);
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nao_deve_permitir_nome_vazio() {
+	public void nao_deve_permitir_descricao_vazio() {
 		DescricaoDeHabilidades a = criaDescricaoDeHabilidades();
-		a.setNome("");
+		a.setDescricao("");
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nome_menor_que_tamanho_minimo_permitido() {
+	public void descricao_menor_que_tamanho_minimo_permitido() {
 		DescricaoDeHabilidades a = criaDescricaoDeHabilidades();
-		a.setNome(criarStringDinamicaPorTamanho(2));
+		a.setDescricao(criarStringDinamicaPorTamanho(2));
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
-	public void nome_maior_que_tamanho_maximo_permitido() {
+	public void descricao_maior_que_tamanho_maximo_permitido() {
 		DescricaoDeHabilidades a = criaDescricaoDeHabilidades();
-		a.setNome(criarStringDinamicaPorTamanho(1001));
+		a.setDescricao(criarStringDinamicaPorTamanho(1001));
 		dao.persist(a);
 		Assert.assertNull(a.getId());
 	}
 
 	@Test
-	public void consultar_por_nome() {
+	public void consultar_por_descricao() {
 		DescricaoDeHabilidades a = criaDescricaoDeHabilidades();
 		dao.persist(a);
 		//
-		String sql = "SELECT a FROM DescricaoDeHabilidades a WHERE a.nome = :nome";
-		TypedQuery<DescricaoDeHabilidades> query = dao.getEntityManager().createQuery(sql, DescricaoDeHabilidades.class);
-		query.setParameter("nome", a.getNome());
+		String sql = "SELECT a FROM DescricaoDeHabilidades a WHERE a.descricao = :descricao";
+		TypedQuery<DescricaoDeHabilidades> query = dao.getEntityManager().createQuery(sql,
+				DescricaoDeHabilidades.class);
+		query.setParameter("descricao", a.getDescricao());
 		//
 		DescricaoDeHabilidades m = query.getSingleResult(); //
 		//
@@ -135,6 +138,6 @@ public class DescricaoDeHabilidadesDAOTeste extends PersistenciaJUnit {
 	}
 
 	private DescricaoDeHabilidades criaDescricaoDeHabilidades() {
-		return DescricaoDeHabilidadesFabricaTest.getInstance().criaDescricaoDeHabilidades(getEntityManager());
+		return DescricaoDeHabilidadesFabricaTest.getInstance().criaDescricaoDeHabilidades();
 	}
 }

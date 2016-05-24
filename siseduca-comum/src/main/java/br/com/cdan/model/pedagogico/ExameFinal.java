@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "ExameFinal")
@@ -42,6 +43,7 @@ public class ExameFinal implements Serializable {
 	@OneToOne(mappedBy = "exameFinal")
 	private SistemaDeAvaliacao sistemaDeAvaliacao;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

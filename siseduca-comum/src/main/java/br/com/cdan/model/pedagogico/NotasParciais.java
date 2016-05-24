@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import br.com.cdan.comum.EnumMediaNotasParciais;
 
@@ -41,6 +42,7 @@ public class NotasParciais implements Serializable {
 	@OneToOne(mappedBy = "notasParciais")
 	private SistemaDeAvaliacao sistemaDeAvaliacao;
 
+	@NotNull
 	@Column(name = "ativo")
 	private Boolean ativo;
 

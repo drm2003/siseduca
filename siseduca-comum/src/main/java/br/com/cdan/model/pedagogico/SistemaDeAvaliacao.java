@@ -40,6 +40,7 @@ public class SistemaDeAvaliacao implements Serializable {
 	@Column(name = "nome", length = 150, nullable = false, unique = true)
 	private String nome;
 
+	@NotNull
 	@Column(name = "padrao")
 	private Boolean padrao;
 

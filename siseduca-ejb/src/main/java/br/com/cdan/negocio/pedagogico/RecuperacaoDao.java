@@ -3,7 +3,7 @@ package br.com.cdan.negocio.pedagogico;
 import javax.persistence.EntityManager;
 
 import br.com.cdan.dao.SiseducaDao;
-import br.com.cdan.model.pedagogico.curso.RequisitoParaOCurso;
+import br.com.cdan.model.pedagogico.Recuperacao;
 
 public class RecuperacaoDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
@@ -21,8 +21,8 @@ public class RecuperacaoDao extends SiseducaDao {
 	 */
 	@Override
 	public void remove(Object obj) {
-		RequisitoParaOCurso requisito = (RequisitoParaOCurso) obj;
-		requisito.setAtivo(false);
-		getEntityManager().merge(requisito);
+		Recuperacao r = (Recuperacao) obj;
+		r.setAtivo(false);
+		getEntityManager().merge(r);
 	}
 }
