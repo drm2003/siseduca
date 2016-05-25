@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- Detalhes do modulo maven -->
@@ -10,7 +9,7 @@
 	<packaging>pom</packaging>
 	<name>siseduca</name>
 	<description>
-        Projeto de SISTEMA de EducaÃ§Ã£o.
+        Projeto de SISTEMA de Educação.
     </description>
 
 	<properties>
@@ -59,7 +58,7 @@
 				<scope>compile</scope>
 			</dependency>
 
-			<!-- NÃºcleo do Hibernate -->
+			<!-- Núcleo do Hibernate -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-core</artifactId>
@@ -67,7 +66,7 @@
 				<scope>compile</scope>
 			</dependency>
 
-			<!-- ImplementaÃ§Ã£o de EntityManager da JPA -->
+			<!-- Implementação de EntityManager da JPA -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-entitymanager</artifactId>
@@ -86,7 +85,7 @@
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
-				<version>5.1.38</version>
+				<version>5.1.34</version>
 				<scope>compile</scope>
 			</dependency>
 
@@ -103,7 +102,7 @@
 				</exclusions>
 			</dependency>
 
-			<!-- dependÃªncias nax core -->
+			<!-- dependências nax core -->
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
@@ -208,19 +207,19 @@
 				<version>1.4</version>
 				<exclusions>
 					<exclusion>
-						<!-- a partir do JDK 6 a API SAAJ estï¿½ integrada dentro do JDK: pacote 
+						<!-- a partir do JDK 6 a API SAAJ est? integrada dentro do JDK: pacote 
 							javax.xml.soap -->
 						<groupId>axis</groupId>
 						<artifactId>axis-saaj</artifactId>
 					</exclusion>
 					<exclusion>
-						<!-- A classe javax.xml.namespace.QName, desde o JDK 6 estï¿½ integrada 
+						<!-- A classe javax.xml.namespace.QName, desde o JDK 6 est? integrada 
 							dentro do JDK -->
-						<!-- E a API jaxrcp jï¿½ estï¿½ disponï¿½vel no servidor JBoss. Artefato 
+						<!-- E a API jaxrcp j? est? dispon?vel no servidor JBoss. Artefato 
 							jboss-jaxrpc-api_1.1_spec -->
-						<!-- Os projetos que apresentarem erro de compilaï¿½ï¿½o por falta do pacote 
+						<!-- Os projetos que apresentarem erro de compila??o por falta do pacote 
 							javax.xml.rpc -->
-						<!-- devem declarar a dependï¿½ncia jboss-jaxrpc-api_1.1_spec com scope 
+						<!-- devem declarar a depend?ncia jboss-jaxrpc-api_1.1_spec com scope 
 							compile -->
 						<groupId>org.apache.axis</groupId>
 						<artifactId>axis-jaxrpc</artifactId>
@@ -673,5 +672,6 @@
 		<module>siseduca-ejb</module>
 		<module>siseduca-war</module>
 		<module>siseduca-ear</module>
-	</modules>
+    <module>arquillian</module>
+  </modules>
 </project>
