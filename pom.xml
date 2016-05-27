@@ -9,7 +9,7 @@
 	<packaging>pom</packaging>
 	<name>siseduca</name>
 	<description>
-        Projeto de SISTEMA de Educação.
+        Projeto de SISTEMA de Educa??o.
     </description>
 
 	<properties>
@@ -58,7 +58,7 @@
 				<scope>compile</scope>
 			</dependency>
 
-			<!-- Núcleo do Hibernate -->
+			<!-- N?cleo do Hibernate -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-core</artifactId>
@@ -66,7 +66,7 @@
 				<scope>compile</scope>
 			</dependency>
 
-			<!-- Implementação de EntityManager da JPA -->
+			<!-- Implementa??o de EntityManager da JPA -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-entitymanager</artifactId>
@@ -102,7 +102,7 @@
 				</exclusions>
 			</dependency>
 
-			<!-- dependências nax core -->
+			<!-- depend?ncias nax core -->
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
@@ -673,5 +673,6 @@
 		<module>siseduca-war</module>
 		<module>siseduca-ear</module>
     <module>arquillian</module>
+    <module>arquillian2</module>
   </modules>
 </project>

@@ -4,8 +4,9 @@ import javax.persistence.EntityManager;
 
 import br.com.cdan.model.biblioteca.AreasDeConhecimento;
 import br.com.cdan.negocio.biblioteca.AreasDeConhecimentoDao;
+import br.com.cdan.negocio.comum.FabricaTest;
 
-public class AreasDeConhecimentoFabricaTest {
+public class AreasDeConhecimentoFabricaTest extends FabricaTest {
 	private static AreasDeConhecimentoFabricaTest instance = null;
 
 	public static synchronized AreasDeConhecimentoFabricaTest getInstance() {
@@ -19,7 +20,7 @@ public class AreasDeConhecimentoFabricaTest {
 		AreasDeConhecimento a = new AreasDeConhecimento();
 		a.setAtivo(Boolean.TRUE);
 		a.setCompartilhado(true);
-		a.setDescricao("Linguistica, Letras e Artes nº " +Math.random()*1000);
+		a.setDescricao(criarStringDinamicaPorTamanho(100));
 		return a;
 	}
 

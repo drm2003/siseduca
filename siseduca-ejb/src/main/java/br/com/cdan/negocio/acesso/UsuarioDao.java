@@ -9,7 +9,6 @@ public class UsuarioDao extends SiseducaDao {
 	private static final long serialVersionUID = 1L;
 
 	public UsuarioDao() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public UsuarioDao(EntityManager em) {
